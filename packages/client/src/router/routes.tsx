@@ -5,6 +5,8 @@ import { ErrorPage } from '@/pages/ErrorPage'
 
 const App = React.lazy(() => import('@/pages'))
 const HelloWorld = React.lazy(() => import('@/pages/HelloWorld'))
+const SignInPage = React.lazy(() => import('@/pages/signin'))
+const SignUpPage = React.lazy(() => import('@/pages/signup'))
 
 // Необходимо обернуть каждую новую страницу в ErrorWrapper за исключением страниц ошибок
 export const router = createBrowserRouter([
@@ -19,5 +21,13 @@ export const router = createBrowserRouter([
   {
     path: '/500',
     element: <ErrorPage />
+  },
+  {
+    path: '/signin',
+    element: <SignInPage/>
+  },
+  {
+    path: '/signup',
+    element: <SignUpPage/>
   }
 ])
