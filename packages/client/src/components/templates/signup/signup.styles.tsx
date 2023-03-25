@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Button } from '../../atoms'
 
-export const Section = styled.section`
+export const Section = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -10,7 +10,7 @@ export const Section = styled.section`
   justify-content: center;
   align-items: center;
   margin: auto;
-  height: 100vh;
+  /* height: 100vh; */
 `
 
 export const Title = styled.h1`

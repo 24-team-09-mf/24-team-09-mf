@@ -1,8 +1,11 @@
 // components
-import { SignIn } from '../../components'
+import { SignIn, LayoutMain } from '../../components'
 
 const SignInPage = () => {
-  return <SignIn />
+  return (
+    <LayoutMain>
+      <SignIn />
+    </LayoutMain>
+  )
 }
-
 export default SignInPage

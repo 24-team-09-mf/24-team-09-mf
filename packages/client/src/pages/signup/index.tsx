@@ -1,8 +1,12 @@
 // components
-import { SignUp } from '../../components'
+import { SignUp, LayoutMain } from '../../components'
 
 const SignUpPage = () => {
-  return <SignUp />
+  return (
+    <LayoutMain>
+      <SignUp />
+    </LayoutMain>
+  )
 }
 
 export default SignUpPage
