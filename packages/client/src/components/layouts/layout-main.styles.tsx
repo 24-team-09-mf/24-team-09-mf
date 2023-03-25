@@ -17,8 +17,8 @@ export const ImgRight = styled.img`
   right: 0;
   object-fit: contain;
   object-position: center;
-  width: 10.9187rem;
-  height: 10.9187rem;
+  width: 5rem;
+  height: 12rem;
   bottom: 20%;
 `
 
