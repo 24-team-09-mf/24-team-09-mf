@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { Button } from '../../atoms'
 
@@ -20,3 +21,5 @@ export const Title = styled.h1`
 `
 
 export const Btn = styled(Button)``
+
+export const LinkComponent = styled(Link)``

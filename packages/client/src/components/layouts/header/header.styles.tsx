@@ -1,5 +1,6 @@
 import { Button } from '@/components/atoms'
 import styled from 'styled-components'
+import { NavLink, Link } from 'react-router-dom'
 
 export const Wrapper = styled.header`
   display: flex;
@@ -28,14 +29,18 @@ export const Img = styled.img`
   object-position: center;
 `
 
-
-export const Text = styled.a`
+export const Text = styled(NavLink)`
   font-size: 1.125rem;
   line-height: 1.5625rem;
   color: #000000;
   cursor: pointer;
 
   &:hover {
+    text-decoration: underline;
+    color: #579945;
+  }
+
+  &.active {
     text-decoration: underline;
     color: #579945;
   }
@@ -48,11 +53,15 @@ export const Btn = styled(Button)`
   line-height: 2.75rem;
 `
 
-export const Profile = styled.a`
+export const Profile = styled(NavLink)`
   display: flex;
   gap: 0.625rem;
   cursor: pointer;
   color: #000000;
+
+  &.active {
+    color: #579945;
+  }
 `
 
 export const User = styled.p`
@@ -64,3 +73,5 @@ export const User = styled.p`
     color: #579945;
   }
 `
+
+export const LinkComponent = styled(Link)``

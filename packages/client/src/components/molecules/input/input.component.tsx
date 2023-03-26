@@ -2,19 +2,16 @@
 import { forwardRef, useState, KeyboardEvent } from 'react'
 
 // svg
-import error from '../../../assets/icons/error.svg'
+import error from '@/assets/icons/error.svg'
 
 // types
 import { TextFieldProps } from './input.types'
 
 // styles
-import * as S from './input.styles'
+import { Wrapper, Error, InputComponent } from './input.styles'
 
 export const Input = forwardRef<HTMLInputElement, TextFieldProps>(
-  (
-    { className, errorMessage, isError, type = 'text', ...props },
-    ref
-  ) => {
+  ({ className, errorMessage, isError, type = 'text', ...props }, ref) => {
     const [isCapsLockOn, setIsCapsLockOn] = useState(false)
 
     const checkCapsLock = (event: KeyboardEvent) => {
@@ -26,8 +23,8 @@ export const Input = forwardRef<HTMLInputElement, TextFieldProps>(
     }
 
     return (
-      <S.Wrapper className={className}>
-        <S.Input
+      <Wrapper className={className}>
+        <InputComponent
           isError={isError}
           ref={ref}
           type={type}
@@ -35,18 +32,18 @@ export const Input = forwardRef<HTMLInputElement, TextFieldProps>(
           onKeyUp={checkCapsLock}
         />
         {isError && (
-          <S.Error>
+          <Error>
             <img src={error} alt="ошибка" />
-            {errorMessage}
-          </S.Error>
+            {`${errorMessage}`}
+          </Error>
         )}
         {isCapsLockOn && (
-          <S.Error>
+          <Error>
             <img src={error} alt="ошибка" />
             Включен Caps Lock
-          </S.Error>
+          </Error>
         )}
-      </S.Wrapper>
+      </Wrapper>
     )
   }
 )
