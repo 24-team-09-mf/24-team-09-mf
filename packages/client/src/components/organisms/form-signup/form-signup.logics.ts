@@ -15,7 +15,7 @@ const useSignUp = () => {
     formState: { errors, isValid },
     reset,
   } = useForm<FormSignUpValues>({
-    mode: 'onChange',
+    mode: 'all',
     resolver: yupResolver(validationSchema),
   })
 

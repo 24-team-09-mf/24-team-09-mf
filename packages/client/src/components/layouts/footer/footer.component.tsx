@@ -1,36 +1,36 @@
 // images
-import image from '../../../assets/images/footer.png'
+import image from '@/assets/images/footer.png'
 
 // styles
-import * as S from './footer.styles'
+import { Wrapper, FooterText, LinkComponent, Img } from './footer.styles'
 
 export const Footer = () => {
   return (
-    <S.Wrapper>
-      <S.FooterText>
+    <Wrapper>
+      <FooterText>
         Команда разработки: &nbsp;
-        <S.Link href="https://github.com/oalbukova" target="_blank">
+        <LinkComponent to="https://github.com/oalbukova" target="_blank">
           oalbukova
-        </S.Link>
+        </LinkComponent>
         |
-        <S.Link href="https://github.com/alheym" target="_blank">
+        <LinkComponent to="https://github.com/alheym" target="_blank">
           alheym
-        </S.Link>
+        </LinkComponent>
         |
-        <S.Link href="https://github.com/Lobanovk" target="_blank">
+        <LinkComponent to="https://github.com/Lobanovk" target="_blank">
           Lobanovk
-        </S.Link>
+        </LinkComponent>
         |
-        <S.Link href="https://github.com/ErikKhasanov" target="_blank">
+        <LinkComponent to="https://github.com/ErikKhasanov" target="_blank">
           ErikKhasanov
-        </S.Link>
+        </LinkComponent>
         |
-        <S.Link href="https://github.com/leopard-work" target="_blank">
+        <LinkComponent to="https://github.com/leopard-work" target="_blank">
           leopard-work
-        </S.Link>
-      </S.FooterText>
-      <S.FooterText>&#169; game name 2023</S.FooterText>
-      <S.Img src={image} alt="профиль" />
-    </S.Wrapper>
+        </LinkComponent>
+      </FooterText>
+      <FooterText>&#169; game name 2023</FooterText>
+      <Img src={image} alt="профиль" />
+    </Wrapper>
   )
 }

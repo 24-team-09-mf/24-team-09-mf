@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   width: 100%;
 `
 
-export const Input = styled.input<{ isError?: boolean; disabled?: boolean }>`
+export const InputComponent = styled.input<{ isError?: boolean; disabled?: boolean }>`
   cursor: ${({ disabled }) => (disabled ? 'auto' : 'pointer')};
   pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
   opacity: ${({ disabled }) => (disabled ? '0.5' : '1')};
@@ -30,7 +30,7 @@ export const Input = styled.input<{ isError?: boolean; disabled?: boolean }>`
   }
 `
 
-export const Error = styled.p`
+export const Error = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;

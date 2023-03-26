@@ -7,22 +7,22 @@ import { Footer } from './footer'
 import { LayoutMainProps } from './layout-main.types'
 
 // images
-import imageLeft from '../../assets/images/bg-left.png';
-import imageRight from '../../assets/images/bg-right.png';
+import imageLeft from '@/assets/images/bg-left.png'
+import imageRight from '@/assets/images/bg-right.png'
 
 // styles
-import * as S from './layout-main.styles'
+import { Wrapper, Content, ImgLeft, ImgRight } from './layout-main.styles'
 
 export const LayoutMain: FC<LayoutMainProps> = ({ children }) => {
   return (
-    <S.Wrapper>
+    <Wrapper>
       <Header />
-      <S.Content>
-        <S.ImgLeft  alt="фон" src={imageLeft}/>
-        <S.ImgRight alt="фон" src={imageRight}/>
+      <Content>
+        <ImgLeft alt="фон" src={imageLeft} />
+        <ImgRight alt="фон" src={imageRight} />
         {children}
-      </S.Content>
+      </Content>
       <Footer />
-    </S.Wrapper>
+    </Wrapper>
   )
 }

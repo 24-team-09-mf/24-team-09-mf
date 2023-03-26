@@ -1,10 +1,11 @@
-import React from 'react'
+import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
+import loadable from '@loadable/component'
 
-const App = React.lazy(() => import('@/pages'))
-const HelloWorld = React.lazy(() => import('@/pages/HelloWorld'))
-const SignInPage = React.lazy(() => import('@/pages/signin'))
-const SignUpPage = React.lazy(() => import('@/pages/signup'))
+const App = lazy(() => import('@/pages'))
+const HelloWorld = lazy(() => import('@/pages/HelloWorld'))
+const SignInPage = loadable(() => import('@/pages/signin'))
+const SignUpPage = loadable(() => import('@/pages/signup'))
 
 export const router = createBrowserRouter([
   {
@@ -25,18 +26,18 @@ export const router = createBrowserRouter([
   },
   {
     path: '/profile',
-    // element: <ProfilePage/>
+    // element: <ProfilePage />,
   },
   {
     path: '/statistics',
-    // element: <ProfilePage/>
+    // element: <StatisticsPage />,
   },
   {
     path: '/forum',
-    // element: <ProfilePage/>
+    // element: <ForumPage />,
   },
   {
     path: '/game',
-    // element: <ProfilePage/>
+    // element: <GamePage/>
   },
 ])

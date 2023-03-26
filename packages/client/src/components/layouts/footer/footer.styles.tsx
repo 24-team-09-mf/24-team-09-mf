@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from "react-router-dom";
 
 export const Wrapper = styled.footer`
   display: flex;
@@ -12,7 +13,7 @@ export const FooterText = styled.p`
   margin-block-end: 1.125rem;
 `
 
-export const Link = styled.a`
+export const LinkComponent = styled(Link)`
   color: #000000;
   cursor: pointer;
 
