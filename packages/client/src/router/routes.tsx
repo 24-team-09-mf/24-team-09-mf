@@ -1,11 +1,11 @@
 import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import { ErrorWrapper } from '@/components/layouts/error-wrapper'
-import { ErrorPage } from '@/pages/ErrorPage'
 import loadable from '@loadable/component'
 
 const App = lazy(() => import('@/pages'))
 const HelloWorld = lazy(() => import('@/pages/HelloWorld'))
+const ErrorPage = lazy(() => import('@/pages/ErrorPage'))
 const SignInPage = loadable(() => import('@/pages/signin'))
 const SignUpPage = loadable(() => import('@/pages/signup'))
 
