@@ -1,6 +1,9 @@
 // images
 import image from '@/assets/images/header.png'
 
+// lib
+import { Link } from 'react-router-dom'
+
 // svg
 import user from '@/assets/icons/user.svg'
 
@@ -14,7 +17,6 @@ import {
   Btn,
   Profile,
   User,
-  LinkComponent,
 } from './header.styles'
 
 export const Header = () => {
@@ -25,11 +27,11 @@ export const Header = () => {
           <Img src={image} alt="меню" />
           <Text to="/statistics">Статистика</Text>
           <Text to="/forum">Форум</Text>
-          <LinkComponent to="/game">
+          <Link to="/game">
             <Btn variant="contained" color="#579945">
               играть
             </Btn>
-          </LinkComponent>
+          </Link>
         </Navigation>
         <Profile to="/profile">
           <img src={user} alt="профиль" />

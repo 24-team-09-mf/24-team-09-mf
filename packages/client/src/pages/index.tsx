@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 
-
 function App() {
   useEffect(() => {
     const fetchServerData = async () => {

@@ -1,6 +1,4 @@
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { Button } from '../../atoms'
 
 export const Section = styled.div`
   background-position: center;
@@ -18,6 +16,3 @@ export const Title = styled.h1`
   font-size: 1.875rem;
   line-height: 2.75rem;
 `
-export const Btn = styled(Button)``
-
-export const LinkComponent = styled(Link)``
