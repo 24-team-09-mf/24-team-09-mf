@@ -4,10 +4,11 @@ import { RouterProvider } from 'react-router-dom'
 
 import { router } from './router/routes'
 
-import './index.css'
+import { GlobalStyle } from './global-styles'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <GlobalStyle />
+    <RouterProvider router={router} />
   </React.StrictMode>
 )
