@@ -73,5 +73,3 @@ export const User = styled.p`
     color: #579945;
   }
 `
-
-export const LinkComponent = styled(Link)``

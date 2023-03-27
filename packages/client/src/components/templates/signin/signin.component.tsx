@@ -1,19 +1,23 @@
+// lib
+import { Link } from 'react-router-dom'
+
 // components
+import { Button } from '../../atoms'
 import { FormSignIn } from '../../organisms'
 
 // styles
-import { Section, Title, Btn, LinkComponent } from './signin.styles'
+import { Section, Title } from './signin.styles'
 
 export const SignIn = () => {
   return (
     <Section>
       <Title>Авторизация</Title>
       <FormSignIn />
-      <LinkComponent to="/signup">
-        <Btn color="#333333" variant="text">
+      <Link to="/signup">
+        <Button color="#333333" variant="text">
           Еще не зарегистрированы?
-        </Btn>
-      </LinkComponent>
+        </Button>
+      </Link>
     </Section>
   )
 }

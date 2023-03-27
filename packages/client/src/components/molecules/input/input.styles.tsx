@@ -7,7 +7,10 @@ export const Wrapper = styled.div`
   width: 100%;
 `
 
-export const InputComponent = styled.input<{ isError?: boolean; disabled?: boolean }>`
+export const InputComponent = styled.input<{
+  isError?: boolean
+  disabled?: boolean
+}>`
   cursor: ${({ disabled }) => (disabled ? 'auto' : 'pointer')};
   pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
   opacity: ${({ disabled }) => (disabled ? '0.5' : '1')};

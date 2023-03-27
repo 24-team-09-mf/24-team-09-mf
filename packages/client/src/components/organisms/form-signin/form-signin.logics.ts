@@ -2,8 +2,8 @@
 import { useForm } from 'react-hook-form'
 
 // validation
-import { yupResolver } from "@hookform/resolvers/yup";
-import validationSchema from './sign-in-form.validate'
+import { yupResolver } from '@hookform/resolvers/yup'
+import validationSchema from './form-signin.validate'
 
 // types
 import { FormSignInValues } from './form-signin.types'
@@ -18,7 +18,6 @@ const useSignIn = () => {
     mode: 'all',
     resolver: yupResolver(validationSchema),
   })
-
 
   const onSubmitHandler = async (data: FormSignInValues) => {
     try {

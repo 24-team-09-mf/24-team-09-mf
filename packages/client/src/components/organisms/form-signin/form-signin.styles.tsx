@@ -16,4 +16,3 @@ export const InputComponent = styled(Input)`
 export const BtnSave = styled(Button)`
   margin-block: 0.625rem;
 `
-
