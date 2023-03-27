@@ -2,13 +2,12 @@
 import image from '@/assets/images/footer.png'
 
 // constants
-import { COPYRIGHT_SYMBOL } from '@/сonstants/constants'
+import { COPYRIGHT_SYMBOL } from '../../../сonstants/constants'
 
 // styles
 import { Wrapper, FooterText, LinkComponent, Img } from './footer.styles'
 
 export const Footer = () => {
-
   console.log(`${COPYRIGHT_SYMBOL}`)
   return (
     <Wrapper>
@@ -34,11 +33,7 @@ export const Footer = () => {
           leopard-work
         </LinkComponent>
       </FooterText>
-      <FooterText>
-
-        {COPYRIGHT_SYMBOL} game name 2023
-
-        </FooterText>
+      <FooterText>{COPYRIGHT_SYMBOL} game name 2023</FooterText>
       <Img src={image} alt="профиль" />
     </Wrapper>
   )
