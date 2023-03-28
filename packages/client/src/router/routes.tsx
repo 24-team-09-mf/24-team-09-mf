@@ -6,6 +6,7 @@ const App = lazy(() => import('@/pages'))
 const HelloWorld = lazy(() => import('@/pages/HelloWorld'))
 const SignInPage = loadable(() => import('@/pages/signin'))
 const SignUpPage = loadable(() => import('@/pages/signup'))
+const ProfilePage = loadable(() => import('@/pages/profile'))
 
 export const router = createBrowserRouter([
   {
@@ -26,7 +27,7 @@ export const router = createBrowserRouter([
   },
   {
     path: '/profile',
-    // element: <ProfilePage />,
+    element: <ProfilePage />,
   },
   {
     path: '/statistics',
