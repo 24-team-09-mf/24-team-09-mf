@@ -28,7 +28,7 @@ export const Avatar = forwardRef<HTMLInputElement, AvatarProps>(
     return (
       <Wrapper>
         <AvatarImage
-          src={avatarSrc ? avatarSrc : avatarDefault}
+          src={avatarSrc || avatarDefault}
           alt="Аватар"
         />
         <AvatarInput
