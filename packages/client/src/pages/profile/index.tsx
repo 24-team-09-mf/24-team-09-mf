@@ -1,7 +1,12 @@
 // components
-import { LayoutMain } from '../../components'
+import { Profile, LayoutMain } from '../../components'
 
 const ProfilePage = () => {
-  return <LayoutMain>Профиль</LayoutMain>
+  return (
+    <LayoutMain>
+      <Profile />
+    </LayoutMain>
+  )
 }
+
 export default ProfilePage

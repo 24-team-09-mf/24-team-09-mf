@@ -7,6 +7,7 @@ const HelloWorld = lazy(() => import('@/pages/HelloWorld'))
 const SignInPage = loadable(() => import('@/pages/signin'))
 const SignUpPage = loadable(() => import('@/pages/signup'))
 const ProfilePage = loadable(() => import('@/pages/profile'))
+const ChangePasswordPage = loadable(() => import('@/pages/change-password'))
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
   {
     path: '/profile',
     element: <ProfilePage />,
+  },
+  {
+    path: '/change-password',
+    element: <ChangePasswordPage />,
   },
   {
     path: '/statistics',
