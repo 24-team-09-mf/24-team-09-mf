@@ -1,7 +1,7 @@
 # Механика игры "Джунглевая опасность"
 
 <p align="center">
-  <img src="https://www.dropbox.com/s/39avm7f97ig6m7o/GIF4.gif?raw=1" alt="Иллюстрация к проекту">
+  <img src="https://www.dropbox.com/s/39avm7f97ig6m7o/GIF4.gif?raw=1" alt="Иллюстрация к игре">
 </p> 
 
 ### 1. Карта и персонажи
