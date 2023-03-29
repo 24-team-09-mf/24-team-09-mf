@@ -13,13 +13,11 @@ export const ChangePassword = () => {
     <Section>
       <Title>Изменить пароль </Title>
       <FormChangePassword />
-
       <Link to="/profile">
         <Button color="#333333" variant="text">
           Отмена
         </Button>
       </Link>
-
     </Section>
   )
 }

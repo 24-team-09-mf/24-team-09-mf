@@ -12,12 +12,10 @@ export const FormProfile = () => {
       <AvatarComponent
         {...register('avatar')}
       />
-
       <AvatarLabel
         color="#579945"
         fontSize="26px"
       >ivanivanov</AvatarLabel>
-
       <InputComponent
         defaultValue="Ivan"
         isError={!!errors.first_name}
@@ -53,7 +51,6 @@ export const FormProfile = () => {
         {...register('phone')}
         placeholder="Телефон"
       />
-
       <BtnSave
         as="button"
         type="submit"

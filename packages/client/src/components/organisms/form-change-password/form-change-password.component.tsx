@@ -24,7 +24,6 @@ export const FormChangePassword = () => {
         {...register('passwordNew')}
         placeholder="Новый пароль"
       />
-
       <BtnSave
         as="button"
         type="submit"

@@ -23,7 +23,6 @@ export const FormSignIn = () => {
         {...register('password')}
         placeholder="Пароль"
       />
-
       <BtnSave
         as="button"
         type="submit"

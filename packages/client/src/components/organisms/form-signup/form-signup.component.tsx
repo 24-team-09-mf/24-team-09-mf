@@ -47,7 +47,6 @@ export const FormSignUp = () => {
         {...register('password')}
         placeholder="пароль"
       />
-
       <BtnSave
         as="button"
         type="submit"
