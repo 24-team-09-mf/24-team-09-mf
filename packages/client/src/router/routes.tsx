@@ -7,16 +7,18 @@ const HelloWorld = loadable(() => import('@/pages/HelloWorld'))
 const ErrorPage = loadable(() => import('@/pages/ErrorPage'))
 const SignInPage = loadable(() => import('@/pages/signin'))
 const SignUpPage = loadable(() => import('@/pages/signup'))
+const ProfilePage = loadable(() => import('@/pages/profile'))
+const ChangePasswordPage = loadable(() => import('@/pages/change-password'))
 
 // Необходимо обернуть каждую новую страницу в ErrorWrapper за исключением страниц ошибок
 export const router = createBrowserRouter([
   {
     path: '/',
-    element:<ErrorWrapper><App /></ErrorWrapper>,
+    element: <ErrorWrapper><App /></ErrorWrapper>,
   },
   {
     path: '/hello',
-    element: <ErrorWrapper><HelloWorld/></ErrorWrapper>
+    element: <ErrorWrapper><HelloWorld /></ErrorWrapper>
   },
   {
     path: '/500',
@@ -24,15 +26,19 @@ export const router = createBrowserRouter([
   },
   {
     path: '/signin',
-    element: <SignInPage />,
+    element: <ErrorWrapper><SignInPage /></ErrorWrapper>,
   },
   {
     path: '/signup',
-    element: <SignUpPage />,
+    element: <ErrorWrapper><SignUpPage /></ErrorWrapper>,
   },
   {
     path: '/profile',
-    // element: <ProfilePage />,
+    element: <ErrorWrapper><ProfilePage /></ErrorWrapper>,
+  },
+  {
+    path: '/change-password',
+    element: <ErrorWrapper><ChangePasswordPage /></ErrorWrapper>,
   },
   {
     path: '/statistics',
