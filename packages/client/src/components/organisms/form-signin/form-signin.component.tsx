@@ -14,7 +14,7 @@ export const FormSignIn = () => {
         isError={!!errors.login}
         errorMessage={errors.login?.message}
         {...register('login')}
-        placeholder="email"
+        placeholder="Login"
       />
       <InputComponent
         type="password"

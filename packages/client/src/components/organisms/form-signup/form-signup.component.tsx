@@ -14,38 +14,38 @@ export const FormSignUp = () => {
         isError={!!errors.first_name}
         errorMessage={errors.first_name?.message}
         {...register('first_name')}
-        placeholder="имя"
+        placeholder="Имя"
       />
       <InputComponent
         isError={!!errors.second_name}
         errorMessage={errors.second_name?.message}
         {...register('second_name')}
-        placeholder="фамилия"
+        placeholder="Фамилия"
       />
       <InputComponent
         isError={!!errors.login}
         errorMessage={errors.login?.message}
         {...register('login')}
-        placeholder="логин"
+        placeholder="Логин"
       />
       <InputComponent
         isError={!!errors.email}
         errorMessage={errors.email?.message}
         {...register('email')}
-        placeholder="email "
+        placeholder="Email "
       />
       <InputComponent
         isError={!!errors.phone}
         errorMessage={errors.phone?.message}
         {...register('phone')}
-        placeholder="телефон"
+        placeholder="Телефон"
       />
       <InputComponent
         type="password"
         isError={!!errors.password}
         errorMessage={errors.password?.message}
         {...register('password')}
-        placeholder="пароль"
+        placeholder="Пароль"
       />
       <BtnSave
         as="button"
