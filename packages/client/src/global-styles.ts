@@ -3,6 +3,20 @@ import { normalize } from 'polished'
 
 export const GlobalStyle = createGlobalStyle`
 ${normalize()}
+
+  :root {
+    --font-title: 'Oswald', sans-serif;
+    --color-text: #333333;
+
+    --color-green1: #D1E3AC;
+    --color-green1-rgb: 209, 227, 172;
+    --color-green2: #579945;
+    --color-green2-rgb: 87, 153, 69;
+
+    --color-gray1: #FAFAFA;
+  }
+
+
   html,
   body {
 
@@ -101,5 +115,10 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+[contentEditable][placeholder]:empty:before {
+    content: attr(placeholder);
+    color: #8c8c8c;
 }
 `

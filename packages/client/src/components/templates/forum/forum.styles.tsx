@@ -5,11 +5,11 @@ export const Section = styled.div`
   width: 75rem;
   margin: 0 auto;
   padding-block: 1.25rem;
-  color: #333333;
+  color: var(--color-text);
 `
 
 export const H1 = styled.h1`
-  font-family: 'Oswald';
+  font-family: var(--font-title);
   font-size: 1.875rem;
   line-height: 2.75rem;
   font-weight: 400;
@@ -61,7 +61,7 @@ export const CatalogRow3 = styled.div`
 `
 
 export const CatalogBlock = styled.div`
-  background: rgba(209, 227, 172, 0.4);
+  background: rgba(var(--color-green1-rgb), 0.4);
   margin-bottom: 0.938rem;
   display: flex;
   align-items: strength;
@@ -128,7 +128,7 @@ export const SectionRow3 = styled(SectionRow2)`
 `
 
 export const SectionRow1Title = styled(Link)`
-  color: #333333;
+  color: var(--color-text);
   cursor: pointer;
   &:hover {
     text-decoration: underline;
@@ -138,12 +138,12 @@ export const SectionRow1Title = styled(Link)`
 export const FormSep = styled.div`
   height: 0.063rem;
   width: 100%;
-  background-color: rgba(87, 153, 69, 0.5);
+  background-color: rgba(var(--color-green2-rgb), 0.5);
   margin: 2.5rem 0;
 `
 
 export const FormInput = styled.input`
-  background: #fafafa;
+  background: var(--color-gray1);
   height: 2.5rem;
   width: 100%;
   padding: 0 0.938rem;
@@ -153,7 +153,7 @@ export const FormInput = styled.input`
 `
 
 export const FormTextarea = styled.div`
-  background: #fafafa;
+  background: var(--color-gray1);
   height: 7.5rem;
   width: 100%;
   padding: 0.938rem;
@@ -169,7 +169,7 @@ export const FormButtonWrapper = styled.div`
 `
 
 export const ForumPostBlock = styled.div`
-  background: rgba(209, 227, 172, 0.4);
+  background: rgba(var(--color-green1-rgb), 0.4);
   padding: 1.25rem;
   display: flex;
   &:first-child {
