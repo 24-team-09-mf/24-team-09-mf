@@ -1,7 +1,3 @@
-// components
-import { LayoutMain } from '../../components'
-
-const ForumPage = () => {
-  return <LayoutMain>Форум</LayoutMain>
-}
-export default ForumPage
+export * from './forum-start'
+export * from './forum-section'
+export * from './forum-post'
