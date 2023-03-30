@@ -189,7 +189,7 @@ export const ForumPostBlockAvatar = styled.div`
 
 export const ForumPostContent = styled.div`
   width: calc(100% - 6.25rem);
-  padding-left: 1.875rem;
+  padding-left: 1.25rem;
 `
 
 export const ForumPostTop = styled.div`
