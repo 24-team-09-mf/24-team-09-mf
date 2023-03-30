@@ -3,12 +3,11 @@ import { ErrorWrapper } from '@/components/layouts/error-wrapper'
 import loadable from '@loadable/component'
 
 const App = loadable(() => import('@/pages'))
-const HelloWorld = loadable(() => import('@/pages/HelloWorld'))
-const ErrorPage = loadable(() => import('@/pages/ErrorPage'))
 const SignInPage = loadable(() => import('@/pages/signin'))
 const SignUpPage = loadable(() => import('@/pages/signup'))
 const ProfilePage = loadable(() => import('@/pages/profile'))
 const ChangePasswordPage = loadable(() => import('@/pages/change-password'))
+// const GamePage = loadable(() => import('@/pages/game'));
 
 // Необходимо обернуть каждую новую страницу в ErrorWrapper за исключением страниц ошибок
 export const router = createBrowserRouter([
@@ -17,12 +16,8 @@ export const router = createBrowserRouter([
     element: <ErrorWrapper><App /></ErrorWrapper>,
   },
   {
-    path: '/hello',
-    element: <ErrorWrapper><HelloWorld /></ErrorWrapper>
-  },
-  {
     path: '/500',
-    element: <ErrorPage />
+    // element: <ErrorPage />
   },
   {
     path: '/signin',
@@ -50,6 +45,6 @@ export const router = createBrowserRouter([
   },
   {
     path: '/game',
-    // element: <GamePage/>
+    // element: <GamePage />
   },
 ])
