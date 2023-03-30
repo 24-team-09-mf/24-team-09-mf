@@ -102,4 +102,9 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   transition: background-color 600000s 0s, color 600000s 0s;
 }
+
+@font-face {
+  font-family: '04B03';
+  src: url('public/fonts/04B03.TTF') format('truetype');
+}
 `
