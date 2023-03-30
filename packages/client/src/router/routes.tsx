@@ -9,44 +9,73 @@ const SignInPage = loadable(() => import('@/pages/signin'))
 const SignUpPage = loadable(() => import('@/pages/signup'))
 const ProfilePage = loadable(() => import('@/pages/profile'))
 const ChangePasswordPage = loadable(() => import('@/pages/change-password'))
+const ForumPage = loadable(() => import('@/pages/forum/forum-start'))
 
 // Необходимо обернуть каждую новую страницу в ErrorWrapper за исключением страниц ошибок
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <ErrorWrapper><App /></ErrorWrapper>,
+    element: (
+      <ErrorWrapper>
+        <App />
+      </ErrorWrapper>
+    ),
   },
   {
     path: '/hello',
-    element: <ErrorWrapper><HelloWorld /></ErrorWrapper>
+    element: (
+      <ErrorWrapper>
+        <HelloWorld />
+      </ErrorWrapper>
+    ),
   },
   {
     path: '/500',
-    element: <ErrorPage />
+    element: <ErrorPage />,
   },
   {
     path: '/signin',
-    element: <ErrorWrapper><SignInPage /></ErrorWrapper>,
+    element: (
+      <ErrorWrapper>
+        <SignInPage />
+      </ErrorWrapper>
+    ),
   },
   {
     path: '/signup',
-    element: <ErrorWrapper><SignUpPage /></ErrorWrapper>,
+    element: (
+      <ErrorWrapper>
+        <SignUpPage />
+      </ErrorWrapper>
+    ),
   },
   {
     path: '/profile',
-    element: <ErrorWrapper><ProfilePage /></ErrorWrapper>,
+    element: (
+      <ErrorWrapper>
+        <ProfilePage />
+      </ErrorWrapper>
+    ),
   },
   {
     path: '/change-password',
-    element: <ErrorWrapper><ChangePasswordPage /></ErrorWrapper>,
+    element: (
+      <ErrorWrapper>
+        <ChangePasswordPage />
+      </ErrorWrapper>
+    ),
+  },
+  {
+    path: '/forum',
+    element: (
+      <ErrorWrapper>
+        <ForumPage />
+      </ErrorWrapper>
+    ),
   },
   {
     path: '/statistics',
     // element: <StatisticsPage />,
-  },
-  {
-    path: '/forum',
-    // element: <ForumPage />,
   },
   {
     path: '/game',

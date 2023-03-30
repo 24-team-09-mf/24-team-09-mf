@@ -8,7 +8,6 @@ import { COPYRIGHT_SYMBOL } from '../../../сonstants/constants'
 import { Wrapper, FooterText, LinkComponent, Img } from './footer.styles'
 
 export const Footer = () => {
-  console.log(`${COPYRIGHT_SYMBOL}`)
   return (
     <Wrapper>
       <FooterText>
