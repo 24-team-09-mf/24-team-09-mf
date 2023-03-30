@@ -13,9 +13,6 @@ const useSectionForm = (id: string, postPageId?: string) => {
     mode: 'onBlur',
   })
 
-  // setValue('id', id)
-  // if (postPageId) setValue('postPageId', postPageId)
-
   const onSubmitHandler = async (data: ForumFormsProps) => {
     try {
       data = { ...data, id: id }
