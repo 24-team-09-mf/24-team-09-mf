@@ -10,6 +10,7 @@ const SignUpPage = loadable(() => import('@/pages/signup'))
 const ProfilePage = loadable(() => import('@/pages/profile'))
 const ChangePasswordPage = loadable(() => import('@/pages/change-password'))
 const ForumPage = loadable(() => import('@/pages/forum/forum-start'))
+const ForumSectionPage = loadable(() => import('@/pages/forum/forum-section'))
 
 // Необходимо обернуть каждую новую страницу в ErrorWrapper за исключением страниц ошибок
 export const router = createBrowserRouter([
@@ -70,6 +71,14 @@ export const router = createBrowserRouter([
     element: (
       <ErrorWrapper>
         <ForumPage />
+      </ErrorWrapper>
+    ),
+  },
+  {
+    path: `/forum/:id`,
+    element: (
+      <ErrorWrapper>
+        <ForumSectionPage />
       </ErrorWrapper>
     ),
   },

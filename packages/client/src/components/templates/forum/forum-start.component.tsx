@@ -6,7 +6,7 @@ import {
   Section,
 } from '@/components/templates/forum/forum.styles'
 import React from 'react'
-import { ForumStartTopics } from '@/components/organisms/forum/forum-start.component'
+import { ForumStartTopics } from '@/components/organisms/forum'
 
 export const Forum = () => {
   // TODO: Поменять, демо
