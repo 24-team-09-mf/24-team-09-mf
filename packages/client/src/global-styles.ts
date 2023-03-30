@@ -124,6 +124,6 @@ input:-webkit-autofill:active {
 
 @font-face {
   font-family: '04B03';
-  src: url('public/fonts/04B03.TTF') format('truetype');
+  src: url('/fonts/04B03.TTF') format('truetype');
 }
 `
