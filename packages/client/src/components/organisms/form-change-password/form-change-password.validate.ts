@@ -1,7 +1,7 @@
 // lib
 import * as yup from 'yup'
 
-import { passwordScheme, passwordNewScheme } from '../../../utils'
+import { passwordScheme, passwordNewScheme } from '../../../utils/validation/validationSchemes'
 
 // types
 import { FormPasswordValues } from './form-change-password.types'
