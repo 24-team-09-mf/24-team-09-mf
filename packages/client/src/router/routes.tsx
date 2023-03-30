@@ -7,7 +7,7 @@ const SignInPage = loadable(() => import('@/pages/signin'))
 const SignUpPage = loadable(() => import('@/pages/signup'))
 const ProfilePage = loadable(() => import('@/pages/profile'))
 const ChangePasswordPage = loadable(() => import('@/pages/change-password'))
-// const GamePage = loadable(() => import('@/pages/game'));
+const GamePage = loadable(() => import('@/pages/game'));
 const ForumPage = loadable(() => import('@/pages/forum/forum-start'))
 const ForumSectionPage = loadable(() => import('@/pages/forum/forum-section'))
 const ForumPostPage = loadable(() => import('@/pages/forum/forum-post'))
@@ -93,6 +93,10 @@ export const router = createBrowserRouter([
   },
   {
     path: '/game',
-    // element: <GamePage />
+    element: (
+      <ErrorWrapper>
+        <GamePage />
+      </ErrorWrapper>
+    )
   },
 ])
