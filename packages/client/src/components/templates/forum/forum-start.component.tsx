@@ -1,6 +1,6 @@
 import {
-  CatalogRow3,
-  CatalogRow2,
+  CatalogRowLastMessage,
+  CatalogRowThreadsCount,
   CatalogTop,
   H1,
   Section,
@@ -43,8 +43,8 @@ export const Forum = () => {
     <Section>
       <H1>ФОРУМ</H1>
       <CatalogTop>
-        <CatalogRow2>Тем</CatalogRow2>
-        <CatalogRow3>Последнее сообщение</CatalogRow3>
+        <CatalogRowThreadsCount>Тем</CatalogRowThreadsCount>
+        <CatalogRowLastMessage>Последнее сообщение</CatalogRowLastMessage>
       </CatalogTop>
       <ForumStartTopics data={demoData} />
     </Section>

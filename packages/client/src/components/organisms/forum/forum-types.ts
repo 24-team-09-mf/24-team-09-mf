@@ -1,4 +1,4 @@
-export type forumLastTopicProps = {
+export type ForumLastTopicProps = {
   id: string
   date: number
   title: string
@@ -6,34 +6,30 @@ export type forumLastTopicProps = {
   userName: string
 }
 
-export type forumStartProps = {
+export type ForumStartProps = {
   id: string
   title: string
   text: string
   topicsCount: number
-  lastTopic: forumLastTopicProps
+  lastTopic: ForumLastTopicProps
 }
 
-export type forumSectionProps = {
+export type ForumSectionProps = {
   id: string
   parentId: string
   title: string
   postCount: number
-  lastTopic: forumLastTopicProps
+  lastTopic: ForumLastTopicProps
 }
 
-export type forumSectionsProps = {
-  title: string
-  topics: forumSectionProps[]
-}
-
-export type forumFormsProps = {
+export type ForumFormsProps = {
   id: string
+  postPageId?: string
   title: string
   message: string
 }
 
-export type forumPostProps = {
+export type ForumPostProps = {
   id: string
   text: string
   date: number
@@ -41,9 +37,4 @@ export type forumPostProps = {
   userId: number
   userName: string
   userAvatar: null | string
-}
-
-export type forumPostsProps = {
-  title: string
-  topics: forumPostProps[]
 }

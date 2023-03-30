@@ -35,14 +35,14 @@ export const CatalogTop = styled.div`
   text-align: center;
 `
 
-export const CatalogRow1 = styled.div`
+export const CatalogRowContent = styled.div`
   display: block;
   padding: 0.938rem;
   padding-right: 1.25rem;
   width: calc(100% - 25rem);
 `
 
-export const CatalogRow2 = styled.div`
+export const CatalogRowThreadsCount = styled.div`
   width: 6.25rem;
   font-size: 0.75rem;
   text-align: center;
@@ -53,7 +53,7 @@ export const CatalogRow2 = styled.div`
   justify-content: center;
 `
 
-export const CatalogRow3 = styled.div`
+export const CatalogRowLastMessage = styled.div`
   width: 18.75rem;
   display: flex;
   align-items: center;
@@ -82,7 +82,7 @@ export const CatalogRow1Title = styled(Link)`
   }
 `
 
-export const CatalogRowMessage = styled(CatalogRow3)`
+export const CatalogRowMessage = styled(CatalogRowLastMessage)`
   padding: 0 0.938rem;
   font-size: 0.75rem;
   justify-content: flex-start;
@@ -104,14 +104,14 @@ export const CatalogRowMessageLink = styled(Link)`
 
 export const CatalogRowMessageUser = styled.div``
 
-export const SectionRow1 = styled.div`
+export const SectionRowContent = styled.div`
   display: block;
   padding: 0.938rem;
   padding-right: 1.25rem;
   width: calc(100% - 21.875rem);
 `
 
-export const SectionRow2 = styled.div`
+export const SectionRowMessagesCount = styled.div`
   width: 6.25rem;
   font-size: 0.75rem;
   text-align: center;
@@ -122,12 +122,12 @@ export const SectionRow2 = styled.div`
   justify-content: center;
 `
 
-export const SectionRow3 = styled(SectionRow2)`
+export const SectionRowLastMessage = styled(SectionRowMessagesCount)`
   width: 9.375rem;
   border-right: none;
 `
 
-export const SectionRow1Title = styled(Link)`
+export const SectionRowContentTitle = styled(Link)`
   color: var(--color-text);
   cursor: pointer;
   &:hover {
@@ -135,7 +135,7 @@ export const SectionRow1Title = styled(Link)`
   }
 `
 
-export const FormSep = styled.div`
+export const FormSeparator = styled.div`
   height: 0.063rem;
   width: 100%;
   background-color: rgba(var(--color-green2-rgb), 0.5);

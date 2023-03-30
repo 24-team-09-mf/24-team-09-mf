@@ -1,7 +1,7 @@
-import { forumPostProps } from '@/components/organisms/forum/types'
+import { ForumPostProps } from '@/components/organisms/forum/forum-types'
 import {
   FormButtonWrapper,
-  FormSep,
+  FormSeparator,
   FormTextarea,
   ForumPostBlock,
   ForumPostBlockAvatar,
@@ -15,35 +15,36 @@ import {
   ForumPostUserName,
   H2,
 } from '@/components/templates/forum/forum.styles'
-import icon_rate_minus from '@/assets/icons/rate_minus.svg'
-import icon_rate_plus from '@/assets/icons/rate_plus.svg'
+import IconRateMinus from '@/assets/icons/rate_minus.svg'
+import IconRatePlus from '@/assets/icons/rate_plus.svg'
 import React, { useEffect, useState } from 'react'
 import dateParse from '@/components/utils/date-parse'
-import useSectionForm from '@/components/organisms/forum/logic'
+import useSectionForm from '@/components/organisms/forum/forum-logic'
 import { Button } from '@/components'
 
-const ForumPost = (el: forumPostProps) => {
+const ForumPost = (el: ForumPostProps) => {
   const [rate, setRate] = useState(el.rate)
+  const { userAvatar, userName, date, text } = el
 
   return (
     <ForumPostBlock>
       <ForumPostBlockAvatar>
-        {el.userAvatar && <img src={el.userAvatar} alt="" />}
+        {userAvatar && <img src={userAvatar} alt="" />}
       </ForumPostBlockAvatar>
       <ForumPostContent>
         <ForumPostTop>
-          <ForumPostUserName>{el.userName}</ForumPostUserName>
-          <ForumPostDate>{dateParse(el.date)}</ForumPostDate>
+          <ForumPostUserName>{userName}</ForumPostUserName>
+          <ForumPostDate>{dateParse(date)}</ForumPostDate>
         </ForumPostTop>
-        <p>{el.text}</p>
+        <p>{text}</p>
         <ForumPostBottom>
           <ForumPostRate>
-            <ForumPostRateButton onClick={() => setRate(rate - 1)}>
-              <img src={icon_rate_minus} alt="Не нравиться" />
+            <ForumPostRateButton onClick={() => setRate(prev => prev - 1)}>
+              <img src={IconRateMinus} alt="Не нравится" />
             </ForumPostRateButton>
             <ForumPostRateText>{rate}</ForumPostRateText>
-            <ForumPostRateButton onClick={() => setRate(rate + 1)}>
-              <img src={icon_rate_plus} alt="Нравиться" />
+            <ForumPostRateButton onClick={() => setRate(prev => prev + 1)}>
+              <img src={IconRatePlus} alt="Нравится" />
             </ForumPostRateButton>
           </ForumPostRate>
         </ForumPostBottom>
@@ -52,13 +53,13 @@ const ForumPost = (el: forumPostProps) => {
   )
 }
 
-export const ForumPosts = ({ data }: { data: forumPostProps[] }) => {
+export const ForumPosts = ({ data }: { data: ForumPostProps[] }) => {
   return (
-    <>
+    <div>
       {data.map(el => (
         <ForumPost key={el.id} {...el} />
       ))}
-    </>
+    </div>
   )
 }
 
@@ -76,16 +77,11 @@ export const ForumPostsForm = ({
     isValid,
     setValue,
     getValues,
-  } = useSectionForm()
-
-  useEffect(() => {
-    setValue('id', id)
-    setValue('postPageId', postPageId)
-  }, [onSubmitHandler])
+  } = useSectionForm(id, postPageId)
 
   return (
     <form onSubmit={handleSubmit(onSubmitHandler)}>
-      <FormSep />
+      <FormSeparator />
       <H2 marginBottom="30px">Написать сообщение</H2>
       <FormTextarea
         {...register('message', { required: true })}

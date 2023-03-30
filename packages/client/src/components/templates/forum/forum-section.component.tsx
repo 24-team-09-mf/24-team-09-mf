@@ -1,11 +1,9 @@
 import {
-  CatalogRow3,
-  CatalogRow2,
   CatalogTop,
   H1,
   Section,
-  SectionRow2,
-  SectionRow3,
+  SectionRowMessagesCount,
+  SectionRowLastMessage,
 } from '@/components/templates/forum/forum.styles'
 import React from 'react'
 import { Navigate, useParams } from 'react-router-dom'
@@ -62,9 +60,9 @@ export const ForumSection = () => {
       <H1>ФОРУМ</H1>
       <ForumSectionTitle title={demoData.title} />
       <CatalogTop>
-        <SectionRow2>Сообщений</SectionRow2>
-        <SectionRow2>Автор</SectionRow2>
-        <SectionRow3>Последнее сообщение</SectionRow3>
+        <SectionRowMessagesCount>Сообщений</SectionRowMessagesCount>
+        <SectionRowMessagesCount>Автор</SectionRowMessagesCount>
+        <SectionRowLastMessage>Последнее сообщение</SectionRowLastMessage>
       </CatalogTop>
       <ForumSectionTopics data={demoData.topics} />
       <ForumSectionForm id={id} />

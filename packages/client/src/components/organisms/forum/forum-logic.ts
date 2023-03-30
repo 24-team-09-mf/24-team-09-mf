@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
-import { forumFormsProps } from '@/components/organisms/forum/types'
+import { ForumFormsProps } from '@/components/organisms/forum/forum-types'
 
-const useSectionForm = () => {
+const useSectionForm = (id: string, postPageId?: string) => {
   const {
     register,
     handleSubmit,
@@ -13,8 +13,13 @@ const useSectionForm = () => {
     mode: 'onBlur',
   })
 
-  const onSubmitHandler = async (data: forumFormsProps) => {
+  // setValue('id', id)
+  // if (postPageId) setValue('postPageId', postPageId)
+
+  const onSubmitHandler = async (data: ForumFormsProps) => {
     try {
+      data = { ...data, id: id }
+      if (postPageId) data = { ...data, postPageId: postPageId }
       console.log(data)
       reset()
       setValue('message', '')

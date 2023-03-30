@@ -1,44 +1,43 @@
 import React, { useEffect } from 'react'
 import {
   CatalogBlock,
-  FormSep,
+  FormSeparator,
   H2,
-  SectionRow1,
-  SectionRow1Title,
-  SectionRow2,
-  SectionRow3,
+  SectionRowContent,
+  SectionRowContentTitle,
+  SectionRowMessagesCount,
+  SectionRowLastMessage,
   FormInput,
   FormTextarea,
   FormButtonWrapper,
 } from '@/components/templates/forum/forum.styles'
 import dateParse from '@/components/utils/date-parse'
-import {
-  forumSectionProps,
-  forumSectionsProps,
-} from '@/components/organisms/forum/types'
+import { ForumSectionProps } from '@/components/organisms/forum/forum-types'
 import { Button } from '@/components'
-import useSectionForm from '@/components/organisms/forum/logic'
+import useSectionForm from '@/components/organisms/forum/forum-logic'
 
 export const ForumSectionTitle = ({ title }: { title: string }) => {
   return <H2>{title}</H2>
 }
 
-const ForumSectionTopicsElement = (el: forumSectionProps) => {
+const ForumSectionTopicsElement = (el: ForumSectionProps) => {
+  const { parentId, id, title, postCount, lastTopic } = el
+
   return (
     <CatalogBlock>
-      <SectionRow1>
-        <SectionRow1Title to={`/forum/${el.parentId}/${el.id}`}>
-          {el.title}
-        </SectionRow1Title>
-      </SectionRow1>
-      <SectionRow2>{el.postCount}</SectionRow2>
-      <SectionRow2>{el.lastTopic.userName}</SectionRow2>
-      <SectionRow3>{dateParse(el.lastTopic.date)}</SectionRow3>
+      <SectionRowContent>
+        <SectionRowContentTitle to={`/forum/${parentId}/${id}`}>
+          {title}
+        </SectionRowContentTitle>
+      </SectionRowContent>
+      <SectionRowMessagesCount>{postCount}</SectionRowMessagesCount>
+      <SectionRowMessagesCount>{lastTopic.userName}</SectionRowMessagesCount>
+      <SectionRowLastMessage>{dateParse(lastTopic.date)}</SectionRowLastMessage>
     </CatalogBlock>
   )
 }
 
-export const ForumSectionTopics = ({ data }: { data: forumSectionProps[] }) => {
+export const ForumSectionTopics = ({ data }: { data: ForumSectionProps[] }) => {
   return (
     <>
       {data.map(el => (
@@ -56,15 +55,11 @@ export const ForumSectionForm = ({ id }: { id: string }) => {
     isValid,
     setValue,
     getValues,
-  } = useSectionForm()
-
-  useEffect(() => {
-    setValue('id', id)
-  }, [onSubmitHandler])
+  } = useSectionForm(id)
 
   return (
     <form onSubmit={handleSubmit(onSubmitHandler)}>
-      <FormSep />
+      <FormSeparator />
       <H2 marginBottom="30px">Добавить тему</H2>
       <FormInput
         {...register('title', { required: true })}
