@@ -1,6 +1,5 @@
-import { LayoutMain } from '@/components'
+import { ForumSection, LayoutMain } from '@/components'
 import React from 'react'
-import { ForumSection } from '@/components/templates/forum'
 
 const ForumSectionPage = () => {
   return (
