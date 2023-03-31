@@ -1,7 +1,11 @@
 import React from 'react'
-import { LayoutMain } from '@/components'
+import { LayoutMain, Statistics } from '@/components'
 
 const StatisticsPage = () => {
-  return <LayoutMain>Статистика</LayoutMain>
+  return (
+    <LayoutMain>
+      <Statistics />
+    </LayoutMain>
+  )
 }
 export default StatisticsPage
