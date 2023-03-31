@@ -1,5 +1,5 @@
-// components
-import { LayoutMain } from '../../components'
+import React from 'react'
+import { LayoutMain } from '@/components'
 
 const StatisticsPage = () => {
   return <LayoutMain>Статистика</LayoutMain>
