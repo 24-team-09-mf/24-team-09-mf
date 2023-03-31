@@ -2,7 +2,7 @@ function mergeSort(
   unsortedArray: Record<number | string, any>,
   sortingParameter: string,
   sortDir = 'ASC'
-): Record<number | string, any> {
+): any {
   if (unsortedArray.length <= 1) {
     return unsortedArray
   }
@@ -37,7 +37,7 @@ function merge(
     while (leftIndex < left.length && rightIndex < right.length) {
       let comparison =
         left[leftIndex][sortingParameter] < right[rightIndex][sortingParameter]
-      if (sortingDir !== 'ASC')
+      if (sortingDir !== 'DESC')
         comparison =
           left[leftIndex][sortingParameter] >=
           right[rightIndex][sortingParameter]

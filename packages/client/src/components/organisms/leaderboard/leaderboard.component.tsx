@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Control,
   H2,
@@ -17,8 +17,10 @@ import {
 } from './leaderboard.styles'
 import { Input } from '@/components/molecules'
 import IconSort from '@/assets/icons/sort.svg'
+import { LeaderboardElementProps } from './leaderboard-types'
+import mergeSort from '@/utils/mergeSort'
 
-const LeaderboardElement = (el: any) => {
+const LeaderboardElement = (el: LeaderboardElementProps) => {
   const { position, points, userName, userAvatar } = el
 
   return (
@@ -37,7 +39,20 @@ const LeaderboardElement = (el: any) => {
   )
 }
 
-export const Leaderboard = ({ data }: { data: any }) => {
+export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
+  const [search, setSearch] = useState('')
+  const [nameSort, setNameSort] = useState('ASC')
+  const [positionSort, setPositionSort] = useState('DESC')
+  const [sortData, setSortData] = useState(data)
+
+  useEffect(() => {
+    setSortData([...mergeSort(data, 'userName', nameSort)])
+  }, [nameSort])
+
+  useEffect(() => {
+    setSortData([...mergeSort(data, 'position', positionSort)])
+  }, [positionSort])
+
   return (
     <Wrapper>
       <H2 marginBottom="50px">Таблица лидеров</H2>
@@ -46,20 +61,26 @@ export const Leaderboard = ({ data }: { data: any }) => {
           <ControlTitle>Поиск:</ControlTitle>
           <Input
             placeholder="Введите имя"
-            onKeyDown={() => console.log('ok')}
+            onChange={event => {
+              setSearch((event.target as HTMLInputElement).value)
+            }}
           />
         </Search>
         <Sort>
           <ControlTitle>Сортировка:</ControlTitle>
-          <SortElement>
+          <SortElement
+            onClick={() => setNameSort(nameSort === 'ASC' ? 'DESC' : 'ASC')}>
             По имени
-            <SortElementIcon>
+            <SortElementIcon dir={nameSort}>
               <img src={IconSort} alt="Сортировать" />
             </SortElementIcon>
           </SortElement>
-          <SortElement>
+          <SortElement
+            onClick={() =>
+              setPositionSort(positionSort === 'ASC' ? 'DESC' : 'ASC')
+            }>
             По очкам
-            <SortElementIcon dir="DESC">
+            <SortElementIcon dir={positionSort}>
               <img src={IconSort} alt="Сортировать" />
             </SortElementIcon>
           </SortElement>
@@ -67,8 +88,8 @@ export const Leaderboard = ({ data }: { data: any }) => {
       </Control>
 
       <>
-        {data.map(el => (
-          <LeaderboardElement key={el.id} {...el} />
+        {sortData.map(el => (
+          <LeaderboardElement key={el.position} {...el} />
         ))}
       </>
     </Wrapper>

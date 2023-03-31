@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Input } from '@/components/molecules'
 
 export const H2 = styled.h2((props: { marginBottom?: string }) => {
   const marginBottom = props.marginBottom ? props.marginBottom : '1.875rem'
