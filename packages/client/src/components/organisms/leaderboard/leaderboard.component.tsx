@@ -18,7 +18,26 @@ import {
 import { Input } from '@/components/molecules'
 import IconSort from '@/assets/icons/sort.svg'
 
-export const Leaderboard = () => {
+const LeaderboardElement = (el: any) => {
+  const { position, points, userName, userAvatar } = el
+
+  return (
+    <Item>
+      <ItemLeft>
+        <Number>{position}</Number>
+        <User>
+          <UserAvatar>
+            {userAvatar && <img src={userAvatar} alt={userName} />}
+          </UserAvatar>
+          {userName}
+        </User>
+      </ItemLeft>
+      <Points>{points}</Points>
+    </Item>
+  )
+}
+
+export const Leaderboard = ({ data }: { data: any }) => {
   return (
     <Wrapper>
       <H2 marginBottom="50px">Таблица лидеров</H2>
@@ -46,42 +65,12 @@ export const Leaderboard = () => {
           </SortElement>
         </Sort>
       </Control>
-      <Item>
-        <ItemLeft>
-          <Number>1</Number>
-          <User>
-            <UserAvatar>
-              <img src="" alt="ivanivanov" />
-            </UserAvatar>
-            ivanivanov
-          </User>
-        </ItemLeft>
-        <Points>23456</Points>
-      </Item>
-      <Item>
-        <ItemLeft>
-          <Number>1</Number>
-          <User>
-            <UserAvatar>
-              <img src="" alt="ivanivanov" />
-            </UserAvatar>
-            ivanivanov
-          </User>
-        </ItemLeft>
-        <Points>23456</Points>
-      </Item>
-      <Item>
-        <ItemLeft>
-          <Number>1</Number>
-          <User>
-            <UserAvatar>
-              <img src="" alt="ivanivanov" />
-            </UserAvatar>
-            ivanivanov
-          </User>
-        </ItemLeft>
-        <Points>23456</Points>
-      </Item>
+
+      <>
+        {data.map(el => (
+          <LeaderboardElement key={el.id} {...el} />
+        ))}
+      </>
     </Wrapper>
   )
 }

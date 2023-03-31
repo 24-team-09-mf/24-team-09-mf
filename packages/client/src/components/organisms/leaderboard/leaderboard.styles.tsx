@@ -18,7 +18,7 @@ export const Wrapper = styled.div`
 export const Control = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1.875rem;
+  margin-bottom: 1rem;
 `
 
 export const Search = styled.div`
@@ -45,7 +45,7 @@ export const Item = styled.div`
   align-items: center;
   justify-content: space-between;
   font-weight: 700;
-  font-size: 2rem;
+  font-size: 1.25rem;
 
   &:last-child {
     margin-bottom: 0;
