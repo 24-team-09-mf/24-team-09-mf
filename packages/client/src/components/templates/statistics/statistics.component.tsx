@@ -19,12 +19,18 @@ export const Statistics = () => {
     },
     {
       position: 3,
+      points: 1950,
+      userName: 'ivan2',
+      userAvatar: null,
+    },
+    {
+      position: 4,
       points: 1900,
       userName: 'noname',
       userAvatar: null,
     },
     {
-      position: 4,
+      position: 5,
       points: 270,
       userName: 'user0001',
       userAvatar: null,

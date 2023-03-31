@@ -46,11 +46,17 @@ export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
   const [sortData, setSortData] = useState(data)
 
   useEffect(() => {
-    setSortData([...mergeSort(data, 'userName', nameSort)])
+    const s = data.filter(el => el.userName.indexOf(search) !== -1)
+    setSortData([...mergeSort(s, 'position', 'DESC')])
+    setPositionSort('DESC')
+  }, [search])
+
+  useEffect(() => {
+    setSortData([...mergeSort(sortData, 'userName', nameSort)])
   }, [nameSort])
 
   useEffect(() => {
-    setSortData([...mergeSort(data, 'position', positionSort)])
+    setSortData([...mergeSort(sortData, 'position', positionSort)])
   }, [positionSort])
 
   return (
