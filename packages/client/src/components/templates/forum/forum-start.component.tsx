@@ -3,10 +3,10 @@ import {
   CatalogRowThreadsCount,
   CatalogTop,
   H1,
-  Section,
 } from '@/components/templates/forum/forum.styles'
-import React from 'react'
 import { ForumStartTopics } from '@/components/organisms/forum'
+
+import Container from '@/components/layouts/container/container.component'
 
 export const Forum = () => {
   // TODO: Поменять, демо
@@ -40,13 +40,13 @@ export const Forum = () => {
   ]
 
   return (
-    <Section>
+    <Container>
       <H1>ФОРУМ</H1>
       <CatalogTop>
         <CatalogRowThreadsCount>Тем</CatalogRowThreadsCount>
         <CatalogRowLastMessage>Последнее сообщение</CatalogRowLastMessage>
       </CatalogTop>
       <ForumStartTopics data={demoData} />
-    </Section>
+    </Container>
   )
 }

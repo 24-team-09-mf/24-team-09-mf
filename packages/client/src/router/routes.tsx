@@ -3,7 +3,6 @@ import { ErrorWrapper } from '@/components/layouts/error-wrapper'
 import loadable from '@loadable/component'
 
 const App = loadable(() => import('@/pages'))
-const HelloWorld = loadable(() => import('@/pages/HelloWorld'))
 const ErrorPage = loadable(() => import('@/pages/ErrorPage'))
 const SignInPage = loadable(() => import('@/pages/signin'))
 const SignUpPage = loadable(() => import('@/pages/signup'))
@@ -12,6 +11,8 @@ const ChangePasswordPage = loadable(() => import('@/pages/change-password'))
 const ForumPage = loadable(() => import('@/pages/forum/forum-start'))
 const ForumSectionPage = loadable(() => import('@/pages/forum/forum-section'))
 const ForumPostPage = loadable(() => import('@/pages/forum/forum-post'))
+const LandingPage = loadable(() => import('@/pages/landing'))
+
 
 // Необходимо обернуть каждую новую страницу в ErrorWrapper за исключением страниц ошибок
 export const router = createBrowserRouter([
@@ -20,14 +21,6 @@ export const router = createBrowserRouter([
     element: (
       <ErrorWrapper>
         <App />
-      </ErrorWrapper>
-    ),
-  },
-  {
-    path: '/hello',
-    element: (
-      <ErrorWrapper>
-        <HelloWorld />
       </ErrorWrapper>
     ),
   },
@@ -99,4 +92,8 @@ export const router = createBrowserRouter([
     path: '/game',
     // element: <GamePage/>
   },
+  {
+    path: '/landing',
+    element: <ErrorWrapper><LandingPage/></ErrorWrapper>
+  }
 ])
