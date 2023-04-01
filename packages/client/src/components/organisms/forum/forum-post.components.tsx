@@ -18,9 +18,9 @@ import {
 import IconRateMinus from '@/assets/icons/rate_minus.svg'
 import IconRatePlus from '@/assets/icons/rate_plus.svg'
 import React, { useEffect, useState } from 'react'
-import dateParse from '@/components/utils/date-parse'
 import useSectionForm from '@/components/organisms/forum/forum-logic'
 import { Button } from '@/components'
+import dateParse from '@/utils/dateParse'
 
 const ForumPost = (el: ForumPostProps) => {
   const [rate, setRate] = useState(el.rate)

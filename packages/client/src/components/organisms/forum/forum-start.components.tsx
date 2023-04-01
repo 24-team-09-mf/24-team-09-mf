@@ -10,7 +10,7 @@ import {
 } from '@/components/templates/forum/forum.styles'
 import React from 'react'
 import { ForumStartProps } from '@/components/organisms/forum/forum-types'
-import dateParse from '@/components/utils/date-parse'
+import dateParse from '@/utils/dateParse'
 
 const ForumStartElement = (el: ForumStartProps) => {
   const { id, title, text, topicsCount, lastTopic } = el
