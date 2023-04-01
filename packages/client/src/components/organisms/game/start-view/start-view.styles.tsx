@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-`;
+`
 
 export const Footer = styled.div`
   width: 100%;
@@ -16,18 +16,18 @@ export const Footer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 120px;
-`;
+`
 
 export const Title = styled.h1`
   font-weight: 400;
   font-size: 110px;
   line-height: 120px;
-  color: #97B955;
+  color: #97b955;
   text-align: right;
-`;
+`
 export const BtnStart = styled(Button)`
   font-size: 32px;
-  background-color: #1E7063;
+  background-color: #1e7063;
   border-radius: 8px;
   padding: 22px;
   width: fit-content;
@@ -37,10 +37,10 @@ export const BtnStart = styled(Button)`
   }
   &:active {
     box-shadow: -0.25rem -0.1875rem 0.25rem transparent,
-    0.125rem 0.25rem 0.6875rem ${() => rgba('#1E7063', 0.2)};
+      0.125rem 0.25rem 0.6875rem ${() => rgba('#1E7063', 0.2)};
   }
   &:focus-visible {
     box-shadow: -0.25rem -0.1875rem 0.25rem transparent,
-    0.125rem 0.25rem 0.6875rem ${() => rgba('#1E7063', 0.2)};
+      0.125rem 0.25rem 0.6875rem ${() => rgba('#1E7063', 0.2)};
   }
-`;
+`

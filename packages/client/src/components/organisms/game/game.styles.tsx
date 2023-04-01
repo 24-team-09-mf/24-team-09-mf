@@ -1,13 +1,21 @@
 import styled from 'styled-components'
-import { HEIGHT_VIEW, WIDTH_VIEW } from '@/components/organisms/game/game.constants'
+import {
+  HEIGHT_VIEW,
+  WIDTH_VIEW,
+} from '@/components/organisms/game/game.constants'
 import { Button } from '@/components'
 
+export const Wrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
 export const MainView = styled.div`
   position: relative;
   width: ${WIDTH_VIEW}px;
   height: ${HEIGHT_VIEW}px;
-  margin: 0 auto;
-`;
+`
 
 export const Content = styled.div`
   font-family: '04B03';
@@ -26,4 +34,4 @@ export const BtnText = styled(Button)`
   &:hover {
     text-decoration: none;
   }
-`;
+`
