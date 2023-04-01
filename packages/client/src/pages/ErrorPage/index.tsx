@@ -1,6 +1,10 @@
-const ErrorPage = () => {
+import { LayoutMain, ErrorTemplate } from '../../components'
+
+const ErrorPage: React.FC = () => {
   return (
-    <div>Что-то пошло не так</div>
+    <LayoutMain>
+      <ErrorTemplate />
+    </LayoutMain>
   )
 }
 
