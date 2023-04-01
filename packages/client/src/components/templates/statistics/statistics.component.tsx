@@ -1,4 +1,3 @@
-import React from 'react'
 import { Section, H1 } from './statistics.styles'
 import { Leaderboard } from '@/components'
 

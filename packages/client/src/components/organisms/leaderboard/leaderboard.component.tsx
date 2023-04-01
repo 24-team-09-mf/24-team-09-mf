@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Control,
   H2,
@@ -20,8 +20,8 @@ import IconSort from '@/assets/icons/sort.svg'
 import { LeaderboardElementProps } from './leaderboard-types'
 import mergeSort from '@/utils/mergeSort'
 
-const LeaderboardElement = (el: LeaderboardElementProps) => {
-  const { position, points, userName, userAvatar } = el
+const LeaderboardElement = (props: LeaderboardElementProps) => {
+  const { position, points, userName, userAvatar } = props
 
   return (
     <Item>
@@ -47,21 +47,21 @@ export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
 
   useEffect(() => {
     const s = data.filter(el => el.userName.indexOf(search) !== -1)
-    setSortData([...mergeSort(s, 'position', 'DESC')])
+    setSortData(mergeSort(s, 'position', 'DESC'))
     setPositionSort('DESC')
   }, [search])
 
   useEffect(() => {
-    setSortData([...mergeSort(sortData, 'userName', nameSort)])
+    setSortData(mergeSort(sortData, 'userName', nameSort))
   }, [nameSort])
 
   useEffect(() => {
-    setSortData([...mergeSort(sortData, 'position', positionSort)])
+    setSortData(mergeSort(sortData, 'position', positionSort))
   }, [positionSort])
 
   return (
     <Wrapper>
-      <H2 marginBottom="50px">Таблица лидеров</H2>
+      <H2>Таблица лидеров</H2>
       <Control>
         <Search>
           <ControlTitle>Поиск:</ControlTitle>
@@ -93,11 +93,9 @@ export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
         </Sort>
       </Control>
 
-      <>
-        {sortData.map(el => (
-          <LeaderboardElement key={el.position} {...el} />
-        ))}
-      </>
+      {sortData.map(el => (
+        <LeaderboardElement key={el.position} {...el} />
+      ))}
     </Wrapper>
   )
 }

@@ -1,4 +1,3 @@
-import React from 'react'
 import { LayoutMain, Statistics } from '@/components'
 
 const StatisticsPage = () => {
