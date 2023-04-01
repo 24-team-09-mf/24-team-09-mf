@@ -16,7 +16,8 @@ export const Footer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 120px;
-`
+`;
+
 export const Title = styled.h1`
   font-weight: 400;
   font-size: 110px;
@@ -42,4 +43,4 @@ export const BtnStart = styled(Button)`
     box-shadow: -0.25rem -0.1875rem 0.25rem transparent,
     0.125rem 0.25rem 0.6875rem ${() => rgba('#1E7063', 0.2)};
   }
-`
+`;
