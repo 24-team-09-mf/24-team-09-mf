@@ -1,11 +1,9 @@
-import { LayoutMain } from "@/components";
-
-import { Landing } from "@/components/templates/landing";
+import { LayoutMain, Landing } from '@/components'
 
 const LandingPage: React.FC = () => {
   return (
     <LayoutMain>
-      <Landing/>
+      <Landing />
     </LayoutMain>
   )
 }
