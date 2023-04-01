@@ -26,4 +26,4 @@ export const BtnText = styled(Button)`
   &:hover {
     text-decoration: none;
   }
-`
+`;

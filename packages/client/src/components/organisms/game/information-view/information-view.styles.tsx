@@ -16,13 +16,13 @@ export const Content = styled(ContentComponent)`
   padding-top: 25px;
   height: 100%;
   width: 100%;
-`
+`;
 
 export const Header = styled.div`
   width: 100%;
   display: flex;
   justify-content: end;
-`
+`;
 
 export const ButtonsBlock = styled.div`
   height: 100%;
@@ -79,11 +79,12 @@ export const Button = styled.div<ButtonProps>`
     content: ${({ tooltip }) => `'${tooltip}'`};
     font-size: 50px;
   }
-`
+`;
+
 export const Block = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   margin-top: 130px;
-`
+`;
