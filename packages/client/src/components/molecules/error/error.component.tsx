@@ -16,9 +16,7 @@ export const ErrorBlock: React.FC<IErrorBlockProps> = ({ code, text }) => {
     <Wrapper>
       <Code>{code}</Code>
       <Description>{text}</Description>
-      <BackLink href="#" onClick={onBack}>
-        Назад
-      </BackLink>
+      <BackLink onClick={onBack}>Назад</BackLink>
     </Wrapper>
   )
 }
