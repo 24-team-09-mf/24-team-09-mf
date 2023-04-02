@@ -3,8 +3,8 @@ import { ErrorWrapper } from '@/components/layouts/error-wrapper'
 import loadable from '@loadable/component'
 
 const App = loadable(() => import('@/pages'))
-const HelloWorld = loadable(() => import('@/pages/HelloWorld'))
 const ErrorPage = loadable(() => import('@/pages/ErrorPage'))
+const PageNotFound = loadable(() => import('@/pages/PageNotFound'))
 const SignInPage = loadable(() => import('@/pages/signin'))
 const SignUpPage = loadable(() => import('@/pages/signup'))
 const ProfilePage = loadable(() => import('@/pages/profile'))
@@ -25,16 +25,12 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: '/hello',
-    element: (
-      <ErrorWrapper>
-        <HelloWorld />
-      </ErrorWrapper>
-    ),
-  },
-  {
     path: '/500',
     element: <ErrorPage />,
+  },
+  {
+    path: '/*',
+    element: <PageNotFound />,
   },
   {
     path: '/signin',
