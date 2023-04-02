@@ -1,5 +1,5 @@
+import { JungleHeader } from '@/components/molecules'
 import Container from '@/components/layouts/container/container.component'
-import JungleHeader from '@/components/molecules/jungleHeader/jungleHeader.component'
 
 import {
   Wrapper,
@@ -7,6 +7,7 @@ import {
   Section,
   GameGif,
   GameProcess,
+  SignUpLink,
 } from './landing.styles'
 
 import Game from '@/assets/images/landing/game.gif'
@@ -37,15 +38,18 @@ export const Landing = () => {
           <JungleHeader title="Игровой процесс" variant="xs" align="left" />
           <GameProcess>
             <GameGif src={Game} alt="Игровой процесс" />
-            {/* TODO доделать Typography */}
-            <Description>
-              Игрок управляет персонажем используя клавиши на клавиатуре. Герой
-              может прыгать, бегать и собирать награды. По мере повышения
-              сложности, на уровнях будут появляться новые препятствия, которые
-              необходимо преодолевать для того, чтобы получить больше наград.
-              Если же герой падает в пропасть или умирает от урона ловушек –
-              игра заканчивается.
-            </Description>
+            <div>
+              {/* TODO доделать Typography */}
+              <Description>
+                Игрок управляет персонажем используя клавиши на клавиатуре.
+                Герой может прыгать, бегать и собирать награды. По мере
+                повышения сложности, на уровнях будут появляться новые
+                препятствия, которые необходимо преодолевать для того, чтобы
+                получить больше наград. Если же герой падает в пропасть или
+                умирает от урона ловушек – игра заканчивается.
+              </Description>
+              <SignUpLink to="/signup">РЕГИСТРАЦИЯ</SignUpLink>
+            </div>
           </GameProcess>
         </Section>
         <Section>

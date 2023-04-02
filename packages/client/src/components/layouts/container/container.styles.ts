@@ -1,10 +1,8 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
+  padding: 0 15px;
+  margin 0 auto;
   @media (min-width: 768px) {
     width: 750px;
   }
