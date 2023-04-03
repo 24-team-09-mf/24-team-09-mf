@@ -1,4 +1,4 @@
 export type StartViewProps = {
-  onClickInformation(): void;
-  onClickStartGame(): void;
+  onClickInformation(): void
+  onClickStartGame(): void
 }

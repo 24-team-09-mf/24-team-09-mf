@@ -1,5 +1,6 @@
 export type GameViewProps = {
-  isStartedGame: boolean;
+  isStartedGame: boolean
+  isEndedGame: boolean
 }
 
 export type GameModel = CanvasRenderingContext2D | null
