@@ -1,6 +1,6 @@
 import { Wrapper, Image, Title } from './jungleHeader.styles'
 
-import { ALIGN_VARIANTS, VARIANT_FONT_SIZES } from './jungleHeader.contstants'
+import { ALIGN_VARIANTS, VARIANT_FONT_SIZES } from './jungleHeader.constants'
 import { IJungleHeaderProps } from './jungleHeader.types'
 
 import jungleTileset from '@/assets/images/landing/jungle_tileset.png'
