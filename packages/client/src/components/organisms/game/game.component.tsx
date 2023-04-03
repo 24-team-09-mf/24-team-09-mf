@@ -16,6 +16,11 @@ export const GameComponent = () => {
     []
   )
 
+  const handlerClickRestartGame = useCallback(
+    () => setIsGameEnded(prev => !prev),
+    []
+  )
+
   const handlerClickShowInformation = useCallback(
     () => setIsShowInformation(prev => !prev),
     []
@@ -38,7 +43,7 @@ export const GameComponent = () => {
         )}
         {!isGameEnded && (
             <EndView
-              onClickStartGame={() => setIsGameEnded(true)}
+              onClickStartGame={handlerClickRestartGame}
               score={1034}
             />
           )
