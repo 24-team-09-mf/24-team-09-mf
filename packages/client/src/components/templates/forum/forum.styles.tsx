@@ -1,13 +1,6 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-export const Section = styled.div`
-  width: 75rem;
-  margin: 0 auto;
-  padding-block: 1.25rem;
-  color: var(--color-text);
-`
-
 export const H1 = styled.h1`
   font-family: var(--font-title);
   font-size: 1.875rem;

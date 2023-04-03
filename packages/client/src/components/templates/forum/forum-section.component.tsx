@@ -1,17 +1,17 @@
 import {
   CatalogTop,
   H1,
-  Section,
   SectionRowMessagesCount,
   SectionRowLastMessage,
 } from '@/components/templates/forum/forum.styles'
-import React from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 import {
   ForumSectionForm,
   ForumSectionTitle,
   ForumSectionTopics,
 } from '@/components/organisms/forum'
+
+import Container from '@/components/layouts/container/container.component'
 
 export const ForumSection = () => {
   const { id } = useParams()
@@ -56,7 +56,7 @@ export const ForumSection = () => {
   }
 
   return (
-    <Section>
+    <Container>
       <H1>ФОРУМ</H1>
       <ForumSectionTitle title={demoData.title} />
       <CatalogTop>
@@ -66,6 +66,6 @@ export const ForumSection = () => {
       </CatalogTop>
       <ForumSectionTopics data={demoData.topics} />
       <ForumSectionForm id={id} />
-    </Section>
+    </Container>
   )
 }

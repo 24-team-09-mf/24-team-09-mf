@@ -12,7 +12,7 @@ function App() {
 
     fetchServerData()
   }, [])
-  return <Navigate to={'/game'} replace/>
+  return <Navigate to={'/game'} replace />
 }
 
 export default App

@@ -1,11 +1,12 @@
-import { H1, Section } from '@/components/templates/forum/forum.styles'
-import React from 'react'
+import { H1 } from '@/components/templates/forum/forum.styles'
 import {
   ForumPosts,
   ForumPostsForm,
   ForumSectionTitle,
 } from '@/components/organisms/forum'
 import { Navigate, useParams } from 'react-router-dom'
+
+import Container from '@/components/layouts/container/container.component'
 
 export const ForumPost = () => {
   const { id, postPageId } = useParams()
@@ -51,11 +52,11 @@ export const ForumPost = () => {
   }
 
   return (
-    <Section>
+    <Container>
       <H1>ФОРУМ</H1>
       <ForumSectionTitle title={demoData.title} />
       <ForumPosts data={demoData.posts} />
       <ForumPostsForm id={id} postPageId={postPageId} />
-    </Section>
+    </Container>
   )
 }

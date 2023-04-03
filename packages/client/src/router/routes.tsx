@@ -2,17 +2,17 @@ import { createBrowserRouter } from 'react-router-dom'
 import { ErrorWrapper } from '@/components/layouts/error-wrapper'
 import loadable from '@loadable/component'
 
-const App = loadable(() => import('@/pages'))
 const ErrorPage = loadable(() => import('@/pages/ErrorPage'))
 const PageNotFound = loadable(() => import('@/pages/PageNotFound'))
 const SignInPage = loadable(() => import('@/pages/signin'))
 const SignUpPage = loadable(() => import('@/pages/signup'))
 const ProfilePage = loadable(() => import('@/pages/profile'))
 const ChangePasswordPage = loadable(() => import('@/pages/change-password'))
-const GamePage = loadable(() => import('@/pages/game'));
+const GamePage = loadable(() => import('@/pages/game'))
 const ForumPage = loadable(() => import('@/pages/forum/forum-start'))
 const ForumSectionPage = loadable(() => import('@/pages/forum/forum-section'))
 const ForumPostPage = loadable(() => import('@/pages/forum/forum-post'))
+const LandingPage = loadable(() => import('@/pages/landing'))
 const StatisticsPage = loadable(() => import('@/pages/statistics'))
 
 // Необходимо обернуть каждую новую страницу в ErrorWrapper за исключением страниц ошибок
@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
     path: '/',
     element: (
       <ErrorWrapper>
-        <App />
+        <LandingPage />
       </ErrorWrapper>
     ),
   },
@@ -103,6 +103,6 @@ export const router = createBrowserRouter([
       <ErrorWrapper>
         <GamePage />
       </ErrorWrapper>
-    )
+    ),
   },
 ])
