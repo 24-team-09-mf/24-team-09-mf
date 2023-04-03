@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import { MainView, Wrapper } from './game.styles'
 import { GameView } from './game-view'
@@ -8,19 +8,29 @@ export const GameComponent = () => {
   const [isShowInformation, setIsShowInformation] = useState(false)
   const [isGameStarted, setIsGameStarted] = useState(false)
 
+  const handlerClickStartGame = useCallback(
+    () => setIsGameStarted(prev => !prev),
+    []
+  )
+
+  const handlerClickShowInformation = useCallback(
+    () => setIsShowInformation(prev => !prev),
+    []
+  )
+
   return (
     <Wrapper>
       <MainView>
         <GameView isStartedGame={isGameStarted} />
         {!isGameStarted && (
           <StartView
-            onClickStartGame={() => setIsGameStarted(true)}
-            onClickInformation={() => setIsShowInformation(true)}
+            onClickStartGame={handlerClickStartGame}
+            onClickInformation={handlerClickShowInformation}
           />
         )}
         {isShowInformation && (
           <InformationView
-            onCloseInformation={() => setIsShowInformation(false)}
+            onCloseInformation={handlerClickShowInformation}
           />
         )}
       </MainView>
