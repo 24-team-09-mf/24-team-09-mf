@@ -25,7 +25,6 @@ export const GameView: FC<GameViewProps> = ({ isStartedGame, isEndedGame }) => {
   }, [canvasRef.current])
 
   useGameProcess({ gameModel, isStartedGame, isEndedGame })
-  console.log('isStartedGame:', isStartedGame, 'isGameEnded:', isEndedGame);
 
   return <canvas ref={canvasRef} />
 }

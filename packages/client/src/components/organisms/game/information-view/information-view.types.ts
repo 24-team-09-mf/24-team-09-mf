@@ -1,8 +1,8 @@
 export type InformationViewProps = {
-  onCloseInformation(): void;
+  onCloseInformation(): void
 }
 
 export type ButtonProps = {
-  direction: 'right' | 'bottom';
+  direction: 'right' | 'bottom'
   tooltip: string
 }
