@@ -11,10 +11,10 @@ import {
   FormTextarea,
   FormButtonWrapper,
 } from '@/components/templates/forum/forum.styles'
-import dateParse from '@/components/utils/date-parse'
 import { ForumSectionProps } from '@/components/organisms/forum/forum-types'
 import { Button } from '@/components'
 import useSectionForm from '@/components/organisms/forum/forum-logic'
+import dateParse from '@/utils/dateParse'
 
 export const ForumSectionTitle = ({ title }: { title: string }) => {
   return <H2>{title}</H2>

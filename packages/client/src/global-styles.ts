@@ -121,4 +121,9 @@ input:-webkit-autofill:active {
     content: attr(placeholder);
     color: #8c8c8c;
 }
+
+@font-face {
+  font-family: '04B03';
+  src: url('/fonts/04B03.TTF') format('truetype');
+}
 `
