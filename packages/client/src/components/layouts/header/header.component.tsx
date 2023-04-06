@@ -24,7 +24,9 @@ export const Header = () => {
     <Wrapper>
       <Container>
         <Navigation>
-          <Img src={image} alt="меню" />
+          <Link to="/">
+            <Img src={image} alt="Джунглевая опасность" />
+          </Link>
           <Text to="/statistics">Статистика</Text>
           <Text to="/forum">Форум</Text>
           <Link to="/game">

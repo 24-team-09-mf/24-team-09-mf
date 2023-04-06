@@ -1,8 +1,11 @@
 import { createGlobalStyle } from 'styled-components'
 import { normalize } from 'polished'
+import { Fonts } from '@/fonts'
 
 export const GlobalStyle = createGlobalStyle`
-${normalize()}
+  ${normalize()}
+
+  ${Fonts}
 
   :root {
     --font-title: 'Oswald', sans-serif;
@@ -27,7 +30,7 @@ ${normalize()}
   width: 100%;
   min-width: 320px;
   min-height: 100vh;
-  font-size: 0.8333vw;
+  font-size: 16px;
   font-weight: 500;
   font-style: normal;
   line-height: 19px;
@@ -52,78 +55,73 @@ ${normalize()}
   }
   }
 
-*,
-*::after,
-*::before {
-  box-sizing: inherit;
-}
+  *,
+  *::after,
+  *::before {
+    box-sizing: inherit;
+  }
 
-ul,
-ol {
-  margin: 0;
-  padding: 0;
-}
+  ul,
+  ol {
+    margin: 0;
+    padding: 0;
+  }
 
-li {
-  list-style: none;
-}
+  li {
+    list-style: none;
+  }
 
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-ul,
-ol,
-li,
-figure,
-figcaption,
-blockquote,
-dl,
-dd {
-  margin: 0;
-}
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  ul,
+  ol,
+  li,
+  figure,
+  figcaption,
+  blockquote,
+  dl,
+  dd {
+    margin: 0;
+  }
 
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 
-img {
-  display: block;
-}
+  img {
+    display: block;
+  }
 
-input,
-button,
-textarea,
-select {
-  font: inherit;
-}
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
 
-a {
-  cursor: auto;
-  display: inline-block;
-  text-decoration: none;
-}
+  a {
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+  }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  transition: background-color 600000s 0s, color 600000s 0s;
-}
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    transition: background-color 600000s 0s, color 600000s 0s;
+  }
 
-[contentEditable][placeholder]:empty:before {
-    content: attr(placeholder);
-    color: #8c8c8c;
-}
-
-@font-face {
-  font-family: '04B03';
-  src: url('/fonts/04B03.TTF') format('truetype');
-}
+  [contentEditable][placeholder]:empty:before {
+      content: attr(placeholder);
+      color: #8c8c8c;
+  }
 `
