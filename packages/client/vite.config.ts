@@ -8,6 +8,17 @@ dotenv.config()
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  build: {
+    rollupOptions: {
+      output: {
+        dir: 'dist',
+        format: 'iife',
+        entryFileNames: `assets/[name].js`,
+        chunkFileNames: `assets/[name].js`,
+        assetFileNames: `assets/[name].[ext]`,
+      },
+    },
+  },
   server: {
     port: Number(process.env.CLIENT_PORT) || 3000,
   },
