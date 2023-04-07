@@ -6,6 +6,28 @@ import { router } from './router/routes'
 
 import { GlobalStyle } from './global-styles'
 
+const startServiceWorker = () => {
+  if ('serviceWorker' in navigator && import.meta.env.MODE === 'production') {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker
+        .register('./sw.js')
+        .then(event => {
+          console.log('[Service Worker] Registered', event)
+        })
+        .catch((error: string) => {
+          console.log('[Service Worker] Registration failed: ', error)
+        })
+    })
+  }
+}
+
+const requestNotificationPermission = () => {
+  const permission = window.Notification.requestPermission()
+}
+
+startServiceWorker()
+requestNotificationPermission()
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <GlobalStyle />
