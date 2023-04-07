@@ -15,7 +15,18 @@ export default defineConfig({
         format: 'iife',
         entryFileNames: `assets/[name].js`,
         chunkFileNames: `assets/[name].js`,
-        assetFileNames: `assets/[name].[ext]`,
+        assetFileNames: ({ name }) => {
+          if (/\.(gif|jpe?g|png|svg)$/.test(name ?? '')) {
+            return 'assets/images/[name][extname]'
+          }
+          if (/\.(woff|woff2)$/.test(name ?? '')) {
+            return 'assets/fonts/[name][extname]'
+          }
+          if (/\.css$/.test(name ?? '')) {
+            return 'assets/css/[name][extname]'
+          }
+          return 'assets/[name][extname]'
+        },
       },
     },
   },
