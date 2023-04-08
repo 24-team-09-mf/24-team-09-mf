@@ -29,7 +29,7 @@ export const GameComponent = () => {
   return (
     <Wrapper>
       <MainView>
-        <GameView isStartedGame={isGameStarted} isEndedGame={isGameEnded} />
+        <GameView isStartedGame={isGameStarted} isEndedGame={isGameEnded} onGameOver={() => setIsGameEnded(true)} />
         {!isGameStarted && !isGameEnded && (
           <StartView
             onClickStartGame={handlerClickStartGame}
