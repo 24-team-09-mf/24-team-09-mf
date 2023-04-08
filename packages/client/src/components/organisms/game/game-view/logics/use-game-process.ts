@@ -10,19 +10,23 @@ import {
 } from '@/components/organisms/game/game-view/game-view.types'
 import { useKeysHandlers } from '@/components/organisms/game/game-view/logics/use-keys-handlers'
 import { usePlayer } from '@/components/organisms/game/game-view/logics/use-player'
+import { useCollisionsBlock } from '@/components/organisms/game/game-view/logics/use-collisions-block'
 
 type Props = {
   gameModel: GameModel
   isStartedGame: GameViewProps['isStartedGame']
   isEndedGame: GameViewProps['isEndedGame']
+  onGameOver: GameViewProps['onGameOver']
 }
 export const useGameProcess = ({
   gameModel,
   isStartedGame,
   isEndedGame,
+  onGameOver
 }: Props) => {
   const keys = useKeysHandlers()
-  const drawPlayer = usePlayer({ gameModel, keys });
+  const collisionBlocks = useCollisionsBlock({ gameModel });
+  const drawPlayer = usePlayer({ gameModel, keys, collisionBlocks, onGameOver });
 
   const [drawBackground] = useSprite({
     gameModel,
@@ -63,6 +67,7 @@ export const useGameProcess = ({
         drawBackground();
       } else {
         drawGameBackground()
+        collisionBlocks.forEach(block => block.draw());
         drawPlayer()
       }
     }
@@ -75,7 +80,7 @@ export const useGameProcess = ({
         window.cancelAnimationFrame(requestId)
       }
     }
-  }, [gameModel, isStartedGame, isEndedGame, drawPlayer])
+  }, [gameModel, isStartedGame, isEndedGame, drawPlayer, collisionBlocks])
 
   if (!gameModel) return null
 }

@@ -2,18 +2,23 @@ import { GameModel } from '@/components/organisms/game/game-view/game-view.types
 import { useCallback, useMemo } from 'react'
 import { Player } from '@/components/organisms/game/game-view/models/Player'
 import { useKeysHandlers } from '@/components/organisms/game/game-view/logics/use-keys-handlers'
+import { CollisionBlock } from '@/components/organisms/game/game-view/models/CollisionBlock'
 
 type Props = {
   gameModel: GameModel;
   keys: ReturnType<typeof useKeysHandlers>
+  collisionBlocks: CollisionBlock[]
+  onGameOver(): void;
 }
-export const usePlayer = ({ gameModel, keys }: Props) => {
+export const usePlayer = ({ gameModel, keys, collisionBlocks, onGameOver }: Props) => {
   const player = useMemo(() => {
     if (gameModel) {
       return new Player({
-        position: { x: 0, y: 0 },
-        dimensions: { width: 50, height: 100 },
+        position: { x: 32 * 5, y: 0 },
+        dimensions: { width: 32, height: 64 },
         model: gameModel,
+        collisionBlocks,
+        onGameOver
       })
     }
   }, [gameModel])
@@ -21,7 +26,7 @@ export const usePlayer = ({ gameModel, keys }: Props) => {
   const update = useCallback(
     () => {
       if (player) {
-        if (player.velocity.y === 0 && keys.pressedW) player.velocity.y = -10
+        if (player.velocity.y === 0 && keys.pressedW) player.velocity.y = -12
         player.velocity.x = 0
         if (keys.pressedA) {
           player.velocity.x = -4
