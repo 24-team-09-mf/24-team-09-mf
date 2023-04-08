@@ -8,13 +8,22 @@ import {
   GameModel,
   GameViewProps,
 } from '@/components/organisms/game/game-view/game-view.types'
+import { useKeysHandlers } from '@/components/organisms/game/game-view/logics/use-keys-handlers'
+import { usePlayer } from '@/components/organisms/game/game-view/logics/use-player'
 
 type Props = {
   gameModel: GameModel
   isStartedGame: GameViewProps['isStartedGame']
   isEndedGame: GameViewProps['isEndedGame']
 }
-export const useGameProcess = ({ gameModel, isStartedGame, isEndedGame }: Props) => {
+export const useGameProcess = ({
+  gameModel,
+  isStartedGame,
+  isEndedGame,
+}: Props) => {
+  const keys = useKeysHandlers()
+  const drawPlayer = usePlayer({ gameModel, keys });
+
   const [drawBackground] = useSprite({
     gameModel,
     position: {
@@ -41,32 +50,6 @@ export const useGameProcess = ({ gameModel, isStartedGame, isEndedGame }: Props)
     },
     color: '#000',
   })
-  const [drawSpritePlayer] = useSprite({
-    gameModel,
-    position: {
-      x: 820,
-      y: 350,
-    },
-    dimensions: {
-      width: 80,
-      height: 140,
-    },
-    color: 'red',
-    imageSrc:'/assets/sprites/hero/idle1.png'
-  })
-
-  const [drawPlayer] = useSprite({
-    gameModel,
-    position: {
-      x: 0,
-      y: 0,
-    },
-    dimensions: {
-      width: 80,
-      height: 140,
-    },
-    color: 'red',
-  })
 
   useEffect(() => {
     let requestId: number | null = null
@@ -76,14 +59,9 @@ export const useGameProcess = ({ gameModel, isStartedGame, isEndedGame }: Props)
     function animate() {
       requestId = null
       start()
-
-      if (!isStartedGame) {
-        drawBackground()
-        // drawSpritePlayer()
-      } else if (!isEndedGame) {
-        drawBackground()
-      }
-      else {
+      if (!isStartedGame && !isEndedGame) {
+        drawBackground();
+      } else {
         drawGameBackground()
         drawPlayer()
       }
@@ -97,5 +75,7 @@ export const useGameProcess = ({ gameModel, isStartedGame, isEndedGame }: Props)
         window.cancelAnimationFrame(requestId)
       }
     }
-  }, [gameModel, isStartedGame, isEndedGame])
+  }, [gameModel, isStartedGame, isEndedGame, drawPlayer])
+
+  if (!gameModel) return null
 }
