@@ -16,47 +16,44 @@ export const FormProfile = () => {
 
   return (
     <Form onSubmit={handleSubmit(onSubmitHandler)}>
-      <AvatarComponent {...register('avatar')} src={`https://ya-praktikum.tech/api/v2/resources/${user?.avatar}`} />
+      <AvatarComponent
+        {...register('avatar')}
+        src={`https://ya-praktikum.tech/api/v2/resources/${user?.avatar}`}
+      />
       <AvatarLabel color="#579945" fontSize="26px">
-        ivanivanov
+        {user?.login}
       </AvatarLabel>
       <InputComponent
-        defaultValue="Ivan"
         isError={!!errors.first_name}
         errorMessage={errors.first_name?.message}
         {...register('first_name')}
         placeholder="Имя"
       />
       <InputComponent
-        defaultValue="Ivanov"
         isError={!!errors.second_name}
         errorMessage={errors.second_name?.message}
         {...register('second_name')}
         placeholder="Фамилия"
       />
       <InputComponent
-        defaultValue="Ivanov"
         isError={!!errors.display_name}
         errorMessage={errors.display_name?.message}
         {...register('display_name')}
         placeholder="Ник"
       />
       <InputComponent
-        defaultValue="ivanivanov"
         isError={!!errors.login}
         errorMessage={errors.login?.message}
         {...register('login')}
         placeholder="Логин"
       />
       <InputComponent
-        defaultValue="ivanivanov@mail.com"
         isError={!!errors.email}
         errorMessage={errors.email?.message}
         {...register('email')}
         placeholder="Email"
       />
       <InputComponent
-        defaultValue="+79607689451"
         isError={!!errors.phone}
         errorMessage={errors.phone?.message}
         {...register('phone')}
