@@ -49,7 +49,7 @@ export function passwordNewScheme(passwordOld: string, message: string) {
     .trim()
     .required('Пожалуйста введите ваш пароль')
     .matches(passwordRegExp, message)
-    .oneOf([yup.ref(passwordOld), null], 'Новый пароль не может совпадать со старым')
+    .notOneOf([yup.ref(passwordOld), null], 'Новый пароль не может совпадать со старым')
 }
 
 export function avatarScheme() {
