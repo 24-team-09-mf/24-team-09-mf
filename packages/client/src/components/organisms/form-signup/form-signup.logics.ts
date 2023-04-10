@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 // redux
 import { useAppDispatch } from '@/store'
-import { signUp } from '@/store/user/auth/actions'
+import { getUser, signUp } from '@/store/user/auth/actions'
 
 // validation
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -29,8 +29,11 @@ const useSignUp = () => {
   const onSubmitHandler = async (data: FormSignUpValues) => {
     try {
       await dispatch(signUp(data))
-      reset()
-      navigate('/profile')
+      const result =  await dispatch(getUser())
+      if (result.meta.requestStatus === 'fulfilled') {
+        reset()
+        navigate('/profile')
+      }
     } catch (error) {
       console.log(error)
     }

@@ -29,7 +29,8 @@ export const FormChangePassword = () => {
         type="submit"
         color="#579945"
         variant="contained"
-        disabled={!isValid}>
+        // disabled={!isValid}
+        >
         Сохранить
       </BtnSave>
     </Form>

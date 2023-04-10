@@ -5,7 +5,7 @@ import image from '@/assets/images/header.png'
 import { Link } from 'react-router-dom'
 
 // redux
-import { userState } from '@/store'
+import { userStore } from '@/store'
 
 // svg
 import userImg from '@/assets/icons/user.svg'
@@ -23,7 +23,7 @@ import {
 } from './header.styles'
 
 export const Header = () => {
-  const { user } = userState()
+  const { user } = userStore()
 
   return (
     <Wrapper>

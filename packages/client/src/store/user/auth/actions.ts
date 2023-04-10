@@ -2,7 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import http, { ApiEndpoints } from '@/api/base'
 import { SignIn, SignUp, User } from '../types'
 
-
 export const getUser = createAsyncThunk(
   'user/getuser',
   async (_, { rejectWithValue }) => {
@@ -20,8 +19,6 @@ export const signIn = createAsyncThunk(
   async (signinData: SignIn, { rejectWithValue }) => {
     try {
       await http.post(ApiEndpoints.Auth.SignIn, signinData)
-      const response = await http.get<User>(ApiEndpoints.Auth.UserInfo)
-      return response.data
     } catch (e) {
       return rejectWithValue('Ошибка авторизации')
     }
@@ -33,8 +30,6 @@ export const signUp = createAsyncThunk(
   async (signupData: SignUp, { rejectWithValue }) => {
     try {
       await http.post(ApiEndpoints.Auth.SignUp, signupData)
-      const response = await http.get<User>(ApiEndpoints.Auth.UserInfo)
-      return response.data
     } catch (e) {
       return rejectWithValue('Ошибка регистрации')
     }

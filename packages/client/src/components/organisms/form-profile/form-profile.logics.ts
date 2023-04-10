@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react'
-
 // lib
 import { useForm } from 'react-hook-form'
 
@@ -8,26 +6,18 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import validationSchema from './form-profile.validate'
 
 // redux
-import { useAppDispatch, userState } from '@/store'
+import { useAppDispatch, userStore } from '@/store'
 import { updateProfile } from '@/store/user/profile/actions'
+import { getUser } from '@/store/user/auth/actions'
 
 // utils
 import { generateDefaultValues } from '@/utils/generateDefaultValues'
-import { AvatarUrl } from '@/api/base'
 
 // types
 import { FormProfileValues } from './form-profile.types'
 
 const useProfile = () => {
-  const { user } = userState()
-
-  const [avatarSrc, setAvatarSrc] = useState('')
-
-  useEffect(() => {
-    if (user?.avatar) {
-      setAvatarSrc(`${AvatarUrl}${user.avatar}`)
-    }
-  }, [user?.avatar])
+  const { user } = userStore()
 
   const {
     register,
@@ -44,6 +34,7 @@ const useProfile = () => {
   const onSubmitHandler = async (data: FormProfileValues) => {
     try {
       await dispatch(updateProfile(data))
+      await dispatch(getUser())
     } catch (error) {
       console.log(error)
     }
@@ -56,7 +47,6 @@ const useProfile = () => {
     errors,
     isValid,
     user,
-    avatarSrc,
   }
 }
 

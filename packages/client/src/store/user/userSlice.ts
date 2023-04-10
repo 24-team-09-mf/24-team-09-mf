@@ -2,9 +2,22 @@ import { createSlice } from '@reduxjs/toolkit'
 import { getUser, signIn, signOut, signUp } from './auth/actions'
 import { updateAvatar, updatePassword, updateProfile } from './profile/actions'
 import { UserState } from './types'
+import { AvatarUrl } from '@/api/base'
+
+import avatarDefault from '@/assets/images/avatarDefault.png'
 
 const initialState: UserState = {
-  user: null,
+  user: {
+    id: null,
+    first_name: '',
+    second_name: '',
+    display_name: '',
+    login: '',
+    email: '',
+    phone: '',
+    avatar: `${avatarDefault}`,
+    status: '',
+  },
   isLoading: false,
   error: '',
 }
@@ -18,7 +31,12 @@ const userSlice = createSlice({
       .addCase(getUser.fulfilled, (state, action) => {
         state.isLoading = false
         state.error = ''
-        state.user = action.payload
+        state.user = {
+          ...action.payload,
+          avatar: action.payload.avatar
+            ? `${AvatarUrl}${action.payload.avatar}`
+            : initialState.user?.avatar,
+        }
       })
       .addCase(getUser.pending, state => {
         state.isLoading = true
@@ -27,10 +45,9 @@ const userSlice = createSlice({
         state.isLoading = false
         state.error = action.payload as string
       })
-      .addCase(updateProfile.fulfilled, (state, action) => {
+      .addCase(updateProfile.fulfilled, state => {
         state.isLoading = false
         state.error = ''
-        state.user = action.payload
       })
       .addCase(updateProfile.pending, state => {
         state.isLoading = true
@@ -39,10 +56,9 @@ const userSlice = createSlice({
         state.isLoading = false
         state.error = action.payload as string
       })
-      .addCase(updateAvatar.fulfilled, (state, action) => {
+      .addCase(updateAvatar.fulfilled, state => {
         state.isLoading = false
         state.error = ''
-        state.user = action.payload
       })
       .addCase(updateAvatar.pending, state => {
         state.isLoading = true
@@ -51,10 +67,9 @@ const userSlice = createSlice({
         state.isLoading = false
         state.error = action.payload as string
       })
-      .addCase(updatePassword.fulfilled, (state, action) => {
+      .addCase(updatePassword.fulfilled, state => {
         state.isLoading = false
         state.error = ''
-        state.user = action.payload
       })
       .addCase(updatePassword.pending, state => {
         state.isLoading = true
@@ -63,10 +78,9 @@ const userSlice = createSlice({
         state.isLoading = false
         state.error = action.payload as string
       })
-      .addCase(signIn.fulfilled, (state, action) => {
+      .addCase(signIn.fulfilled, state => {
         state.isLoading = false
         state.error = ''
-        state.user = action.payload
       })
       .addCase(signIn.pending, state => {
         state.isLoading = true
@@ -87,10 +101,9 @@ const userSlice = createSlice({
         state.error = action.payload as string
         state.isLoading = false
       })
-      .addCase(signUp.fulfilled, (state, action) => {
+      .addCase(signUp.fulfilled, state => {
         state.isLoading = false
         state.error = ''
-        state.user = action.payload
       })
       .addCase(signUp.pending, state => {
         state.isLoading = true

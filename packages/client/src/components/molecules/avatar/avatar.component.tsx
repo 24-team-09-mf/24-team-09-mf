@@ -1,9 +1,10 @@
 // react
-import { forwardRef, useState, useEffect } from 'react'
+import { forwardRef, useState } from 'react'
 
 // redux
 import { useAppDispatch } from '@/store'
 import { updateAvatar } from '@/store/user/profile/actions'
+import { getUser } from '@/store/user/auth/actions'
 
 // types
 import { AvatarProps } from './avatar.types'
@@ -11,22 +12,13 @@ import { AvatarProps } from './avatar.types'
 // styles
 import { Wrapper, AvatarInput, AvatarImage } from './avatar.styles'
 
-// images
-import avatarDefault from '@/assets/images/avatarDefault.png'
-
 export const Avatar = forwardRef<HTMLInputElement, AvatarProps>(
   ({ src, ...props }, ref) => {
     const dispatch = useAppDispatch()
 
-    const [avatarSrc, setAvatarSrc] = useState(avatarDefault)
+    const [avatarSrc, setAvatarSrc] = useState(src)
 
-    useEffect(() => {
-      if (src) {
-        setAvatarSrc(src)
-      }
-    }, [src])
-
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0]
       if (file) {
         const reader = new FileReader()
@@ -36,7 +28,12 @@ export const Avatar = forwardRef<HTMLInputElement, AvatarProps>(
         }
         const formData = new FormData()
         formData.append('avatar', file)
-        dispatch(updateAvatar(formData))
+        try {
+          await dispatch(updateAvatar(formData))
+          await dispatch(getUser())
+        } catch (error) {
+          console.log(error)
+        }
       }
     }
 

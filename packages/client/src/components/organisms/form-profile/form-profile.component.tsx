@@ -18,13 +18,12 @@ export const FormProfile = () => {
     errors,
     isValid,
     user,
-    avatarSrc,
   } = useProfile()
 
 
   return (
     <Form onSubmit={handleSubmit(onSubmitHandler)}>
-      <AvatarComponent {...register('avatar')} src={avatarSrc}/>
+      <AvatarComponent {...register('avatar')} src={user?.avatar}/>
       <AvatarLabel color="#579945" fontSize="26px">
         {user?.login}
       </AvatarLabel>
