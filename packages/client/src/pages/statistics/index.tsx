@@ -1,10 +1,6 @@
-import { LayoutMain, Statistics } from '@/components'
+import { Statistics } from '@/components'
 
 const StatisticsPage = () => {
-  return (
-    <LayoutMain>
-      <Statistics />
-    </LayoutMain>
-  )
+  return <Statistics />
 }
 export default StatisticsPage
