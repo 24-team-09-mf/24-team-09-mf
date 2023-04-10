@@ -5,10 +5,10 @@ import { useKeysHandlers } from '@/components/organisms/game/game-view/logics/us
 import { CollisionBlock } from '@/components/organisms/game/game-view/models/CollisionBlock'
 
 type Props = {
-  gameModel: GameModel;
+  gameModel: GameModel
   keys: ReturnType<typeof useKeysHandlers>
   collisionBlocks: CollisionBlock[]
-  onGameOver(): void;
+  onGameOver(): void
 }
 export const usePlayer = ({ gameModel, keys, collisionBlocks, onGameOver }: Props) => {
   const player = useMemo(() => {
@@ -16,9 +16,12 @@ export const usePlayer = ({ gameModel, keys, collisionBlocks, onGameOver }: Prop
       return new Player({
         position: { x: 32 * 5, y: 0 },
         dimensions: { width: 32, height: 64 },
+        cropbox: { width: 35, height: 64 },
         model: gameModel,
         collisionBlocks,
-        onGameOver
+        onGameOver,
+        color: 'green',
+        imageSrc: '/assets/sprites/hero/idle.png',
       })
     }
   }, [gameModel])
@@ -36,7 +39,7 @@ export const usePlayer = ({ gameModel, keys, collisionBlocks, onGameOver }: Prop
         player?.update()
       }
     },
-    [keys]
+    [keys, player]
   );
 
   return update;

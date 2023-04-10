@@ -6,8 +6,11 @@ import { CollisionBlock } from '@/components/organisms/game/game-view/models/Col
 type Props = SpriteModel & {
   collisionBlocks: CollisionBlock[];
   onGameOver: () => void;
+  color?: string
+  imageSrc?: string
 }
 export class Player extends Sprite {
+
   velocity = {
     x: 0,
     y: 0,
@@ -15,17 +18,18 @@ export class Player extends Sprite {
   gravity = 0.6
   collisionBlocks: CollisionBlock[] = []
 
-  constructor({ position, model, dimensions, collisionBlocks, onGameOver }: Props) {
-    super({ position, model, dimensions })
+  constructor({ position, model, dimensions, collisionBlocks, onGameOver, imageSrc, color, cropbox }: Props) {
+    super({ position, model, dimensions, imageSrc, color, cropbox })
     this.position = position
     this.model = model
     this.dimensions = dimensions
     this.collisionBlocks = collisionBlocks
     this.gameOver = onGameOver
+    this.cropbox = cropbox
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  gameOver() {}
+  gameOver() { }
 
   update() {
     this.position.x += this.velocity.x
@@ -34,7 +38,7 @@ export class Player extends Sprite {
     this.position.y += this.velocity.y
     this.checkVerticalCollision();
     if (this.position.y + this.dimensions.height + this.velocity.y > HEIGHT_VIEW) {
-    this.gameOver()
+      this.gameOver()
     }
     this.draw()
   }

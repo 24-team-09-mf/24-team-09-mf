@@ -26,7 +26,13 @@ export const useGameProcess = ({
 }: Props) => {
   const keys = useKeysHandlers()
   const collisionBlocks = useCollisionsBlock({ gameModel });
-  const drawPlayer = usePlayer({ gameModel, keys, collisionBlocks, onGameOver });
+
+  const drawPlayer = usePlayer({
+    gameModel,
+    keys,
+    collisionBlocks,
+    onGameOver
+  });
 
   const [drawBackground] = useSprite({
     gameModel,
@@ -66,9 +72,12 @@ export const useGameProcess = ({
       if (!isStartedGame && !isEndedGame) {
         drawBackground();
       } else {
+
         drawGameBackground()
-        collisionBlocks.forEach(block => block.draw());
         drawPlayer()
+
+        collisionBlocks.forEach(block => block.draw());
+
       }
     }
     function start() {
