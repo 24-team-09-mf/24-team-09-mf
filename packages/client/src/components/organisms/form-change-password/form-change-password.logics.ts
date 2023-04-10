@@ -27,10 +27,12 @@ const useChangePassword = () => {
   const navigate = useNavigate()
 
   const onSubmitHandler = async (data: FormPasswordValues) => {
-    const result = await dispatch(updatePassword(data))
-    if (result.meta.requestStatus === 'fulfilled') {
+    try {
+      await dispatch(updatePassword(data))
       reset()
       navigate('/profile')
+    } catch (error) {
+      console.log(error)
     }
   }
 

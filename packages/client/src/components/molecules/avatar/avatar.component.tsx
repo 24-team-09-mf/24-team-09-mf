@@ -1,5 +1,5 @@
 // react
-import { forwardRef, useState } from 'react'
+import { forwardRef, useState, useEffect } from 'react'
 
 // redux
 import { useAppDispatch } from '@/store'
@@ -18,16 +18,31 @@ export const Avatar = forwardRef<HTMLInputElement, AvatarProps>(
   ({ src, ...props }, ref) => {
     const dispatch = useAppDispatch()
 
+    const [avatarSrc, setAvatarSrc] = useState(avatarDefault)
+
+    useEffect(() => {
+      if (src) {
+        setAvatarSrc(src)
+      }
+    }, [src])
+
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const target = e.target as HTMLInputElement
-      const formData = new FormData()
-      if (target.files) formData.append('avatar', target.files[0])
-      dispatch(updateAvatar(formData))
+      const file = e.target.files?.[0]
+      if (file) {
+        const reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = () => {
+          setAvatarSrc(reader.result as string)
+        }
+        const formData = new FormData()
+        formData.append('avatar', file)
+        dispatch(updateAvatar(formData))
+      }
     }
 
     return (
       <Wrapper>
-        <AvatarImage src={src || avatarDefault} alt="Аватар" />
+        <AvatarImage src={avatarSrc} alt="Аватар" />
         <AvatarInput
           type="file"
           accept=".png, .jpg"

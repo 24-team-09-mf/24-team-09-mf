@@ -11,15 +11,20 @@ import {
 } from './form-profile.styles'
 
 export const FormProfile = () => {
-  const { register, onSubmitHandler, handleSubmit, errors, isValid, user } =
-    useProfile()
+  const {
+    register,
+    onSubmitHandler,
+    handleSubmit,
+    errors,
+    isValid,
+    user,
+    avatarSrc,
+  } = useProfile()
+
 
   return (
     <Form onSubmit={handleSubmit(onSubmitHandler)}>
-      <AvatarComponent
-        {...register('avatar')}
-        src={`https://ya-praktikum.tech/api/v2/resources/${user?.avatar}`}
-      />
+      <AvatarComponent {...register('avatar')} src={avatarSrc}/>
       <AvatarLabel color="#579945" fontSize="26px">
         {user?.login}
       </AvatarLabel>

@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react'
+
 // lib
 import { useForm } from 'react-hook-form'
 
@@ -9,11 +11,23 @@ import validationSchema from './form-profile.validate'
 import { useAppDispatch, userState } from '@/store'
 import { updateProfile } from '@/store/user/profile/actions'
 
+// utils
+import { generateDefaultValues } from '@/utils/generateDefaultValues'
+import { AvatarUrl } from '@/api/base'
+
 // types
 import { FormProfileValues } from './form-profile.types'
 
 const useProfile = () => {
   const { user } = userState()
+
+  const [avatarSrc, setAvatarSrc] = useState('')
+
+  useEffect(() => {
+    if (user?.avatar) {
+      setAvatarSrc(`${AvatarUrl}${user.avatar}`)
+    }
+  }, [user?.avatar])
 
   const {
     register,
@@ -21,21 +35,18 @@ const useProfile = () => {
     formState: { errors, isValid },
   } = useForm<FormProfileValues>({
     mode: 'all',
-    defaultValues: {
-      first_name: user?.first_name || '',
-      second_name: user?.second_name || '',
-      display_name: user?.display_name || '',
-      login: user?.login || '',
-      email: user?.email || '',
-      phone: user?.phone || '',
-    },
+    defaultValues: generateDefaultValues(user),
 
     resolver: yupResolver(validationSchema),
   })
   const dispatch = useAppDispatch()
 
   const onSubmitHandler = async (data: FormProfileValues) => {
-    await dispatch(updateProfile(data))
+    try {
+      await dispatch(updateProfile(data))
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return {
@@ -45,6 +56,7 @@ const useProfile = () => {
     errors,
     isValid,
     user,
+    avatarSrc,
   }
 }
 

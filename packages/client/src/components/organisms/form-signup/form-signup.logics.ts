@@ -27,10 +27,12 @@ const useSignUp = () => {
   const navigate = useNavigate()
 
   const onSubmitHandler = async (data: FormSignUpValues) => {
-    const result = await dispatch(signUp(data))
-    if (result.meta.requestStatus === 'fulfilled') {
+    try {
+      await dispatch(signUp(data))
       reset()
       navigate('/profile')
+    } catch (error) {
+      console.log(error)
     }
   }
 

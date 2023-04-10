@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 export const BaseUrl = 'https://ya-praktikum.tech/api/v2/'
+export const AvatarUrl = 'https://ya-praktikum.tech/api/v2/resources/'
 
 export const ApiEndpoints = {
   Auth: {
