@@ -1,18 +1,29 @@
-import { useEffect } from 'react'
-import './App.css'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { RouterProvider } from 'react-router-dom'
 
-function App() {
-  useEffect(() => {
-    const fetchServerData = async () => {
-      const url = `http://localhost:${__SERVER_PORT__}`
-      const response = await fetch(url)
-      const data = await response.json()
-      console.log(data)
-    }
+import { router } from './router/routes'
 
-    fetchServerData()
-  }, [])
-  return <div className="App">Вот тут будет жить ваше приложение :)</div>
+import { GlobalStyle } from './global-styles'
+
+const startServiceWorker = () => {
+  if ('serviceWorker' in navigator && import.meta.env.MODE === 'production') {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').then()
+    })
+  }
 }
 
-export default App
+const requestNotificationPermission = () => {
+  const permission = window.Notification.requestPermission()
+}
+
+startServiceWorker()
+requestNotificationPermission()
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <React.StrictMode>
+    <GlobalStyle />
+    <RouterProvider router={router} />
+  </React.StrictMode>
+)
