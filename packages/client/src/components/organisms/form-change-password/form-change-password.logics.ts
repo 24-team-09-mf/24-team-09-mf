@@ -32,8 +32,6 @@ const useChangePassword = () => {
       reset()
       navigate('/profile')
     }
-
-    reset()
   }
 
   return {

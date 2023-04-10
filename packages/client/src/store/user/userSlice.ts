@@ -87,7 +87,6 @@ const userSlice = createSlice({
         state.error = action.payload as string
         state.isLoading = false
       })
-
       .addCase(signUp.fulfilled, (state, action) => {
         state.isLoading = false
         state.error = ''
@@ -96,13 +95,11 @@ const userSlice = createSlice({
       .addCase(signUp.pending, state => {
         state.isLoading = true
       })
-
       .addCase(signUp.rejected, (state, action) => {
         state.error = action.payload as string
         state.isLoading = false
       })
   },
 })
-
 
 export default userSlice.reducer
