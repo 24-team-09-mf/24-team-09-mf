@@ -12,16 +12,16 @@ export const FormChangePassword = () => {
     <Form onSubmit={handleSubmit(onSubmitHandler)}>
       <InputComponent
         type="password"
-        isError={!!errors.passwordOld}
-        errorMessage={errors.passwordOld?.message}
-        {...register('passwordOld')}
+        isError={!!errors.oldPassword}
+        errorMessage={errors.oldPassword?.message}
+        {...register('oldPassword')}
         placeholder="Старый пароль"
       />
       <InputComponent
         type="password"
-        isError={!!errors.passwordNew}
-        errorMessage={errors.passwordNew?.message}
-        {...register('passwordNew')}
+        isError={!!errors.newPassword}
+        errorMessage={errors.newPassword?.message}
+        {...register('newPassword')}
         placeholder="Новый пароль"
       />
       <BtnSave

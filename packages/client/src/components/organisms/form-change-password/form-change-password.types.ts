@@ -1,4 +1,4 @@
 export interface FormPasswordValues {
-  passwordOld: string
-  passwordNew: string
+  oldPassword: string
+  newPassword: string
 }

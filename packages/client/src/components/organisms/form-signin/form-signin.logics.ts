@@ -1,5 +1,10 @@
 // lib
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+
+// redux
+import { useAppDispatch } from '@/store'
+import { signIn } from '@/store/user/auth/actions'
 
 // validation
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -18,13 +23,14 @@ const useSignIn = () => {
     mode: 'all',
     resolver: yupResolver(validationSchema),
   })
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const onSubmitHandler = async (data: FormSignInValues) => {
-    try {
-      console.log(data)
+    const result = await dispatch(signIn(data))
+    if (result.meta.requestStatus === 'fulfilled') {
       reset()
-    } catch (error) {
-      console.log(error)
+      navigate('/profile')
     }
   }
 

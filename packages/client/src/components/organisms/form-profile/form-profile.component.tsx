@@ -2,20 +2,24 @@
 import useProfile from './form-profile.logics'
 
 // styles
-import { Form, InputComponent, BtnSave, AvatarComponent, AvatarLabel } from './form-profile.styles'
+import {
+  Form,
+  InputComponent,
+  BtnSave,
+  AvatarComponent,
+  AvatarLabel,
+} from './form-profile.styles'
 
 export const FormProfile = () => {
-  const { register, onSubmitHandler, handleSubmit, errors, isValid } = useProfile()
+  const { register, onSubmitHandler, handleSubmit, errors, isValid, user } =
+    useProfile()
 
   return (
     <Form onSubmit={handleSubmit(onSubmitHandler)}>
-      <AvatarComponent
-        {...register('avatar')}
-      />
-      <AvatarLabel
-        color="#579945"
-        fontSize="26px"
-      >ivanivanov</AvatarLabel>
+      <AvatarComponent {...register('avatar')} src={`https://ya-praktikum.tech/api/v2/resources/${user?.avatar}`} />
+      <AvatarLabel color="#579945" fontSize="26px">
+        ivanivanov
+      </AvatarLabel>
       <InputComponent
         defaultValue="Ivan"
         isError={!!errors.first_name}
@@ -29,6 +33,13 @@ export const FormProfile = () => {
         errorMessage={errors.second_name?.message}
         {...register('second_name')}
         placeholder="Фамилия"
+      />
+      <InputComponent
+        defaultValue="Ivanov"
+        isError={!!errors.display_name}
+        errorMessage={errors.display_name?.message}
+        {...register('display_name')}
+        placeholder="Ник"
       />
       <InputComponent
         defaultValue="ivanivanov"
