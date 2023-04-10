@@ -6,7 +6,7 @@ export const useKeysHandlers = () => {
   const [pressedA, setPressedA] = useState(false)
   const [pressedD, setPressedD] = useState(false)
 
-  const handlerKeyDown = useCallback(({ key }: KeyboardEvent) => {
+  const handlerKeyDown = useCallback(({ key, repeat }: KeyboardEvent) => {
     if (KEY_A.includes(key)) {
       setPressedA(true);
     }
@@ -14,6 +14,10 @@ export const useKeysHandlers = () => {
       setPressedD(true);
     }
     if (KEY_W.includes(key)) {
+      if (repeat) {
+        setPressedW(false);
+        return;
+      }
       setPressedW(true)
     }
   }, [])
