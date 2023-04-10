@@ -16,10 +16,7 @@ export type SpriteModel = {
     width: number
     height: number
   }
-  cropbox: {
-    width: number
-    height: number
-  }
   color?: string
   imageSrc?: string
+  frameRate: number
 }

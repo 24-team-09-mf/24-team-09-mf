@@ -16,11 +16,10 @@ export const usePlayer = ({ gameModel, keys, collisionBlocks, onGameOver }: Prop
       return new Player({
         position: { x: 32 * 5, y: 0 },
         dimensions: { width: 32, height: 64 },
-        cropbox: { width: 35, height: 64 },
+        frameRate: 12,
         model: gameModel,
         collisionBlocks,
         onGameOver,
-        color: 'green',
         imageSrc: '/assets/sprites/hero/idle.png',
       })
     }
