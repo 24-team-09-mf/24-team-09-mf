@@ -34,12 +34,12 @@ export class Sprite {
     if (this.model) {
       if (this.imageSrc) {
         console.log(this.imageSrc);
-        const imagePlayer = new Image();
-        imagePlayer.src = this.imageSrc;
-        imagePlayer.onload = () => {
+        const image = new Image();
+        image.src = this.imageSrc;
+        image.onload = () => {
           if (this.cropbox) {
             this.model?.drawImage(
-              imagePlayer,
+              image,
               0,
               0,
               this.cropbox.width,
