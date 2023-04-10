@@ -13,7 +13,6 @@ const URLS = [
   '/assets/startGame.png',
   '/assets/images/user.svg',
   '/assets/sprites/hero/idle1.png',
-  'vite.svg',
   '/assets/fonts/04b03.woff',
   '/assets/fonts/04b03.woff2',
   '/assets/fonts/OpenSans-Medium.woff',
@@ -31,25 +30,19 @@ const URLS = [
 const CACHE_NAME = 'JungleDanger_v1'
 
 self.addEventListener('install', event => {
-  console.log('[Service Worker] Installing', event)
-
   event.waitUntil(
     caches
       .open(CACHE_NAME)
       .then(cache => {
-        console.log('[Service Worker] Opened cache')
         return cache.addAll(URLS)
       })
       .catch(err => {
-        console.log(err)
         throw err
       })
   )
 })
 
 self.addEventListener('activate', function (event) {
-  console.log('[Service Worker] Activate', event)
-
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
@@ -88,9 +81,6 @@ self.addEventListener('fetch', event => {
 
 self.addEventListener('push', function (event) {
   if (Notification.permission === 'granted') {
-    console.log('[Service Worker] Push Received.')
-    console.log(`[Service Worker] Push had this data: "${event.data.text()}"`)
-
     const title = 'Push message test'
     const options = {
       body: event.data.text(),

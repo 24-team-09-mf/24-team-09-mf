@@ -9,14 +9,7 @@ import { GlobalStyle } from './global-styles'
 const startServiceWorker = () => {
   if ('serviceWorker' in navigator && import.meta.env.MODE === 'production') {
     window.addEventListener('load', () => {
-      navigator.serviceWorker
-        .register('./sw.js')
-        .then(event => {
-          console.log('[Service Worker] Registered', event)
-        })
-        .catch((error: string) => {
-          console.log('[Service Worker] Registration failed: ', error)
-        })
+      navigator.serviceWorker.register('./sw.js').then()
     })
   }
 }
