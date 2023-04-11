@@ -17,12 +17,11 @@ import {
 } from '@/components/templates/forum/forum.styles'
 import IconRateMinus from '@/assets/icons/rate_minus.svg'
 import IconRatePlus from '@/assets/icons/rate_plus.svg'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import useSectionForm from './forum-logic'
 import { Button } from '@/components'
 import dateParse from '@/utils/dateParse'
 import { H2 } from '@/global-styles'
-
 import avatarDefault from '@/assets/images/avatarDefault.png'
 
 const ForumPost = (el: ForumPostProps) => {
@@ -84,6 +83,10 @@ export const ForumPostsForm = ({
     setValue,
     getValues,
   } = useSectionForm(id, postPageId)
+  const messageRef = useRef(null)
+  const messageClear = () => {
+    ;(messageRef!.current! as HTMLDivElement).innerHTML = ''
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmitHandler)}>
@@ -98,15 +101,16 @@ export const ForumPostsForm = ({
           })
         }}
         contentEditable="true"
-        placeholder="Сообщение...">
-        {getValues('message') == '' && ''}
-      </FormTextarea>
+        ref={messageRef}
+        placeholder="Сообщение..."
+      />
       <FormButtonWrapper>
         <Button
           as="button"
           type="submit"
           color="#579945"
           variant="contained"
+          onClick={() => messageClear()}
           disabled={!isValid}>
           Отправить
         </Button>

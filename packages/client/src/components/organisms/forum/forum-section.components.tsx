@@ -14,6 +14,7 @@ import { Button } from '@/components'
 import useSectionForm from './forum-logic'
 import dateParse from '@/utils/dateParse'
 import { H2 } from '@/global-styles'
+import { useRef } from 'react'
 
 export const ForumSectionTitle = ({ title }: { title: string }) => {
   return <H2>{title}</H2>
@@ -53,6 +54,10 @@ export const ForumSectionForm = ({ id }: { id: string }) => {
     setValue,
     getValues,
   } = useSectionForm(id)
+  const messageRef = useRef(null)
+  const messageClear = () => {
+    ;(messageRef!.current! as HTMLDivElement).innerHTML = ''
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmitHandler)}>
@@ -71,15 +76,16 @@ export const ForumSectionForm = ({ id }: { id: string }) => {
           })
         }}
         contentEditable="true"
-        placeholder="Сообщение...">
-        {getValues('message') == '' && ''}
-      </FormTextarea>
+        ref={messageRef}
+        placeholder="Сообщение..."
+      />
       <FormButtonWrapper>
         <Button
           as="button"
           type="submit"
           color="#579945"
           variant="contained"
+          onClick={() => messageClear()}
           disabled={!isValid}>
           Отправить
         </Button>
