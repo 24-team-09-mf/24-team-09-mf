@@ -85,6 +85,7 @@ export const usePlayer = ({ gameModel, keys, collisionBlocks, onGameOver }: Prop
             player.switchSprite('jumpLeft')
           }
         }
+        // что-то странное тут
         else {
           if (player.lastDirection === 'left') {
             player.switchSprite('idleLeft')
