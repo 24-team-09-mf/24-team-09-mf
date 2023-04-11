@@ -4,8 +4,11 @@ import image from '@/assets/images/header.png'
 // lib
 import { Link } from 'react-router-dom'
 
+// redux
+import { userStore } from '@/store'
+
 // svg
-import user from '@/assets/icons/user.svg'
+import userImg from '@/assets/icons/user.svg'
 
 // styles
 import {
@@ -20,6 +23,8 @@ import {
 } from './header.styles'
 
 export const Header = () => {
+  const { user } = userStore()
+
   return (
     <Wrapper>
       <Container>
@@ -36,8 +41,8 @@ export const Header = () => {
           </Link>
         </Navigation>
         <Profile to="/profile">
-          <img src={user} alt="профиль" />
-          <User>useruser</User>
+          <img src={userImg} alt="профиль" />
+        <User>{user?.login}</User>
         </Profile>
       </Container>
     </Wrapper>

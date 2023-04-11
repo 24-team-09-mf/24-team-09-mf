@@ -43,13 +43,13 @@ export function passwordScheme(message: string) {
     .matches(passwordRegExp, message)
 }
 
-export function passwordNewScheme(passwordOld: string, message: string) {
+export function passwordNewScheme(oldPassword: string, message: string) {
   return yup
     .string()
     .trim()
     .required('Пожалуйста введите ваш пароль')
     .matches(passwordRegExp, message)
-    .oneOf([yup.ref(passwordOld), null], 'Новый пароль не может совпадать со старым')
+    .oneOf([yup.ref(oldPassword), null], 'Новый пароль не может совпадать со старым')
 }
 
 export function avatarScheme() {
