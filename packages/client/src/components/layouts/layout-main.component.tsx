@@ -1,28 +1,26 @@
+import { Outlet } from 'react-router-dom'
 // react
 import { FC } from 'react'
 import { Header } from './header'
 import { Footer } from './footer'
-
-// types
-import { LayoutMainProps } from './layout-main.types'
 
 // images
 import imageLeft from '@/assets/images/bg-left.png'
 import imageRight from '@/assets/images/bg-right.png'
 
 // styles
-import { Wrapper, Content, ImgLeft, ImgRight } from './layout-main.styles'
+import { Layout, Content, ImgLeft, ImgRight } from './layout-main.styles'
 
-export const LayoutMain: FC<LayoutMainProps> = ({ children }) => {
+export const LayoutMain: FC = () => {
   return (
-    <Wrapper>
+    <Layout>
       <Header />
       <Content>
-        <ImgLeft alt="фон" src={imageLeft} />
-        <ImgRight alt="фон" src={imageRight} />
-        {children}
+        <Outlet />
       </Content>
       <Footer />
-    </Wrapper>
+      <ImgLeft alt="фон" src={imageLeft} />
+      <ImgRight alt="фон" src={imageRight} />
+    </Layout>
   )
 }

@@ -8,7 +8,6 @@ import {
   CatalogRowMessageLink,
   CatalogRowMessageUser,
 } from '@/components/templates/forum/forum.styles'
-import React from 'react'
 import { ForumStartProps } from '@/components/organisms/forum/forum-types'
 import dateParse from '@/utils/dateParse'
 

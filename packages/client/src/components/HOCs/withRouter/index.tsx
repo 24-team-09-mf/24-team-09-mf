@@ -1,15 +1,11 @@
 import { useNavigate } from 'react-router-dom'
-import React from 'react'
 
-export function withRouter<Props>(Component: React.JSXElementConstructor<Props>) {
+export function withRouter<Props>(
+  Component: React.JSXElementConstructor<Props>
+) {
   return (props: Props) => {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
-    return (
-      <Component
-        navigate={navigate}
-        {...props}
-      />
-    )
+    return <Component navigate={navigate} {...props} />
   }
 }
