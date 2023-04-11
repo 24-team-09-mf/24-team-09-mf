@@ -6,17 +6,29 @@ export type GameViewProps = {
 
 export type GameModel = CanvasRenderingContext2D | null
 
+export type SrpiteAnimation = {
+  [key: string]: {
+    frameRate: number,
+    frameBuffer: number,
+    loop: boolean,
+    imageSrc: string,
+    image?: HTMLImageElement
+  }
+}
+
 export type SpriteModel = {
   model: GameModel
   position: {
     x: number
     y: number
   }
-  dimensions: {
+  dimensions?: {
     width: number
     height: number
   }
   color?: string
   imageSrc?: string
   frameRate: number
+
+  animations: SrpiteAnimation
 }
