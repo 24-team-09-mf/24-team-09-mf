@@ -8,13 +8,26 @@ import {
   GameModel,
   GameViewProps,
 } from '@/components/organisms/game/game-view/game-view.types'
+import { useKeysHandlers } from '@/components/organisms/game/game-view/logics/use-keys-handlers'
+import { usePlayer } from '@/components/organisms/game/game-view/logics/use-player'
+import { useCollisionsBlock } from '@/components/organisms/game/game-view/logics/use-collisions-block'
 
 type Props = {
   gameModel: GameModel
   isStartedGame: GameViewProps['isStartedGame']
   isEndedGame: GameViewProps['isEndedGame']
+  onGameOver: GameViewProps['onGameOver']
 }
-export const useGameProcess = ({ gameModel, isStartedGame, isEndedGame }: Props) => {
+export const useGameProcess = ({
+  gameModel,
+  isStartedGame,
+  isEndedGame,
+  onGameOver,
+}: Props) => {
+  const keys = useKeysHandlers()
+  const collisionBlocks = useCollisionsBlock({ gameModel })
+  const drawPlayer = usePlayer({ gameModel, keys, collisionBlocks, onGameOver })
+
   const [drawBackground] = useSprite({
     gameModel,
     position: {
@@ -26,7 +39,7 @@ export const useGameProcess = ({ gameModel, isStartedGame, isEndedGame }: Props)
       height: HEIGHT_VIEW,
     },
     color: '#192C3B',
-    imageSrc: '/assets/startGame.png'
+    imageSrc: '/assets/startGame.png',
   })
 
   const [drawGameBackground] = useSprite({
@@ -41,32 +54,6 @@ export const useGameProcess = ({ gameModel, isStartedGame, isEndedGame }: Props)
     },
     color: '#000',
   })
-  const [drawSpritePlayer] = useSprite({
-    gameModel,
-    position: {
-      x: 820,
-      y: 350,
-    },
-    dimensions: {
-      width: 80,
-      height: 140,
-    },
-    color: 'red',
-    imageSrc:'/assets/sprites/hero/idle1.png'
-  })
-
-  const [drawPlayer] = useSprite({
-    gameModel,
-    position: {
-      x: 0,
-      y: 0,
-    },
-    dimensions: {
-      width: 80,
-      height: 140,
-    },
-    color: 'red',
-  })
 
   useEffect(() => {
     let requestId: number | null = null
@@ -76,15 +63,11 @@ export const useGameProcess = ({ gameModel, isStartedGame, isEndedGame }: Props)
     function animate() {
       requestId = null
       start()
-
-      if (!isStartedGame) {
+      if (!isStartedGame && !isEndedGame) {
         drawBackground()
-        // drawSpritePlayer()
-      } else if (!isEndedGame) {
-        drawBackground()
-      }
-      else {
+      } else {
         drawGameBackground()
+        collisionBlocks.forEach(block => block.draw())
         drawPlayer()
       }
     }
@@ -97,5 +80,7 @@ export const useGameProcess = ({ gameModel, isStartedGame, isEndedGame }: Props)
         window.cancelAnimationFrame(requestId)
       }
     }
-  }, [gameModel, isStartedGame, isEndedGame])
+  }, [gameModel, isStartedGame, isEndedGame, drawPlayer, collisionBlocks])
+
+  if (!gameModel) return null
 }

@@ -29,7 +29,7 @@ const useSignIn = () => {
   const onSubmitHandler = async (data: FormSignInValues) => {
     try {
       await dispatch(signIn(data))
-      const result =  await dispatch(getUser())
+      const result = await dispatch(getUser())
       if (result.meta.requestStatus === 'fulfilled') {
         reset()
         navigate('/profile')

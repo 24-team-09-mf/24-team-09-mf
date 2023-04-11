@@ -42,7 +42,7 @@ export const Header = () => {
         </Navigation>
         <Profile to="/profile">
           <img src={userImg} alt="профиль" />
-        <User>{user?.login}</User>
+          <User>{user?.login}</User>
         </Profile>
       </Container>
     </Wrapper>

@@ -1,15 +1,16 @@
 import React from 'react'
-import { withRouter } from "@/components/HOCs/withRouter"
+import { withRouter } from '@/components/HOCs/withRouter'
 import { NavigateFunction } from 'react-router/dist/lib/hooks'
 
 type Props = {
   navigate?: NavigateFunction
 }
 
-class ErrorWrapperComponent extends React.Component<React.PropsWithChildren<Props>> {
+class ErrorWrapperComponent extends React.Component<
+  React.PropsWithChildren<Props>
+> {
   componentDidCatch() {
-    if (this.props.navigate)
-      this.props.navigate('/500')
+    if (this.props.navigate) this.props.navigate('/500')
   }
 
   render() {

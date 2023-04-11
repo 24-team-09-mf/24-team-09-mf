@@ -22,14 +22,12 @@ export const useSprite = ({
   color,
   imageSrc,
 }: Props) => {
-
   const draw = useCallback(() => {
-
     //TODO отрисовка наших изображений будет тут
     if (gameModel) {
       if (imageSrc) {
-        const image = new Image();
-        image.src = imageSrc;
+        const image = new Image()
+        image.src = imageSrc
         image.onload = () => {
           gameModel.drawImage(
             image,
@@ -37,16 +35,16 @@ export const useSprite = ({
             position.y,
             dimensions.width,
             dimensions.height
-          );
-        };
+          )
+        }
       } else {
-        gameModel.fillStyle = color || '#000';
+        gameModel.fillStyle = color || '#000'
         gameModel.fillRect(
           position.x,
           position.y,
           dimensions.width,
           dimensions.height
-        );
+        )
       }
     }
   }, [gameModel, position, dimensions])

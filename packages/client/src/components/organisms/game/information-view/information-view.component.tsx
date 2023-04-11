@@ -28,10 +28,16 @@ export const InformationView: FC<InformationViewProps> = ({
           </BtnText>
         </Header>
         <ButtonsBlock>
-          <Button direction="right" tooltip='Jump'>W</Button>
+          <Button direction="right" tooltip="Jump">
+            W
+          </Button>
           <Block>
-            <Button direction="bottom" tooltip='Go to Left'>A</Button>
-            <Button direction="bottom" tooltip='Go to Right'>D</Button>
+            <Button direction="bottom" tooltip="Go to Left">
+              A
+            </Button>
+            <Button direction="bottom" tooltip="Go to Right">
+              D
+            </Button>
           </Block>
         </ButtonsBlock>
       </Content>

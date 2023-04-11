@@ -1,5 +1,5 @@
 // lib
-import * as yup from 'yup';
+import * as yup from 'yup'
 
 import { phoneRegExp, passwordRegExp, nameRegExp, loginRegExp } from './regExp'
 
@@ -22,10 +22,7 @@ export function loginScheme(message: string) {
 }
 
 export function emailScheme(message: string) {
-  return yup
-    .string()
-    .email(message)
-    .required('Введите e-mail')
+  return yup.string().email(message).required('Введите e-mail')
 }
 
 export function phoneScheme(message: string) {
@@ -49,11 +46,12 @@ export function passwordNewScheme(oldPassword: string, message: string) {
     .trim()
     .required('Пожалуйста введите ваш пароль')
     .matches(passwordRegExp, message)
-    .oneOf([yup.ref(oldPassword), null], 'Новый пароль не может совпадать со старым')
+    .oneOf(
+      [yup.ref(oldPassword), null],
+      'Новый пароль не может совпадать со старым'
+    )
 }
 
 export function avatarScheme() {
-  return yup
-    .mixed()
-    .optional()
+  return yup.mixed().optional()
 }

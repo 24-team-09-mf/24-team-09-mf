@@ -1,1 +1,1 @@
-export * from "./information-view.component"
+export * from './information-view.component'
