@@ -1,7 +1,13 @@
 // lib
 import * as yup from 'yup'
 
-import { emailScheme, phoneScheme, nameScheme, loginScheme, avatarScheme } from '../../../utils/validation/validationSchemes'
+import {
+  emailScheme,
+  phoneScheme,
+  nameScheme,
+  loginScheme,
+  avatarScheme,
+} from '../../../utils/validation/validationSchemes'
 
 // types
 import { FormProfileValues } from './form-profile.types'

@@ -27,8 +27,7 @@ export const StartView: FC<StartViewProps> = ({
             color="#fff"
             variant="text"
             disabled={false}
-            onClick={onClickInformation}
-          >
+            onClick={onClickInformation}>
             How to play
           </BtnText>
           <BtnStart
@@ -37,8 +36,7 @@ export const StartView: FC<StartViewProps> = ({
             color="#fff"
             variant="contained"
             disabled={false}
-            onClick={onClickStartGame}
-          >
+            onClick={onClickStartGame}>
             Run Game
           </BtnStart>
         </Footer>
