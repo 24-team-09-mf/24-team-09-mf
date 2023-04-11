@@ -23,6 +23,7 @@ export class Player extends Sprite {
     super({ position, model, dimensions, imageSrc, color, frameRate, animations })
     this.position = position
     this.model = model
+    this.dimensions = dimensions
     this.collisionBlocks = collisionBlocks
     this.gameOver = onGameOver
   }
@@ -51,10 +52,10 @@ export class Player extends Sprite {
 
     if (animation.image) {
       this.image = animation.image
+      this.dimensions = animation.dimensions
       this.frameRate = animation.frameRate || 1
       this.framesBuffer = animation.frameBuffer || 2
     }
-
   }
 
   checkHorizontalCollision() {

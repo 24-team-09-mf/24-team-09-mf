@@ -15,6 +15,7 @@ export const usePlayer = ({ gameModel, keys, collisionBlocks, onGameOver }: Prop
     if (gameModel) {
       return new Player({
         position: { x: 32 * 5, y: 0 },
+        dimensions: { width: 35, height: 64 },
         frameRate: 12,
         model: gameModel,
         collisionBlocks,
@@ -24,37 +25,37 @@ export const usePlayer = ({ gameModel, keys, collisionBlocks, onGameOver }: Prop
           idleRight: {
             frameRate: 12,
             frameBuffer: 10,
-            loop: true,
+            dimensions: { width: 35, height: 64 },
             imageSrc: '/assets/sprites/hero/idle.png'
           },
           idleLeft: {
-            frameRate: 8,
+            frameRate: 12,
             frameBuffer: 10,
-            loop: true,
+            dimensions: { width: 35, height: 64 },
             imageSrc: '/assets/sprites/hero/idleLeft.png'
           },
           runRight: {
             frameRate: 8,
             frameBuffer: 10,
-            loop: true,
+            dimensions: { width: 42, height: 66 },
             imageSrc: '/assets/sprites/hero/run.png'
           },
           runLeft: {
             frameRate: 8,
             frameBuffer: 10,
-            loop: true,
+            dimensions: { width: 42, height: 66 },
             imageSrc: '/assets/sprites/hero/runLeft.png'
           },
           jumpRight: {
             frameRate: 4,
             frameBuffer: 10,
-            loop: true,
+            dimensions: { width: 40, height: 72 },
             imageSrc: '/assets/sprites/hero/jump.png'
           },
           jumpLeft: {
             frameRate: 4,
             frameBuffer: 10,
-            loop: true,
+            dimensions: { width: 40, height: 72 },
             imageSrc: '/assets/sprites/hero/jumpLeft.png'
           }
         }
@@ -65,7 +66,10 @@ export const usePlayer = ({ gameModel, keys, collisionBlocks, onGameOver }: Prop
   const update = useCallback(
     () => {
       if (player) {
-        if (player.velocity.y === 0 && keys.pressedW) player.velocity.y = -12
+        if (player.velocity.y === 0 && keys.pressedW) {
+          player.velocity.y = -12
+        }
+        player.switchSprite('idleRight')
         player.velocity.x = 0
         if (keys.pressedA) {
           player.switchSprite('runLeft')
@@ -73,8 +77,6 @@ export const usePlayer = ({ gameModel, keys, collisionBlocks, onGameOver }: Prop
         } else if (keys.pressedD) {
           player.switchSprite('runRight')
           player.velocity.x = 4
-        } else {
-          player.switchSprite('idleRight')
         }
         player?.update()
       }

@@ -31,7 +31,6 @@ export class Sprite {
       this.dimensions = dimensions
     }
 
-
     this.color = color || 'red'
     this.imageSrc = imageSrc || undefined
     this.frameRate = frameRate
@@ -67,7 +66,6 @@ export class Sprite {
           width: this.dimensions.width,
           height: this.dimensions.height
         }
-
         this.model.drawImage(
           this.image,
           cropbox.position.x,
