@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 import { normalize } from 'polished'
 import { Fonts } from '@/fonts'
 
@@ -125,3 +125,23 @@ export const GlobalStyle = createGlobalStyle`
       color: #8c8c8c;
   }
 `
+
+export const H1 = styled.h1((props: { marginBottom?: string }) => {
+  const marginBottom = props.marginBottom ? props.marginBottom : '1.875rem'
+  return `
+    font-family: var(--font-title);
+    font-size: 1.875rem;
+    line-height: 2.75rem;
+    font-weight: 400;
+    margin-bottom: ${marginBottom};
+  `
+})
+
+export const H2 = styled.h2((props: { marginBottom?: string }) => {
+  const marginBottom = props.marginBottom ? props.marginBottom : '1.875rem'
+  return `
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: ${marginBottom};
+  `
+})

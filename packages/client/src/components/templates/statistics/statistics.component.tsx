@@ -1,5 +1,8 @@
-import { Section, H1 } from './statistics.styles'
+import { Section } from './statistics.styles'
 import { Leaderboard } from '@/components'
+import Container from '@/components/layouts/container/container.component'
+import React from 'react'
+import { H1 } from '@/global-styles'
 
 export const Statistics = () => {
   //TODO Поменять, демо
@@ -37,9 +40,11 @@ export const Statistics = () => {
   ]
 
   return (
-    <Section>
-      <H1>СТАТИСТИКА</H1>
-      <Leaderboard data={demoData} />
-    </Section>
+    <Container>
+      <Section>
+        <H1>СТАТИСТИКА</H1>
+        <Leaderboard data={demoData} />
+      </Section>
+    </Container>
   )
 }
