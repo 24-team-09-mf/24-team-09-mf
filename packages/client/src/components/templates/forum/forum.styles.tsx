@@ -149,6 +149,14 @@ export const FormTextarea = styled.div`
   border: none;
   outline: none;
   overflow-y: scroll;
+
+  blockquote {
+    border: solid 1px #000000;
+    padding: 5px;
+    font-size: 12px;
+    line-height: 12px;
+    border-radius: 5px;
+  }
 `
 
 export const FormButtonWrapper = styled.div`

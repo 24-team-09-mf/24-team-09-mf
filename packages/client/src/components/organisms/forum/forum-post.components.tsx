@@ -17,7 +17,7 @@ import {
 } from '@/components/templates/forum/forum.styles'
 import IconRateMinus from '@/assets/icons/rate_minus.svg'
 import IconRatePlus from '@/assets/icons/rate_plus.svg'
-import { useRef, useState } from 'react'
+import { ReactElement, useRef, useState } from 'react'
 import useSectionForm from './forum-logic'
 import { Button } from '@/components'
 import dateParse from '@/utils/dateParse'
@@ -58,7 +58,17 @@ const ForumPost = (el: ForumPostProps) => {
             </ForumPostRateButton>
           </ForumPostRate>
         </ForumPostBottom>
-        {replyOpen && <ForumPostsForm message={text} />}
+        {replyOpen && (
+          <ForumPostsForm
+            replyMessage={
+              <>
+                <strong>{userName}</strong>
+                <br />
+                {text}
+              </>
+            }
+          />
+        )}
       </ForumPostContent>
     </ForumPostBlock>
   )
@@ -74,7 +84,11 @@ export const ForumPosts = ({ data }: { data: ForumPostProps[] }) => {
   )
 }
 
-export const ForumPostsForm = ({ message }: { message?: string }) => {
+export const ForumPostsForm = ({
+  replyMessage,
+}: {
+  replyMessage?: ReactElement
+}) => {
   const { id, postPageId } = useParams()
   const { register, onSubmitHandler, handleSubmit, isValid, setValue } =
     useSectionForm(id!, postPageId)
@@ -98,9 +112,9 @@ export const ForumPostsForm = ({ message }: { message?: string }) => {
         contentEditable="true"
         ref={messageRef}
         placeholder="Сообщение...">
-        {message && (
+        {replyMessage && (
           <>
-            <blockquote>{message}</blockquote>
+            <blockquote>{replyMessage}</blockquote>
             <br />
             <br />
           </>
