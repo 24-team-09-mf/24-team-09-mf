@@ -12,10 +12,6 @@ export type SrpiteAnimation = {
     frameBuffer: number,
     imageSrc: string,
     image?: HTMLImageElement,
-    dimensions: {
-      width: number
-      height: number
-    }
   }
 }
 
@@ -25,10 +21,7 @@ export type SpriteModel = {
     x: number
     y: number
   }
-  dimensions: {
-    width: number
-    height: number
-  }
+
   color?: string
   imageSrc?: string
   frameRate?: number

@@ -23,14 +23,9 @@ export class Sprite {
   elapsedFrames = 0
   framesBuffer = 10
 
-  constructor({ position, model, dimensions, color, imageSrc, frameRate, animations }: SpriteModel) {
+  constructor({ position, model, color, imageSrc, frameRate, animations }: SpriteModel) {
     this.position = position;
     this.model = model;
-
-    if (dimensions) {
-      this.dimensions = dimensions
-    }
-
     this.color = color || 'red'
     this.imageSrc = imageSrc || undefined
 
@@ -49,9 +44,6 @@ export class Sprite {
         }
       }
     }
-
-
-
 
     this.image = new Image();
     if (this.imageSrc) {

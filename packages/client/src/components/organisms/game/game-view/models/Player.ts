@@ -21,11 +21,10 @@ export class Player extends Sprite {
   collisionBlocks: CollisionBlock[] = []
   frames = 0
 
-  constructor({ position, model, dimensions, collisionBlocks, onGameOver, imageSrc, color, frameRate, animations }: Props) {
-    super({ position, model, dimensions, imageSrc, color, frameRate, animations })
+  constructor({ position, model, collisionBlocks, onGameOver, imageSrc, color, frameRate, animations }: Props) {
+    super({ position, model, imageSrc, color, frameRate, animations })
     this.position = position
     this.model = model
-    this.dimensions = dimensions
     this.collisionBlocks = collisionBlocks
     this.gameOver = onGameOver
   }
@@ -48,14 +47,12 @@ export class Player extends Sprite {
   switchSprite(name: string) {
 
     const animation = this.animations?.[name]
-
     if (this.image === animation?.image) return
 
     this.currentFrame = 0
 
     if (animation?.image) {
       this.image = animation.image
-      this.dimensions = animation.dimensions
       this.frameRate = animation.frameRate || 1
       this.framesBuffer = animation.frameBuffer || 2
     }

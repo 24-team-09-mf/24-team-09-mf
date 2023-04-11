@@ -10,21 +10,20 @@ type Props = {
 export const useCollisionsBlock = ({ gameModel }: Props) => {
   const collisions = useMemo(() => {
     const result: CollisionBlock[] = [];
-   if (gameModel) {
+    if (gameModel) {
       parsedCollisions.forEach((row, y) => {
-       row.forEach((symbol, x) => {
-         if (symbol === 306) {
+        row.forEach((symbol, x) => {
+          if (symbol === 306) {
             result.push(new CollisionBlock({
               model: gameModel,
-              dimensions: { width: 32, height: 32 },
               position: { x: x * 32, y: y * 32 },
-              color: 'blue'
+              imageSrc: '/assets/platforma.png',
             }))
-         }
-       })
-     })
-   }
-   return result
+          }
+        })
+      })
+    }
+    return result
   }, [gameModel]);
 
   return collisions
