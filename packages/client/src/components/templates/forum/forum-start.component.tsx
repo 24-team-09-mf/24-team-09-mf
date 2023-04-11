@@ -2,11 +2,12 @@ import {
   CatalogRowLastMessage,
   CatalogRowThreadsCount,
   CatalogTop,
-  H1,
-} from '@/components/templates/forum/forum.styles'
+  Wrapper,
+} from './forum.styles'
 import { ForumStartTopics } from '@/components/organisms/forum'
 
 import Container from '@/components/layouts/container/container.component'
+import { H1 } from '@/global-styles'
 
 export const Forum = () => {
   // TODO: Поменять, демо
@@ -41,12 +42,14 @@ export const Forum = () => {
 
   return (
     <Container>
-      <H1>ФОРУМ</H1>
-      <CatalogTop>
-        <CatalogRowThreadsCount>Тем</CatalogRowThreadsCount>
-        <CatalogRowLastMessage>Последнее сообщение</CatalogRowLastMessage>
-      </CatalogTop>
-      <ForumStartTopics data={demoData} />
+      <Wrapper>
+        <H1>ФОРУМ</H1>
+        <CatalogTop>
+          <CatalogRowThreadsCount>Тем</CatalogRowThreadsCount>
+          <CatalogRowLastMessage>Последнее сообщение</CatalogRowLastMessage>
+        </CatalogTop>
+        <ForumStartTopics data={demoData} />
+      </Wrapper>
     </Container>
   )
 }

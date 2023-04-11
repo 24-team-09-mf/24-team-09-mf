@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import { ForumFormsProps } from '@/components/organisms/forum/forum-types'
+import { ForumFormsProps } from './forum-types'
 
 const useSectionForm = (id: string, postPageId?: string) => {
   const {

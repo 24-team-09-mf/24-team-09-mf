@@ -1,22 +1,10 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-export const H1 = styled.h1`
-  font-family: var(--font-title);
-  font-size: 1.875rem;
-  line-height: 2.75rem;
-  font-weight: 400;
-  margin-bottom: 1.875rem;
+export const Wrapper = styled.div`
+  padding-block: 2.5rem;
+  color: var(--color-text);
 `
-
-export const H2 = styled.h2((props: { marginBottom?: string }) => {
-  const marginBottom = props.marginBottom ? props.marginBottom : '0'
-  return `
-    font-weight: 700;
-    font-size: 1.25rem;
-    margin-bottom: ${marginBottom};
-  `
-})
 
 export const CatalogTop = styled.div`
   display: flex;
@@ -30,9 +18,10 @@ export const CatalogTop = styled.div`
 
 export const CatalogRowContent = styled.div`
   display: block;
-  padding: 0.938rem;
+  padding: 1.25rem;
   padding-right: 1.25rem;
   width: calc(100% - 25rem);
+  font-size: 0.875rem;
 `
 
 export const CatalogRowThreadsCount = styled.div`
@@ -59,19 +48,27 @@ export const CatalogBlock = styled.div`
   display: flex;
   align-items: strength;
   justify-content: flex-end;
+  transition: all 0.3s;
+  color: var(--color-text);
   &:last-child {
     margin-bottom: 0;
   }
+  &:hover {
+    background: rgba(var(--color-green1-rgb), 0.7);
+  }
 `
 
-export const CatalogRow1Title = styled(Link)`
+export const CatalogRowContentTitle = styled(Link)`
   font-weight: 700;
   font-size: 1.25rem;
   margin-bottom: 0.625rem;
   cursor: pointer;
-  color: #333333;
+  color: var(--color-text);
+  border-bottom: dashed 1px var(--color-text);
+  padding-bottom: 3px;
+  transition: all 0.3s;
   &:hover {
-    text-decoration: underline;
+    border-color: transparent;
   }
 `
 
@@ -86,20 +83,21 @@ export const CatalogRowMessageDate = styled.div`
 `
 
 export const CatalogRowMessageLink = styled(Link)`
-  text-decoration-line: underline;
+  border-bottom: dashed 1px var(--color-text);
   margin-bottom: 0.438rem;
   cursor: pointer;
   color: #333333;
+  transition: all 0.3s;
   &:hover {
-    text-decoration: none;
+    border-color: transparent;
   }
 `
 
 export const CatalogRowMessageUser = styled.div``
 
-export const SectionRowContent = styled.div`
+export const SectionRowContent = styled(Link)`
   display: block;
-  padding: 0.938rem;
+  padding: 1.25rem;
   padding-right: 1.25rem;
   width: calc(100% - 21.875rem);
 `
@@ -120,12 +118,9 @@ export const SectionRowLastMessage = styled(SectionRowMessagesCount)`
   border-right: none;
 `
 
-export const SectionRowContentTitle = styled(Link)`
+export const SectionRowContentTitle = styled.div`
   color: var(--color-text);
   cursor: pointer;
-  &:hover {
-    text-decoration: underline;
-  }
 `
 
 export const FormSeparator = styled.div`
@@ -176,8 +171,13 @@ export const ForumPostBlock = styled.div`
 export const ForumPostBlockAvatar = styled.div`
   width: 6.25rem;
   height: 6.25rem;
-  background: #c4c4c4;
-  border-radius: 0.313rem;
+  border-radius: 50%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
 `
 
 export const ForumPostContent = styled.div`

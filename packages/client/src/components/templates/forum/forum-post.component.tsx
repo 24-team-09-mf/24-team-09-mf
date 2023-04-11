@@ -1,4 +1,3 @@
-import { H1 } from '@/components/templates/forum/forum.styles'
 import {
   ForumPosts,
   ForumPostsForm,
@@ -7,6 +6,8 @@ import {
 import { Navigate, useParams } from 'react-router-dom'
 
 import Container from '@/components/layouts/container/container.component'
+import { H1 } from '@/global-styles'
+import { Wrapper } from './forum.styles'
 
 export const ForumPost = () => {
   const { id, postPageId } = useParams()
@@ -53,10 +54,12 @@ export const ForumPost = () => {
 
   return (
     <Container>
-      <H1>ФОРУМ</H1>
-      <ForumSectionTitle title={demoData.title} />
-      <ForumPosts data={demoData.posts} />
-      <ForumPostsForm id={id} postPageId={postPageId} />
+      <Wrapper>
+        <H1>ФОРУМ</H1>
+        <ForumSectionTitle title={demoData.title} />
+        <ForumPosts data={demoData.posts} />
+        <ForumPostsForm id={id} postPageId={postPageId} />
+      </Wrapper>
     </Container>
   )
 }

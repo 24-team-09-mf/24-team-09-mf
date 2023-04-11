@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react'
 import {
   CatalogBlock,
   FormSeparator,
-  H2,
   SectionRowContent,
   SectionRowContentTitle,
   SectionRowMessagesCount,
@@ -11,10 +9,11 @@ import {
   FormTextarea,
   FormButtonWrapper,
 } from '@/components/templates/forum/forum.styles'
-import { ForumSectionProps } from '@/components/organisms/forum/forum-types'
+import { ForumSectionProps } from './forum-types'
 import { Button } from '@/components'
-import useSectionForm from '@/components/organisms/forum/forum-logic'
+import useSectionForm from './forum-logic'
 import dateParse from '@/utils/dateParse'
+import { H2 } from '@/global-styles'
 
 export const ForumSectionTitle = ({ title }: { title: string }) => {
   return <H2>{title}</H2>
@@ -25,10 +24,8 @@ const ForumSectionTopicsElement = (el: ForumSectionProps) => {
 
   return (
     <CatalogBlock>
-      <SectionRowContent>
-        <SectionRowContentTitle to={`/forum/${parentId}/${id}`}>
-          {title}
-        </SectionRowContentTitle>
+      <SectionRowContent to={`/forum/${parentId}/${id}`}>
+        <SectionRowContentTitle>{title}</SectionRowContentTitle>
       </SectionRowContent>
       <SectionRowMessagesCount>{postCount}</SectionRowMessagesCount>
       <SectionRowMessagesCount>{lastTopic.userName}</SectionRowMessagesCount>

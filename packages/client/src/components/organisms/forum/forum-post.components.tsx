@@ -1,4 +1,4 @@
-import { ForumPostProps } from '@/components/organisms/forum/forum-types'
+import { ForumPostProps } from './forum-types'
 import {
   FormButtonWrapper,
   FormSeparator,
@@ -13,14 +13,16 @@ import {
   ForumPostRateText,
   ForumPostTop,
   ForumPostUserName,
-  H2,
 } from '@/components/templates/forum/forum.styles'
 import IconRateMinus from '@/assets/icons/rate_minus.svg'
 import IconRatePlus from '@/assets/icons/rate_plus.svg'
-import React, { useEffect, useState } from 'react'
-import useSectionForm from '@/components/organisms/forum/forum-logic'
+import { useState } from 'react'
+import useSectionForm from './forum-logic'
 import { Button } from '@/components'
 import dateParse from '@/utils/dateParse'
+import { H2 } from '@/global-styles'
+
+import avatarDefault from '@/assets/images/avatarDefault.png'
 
 const ForumPost = (el: ForumPostProps) => {
   const [rate, setRate] = useState(el.rate)
@@ -29,7 +31,7 @@ const ForumPost = (el: ForumPostProps) => {
   return (
     <ForumPostBlock>
       <ForumPostBlockAvatar>
-        {userAvatar && <img src={userAvatar} alt="" />}
+        <img src={userAvatar ? userAvatar : avatarDefault} alt="" />
       </ForumPostBlockAvatar>
       <ForumPostContent>
         <ForumPostTop>
