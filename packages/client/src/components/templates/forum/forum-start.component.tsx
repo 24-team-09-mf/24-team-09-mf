@@ -19,7 +19,7 @@ export const Forum = () => {
       topicsCount: 12,
       lastTopic: {
         id: '55',
-        date: 34343434,
+        date: 1681213333000,
         title: 'Предложения по улучшению игры',
         userId: 99,
         userName: 'useruser',
@@ -32,7 +32,7 @@ export const Forum = () => {
       topicsCount: 12,
       lastTopic: {
         id: '55',
-        date: 34343434,
+        date: 1682213533000,
         title: 'Предложения по улучшению игры',
         userId: 99,
         userName: 'useruser',

@@ -25,7 +25,7 @@ export const ForumPost = () => {
       {
         id: '99',
         text: 'Всем привет!Недавно заметил, что после каждого перезахода в игру, отключается нативный фпс-лок. Эта фигня как-то лечится или проще залочить фпс в настройках драйвера и забить? Началось очевидно после прилета патча 10.0.7 на лайв.',
-        date: 34343434,
+        date: 1681213333000,
         rate: 7,
         userId: 99,
         userName: 'useruser',
@@ -34,7 +34,7 @@ export const ForumPost = () => {
       {
         id: '100',
         text: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa AAAAAAAAAAAAAAAAAAAAAAAAA',
-        date: 34343434,
+        date: 1681213333000,
         rate: 1,
         userId: 99,
         userName: 'useruser',
@@ -43,7 +43,7 @@ export const ForumPost = () => {
       {
         id: '101',
         text: 'Всем привет!Недавно заметил, что после каждого перезахода в игру, отключается нативный фпс-лок. Эта фигня как-то лечится или проще залочить фпс в настройках драйвера и забить? Началось очевидно после прилета патча 10.0.7 на лайв.',
-        date: 34343434,
+        date: 1682213533000,
         rate: 0,
         userId: 99,
         userName: 'useruser',

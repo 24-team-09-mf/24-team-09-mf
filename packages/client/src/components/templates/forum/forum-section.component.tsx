@@ -33,7 +33,7 @@ export const ForumSection = () => {
         userId: 99,
         lastTopic: {
           id: '101',
-          date: 34343434,
+          date: 1681213333000,
           title: 'Предложения по улучшению игры',
           userId: 99,
           userName: 'useruser',
@@ -47,7 +47,7 @@ export const ForumSection = () => {
         userId: 99,
         lastTopic: {
           id: '101',
-          date: 34343434,
+          date: 1682213533000,
           title: 'Предложения по улучшению игры',
           userId: 99,
           userName: 'useruser',
