@@ -15,6 +15,8 @@ export class Player extends Sprite {
     x: 0,
     y: 0,
   }
+
+  lastDirection = ''
   gravity = 0.6
   collisionBlocks: CollisionBlock[] = []
   frames = 0

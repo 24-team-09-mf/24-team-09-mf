@@ -67,21 +67,30 @@ export const usePlayer = ({ gameModel, keys, collisionBlocks, onGameOver }: Prop
     () => {
       if (player) {
         if (player.velocity.y === 0 && keys.pressedW) {
-          player.velocity.y = -12
+          player.velocity.y = -10
         }
         player.velocity.x = 0
         if (keys.pressedA) {
+          player.lastDirection = 'left'
           player.switchSprite('runLeft')
           player.velocity.x = -4
         } else if (keys.pressedD) {
+          player.lastDirection = 'right'
           player.switchSprite('runRight')
           player.velocity.x = 4
         } else if (keys.pressedW) {
-          player.switchSprite('jumpRight')
+          if (player.lastDirection === 'right') {
+            player.switchSprite('jumpRight')
+          } else {
+            player.switchSprite('jumpLeft')
+          }
         }
         else {
-          player.switchSprite('idleRight')
-          player.velocity.x = 0
+          if (player.lastDirection === 'left') {
+            player.switchSprite('idleLeft')
+          } else {
+            player.switchSprite('idleRight')
+          }
         }
         player?.update()
       }
