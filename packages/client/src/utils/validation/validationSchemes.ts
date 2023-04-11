@@ -46,7 +46,7 @@ export function passwordNewScheme(oldPassword: string, message: string) {
     .trim()
     .required('Пожалуйста введите ваш пароль')
     .matches(passwordRegExp, message)
-    .notOneOf([yup.ref(passwordOld), null], 'Новый пароль не может совпадать со старым')
+    .notOneOf([yup.ref(oldPassword), null], 'Новый пароль не может совпадать со старым')
 }
 
 export function avatarScheme() {
