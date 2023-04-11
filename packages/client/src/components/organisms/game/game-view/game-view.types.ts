@@ -31,7 +31,7 @@ export type SpriteModel = {
   }
   color?: string
   imageSrc?: string
-  frameRate: number
+  frameRate?: number
 
-  animations: SrpiteAnimation
+  animations?: SrpiteAnimation
 }

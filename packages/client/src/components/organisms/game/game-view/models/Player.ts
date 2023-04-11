@@ -46,13 +46,14 @@ export class Player extends Sprite {
   }
 
   switchSprite(name: string) {
-    const animation = this.animations[name]
 
-    if (this.image === animation.image) return
+    const animation = this.animations?.[name]
+
+    if (this.image === animation?.image) return
 
     this.currentFrame = 0
 
-    if (animation.image) {
+    if (animation?.image) {
       this.image = animation.image
       this.dimensions = animation.dimensions
       this.frameRate = animation.frameRate || 1

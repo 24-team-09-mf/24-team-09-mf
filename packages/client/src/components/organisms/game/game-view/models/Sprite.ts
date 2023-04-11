@@ -11,7 +11,7 @@ export class Sprite {
     height: 0,
   }
 
-  animations: SrpiteAnimation
+  animations?: SrpiteAnimation
 
   model: GameModel = null
   color = ''
@@ -33,17 +33,25 @@ export class Sprite {
 
     this.color = color || 'red'
     this.imageSrc = imageSrc || undefined
-    this.frameRate = frameRate
 
-    this.animations = animations
+    if (frameRate) {
+      this.frameRate = frameRate
+    }
 
-    if (this.animations) {
-      for (const key in this.animations) {
-        const image = new Image()
-        image.src = this.animations[key].imageSrc
-        this.animations[key].image = image
+    if (animations) {
+      this.animations = animations
+
+      if (this.animations) {
+        for (const key in this.animations) {
+          const image = new Image()
+          image.src = this.animations[key].imageSrc
+          this.animations[key].image = image
+        }
       }
     }
+
+
+
 
     this.image = new Image();
     if (this.imageSrc) {
