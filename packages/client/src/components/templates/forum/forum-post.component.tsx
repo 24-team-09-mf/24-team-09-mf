@@ -58,7 +58,7 @@ export const ForumPost = () => {
         <H1>ФОРУМ</H1>
         <ForumSectionTitle title={demoData.title} />
         <ForumPosts data={demoData.posts} />
-        <ForumPostsForm id={id} postPageId={postPageId} />
+        <ForumPostsForm />
       </Wrapper>
     </Container>
   )

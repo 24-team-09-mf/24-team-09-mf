@@ -23,10 +23,13 @@ import { Button } from '@/components'
 import dateParse from '@/utils/dateParse'
 import { H2 } from '@/global-styles'
 import avatarDefault from '@/assets/images/avatarDefault.png'
+import { useParams } from 'react-router-dom'
 
 const ForumPost = (el: ForumPostProps) => {
   const [rate, setRate] = useState(el.rate)
   const { userAvatar, userName, date, text } = el
+
+  const [replyOpen, setReplyOpen] = useState(false)
 
   return (
     <ForumPostBlock>
@@ -41,7 +44,9 @@ const ForumPost = (el: ForumPostProps) => {
         <p>{text}</p>
         <ForumPostBottom>
           <div>
-            <ForumPostReplyBtn>Ответить</ForumPostReplyBtn>
+            <ForumPostReplyBtn onClick={() => setReplyOpen(prev => !prev)}>
+              Ответить
+            </ForumPostReplyBtn>
           </div>
           <ForumPostRate>
             <ForumPostRateButton onClick={() => setRate(prev => prev - 1)}>
@@ -53,6 +58,7 @@ const ForumPost = (el: ForumPostProps) => {
             </ForumPostRateButton>
           </ForumPostRate>
         </ForumPostBottom>
+        {replyOpen && <ForumPostsForm message={text} />}
       </ForumPostContent>
     </ForumPostBlock>
   )
@@ -68,21 +74,10 @@ export const ForumPosts = ({ data }: { data: ForumPostProps[] }) => {
   )
 }
 
-export const ForumPostsForm = ({
-  id,
-  postPageId,
-}: {
-  id: string
-  postPageId: string
-}) => {
-  const {
-    register,
-    onSubmitHandler,
-    handleSubmit,
-    isValid,
-    setValue,
-    getValues,
-  } = useSectionForm(id, postPageId)
+export const ForumPostsForm = ({ message }: { message?: string }) => {
+  const { id, postPageId } = useParams()
+  const { register, onSubmitHandler, handleSubmit, isValid, setValue } =
+    useSectionForm(id!, postPageId)
   const messageRef = useRef(null)
   const messageClear = () => {
     ;(messageRef!.current! as HTMLDivElement).innerHTML = ''
@@ -102,8 +97,15 @@ export const ForumPostsForm = ({
         }}
         contentEditable="true"
         ref={messageRef}
-        placeholder="Сообщение..."
-      />
+        placeholder="Сообщение...">
+        {message && (
+          <>
+            <blockquote>{message}</blockquote>
+            <br />
+            <br />
+          </>
+        )}
+      </FormTextarea>
       <FormButtonWrapper>
         <Button
           as="button"
