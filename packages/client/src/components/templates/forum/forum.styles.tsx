@@ -152,10 +152,11 @@ export const FormTextarea = styled.div`
 
   blockquote {
     border: solid 1px #000000;
-    padding: 5px;
-    font-size: 12px;
-    line-height: 12px;
-    border-radius: 5px;
+    padding: 0.313rem;
+    font-size: 0.75rem;
+    line-height: 0.75rem;
+    border-radius: 0.313rem;
+    margin-bottom: 0.938rem;
   }
 `
 
@@ -224,7 +225,7 @@ export const ForumPostRateText = styled.div`
 export const ForumPostReplyBtn = styled.button`
   color: #000000;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 0.75rem;
   background-color: transparent;
   border: solid 1px #000000;
   cursor: pointer;
@@ -251,5 +252,16 @@ export const ForumPostBlock = styled.div`
     .${ForumPostReplyBtn['componentStyle']['componentId']} {
       display: block;
     }
+  }
+`
+
+export const ForumPostText = styled.div`
+  blockquote {
+    border: solid 1px #000000;
+    padding: 0.313rem;
+    font-size: 0.75rem;
+    line-height: 0.75rem;
+    border-radius: 0.313rem;
+    margin-bottom: 0.938rem;
   }
 `

@@ -12,6 +12,7 @@ import {
   ForumPostRateButton,
   ForumPostRateText,
   ForumPostReplyBtn,
+  ForumPostText,
   ForumPostTop,
   ForumPostUserName,
 } from '@/components/templates/forum/forum.styles'
@@ -34,14 +35,14 @@ const ForumPost = (el: ForumPostProps) => {
   return (
     <ForumPostBlock>
       <ForumPostBlockAvatar>
-        <img src={userAvatar ? userAvatar : avatarDefault} alt="" />
+        <img src={userAvatar ? userAvatar : avatarDefault} alt={userName} />
       </ForumPostBlockAvatar>
       <ForumPostContent>
         <ForumPostTop>
           <ForumPostUserName>{userName}</ForumPostUserName>
           <ForumPostDate>{dateParse(date)}</ForumPostDate>
         </ForumPostTop>
-        <p>{text}</p>
+        <ForumPostText>{text}</ForumPostText>
         <ForumPostBottom>
           <div>
             <ForumPostReplyBtn onClick={() => setReplyOpen(prev => !prev)}>
@@ -93,9 +94,8 @@ export const ForumPostsForm = ({
   const { register, onSubmitHandler, handleSubmit, isValid, setValue } =
     useSectionForm(id!, postPageId)
   const messageRef = useRef(null)
-  const messageClear = () => {
-    ;(messageRef!.current! as HTMLDivElement).innerHTML = ''
-  }
+  const messageClear = () =>
+    ((messageRef!.current! as HTMLDivElement).innerHTML = '')
 
   return (
     <form onSubmit={handleSubmit(onSubmitHandler)}>

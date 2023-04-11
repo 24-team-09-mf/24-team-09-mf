@@ -1,3 +1,5 @@
+import { ReactElement } from 'react'
+
 export type ForumLastTopicProps = {
   id: string
   date: number
@@ -31,7 +33,7 @@ export type ForumFormsProps = {
 
 export type ForumPostProps = {
   id: string
-  text: string
+  text: string | ReactElement
   date: number
   rate: number
   userId: number
