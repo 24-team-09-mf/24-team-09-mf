@@ -45,7 +45,7 @@ export const useGameProcess = ({
       height: HEIGHT_VIEW,
     },
     color: '#192C3B',
-    imageSrc: '/assets/startGame.png'
+    imageSrc: '/assets/startGame.png',
   })
 
   const [drawGameBackground] = useSprite({
@@ -74,6 +74,7 @@ export const useGameProcess = ({
       } else {
 
         drawGameBackground()
+        collisionBlocks.forEach(block => block.draw())
         drawPlayer()
 
         collisionBlocks.forEach(block => block.draw());

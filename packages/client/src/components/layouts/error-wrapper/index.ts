@@ -1,1 +1,1 @@
-export * from './error-wrapper.component';
+export * from './error-wrapper.component'

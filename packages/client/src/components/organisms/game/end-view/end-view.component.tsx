@@ -2,27 +2,14 @@ import { Link } from 'react-router-dom'
 import { FC } from 'react'
 import { EndViewProps } from './end-view.types'
 import { BtnText, Content } from '../game.styles'
-import {
-  BtnStart,
-  Title,
-  Score,
-  Footer,
-  Wrapper,
-} from './end-view.styles'
+import { BtnStart, Title, Score, Footer, Wrapper } from './end-view.styles'
 
-export const EndView: FC<EndViewProps> = ({
-  onClickStartGame,
-  score
-}) => {
+export const EndView: FC<EndViewProps> = ({ onClickStartGame, score }) => {
   return (
     <Wrapper>
       <Content>
-        <Title>
-          Game over
-        </Title>
-        <Score>
-          SCORE: {score}
-        </Score>
+        <Title>Game over</Title>
+        <Score>SCORE: {score}</Score>
         <Footer>
           <Link to="/forum">
             <BtnText
@@ -30,8 +17,7 @@ export const EndView: FC<EndViewProps> = ({
               type="button"
               color="#fff"
               variant="text"
-              disabled={false}
-            >
+              disabled={false}>
               Forum
             </BtnText>
           </Link>
@@ -41,8 +27,7 @@ export const EndView: FC<EndViewProps> = ({
               type="button"
               color="#fff"
               variant="text"
-              disabled={false}
-            >
+              disabled={false}>
               Leaderboard
             </BtnText>
           </Link>
@@ -52,8 +37,7 @@ export const EndView: FC<EndViewProps> = ({
             color="#fff"
             variant="contained"
             disabled={false}
-            onClick={onClickStartGame}
-          >
+            onClick={onClickStartGame}>
             Retry
           </BtnStart>
         </Footer>

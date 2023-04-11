@@ -1,7 +1,13 @@
 // lib
 import * as yup from 'yup'
 
-import { emailScheme, phoneScheme, nameScheme, loginScheme, passwordScheme } from '../../../utils/validation/validationSchemes'
+import {
+  emailScheme,
+  phoneScheme,
+  nameScheme,
+  loginScheme,
+  passwordScheme,
+} from '../../../utils/validation/validationSchemes'
 
 // types
 import { FormSignUpValues } from './form-signup.types'
@@ -13,7 +19,8 @@ const schema: yup.SchemaOf<FormSignUpValues> = yup.object().shape({
   email: emailScheme('Введите валидный email-адрес'),
   phone: phoneScheme('Введите верный телефонный номер'),
   password: passwordScheme(
-    'Минимум 8 символов, должен включать цифры и латинские буквы')
+    'Минимум 8 символов, должен включать цифры и латинские буквы'
+  ),
 })
 
 export default schema

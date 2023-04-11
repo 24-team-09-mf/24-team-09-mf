@@ -1,11 +1,7 @@
-import { LayoutMain, Landing } from '@/components'
+import { Landing } from '@/components'
 
 const LandingPage: React.FC = () => {
-  return (
-    <LayoutMain>
-      <Landing />
-    </LayoutMain>
-  )
+  return <Landing />
 }
 
 export default LandingPage

@@ -1,11 +1,7 @@
-import { LayoutMain, ErrorTemplate } from '../../components'
+import { ErrorTemplate } from '../../components'
 
 const ErrorPage: React.FC = () => {
-  return (
-    <LayoutMain>
-      <ErrorTemplate />
-    </LayoutMain>
-  )
+  return <ErrorTemplate />
 }
 
 export default ErrorPage

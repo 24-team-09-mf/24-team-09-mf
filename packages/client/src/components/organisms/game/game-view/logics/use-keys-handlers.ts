@@ -6,42 +6,42 @@ export const useKeysHandlers = () => {
   const [pressedA, setPressedA] = useState(false)
   const [pressedD, setPressedD] = useState(false)
 
-  const handlerKeyDown = useCallback(({ key }: KeyboardEvent) => {
+  const handlerKeyDown = useCallback(({ key, repeat }: KeyboardEvent) => {
     if (KEY_A.includes(key)) {
-      setPressedA(true);
+      setPressedA(true)
     }
     if (KEY_D.includes(key)) {
-      setPressedD(true);
+      setPressedD(true)
     }
     if (KEY_W.includes(key)) {
+      if (repeat) {
+        setPressedW(false)
+        return
+      }
       setPressedW(true)
     }
   }, [])
 
-  const handlerKeyUp = useCallback(
-    ({ key }: KeyboardEvent) => {
-      if (KEY_A.includes(key)) {
-        setPressedA(false);
-      }
-      if (KEY_D.includes(key)) {
-        setPressedD(false);
-      }
-      if (KEY_W.includes(key)) {
-        setPressedW(false)
-      }
-    },
-    []
-  );
-
-
-  useEffect(() => {
-      window.addEventListener('keydown', handlerKeyDown)
-      window.addEventListener('keyup', handlerKeyUp)
-      return () => {
-        window.removeEventListener('keydown', handlerKeyDown)
-        window.removeEventListener('keyup', handlerKeyUp)
-      }
+  const handlerKeyUp = useCallback(({ key }: KeyboardEvent) => {
+    if (KEY_A.includes(key)) {
+      setPressedA(false)
+    }
+    if (KEY_D.includes(key)) {
+      setPressedD(false)
+    }
+    if (KEY_W.includes(key)) {
+      setPressedW(false)
+    }
   }, [])
 
-  return { pressedA, pressedD, pressedW };
+  useEffect(() => {
+    window.addEventListener('keydown', handlerKeyDown)
+    window.addEventListener('keyup', handlerKeyUp)
+    return () => {
+      window.removeEventListener('keydown', handlerKeyDown)
+      window.removeEventListener('keyup', handlerKeyUp)
+    }
+  }, [])
+
+  return { pressedA, pressedD, pressedW }
 }

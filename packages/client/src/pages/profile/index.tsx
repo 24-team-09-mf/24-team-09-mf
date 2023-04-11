@@ -2,11 +2,7 @@
 import { Profile, LayoutMain } from '../../components'
 
 const ProfilePage = () => {
-  return (
-    <LayoutMain>
-      <Profile />
-    </LayoutMain>
-  )
+  return <Profile />
 }
 
 export default ProfilePage

@@ -26,10 +26,16 @@ export const GameComponent = () => {
     []
   )
 
+  const handlerGameOver = useCallback(() => setIsGameEnded(true), [])
+
   return (
     <Wrapper>
       <MainView>
-        <GameView isStartedGame={isGameStarted} isEndedGame={isGameEnded} onGameOver={() => setIsGameEnded(true)} />
+        <GameView
+          isStartedGame={isGameStarted}
+          isEndedGame={isGameEnded}
+          onGameOver={() => setIsGameEnded(true)}
+        />
         {!isGameStarted && !isGameEnded && (
           <StartView
             onClickStartGame={handlerClickStartGame}
