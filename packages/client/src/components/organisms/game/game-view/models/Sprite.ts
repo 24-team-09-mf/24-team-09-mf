@@ -1,4 +1,7 @@
-import { GameModel, SpriteModel } from '@/components/organisms/game/game-view/game-view.types'
+import {
+  GameModel,
+  SpriteModel,
+} from '@/components/organisms/game/game-view/game-view.types'
 
 export class Sprite {
   position = {
@@ -11,18 +14,18 @@ export class Sprite {
     height: 0,
   }
 
-  model: GameModel = null;
-  color = '';
+  model: GameModel = null
+  color = ''
   constructor({ position, model, dimensions, color }: SpriteModel) {
-    this.position = position;
-    this.model = model;
+    this.position = position
+    this.model = model
     this.dimensions = dimensions
     this.color = color || 'red'
   }
 
   draw() {
     if (this.model) {
-      this.model.fillStyle = this.color;
+      this.model.fillStyle = this.color
       this.model.fillRect(
         this.position.x,
         this.position.y,

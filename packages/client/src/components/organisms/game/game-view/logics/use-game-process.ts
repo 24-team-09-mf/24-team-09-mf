@@ -22,11 +22,11 @@ export const useGameProcess = ({
   gameModel,
   isStartedGame,
   isEndedGame,
-  onGameOver
+  onGameOver,
 }: Props) => {
   const keys = useKeysHandlers()
-  const collisionBlocks = useCollisionsBlock({ gameModel });
-  const drawPlayer = usePlayer({ gameModel, keys, collisionBlocks, onGameOver });
+  const collisionBlocks = useCollisionsBlock({ gameModel })
+  const drawPlayer = usePlayer({ gameModel, keys, collisionBlocks, onGameOver })
 
   const [drawBackground] = useSprite({
     gameModel,
@@ -39,7 +39,7 @@ export const useGameProcess = ({
       height: HEIGHT_VIEW,
     },
     color: '#192C3B',
-    imageSrc: '/assets/startGame.png'
+    imageSrc: '/assets/startGame.png',
   })
 
   const [drawGameBackground] = useSprite({
@@ -64,10 +64,10 @@ export const useGameProcess = ({
       requestId = null
       start()
       if (!isStartedGame && !isEndedGame) {
-        drawBackground();
+        drawBackground()
       } else {
         drawGameBackground()
-        collisionBlocks.forEach(block => block.draw());
+        collisionBlocks.forEach(block => block.draw())
         drawPlayer()
       }
     }
