@@ -1,3 +1,5 @@
+export const SYMBOL_COLLISION_BLOCK = 306
+export const BLOCK_SIZE = 32
 export const WIDTH_VIEW = 32 * 32
 export const HEIGHT_VIEW = 32 * 18
 

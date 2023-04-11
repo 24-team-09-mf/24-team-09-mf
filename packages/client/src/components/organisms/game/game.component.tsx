@@ -26,6 +26,8 @@ export const GameComponent = () => {
     []
   )
 
+  const handlerGameOver = useCallback(() => setIsGameEnded(true), [])
+
   return (
     <Wrapper>
       <MainView>

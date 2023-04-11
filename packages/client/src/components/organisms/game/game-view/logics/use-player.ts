@@ -37,7 +37,7 @@ export const usePlayer = ({
       } else if (keys.pressedD) {
         player.velocity.x = 4
       }
-      player?.update()
+      player.update()
     }
   }, [keys])
 
