@@ -156,18 +156,6 @@ export const FormButtonWrapper = styled.div`
   justify-content: flex-end;
 `
 
-export const ForumPostBlock = styled.div`
-  background: rgba(var(--color-green1-rgb), 0.4);
-  padding: 1.25rem;
-  display: flex;
-  &:first-child {
-    margin-top: 1.875rem;
-  }
-  &:nth-child(even) {
-    background: #ffffff;
-  }
-`
-
 export const ForumPostBlockAvatar = styled.div`
   width: 6.25rem;
   height: 6.25rem;
@@ -202,7 +190,8 @@ export const ForumPostDate = styled.div`
 export const ForumPostBottom = styled.div`
   margin-top: 1.25rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  min-height: 1.563rem;
 `
 
 export const ForumPostRate = styled.div`
@@ -222,4 +211,37 @@ export const ForumPostRateButton = styled.button`
 export const ForumPostRateText = styled.div`
   margin: 0 0.625rem;
   font-size: 0.75rem;
+`
+
+export const ForumPostReplyBtn = styled.button`
+  color: #000000;
+  text-transform: uppercase;
+  font-size: 12px;
+  background-color: transparent;
+  border: solid 1px #000000;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: none;
+
+  &:hover {
+    background-color: var(--color-green1);
+  }
+`
+
+export const ForumPostBlock = styled.div`
+  background: rgba(var(--color-green1-rgb), 0.4);
+  padding: 1.25rem;
+  display: flex;
+  &:first-child {
+    margin-top: 1.875rem;
+  }
+  &:nth-child(even) {
+    background: #ffffff;
+  }
+
+  &:hover {
+    .${ForumPostReplyBtn['componentStyle']['componentId']} {
+      display: block;
+    }
+  }
 `

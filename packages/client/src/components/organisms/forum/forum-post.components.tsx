@@ -11,6 +11,7 @@ import {
   ForumPostRate,
   ForumPostRateButton,
   ForumPostRateText,
+  ForumPostReplyBtn,
   ForumPostTop,
   ForumPostUserName,
 } from '@/components/templates/forum/forum.styles'
@@ -40,6 +41,9 @@ const ForumPost = (el: ForumPostProps) => {
         </ForumPostTop>
         <p>{text}</p>
         <ForumPostBottom>
+          <div>
+            <ForumPostReplyBtn>Ответить</ForumPostReplyBtn>
+          </div>
           <ForumPostRate>
             <ForumPostRateButton onClick={() => setRate(prev => prev - 1)}>
               <img src={IconRateMinus} alt="Не нравится" />
