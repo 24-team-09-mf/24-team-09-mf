@@ -42,7 +42,7 @@ const ForumPost = (el: ForumPostProps) => {
           <ForumPostUserName>{userName}</ForumPostUserName>
           <ForumPostDate>{dateParse(date)}</ForumPostDate>
         </ForumPostTop>
-        <ForumPostText>{text}</ForumPostText>
+        <ForumPostText dangerouslySetInnerHTML={{ __html: text as string }} />
         <ForumPostBottom>
           <div>
             <ForumPostReplyBtn onClick={() => setReplyOpen(prev => !prev)}>
@@ -65,7 +65,7 @@ const ForumPost = (el: ForumPostProps) => {
               <>
                 <strong>{userName}</strong>
                 <br />
-                {text}
+                <div dangerouslySetInnerHTML={{ __html: text as string }} />
               </>
             }
           />
