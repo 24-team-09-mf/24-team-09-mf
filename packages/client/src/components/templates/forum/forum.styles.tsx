@@ -140,6 +140,36 @@ export const FormInput = styled.input`
   outline: none;
 `
 
+export const FormTextareaWrapper = styled.div`
+  background: var(--color-gray1);
+  padding: 0.938rem 0 0 0;
+`
+
+export const FormTextareaButtons = styled.div`
+  padding: 0 0.938rem 0 0.938rem;
+  display: flex;
+`
+
+export const FormTextareaButton = styled.div`
+  height: 24px;
+  width: 24px;
+  background-color: var(--color-green1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+`
+
 export const FormTextarea = styled.div`
   background: var(--color-gray1);
   height: 7.5rem;
@@ -149,6 +179,7 @@ export const FormTextarea = styled.div`
   border: none;
   outline: none;
   overflow-y: scroll;
+  position: relative;
 
   blockquote {
     border: solid 1px #000000;
