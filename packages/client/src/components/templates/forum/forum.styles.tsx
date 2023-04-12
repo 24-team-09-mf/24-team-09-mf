@@ -151,13 +151,13 @@ export const FormTextareaButtons = styled.div`
 `
 
 export const FormTextareaButton = styled.div`
-  height: 24px;
-  width: 24px;
+  height: 1.5rem;
+  width: 1.5rem;
   background-color: var(--color-green1);
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 5px;
+  margin-right: 0.313rem;
   cursor: pointer;
   transition: all 0.3s;
 
@@ -236,6 +236,7 @@ export const ForumPostBottom = styled.div`
 
 export const ForumPostRate = styled.div`
   display: flex;
+  align-items: center;
 `
 
 export const ForumPostRateButton = styled.button`
@@ -251,6 +252,75 @@ export const ForumPostRateButton = styled.button`
 export const ForumPostRateText = styled.div`
   margin: 0 0.625rem;
   font-size: 0.75rem;
+`
+
+export const ForumEmoji = styled.div`
+  margin-right: 1.25rem;
+  display: flex;
+  align-items: center;
+`
+
+export const ForumEmojiAddBtn = styled.div`
+  margin-left: 0.625rem;
+  width: 1.625rem;
+  height: 1.625rem;
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 0.313rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    cursor: pointer;
+  }
+`
+
+export const ForumEmojiAddBlock = styled.div((props: { display?: string }) => {
+  return `
+    position: absolute;
+    bottom: 1.875rem;
+    left: -0.125rem;
+    background-color: #ffffff;
+    border: solid 1px var(--color-text);
+    z-index: 2;
+    width: 1.875rem;
+    display: ${props.display}
+  `
+})
+
+export const ForumEmojiAddElement = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.875rem;
+
+  img {
+    width: 1.625rem;
+    transition: all 0.3s;
+  }
+
+  &:hover {
+    img {
+      opacity: 0.7;
+    }
+  }
+`
+
+export const ForumEmojiElement = styled.div`
+  height: 1.375rem;
+  background-color: #ffffff;
+  border: solid 1px var(--color-text);
+  border-radius: 0.313rem;
+  display: flex;
+  padding: 0 0.313rem;
+  font-size: 0.625rem;
+  align-items: center;
+  margin-left: 0.313rem;
+
+  img {
+    margin-right: 0.313rem;
+  }
 `
 
 export const ForumPostReplyBtn = styled.button`

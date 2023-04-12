@@ -30,6 +30,7 @@ export const ForumPost = () => {
         userId: 99,
         userName: 'useruser',
         userAvatar: null,
+        emoji: null,
       },
       {
         id: '100',
@@ -39,6 +40,7 @@ export const ForumPost = () => {
         userId: 99,
         userName: 'useruser',
         userAvatar: null,
+        emoji: [{ name: 'robot', usersId: [2, 3, 4, 5, 6, 7, 8] }],
       },
       {
         id: '101',
@@ -48,6 +50,10 @@ export const ForumPost = () => {
         userId: 99,
         userName: 'useruser',
         userAvatar: null,
+        emoji: [
+          { name: 'poop', usersId: [1, 2, 3] },
+          { name: 'cat', usersId: [1] },
+        ],
       },
     ],
   }

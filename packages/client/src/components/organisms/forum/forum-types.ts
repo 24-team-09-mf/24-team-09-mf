@@ -31,6 +31,11 @@ export type ForumFormsProps = {
   message: string
 }
 
+export type ForumEmoji = {
+  name: string
+  usersId: number[]
+}
+
 export type ForumPostProps = {
   id: string
   text: string | ReactElement
@@ -39,6 +44,7 @@ export type ForumPostProps = {
   userId: number
   userName: string
   userAvatar: null | string
+  emoji: ForumEmoji[] | null
 }
 
 export type ForumEditorProps = {
