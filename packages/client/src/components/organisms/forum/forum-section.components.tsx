@@ -1,20 +1,13 @@
 import {
   CatalogBlock,
-  FormSeparator,
   SectionRowContent,
   SectionRowContentTitle,
   SectionRowMessagesCount,
   SectionRowLastMessage,
-  FormInput,
-  FormTextarea,
-  FormButtonWrapper,
 } from '@/components/templates/forum/forum.styles'
 import { ForumSectionProps } from './forum-types'
-import { Button } from '@/components'
-import useSectionForm from './forum-logic'
 import dateParse from '@/utils/dateParse'
 import { H2 } from '@/global-styles'
-import { useRef } from 'react'
 
 export const ForumSectionTitle = ({ title }: { title: string }) => {
   return <H2>{title}</H2>
@@ -42,54 +35,5 @@ export const ForumSectionTopics = ({ data }: { data: ForumSectionProps[] }) => {
         <ForumSectionTopicsElement key={el.id} {...el} />
       ))}
     </>
-  )
-}
-
-export const ForumSectionForm = ({ id }: { id: string }) => {
-  const {
-    register,
-    onSubmitHandler,
-    handleSubmit,
-    isValid,
-    setValue,
-    getValues,
-  } = useSectionForm(id)
-  const messageRef = useRef(null)
-  const messageClear = () => {
-    ;(messageRef!.current! as HTMLDivElement).innerHTML = ''
-  }
-
-  return (
-    <form onSubmit={handleSubmit(onSubmitHandler)}>
-      <FormSeparator />
-      <H2 marginBottom="30px">Добавить тему</H2>
-      <FormInput
-        {...register('title', { required: true })}
-        placeholder="Заголовок темы"
-      />
-      <FormTextarea
-        {...register('message', { required: true })}
-        suppressContentEditableWarning={true}
-        onInput={e => {
-          setValue('message', e.currentTarget.innerHTML, {
-            shouldValidate: true,
-          })
-        }}
-        contentEditable="true"
-        ref={messageRef}
-        placeholder="Сообщение..."
-      />
-      <FormButtonWrapper>
-        <Button
-          as="button"
-          type="submit"
-          color="#579945"
-          variant="contained"
-          onClick={() => messageClear()}
-          disabled={!isValid}>
-          Отправить
-        </Button>
-      </FormButtonWrapper>
-    </form>
   )
 }

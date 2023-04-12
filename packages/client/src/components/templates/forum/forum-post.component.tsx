@@ -1,6 +1,6 @@
 import {
+  ForumEditor,
   ForumPosts,
-  ForumPostsForm,
   ForumSectionTitle,
 } from '@/components/organisms/forum'
 import { Navigate, useParams } from 'react-router-dom'
@@ -58,7 +58,7 @@ export const ForumPost = () => {
         <H1>ФОРУМ</H1>
         <ForumSectionTitle title={demoData.title} />
         <ForumPosts data={demoData.posts} />
-        <ForumPostsForm />
+        <ForumEditor title="Написать сообщение" />
       </Wrapper>
     </Container>
   )

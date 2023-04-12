@@ -8,7 +8,6 @@ const useSectionForm = (id: string, postPageId?: string) => {
     formState: { errors, isValid },
     reset,
     setValue,
-    getValues,
   } = useForm<any>({
     mode: 'onBlur',
   })
@@ -32,7 +31,6 @@ const useSectionForm = (id: string, postPageId?: string) => {
     errors,
     isValid,
     setValue,
-    getValues,
   }
 }
 

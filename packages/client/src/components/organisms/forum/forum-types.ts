@@ -40,3 +40,9 @@ export type ForumPostProps = {
   userName: string
   userAvatar: null | string
 }
+
+export type ForumEditorProps = {
+  title: string
+  titleInput?: string | null
+  replyMessage?: ReactElement
+}

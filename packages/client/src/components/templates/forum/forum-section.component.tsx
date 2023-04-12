@@ -6,7 +6,7 @@ import {
 } from './forum.styles'
 import { Navigate, useParams } from 'react-router-dom'
 import {
-  ForumSectionForm,
+  ForumEditor,
   ForumSectionTitle,
   ForumSectionTopics,
 } from '@/components/organisms/forum'
@@ -67,7 +67,7 @@ export const ForumSection = () => {
           <SectionRowLastMessage>Последнее сообщение</SectionRowLastMessage>
         </CatalogTop>
         <ForumSectionTopics data={demoData.topics} />
-        <ForumSectionForm id={id} />
+        <ForumEditor title="Добавить тему" titleInput="Заголовок темы" />
       </Wrapper>
     </Container>
   )
