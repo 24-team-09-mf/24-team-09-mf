@@ -3,10 +3,12 @@ import { Sprite } from '@/components/organisms/game/game-view/models/Sprite'
 import { HEIGHT_VIEW } from '@/components/organisms/game/game.constants'
 import { CollisionBlock } from '@/components/organisms/game/game-view/models/CollisionBlock'
 import { Coin } from '@/components/organisms/game/game-view/models/Coin'
+import { Enemy } from '@/components/organisms/game/game-view/models/Enemy'
 
 type Props = SpriteModel & {
   collisionBlocks: CollisionBlock[]
   coins: Coin[]
+  enemies: Enemy[]
   onGameOver: () => void
 }
 export class Player extends Sprite {
@@ -17,6 +19,7 @@ export class Player extends Sprite {
   gravity = 0.6
   collisionBlocks: CollisionBlock[] = []
   coins: Coin[] = []
+  enemies: Enemy[] = []
 
   constructor({
     position,
@@ -24,6 +27,7 @@ export class Player extends Sprite {
     dimensions,
     collisionBlocks,
     coins,
+    enemies,
     onGameOver,
   }: Props) {
     super({ position, model, dimensions })
@@ -32,6 +36,7 @@ export class Player extends Sprite {
     this.dimensions = dimensions
     this.collisionBlocks = collisionBlocks
     this.coins = coins
+    this.enemies = enemies
     this.gameOver = onGameOver
   }
 
@@ -45,6 +50,7 @@ export class Player extends Sprite {
     this.position.y += this.velocity.y
     this.checkVerticalCollision()
     this.checkCoinCollision()
+    this.checkEnemiesCollision()
     if (
       this.position.y + this.dimensions.height + this.velocity.y >
       HEIGHT_VIEW
@@ -54,13 +60,42 @@ export class Player extends Sprite {
     this.draw()
   }
 
+  checkEnemiesCollision() {
+    for (let i = 0; i < this.enemies.length; i++) {
+      const enemy = this.enemies[i]
+      if (enemy.shouldDraw) {
+        if (
+          this.position.x <= enemy.position.x + enemy.dimensions.width &&
+          this.position.x + this.dimensions.width >= enemy.position.x &&
+          enemy.position.y - (this.position.y + this.dimensions.height) <=
+            0.5 &&
+          enemy.position.y - (this.position.y + this.dimensions.height) > -0.3
+        ) {
+          enemy.destroyEnemy()
+          return
+        }
+
+        if (
+          this.position.x <=
+          enemy.position.x + enemy.dimensions.width &&
+          this.position.x + this.dimensions.width >= enemy.position.x &&
+          this.position.y + this.dimensions.height > enemy.position.y &&
+          this.position.y + this.dimensions.height <= enemy.position.y + enemy.dimensions.height
+        ) {
+          this.gameOver()
+          break;
+        }
+      }
+    }
+  }
+
   checkCoinCollision() {
     for (let i = 0; i < this.coins.length; i++) {
       const coin = this.coins[i]
       if (this.checkCollision(coin)) {
         if (coin.shouldDraw) {
           coin.getCoin()
-          break;
+          break
         }
       }
     }
@@ -88,14 +123,12 @@ export class Player extends Sprite {
     for (let i = 0; i < this.collisionBlocks.length; i++) {
       const collisionBlock = this.collisionBlocks[i]
       if (this.checkCollision(collisionBlock)) {
-        // столкновение по оси Х идущей влево
         if (this.velocity.y < 0) {
           this.velocity.y = 0
           this.position.y =
             collisionBlock.position.y + collisionBlock.dimensions.height + 0.03
           break
         }
-        // столкновение по оси Х идущей вправо
         if (this.velocity.y > 0) {
           this.velocity.y = 0
           this.position.y =

@@ -15,6 +15,7 @@ import {
   useStartFinishCollisionBlocks
 } from '@/components/organisms/game/game-view/logics/use-start-finish-collisions-block'
 import { useCoins } from '@/components/organisms/game/game-view/logics/use-coins'
+import { useEnemies } from '@/components/organisms/game/game-view/logics/use-enemies'
 
 type Props = {
   gameModel: GameModel
@@ -29,9 +30,25 @@ export const useGameProcess = ({
   onGameOver,
 }: Props) => {
   const keys = useKeysHandlers()
+  // game block start
   const collisionBlocks = useCollisionsBlock({ gameModel })
   const startFinishCollisionBlocks = useStartFinishCollisionBlocks({ gameModel })
   const coins = useCoins({ gameModel });
+  const [ enemies, enemiesCollisionBlocks ] = useEnemies({ gameModel })
+
+  const drawPlayer = usePlayer({
+    gameModel,
+    keys,
+    collisionBlocks,
+    onGameOver,
+    startFinishCollisionBlocks,
+    coins,
+    enemies,
+    enemiesCollisionBlocks
+  })
+  // game block end
+
+
   const gameBackground = useSprite({
     gameModel,
     position: {
@@ -45,14 +62,6 @@ export const useGameProcess = ({
     color: '#000',
   })
 
-  const drawPlayer = usePlayer({
-    gameModel,
-    keys,
-    collisionBlocks,
-    onGameOver,
-    startFinishCollisionBlocks,
-    coins,
-  })
 
   useEffect(() => {
     let requestId: number | null = null
@@ -69,6 +78,8 @@ export const useGameProcess = ({
         coins.forEach(block => block.draw())
         collisionBlocks.forEach(block => block.draw())
         startFinishCollisionBlocks.forEach(block => block.draw())
+        enemies.forEach(enemy => enemy.update())
+        enemiesCollisionBlocks.forEach(block => block.draw())
         drawPlayer()
       }
     }
@@ -81,7 +92,7 @@ export const useGameProcess = ({
         window.cancelAnimationFrame(requestId)
       }
     }
-  }, [gameModel, isStartedGame, isEndedGame, drawPlayer, collisionBlocks, coins, startFinishCollisionBlocks])
+  }, [gameModel, isStartedGame, isEndedGame, drawPlayer, collisionBlocks, coins, startFinishCollisionBlocks, enemies])
 
   if (!gameModel) return null
 }

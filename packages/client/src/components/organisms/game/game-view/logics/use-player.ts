@@ -13,12 +13,15 @@ import {
   RIGHT_VIEW_BOX_BORDER,
   SPEED
 } from '@/components/organisms/game/game.constants'
+import { Enemy } from '@/components/organisms/game/game-view/models/Enemy'
 
 type Props = {
   gameModel: GameModel
   keys: ReturnType<typeof useKeysHandlers>
   collisionBlocks: CollisionBlock[]
   startFinishCollisionBlocks: CollisionBlock[]
+  enemies: Enemy[]
+  enemiesCollisionBlocks: CollisionBlock[]
   coins: Coin[]
   onGameOver(): void
 }
@@ -48,6 +51,8 @@ export const usePlayer = ({
   onGameOver,
   startFinishCollisionBlocks,
   coins,
+  enemies,
+  enemiesCollisionBlocks,
 }: Props) => {
   const [jumpTime, setJumpTime] = useState(0)
 
@@ -58,6 +63,7 @@ export const usePlayer = ({
         dimensions: { width: 30, height: 50 },
         model: gameModel,
         collisionBlocks,
+        enemies,
         coins,
         onGameOver,
       })
@@ -103,6 +109,8 @@ export const usePlayer = ({
               block => (block.position.x -= SPEED)
             )
             coins.forEach(block => (block.position.x -= SPEED))
+            enemies.forEach(enemy => enemy.position.x -= SPEED)
+            enemiesCollisionBlocks.forEach(block => block.position.x -= SPEED)
           }
         } else if (keys.pressedA) {
           if (!checkNextPosition(player, collisionBlocks, SPEED)) {
@@ -111,6 +119,8 @@ export const usePlayer = ({
               block => (block.position.x += SPEED)
             )
             coins.forEach(block => (block.position.x += SPEED))
+            enemies.forEach(enemy => enemy.position.x += SPEED)
+            enemiesCollisionBlocks.forEach(block => block.position.x += SPEED)
           }
         }
       }
