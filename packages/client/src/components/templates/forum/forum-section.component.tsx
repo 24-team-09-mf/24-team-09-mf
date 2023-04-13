@@ -13,6 +13,7 @@ import {
 
 import Container from '@/components/layouts/container/container.component'
 import { H1 } from '@/global-styles'
+import { forumSectionDemo } from '@/mocks'
 
 export const ForumSection = () => {
   const { id } = useParams()
@@ -22,51 +23,19 @@ export const ForumSection = () => {
     return <Navigate to="/404" replace />
   }
 
-  const demoData = {
-    title: 'Сообщество',
-    topics: [
-      {
-        id: '55',
-        parentId: '1',
-        title: 'Предложения по улучшению игры',
-        postCount: 33,
-        userId: 99,
-        lastTopic: {
-          id: '101',
-          date: 1681213333000,
-          title: 'Предложения по улучшению игры',
-          userId: 99,
-          userName: 'useruser',
-        },
-      },
-      {
-        id: '56',
-        parentId: '1',
-        title: 'Предложения по улучшению игры 22222',
-        postCount: 44,
-        userId: 99,
-        lastTopic: {
-          id: '101',
-          date: 1682213533000,
-          title: 'Предложения по улучшению игры',
-          userId: 99,
-          userName: 'useruser',
-        },
-      },
-    ],
-  }
+  const data = forumSectionDemo
 
   return (
     <Container>
       <Wrapper>
         <H1>ФОРУМ</H1>
-        <ForumSectionTitle title={demoData.title} />
+        <ForumSectionTitle title={data.title} />
         <CatalogTop>
           <SectionRowMessagesCount>Сообщений</SectionRowMessagesCount>
           <SectionRowMessagesCount>Автор</SectionRowMessagesCount>
           <SectionRowLastMessage>Последнее сообщение</SectionRowLastMessage>
         </CatalogTop>
-        <ForumSectionTopics data={demoData.topics} />
+        <ForumSectionTopics data={data.topics} />
         <ForumEditor title="Добавить тему" titleInput="Заголовок темы" />
       </Wrapper>
     </Container>

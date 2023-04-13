@@ -8,37 +8,11 @@ import { ForumStartTopics } from '@/components/organisms/forum'
 
 import Container from '@/components/layouts/container/container.component'
 import { H1 } from '@/global-styles'
+import { forumStartDemo } from '@/mocks'
 
 export const Forum = () => {
   // TODO: Поменять, демо
-  const demoData = [
-    {
-      id: '1',
-      title: 'Сообщество',
-      text: 'Обсуждение игры',
-      topicsCount: 12,
-      lastTopic: {
-        id: '55',
-        date: 1681213333000,
-        title: 'Предложения по улучшению игры',
-        userId: 99,
-        userName: 'useruser',
-      },
-    },
-    {
-      id: '2',
-      title: 'Поддержка',
-      text: 'Возникли затруднения с установкой игры, игровым процессом или учетной записью? Приглашаем на форум службы поддержки.',
-      topicsCount: 12,
-      lastTopic: {
-        id: '55',
-        date: 1682213533000,
-        title: 'Предложения по улучшению игры',
-        userId: 99,
-        userName: 'useruser',
-      },
-    },
-  ]
+  const data = forumStartDemo
 
   return (
     <Container>
@@ -48,7 +22,7 @@ export const Forum = () => {
           <CatalogRowThreadsCount>Тем</CatalogRowThreadsCount>
           <CatalogRowLastMessage>Последнее сообщение</CatalogRowLastMessage>
         </CatalogTop>
-        <ForumStartTopics data={demoData} />
+        <ForumStartTopics data={data} />
       </Wrapper>
     </Container>
   )
