@@ -14,6 +14,7 @@ import { useCollisionsBlock } from '@/components/organisms/game/game-view/logics
 import {
   useStartFinishCollisionBlocks
 } from '@/components/organisms/game/game-view/logics/use-start-finish-collisions-block'
+import { useCoins } from '@/components/organisms/game/game-view/logics/use-coins'
 
 type Props = {
   gameModel: GameModel
@@ -30,6 +31,7 @@ export const useGameProcess = ({
   const keys = useKeysHandlers()
   const collisionBlocks = useCollisionsBlock({ gameModel })
   const startFinishCollisionBlocks = useStartFinishCollisionBlocks({ gameModel })
+  const coins = useCoins({ gameModel });
   const gameBackground = useSprite({
     gameModel,
     position: {
@@ -48,7 +50,8 @@ export const useGameProcess = ({
     keys,
     collisionBlocks,
     onGameOver,
-    startFinishCollisionBlocks
+    startFinishCollisionBlocks,
+    coins,
   })
 
   useEffect(() => {
@@ -63,6 +66,7 @@ export const useGameProcess = ({
         console.log('draw start image')
       } else {
         gameBackground.draw()
+        coins.forEach(block => block.draw())
         collisionBlocks.forEach(block => block.draw())
         startFinishCollisionBlocks.forEach(block => block.draw())
         drawPlayer()
@@ -77,7 +81,7 @@ export const useGameProcess = ({
         window.cancelAnimationFrame(requestId)
       }
     }
-  }, [gameModel, isStartedGame, isEndedGame, drawPlayer, collisionBlocks])
+  }, [gameModel, isStartedGame, isEndedGame, drawPlayer, collisionBlocks, coins, startFinishCollisionBlocks])
 
   if (!gameModel) return null
 }

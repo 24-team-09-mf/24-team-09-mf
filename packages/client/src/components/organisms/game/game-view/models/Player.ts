@@ -2,9 +2,11 @@ import { SpriteModel } from '@/components/organisms/game/game-view/game-view.typ
 import { Sprite } from '@/components/organisms/game/game-view/models/Sprite'
 import { HEIGHT_VIEW } from '@/components/organisms/game/game.constants'
 import { CollisionBlock } from '@/components/organisms/game/game-view/models/CollisionBlock'
+import { Coin } from '@/components/organisms/game/game-view/models/Coin'
 
 type Props = SpriteModel & {
   collisionBlocks: CollisionBlock[]
+  coins: Coin[]
   onGameOver: () => void
 }
 export class Player extends Sprite {
@@ -14,12 +16,14 @@ export class Player extends Sprite {
   }
   gravity = 0.6
   collisionBlocks: CollisionBlock[] = []
+  coins: Coin[] = []
 
   constructor({
     position,
     model,
     dimensions,
     collisionBlocks,
+    coins,
     onGameOver,
   }: Props) {
     super({ position, model, dimensions })
@@ -27,6 +31,7 @@ export class Player extends Sprite {
     this.model = model
     this.dimensions = dimensions
     this.collisionBlocks = collisionBlocks
+    this.coins = coins
     this.gameOver = onGameOver
   }
 
@@ -39,6 +44,7 @@ export class Player extends Sprite {
     this.velocity.y += this.gravity
     this.position.y += this.velocity.y
     this.checkVerticalCollision()
+    this.checkCoinCollision()
     if (
       this.position.y + this.dimensions.height + this.velocity.y >
       HEIGHT_VIEW
@@ -46,6 +52,18 @@ export class Player extends Sprite {
       this.gameOver()
     }
     this.draw()
+  }
+
+  checkCoinCollision() {
+    for (let i = 0; i < this.coins.length; i++) {
+      const coin = this.coins[i]
+      if (this.checkCollision(coin)) {
+        if (coin.shouldDraw) {
+          coin.getCoin()
+          break;
+        }
+      }
+    }
   }
 
   checkHorizontalCollision() {
@@ -88,7 +106,7 @@ export class Player extends Sprite {
     }
   }
 
-  checkCollision(collisionBlock: CollisionBlock) {
+  checkCollision(collisionBlock: CollisionBlock | Coin) {
     return (
       this.position.x <=
         collisionBlock.position.x + collisionBlock.dimensions.width &&
