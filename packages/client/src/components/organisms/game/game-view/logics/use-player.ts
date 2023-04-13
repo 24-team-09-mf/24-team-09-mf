@@ -48,7 +48,7 @@ export const usePlayer = ({
       }
       player.update()
     }
-  }, [keys])
+  }, [keys, jumpTime])
 
   return update
 }
