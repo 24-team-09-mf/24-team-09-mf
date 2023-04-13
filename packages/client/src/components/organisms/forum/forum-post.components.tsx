@@ -33,6 +33,12 @@ const ForumPost = (el: ForumPostProps) => {
   const [replyOpen, setReplyOpen] = useState(false)
   const [emojiAdd, setEmojiAdd] = useState('none')
 
+  const onReplyHandler = () => setReplyOpen(prev => !prev)
+  const onsetEmojiHandler = () =>
+    setEmojiAdd(prev => (prev === 'none' ? 'block' : 'none'))
+  const onSetRateMinusHandler = () => setRate(prev => prev - 1)
+  const onSetRatePlusHandler = () => setRate(prev => prev + 1)
+
   return (
     <ForumPostBlock>
       <ForumPostBlockAvatar>
@@ -46,7 +52,7 @@ const ForumPost = (el: ForumPostProps) => {
         <ForumPostText dangerouslySetInnerHTML={{ __html: text as string }} />
         <ForumPostBottom>
           <div>
-            <ForumPostReplyBtn onClick={() => setReplyOpen(prev => !prev)}>
+            <ForumPostReplyBtn onClick={onReplyHandler}>
               Ответить
             </ForumPostReplyBtn>
           </div>
@@ -59,10 +65,7 @@ const ForumPost = (el: ForumPostProps) => {
                     <span>{el.usersId.length}</span>
                   </ForumEmojiElement>
                 ))}
-              <ForumEmojiAddBtn
-                onClick={() =>
-                  setEmojiAdd(prev => (prev === 'none' ? 'block' : 'none'))
-                }>
+              <ForumEmojiAddBtn onClick={onsetEmojiHandler}>
                 <ForumEmojiAddBlock display={emojiAdd}>
                   {Object.keys(EMOJI).map(el => (
                     <ForumEmojiAddElement key={el}>
@@ -73,11 +76,11 @@ const ForumPost = (el: ForumPostProps) => {
                 <img src={IconEmojiAdd} alt="Добавить эмоцию" />
               </ForumEmojiAddBtn>
             </ForumEmoji>
-            <ForumPostRateButton onClick={() => setRate(prev => prev - 1)}>
+            <ForumPostRateButton onClick={onSetRateMinusHandler}>
               <img src={IconRateMinus} alt="Не нравится" />
             </ForumPostRateButton>
             <ForumPostRateText>{rate}</ForumPostRateText>
-            <ForumPostRateButton onClick={() => setRate(prev => prev + 1)}>
+            <ForumPostRateButton onClick={onSetRatePlusHandler}>
               <img src={IconRatePlus} alt="Нравится" />
             </ForumPostRateButton>
           </ForumPostRate>

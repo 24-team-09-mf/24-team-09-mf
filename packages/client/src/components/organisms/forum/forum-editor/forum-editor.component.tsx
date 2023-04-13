@@ -30,10 +30,14 @@ export const ForumEditor = ({
     ;(messageRef!.current! as HTMLDivElement).innerHTML = ''
   }
 
+  // TODO Deprecated, но пока замены нет
+  const onBoldHandler = () => document.execCommand('bold')
+  const onItalicHandler = () => document.execCommand('italic')
+
   return (
     <form onSubmit={handleSubmit(onSubmitHandler)}>
       <FormSeparator />
-      <H2 marginBottom="30px">{title}</H2>
+      <H2>{title}</H2>
       {titleInput && (
         <FormInput
           {...register('title', { required: true })}
@@ -42,11 +46,10 @@ export const ForumEditor = ({
       )}
       <FormTextareaWrapper>
         <FormTextareaButtons>
-          {/*TODO Deprecated, но пока замены нет*/}
-          <FormTextareaButton onClick={() => document.execCommand('bold')}>
+          <FormTextareaButton onClick={onBoldHandler}>
             <img src={IconBold} alt="Жирный" />
           </FormTextareaButton>
-          <FormTextareaButton onClick={() => document.execCommand('italic')}>
+          <FormTextareaButton onClick={onItalicHandler}>
             <img src={IconItalic} alt="Курсив" />
           </FormTextareaButton>
         </FormTextareaButtons>
@@ -76,7 +79,7 @@ export const ForumEditor = ({
           type="submit"
           color="#579945"
           variant="contained"
-          onClick={() => messageClear()}
+          onClick={messageClear}
           disabled={!isValid}>
           Отправить
         </Button>
