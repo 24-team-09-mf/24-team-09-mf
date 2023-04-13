@@ -34,14 +34,12 @@ export const ForumEditor = ({
     <form onSubmit={handleSubmit(onSubmitHandler)}>
       <FormSeparator />
       <H2 marginBottom="30px">{title}</H2>
-
       {titleInput && (
         <FormInput
           {...register('title', { required: true })}
           placeholder={titleInput}
         />
       )}
-
       <FormTextareaWrapper>
         <FormTextareaButtons>
           {/*TODO Deprecated, но пока замены нет*/}
@@ -52,7 +50,6 @@ export const ForumEditor = ({
             <img src={IconItalic} alt="Курсив" />
           </FormTextareaButton>
         </FormTextareaButtons>
-
         <FormTextarea
           {...register('message', { required: true })}
           suppressContentEditableWarning={true}
@@ -73,7 +70,6 @@ export const ForumEditor = ({
           )}
         </FormTextarea>
       </FormTextareaWrapper>
-
       <FormButtonWrapper>
         <Button
           as="button"

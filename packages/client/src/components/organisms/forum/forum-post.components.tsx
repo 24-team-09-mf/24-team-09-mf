@@ -38,22 +38,18 @@ const ForumPost = (el: ForumPostProps) => {
       <ForumPostBlockAvatar>
         <img src={userAvatar ? userAvatar : avatarDefault} alt={userName} />
       </ForumPostBlockAvatar>
-
       <ForumPostContent>
         <ForumPostTop>
           <ForumPostUserName>{userName}</ForumPostUserName>
           <ForumPostDate>{dateParse(date)}</ForumPostDate>
         </ForumPostTop>
-
         <ForumPostText dangerouslySetInnerHTML={{ __html: text as string }} />
-
         <ForumPostBottom>
           <div>
             <ForumPostReplyBtn onClick={() => setReplyOpen(prev => !prev)}>
               Ответить
             </ForumPostReplyBtn>
           </div>
-
           <ForumPostRate>
             <ForumEmoji>
               {emoji &&
@@ -63,7 +59,6 @@ const ForumPost = (el: ForumPostProps) => {
                     <span>{el.usersId.length}</span>
                   </ForumEmojiElement>
                 ))}
-
               <ForumEmojiAddBtn
                 onClick={() =>
                   setEmojiAdd(prev => (prev === 'none' ? 'block' : 'none'))
@@ -78,7 +73,6 @@ const ForumPost = (el: ForumPostProps) => {
                 <img src={IconEmojiAdd} alt="Добавить эмоцию" />
               </ForumEmojiAddBtn>
             </ForumEmoji>
-
             <ForumPostRateButton onClick={() => setRate(prev => prev - 1)}>
               <img src={IconRateMinus} alt="Не нравится" />
             </ForumPostRateButton>
@@ -88,7 +82,6 @@ const ForumPost = (el: ForumPostProps) => {
             </ForumPostRateButton>
           </ForumPostRate>
         </ForumPostBottom>
-
         {replyOpen && (
           <ForumEditor
             title="Ответить на сообщение"
