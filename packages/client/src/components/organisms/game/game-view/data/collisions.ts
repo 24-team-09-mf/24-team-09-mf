@@ -1,4 +1,6 @@
 // массив чисел, в котором отображается позиция блоков коллизии
+import { parse2D } from '@/utils/parse2D'
+
 const collisionsData = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -25,13 +27,4 @@ const collisionsData = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   0, 0, 0, 0, 0, 0, 0, 0,
 ]
-
-const parse2D = (data: number[]) => {
-  const rows: number[][] = []
-  for (let i = 0; i < data.length; i += 32) {
-    rows.push(data.slice(i, i + 32))
-  }
-  return rows
-}
-
-export const parsedCollisions = parse2D(collisionsData)
+export const parsedCollisions = parse2D(collisionsData, 32)
