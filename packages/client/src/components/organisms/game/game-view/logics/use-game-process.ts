@@ -77,7 +77,6 @@ export const useGameProcess = ({
         collisionBlocks.forEach(block => block.draw())
         startFinishCollisionBlocks.forEach(block => block.draw())
         enemies.forEach(enemy => enemy.update())
-        enemiesCollisionBlocks.forEach(block => block.draw())
         drawPlayer()
       }
     }

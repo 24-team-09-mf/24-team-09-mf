@@ -29,7 +29,6 @@ export const useEnemies = ({
                 model: gameModel,
                 dimensions: { width: BLOCK_SIZE, height: BLOCK_SIZE },
                 position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE },
-                color: 'rgba(249, 210, 5, 0.5)',
               })
             )
           }

@@ -2,8 +2,7 @@ import { Sprite } from '@/components/organisms/game/game-view/models/Sprite'
 import { SpriteModel } from '@/components/organisms/game/game-view/game-view.types'
 
 export class Coin extends Sprite {
-  //TODO вернуть обратно
-  shouldDraw = false
+  shouldDraw = true
   constructor(props: SpriteModel) {
     super(props)
   }
