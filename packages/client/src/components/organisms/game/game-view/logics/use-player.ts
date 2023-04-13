@@ -1,5 +1,5 @@
 import { GameModel } from '@/components/organisms/game/game-view/game-view.types'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { Player } from '@/components/organisms/game/game-view/models/Player'
 import { useKeysHandlers } from '@/components/organisms/game/game-view/logics/use-keys-handlers'
 import { CollisionBlock } from '@/components/organisms/game/game-view/models/CollisionBlock'
@@ -16,6 +16,8 @@ export const usePlayer = ({
   collisionBlocks,
   onGameOver,
 }: Props) => {
+  const [jumpTime, setJumpTime] = useState(0)
+
   const player = useMemo(() => {
     if (gameModel) {
       return new Player({
@@ -30,7 +32,14 @@ export const usePlayer = ({
 
   const update = useCallback(() => {
     if (player) {
-      if (player.velocity.y === 0 && keys.pressedW) player.velocity.y = -12
+      if (player.velocity.y === 0 && keys.pressedW && !jumpTime) {
+        player.velocity.y = -12
+        setJumpTime(performance.now())
+      }
+      if (jumpTime) {
+        const n = performance.now()
+        if (n - jumpTime > 300) setJumpTime(0)
+      }
       player.velocity.x = 0
       if (keys.pressedA) {
         player.velocity.x = -4

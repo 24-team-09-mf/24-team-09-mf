@@ -9,9 +9,11 @@ export const useKeysHandlers = () => {
   const handlerKeyDown = useCallback(({ key, repeat }: KeyboardEvent) => {
     if (KEY_A.includes(key)) {
       setPressedA(true)
+      setPressedW(false)
     }
     if (KEY_D.includes(key)) {
       setPressedD(true)
+      setPressedW(false)
     }
     if (KEY_W.includes(key)) {
       if (repeat) {
