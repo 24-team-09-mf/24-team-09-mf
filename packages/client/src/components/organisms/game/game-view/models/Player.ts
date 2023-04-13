@@ -76,14 +76,14 @@ export class Player extends Sprite {
         }
 
         if (
-          this.position.x <=
-          enemy.position.x + enemy.dimensions.width &&
+          this.position.x <= enemy.position.x + enemy.dimensions.width &&
           this.position.x + this.dimensions.width >= enemy.position.x &&
           this.position.y + this.dimensions.height > enemy.position.y &&
-          this.position.y + this.dimensions.height <= enemy.position.y + enemy.dimensions.height
+          this.position.y + this.dimensions.height <=
+            enemy.position.y + enemy.dimensions.height
         ) {
           this.gameOver()
-          break;
+          break
         }
       }
     }

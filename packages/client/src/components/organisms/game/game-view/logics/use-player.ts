@@ -11,7 +11,7 @@ import {
   JUMP,
   LEFT_VIEW_BOX_BORDER,
   RIGHT_VIEW_BOX_BORDER,
-  SPEED
+  SPEED,
 } from '@/components/organisms/game/game.constants'
 import { Enemy } from '@/components/organisms/game/game-view/models/Enemy'
 
@@ -109,8 +109,8 @@ export const usePlayer = ({
               block => (block.position.x -= SPEED)
             )
             coins.forEach(block => (block.position.x -= SPEED))
-            enemies.forEach(enemy => enemy.position.x -= SPEED)
-            enemiesCollisionBlocks.forEach(block => block.position.x -= SPEED)
+            enemies.forEach(enemy => (enemy.position.x -= SPEED))
+            enemiesCollisionBlocks.forEach(block => (block.position.x -= SPEED))
           }
         } else if (keys.pressedA) {
           if (!checkNextPosition(player, collisionBlocks, SPEED)) {
@@ -119,8 +119,8 @@ export const usePlayer = ({
               block => (block.position.x += SPEED)
             )
             coins.forEach(block => (block.position.x += SPEED))
-            enemies.forEach(enemy => enemy.position.x += SPEED)
-            enemiesCollisionBlocks.forEach(block => block.position.x += SPEED)
+            enemies.forEach(enemy => (enemy.position.x += SPEED))
+            enemiesCollisionBlocks.forEach(block => (block.position.x += SPEED))
           }
         }
       }

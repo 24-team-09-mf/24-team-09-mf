@@ -3,13 +3,13 @@ import { SpriteModel } from '@/components/organisms/game/game-view/game-view.typ
 
 export class Coin extends Sprite {
   //TODO вернуть обратно
-  shouldDraw = false;
+  shouldDraw = false
   constructor(props: SpriteModel) {
     super(props)
   }
 
   getCoin() {
-    this.shouldDraw = false;
+    this.shouldDraw = false
     console.log('get coin, you should update score on one')
   }
   draw() {
@@ -17,5 +17,4 @@ export class Coin extends Sprite {
       super.draw()
     }
   }
-
 }

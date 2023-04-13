@@ -28,14 +28,14 @@ export class Enemy extends Sprite {
   }
 
   destroyEnemy() {
-    this.shouldDraw = false;
+    this.shouldDraw = false
     console.log('destroy enemy')
   }
 
   update() {
     this.position.x += this.velocity.x
     this.checkHorizontalCollision()
-    this.draw();
+    this.draw()
   }
 
   checkHorizontalCollision() {
@@ -43,7 +43,7 @@ export class Enemy extends Sprite {
       const collisionBlock = this.collisionBlocks[i]
       if (this.checkCollision(collisionBlock)) {
         this.velocity.x = this.velocity.x * -1
-        break;
+        break
       }
     }
   }
@@ -51,12 +51,11 @@ export class Enemy extends Sprite {
   checkCollision(collisionBlock: CollisionBlock) {
     return (
       this.position.x <=
-      collisionBlock.position.x + collisionBlock.dimensions.width &&
+        collisionBlock.position.x + collisionBlock.dimensions.width &&
       this.position.x + this.dimensions.width >= collisionBlock.position.x &&
       this.position.y === collisionBlock.position.y - 0.03
     )
   }
-
 
   draw() {
     if (this.shouldDraw) super.draw()

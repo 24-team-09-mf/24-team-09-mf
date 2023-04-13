@@ -11,9 +11,7 @@ import {
 import { useKeysHandlers } from '@/components/organisms/game/game-view/logics/use-keys-handlers'
 import { usePlayer } from '@/components/organisms/game/game-view/logics/use-player'
 import { useCollisionsBlock } from '@/components/organisms/game/game-view/logics/use-collisions-block'
-import {
-  useStartFinishCollisionBlocks
-} from '@/components/organisms/game/game-view/logics/use-start-finish-collisions-block'
+import { useStartFinishCollisionBlocks } from '@/components/organisms/game/game-view/logics/use-start-finish-collisions-block'
 import { useCoins } from '@/components/organisms/game/game-view/logics/use-coins'
 import { useEnemies } from '@/components/organisms/game/game-view/logics/use-enemies'
 
@@ -32,9 +30,11 @@ export const useGameProcess = ({
   const keys = useKeysHandlers()
   // game block start
   const collisionBlocks = useCollisionsBlock({ gameModel })
-  const startFinishCollisionBlocks = useStartFinishCollisionBlocks({ gameModel })
-  const coins = useCoins({ gameModel });
-  const [ enemies, enemiesCollisionBlocks ] = useEnemies({ gameModel })
+  const startFinishCollisionBlocks = useStartFinishCollisionBlocks({
+    gameModel,
+  })
+  const coins = useCoins({ gameModel })
+  const [enemies, enemiesCollisionBlocks] = useEnemies({ gameModel })
 
   const drawPlayer = usePlayer({
     gameModel,
@@ -44,10 +44,9 @@ export const useGameProcess = ({
     startFinishCollisionBlocks,
     coins,
     enemies,
-    enemiesCollisionBlocks
+    enemiesCollisionBlocks,
   })
   // game block end
-
 
   const gameBackground = useSprite({
     gameModel,
@@ -61,7 +60,6 @@ export const useGameProcess = ({
     },
     color: '#000',
   })
-
 
   useEffect(() => {
     let requestId: number | null = null
@@ -92,7 +90,16 @@ export const useGameProcess = ({
         window.cancelAnimationFrame(requestId)
       }
     }
-  }, [gameModel, isStartedGame, isEndedGame, drawPlayer, collisionBlocks, coins, startFinishCollisionBlocks, enemies])
+  }, [
+    gameModel,
+    isStartedGame,
+    isEndedGame,
+    drawPlayer,
+    collisionBlocks,
+    coins,
+    startFinishCollisionBlocks,
+    enemies,
+  ])
 
   if (!gameModel) return null
 }

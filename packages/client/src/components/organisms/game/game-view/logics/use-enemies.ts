@@ -3,18 +3,23 @@ import { useMemo } from 'react'
 import { CollisionBlock } from '@/components/organisms/game/game-view/models/CollisionBlock'
 import {
   ENEMY_COLLISION_SYMBOL,
-  parsedEnemiesCollisionsLvl1
+  parsedEnemiesCollisionsLvl1,
 } from '@/components/organisms/game/game-view/data/enemiesCollisionsLvl1'
 import { BLOCK_SIZE } from '@/components/organisms/game/game.constants'
-import { ENEMY_SYMBOL, parseEnemiesLvl1 } from '@/components/organisms/game/game-view/data/enemiesLvl1'
+import {
+  ENEMY_SYMBOL,
+  parseEnemiesLvl1,
+} from '@/components/organisms/game/game-view/data/enemiesLvl1'
 import { Enemy } from '@/components/organisms/game/game-view/models/Enemy'
 
 type Props = {
   gameModel: GameModel
 }
-export const useEnemies = ({ gameModel }: Props): [Enemy[], CollisionBlock[]] => {
+export const useEnemies = ({
+  gameModel,
+}: Props): [Enemy[], CollisionBlock[]] => {
   const collisions = useMemo(() => {
-    const result: CollisionBlock[] = [];
+    const result: CollisionBlock[] = []
     if (gameModel) {
       parsedEnemiesCollisionsLvl1.forEach((row, y) => {
         row.forEach((symbol, x) => {
@@ -32,7 +37,7 @@ export const useEnemies = ({ gameModel }: Props): [Enemy[], CollisionBlock[]] =>
       })
     }
     return result
-  }, [gameModel]);
+  }, [gameModel])
 
   const enemies = useMemo(() => {
     const result: Enemy[] = []
@@ -47,7 +52,7 @@ export const useEnemies = ({ gameModel }: Props): [Enemy[], CollisionBlock[]] =>
                 position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE - 0.03 },
                 color: '#f105fa',
                 collisionBlocks: collisions,
-                startVelocity: x % 2 === 0 ? -2 : 2
+                startVelocity: x % 2 === 0 ? -2 : 2,
               })
             )
           }
@@ -55,7 +60,7 @@ export const useEnemies = ({ gameModel }: Props): [Enemy[], CollisionBlock[]] =>
       })
     }
     return result
-  }, [gameModel, collisions]);
+  }, [gameModel, collisions])
 
-  return [ enemies, collisions ]
+  return [enemies, collisions]
 }

@@ -22,12 +22,16 @@ export const useSprite = ({
   dimensions,
   color,
 }: Props) => {
-  const backgorund = useMemo(() => new Sprite({
-    model: gameModel,
-    position,
-    dimensions,
-    color
-  }), [gameModel]);
+  const backgorund = useMemo(
+    () =>
+      new Sprite({
+        model: gameModel,
+        position,
+        dimensions,
+        color,
+      }),
+    [gameModel]
+  )
 
   return backgorund
 }
