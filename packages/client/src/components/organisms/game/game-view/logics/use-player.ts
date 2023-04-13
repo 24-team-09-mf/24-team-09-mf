@@ -37,8 +37,7 @@ export const usePlayer = ({
         setJumpTime(performance.now())
       }
       if (jumpTime) {
-        const n = performance.now()
-        if (n - jumpTime > 300) setJumpTime(0)
+        if (performance.now() - jumpTime > 300) setJumpTime(0)
       }
       player.velocity.x = 0
       if (keys.pressedA) {
