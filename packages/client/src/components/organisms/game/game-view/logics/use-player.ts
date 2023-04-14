@@ -3,12 +3,23 @@ import { useCallback, useMemo, useState } from 'react'
 import { Player } from '@/components/organisms/game/game-view/models/Player'
 import { useKeysHandlers } from '@/components/organisms/game/game-view/logics/use-keys-handlers'
 import { CollisionBlock } from '@/components/organisms/game/game-view/models/CollisionBlock'
+import { Coin } from '@/components/organisms/game/game-view/models/Coin'
+import {
+  BLOCK_SIZE,
+  BORDER_LEFT,
+  BORDER_RIGHT,
+  JUMP,
+  LEFT_VIEW_BOX_BORDER,
+  RIGHT_VIEW_BOX_BORDER,
+  SPEED
+} from '@/components/organisms/game/game.constants'
 
 type Props = {
   gameModel: GameModel
   keys: ReturnType<typeof useKeysHandlers>
   collisionBlocks: CollisionBlock[]
   startFinishCollisionBlocks: CollisionBlock[]
+  coins: Coin[]
   onGameOver(): void
 }
 
@@ -36,26 +47,28 @@ export const usePlayer = ({
   collisionBlocks,
   onGameOver,
   startFinishCollisionBlocks,
+  coins,
 }: Props) => {
   const [jumpTime, setJumpTime] = useState(0)
 
   const player = useMemo(() => {
     if (gameModel) {
       return new Player({
-        position: { x: 0, y: 32 * 12 },
+        position: { x: 0, y: BLOCK_SIZE * 12 },
         dimensions: { width: 30, height: 50 },
         model: gameModel,
         collisionBlocks,
+        coins,
         onGameOver,
       })
     }
   }, [gameModel])
 
-  const update = useCallback(() => {
+  return useCallback(() => {
     if (player) {
       // прыжок
       if (player.velocity.y === 0 && keys.pressedW && !jumpTime) {
-        player.velocity.y = -12
+        player.velocity.y = -JUMP
         setJumpTime(performance.now())
       }
       if (jumpTime) {
@@ -66,36 +79,42 @@ export const usePlayer = ({
 
       if (
         keys.pressedA &&
-        (player.position.x > 300 ||
-          startFinishCollisionBlocks.some(block => block.position.x === 0))
-      ) {
-        player.velocity.x = -4
-      } else if (
-        keys.pressedD &&
-        (player.position.x < 600 ||
+        (player.position.x > LEFT_VIEW_BOX_BORDER ||
           startFinishCollisionBlocks.some(
-            block => block.dimensions.width + block.position.x === 1024
+            block => block.position.x === BORDER_LEFT
           ))
       ) {
-        player.velocity.x = 4
+        player.velocity.x = -SPEED
+      } else if (
+        keys.pressedD &&
+        (player.position.x < RIGHT_VIEW_BOX_BORDER ||
+          startFinishCollisionBlocks.some(
+            block => block.dimensions.width + block.position.x === BORDER_RIGHT
+          ))
+      ) {
+        player.velocity.x = SPEED
       } else {
         /** Тут нужно дописать кастомную логику для передвижения cropbox-а у картинка бэкграунда */
         // движение платформ
         if (keys.pressedD) {
-          if (!checkNextPosition(player, collisionBlocks, -4)) {
-            collisionBlocks.forEach(block => (block.position.x -= 4))
-            startFinishCollisionBlocks.forEach(block => (block.position.x -= 4))
+          if (!checkNextPosition(player, collisionBlocks, -SPEED)) {
+            collisionBlocks.forEach(block => (block.position.x -= SPEED))
+            startFinishCollisionBlocks.forEach(
+              block => (block.position.x -= SPEED)
+            )
+            coins.forEach(block => (block.position.x -= SPEED))
           }
         } else if (keys.pressedA) {
-          if (!checkNextPosition(player, collisionBlocks, 4)) {
-            collisionBlocks.forEach(block => (block.position.x += 4))
-            startFinishCollisionBlocks.forEach(block => (block.position.x += 4))
+          if (!checkNextPosition(player, collisionBlocks, SPEED)) {
+            collisionBlocks.forEach(block => (block.position.x += SPEED))
+            startFinishCollisionBlocks.forEach(
+              block => (block.position.x += SPEED)
+            )
+            coins.forEach(block => (block.position.x += SPEED))
           }
         }
       }
       player.update()
     }
   }, [keys, jumpTime])
-
-  return update
 }
