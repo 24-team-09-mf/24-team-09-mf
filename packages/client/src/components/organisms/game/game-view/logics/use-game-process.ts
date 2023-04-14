@@ -91,8 +91,8 @@ export const useGameProcess = ({
         collisionBlocks.forEach(block => block.draw())
         startFinishCollisionBlocks.forEach(block => block.draw())
         enemies.forEach(enemy => enemy.update())
-        drawPlayer()
         collisionBlocks.forEach(block => block.draw())
+        drawPlayer()
       }
     }
     function start() {
