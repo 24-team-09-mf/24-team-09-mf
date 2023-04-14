@@ -28,7 +28,7 @@ export const useEnemies = ({
               new CollisionBlock({
                 model: gameModel,
                 dimensions: { width: BLOCK_SIZE, height: BLOCK_SIZE },
-                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE },
+                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE - 8 },
               })
             )
           }
@@ -47,11 +47,23 @@ export const useEnemies = ({
             result.push(
               new Enemy({
                 model: gameModel,
-                dimensions: { width: BLOCK_SIZE, height: BLOCK_SIZE },
-                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE - 0.03 },
-                color: '#f105fa',
+                frameRate: 8,
+                imageSrc: '/assets/sprites/cat/runLeft.png',
+                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE - 8 },
                 collisionBlocks: collisions,
-                startVelocity: x % 2 === 0 ? -2 : 2,
+                startVelocity: x % 2 === 0 ? - 2 : 2,
+                animations: {
+                  runRight: {
+                    frameRate: 8,
+                    frameBuffer: 13,
+                    imageSrc: '/assets/sprites/cat/run.png'
+                  },
+                  runLeft: {
+                    frameRate: 8,
+                    frameBuffer: 13,
+                    imageSrc: '/assets/sprites/cat/runLeft.png'
+                  }
+                }
               })
             )
           }

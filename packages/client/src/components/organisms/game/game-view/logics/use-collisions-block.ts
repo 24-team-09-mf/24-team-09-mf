@@ -7,6 +7,7 @@ import {
   parsedCollisionLvl1,
 } from '@/components/organisms/game/game-view/data/collisionsLvl1'
 
+
 type Props = {
   gameModel: GameModel
 }
@@ -17,14 +18,11 @@ export const useCollisionsBlock = ({ gameModel }: Props) => {
       parsedCollisionLvl1.forEach((row, y) => {
         row.forEach((symbol, x) => {
           if (symbol === COLLISION_SYMBOL) {
-            result.push(
-              new CollisionBlock({
-                model: gameModel,
-                dimensions: { width: BLOCK_SIZE, height: BLOCK_SIZE },
-                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE },
-                color: 'blue',
-              })
-            )
+            result.push(new CollisionBlock({
+              model: gameModel,
+              position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE },
+              imageSrc: '/assets/grass.png',
+            }))
           }
         })
       })

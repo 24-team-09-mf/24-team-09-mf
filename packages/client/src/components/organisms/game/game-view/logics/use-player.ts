@@ -37,9 +37,9 @@ function checkNextPosition(
       player.position.x <= nextPosition + collisionBlock.dimensions.width &&
       player.position.x + player.dimensions.width >= nextPosition &&
       player.position.y + player.dimensions.height >=
-        collisionBlock.position.y &&
+      collisionBlock.position.y &&
       player.position.y <=
-        collisionBlock.position.y + collisionBlock.dimensions.height
+      collisionBlock.position.y + collisionBlock.dimensions.height
     )
   })
 }
@@ -60,12 +60,45 @@ export const usePlayer = ({
     if (gameModel) {
       return new Player({
         position: { x: 0, y: BLOCK_SIZE * 12 },
-        dimensions: { width: 30, height: 50 },
+        frameRate: 12,
         model: gameModel,
         collisionBlocks,
         enemies,
         coins,
         onGameOver,
+        imageSrc: '/assets/sprites/hero/idle.png',
+        animations: {
+          idleRight: {
+            frameRate: 12,
+            frameBuffer: 10,
+            imageSrc: '/assets/sprites/hero/idle.png'
+          },
+          idleLeft: {
+            frameRate: 12,
+            frameBuffer: 10,
+            imageSrc: '/assets/sprites/hero/idleLeft.png'
+          },
+          runRight: {
+            frameRate: 8,
+            frameBuffer: 10,
+            imageSrc: '/assets/sprites/hero/run.png'
+          },
+          runLeft: {
+            frameRate: 8,
+            frameBuffer: 10,
+            imageSrc: '/assets/sprites/hero/runLeft.png'
+          },
+          jumpRight: {
+            frameRate: 4,
+            frameBuffer: 10,
+            imageSrc: '/assets/sprites/hero/jump.png'
+          },
+          jumpLeft: {
+            frameRate: 4,
+            frameBuffer: 10,
+            imageSrc: '/assets/sprites/hero/jumpLeft.png'
+          }
+        }
       })
     }
   }, [gameModel])
@@ -125,6 +158,29 @@ export const usePlayer = ({
         }
       }
       player.update()
+    }
+
+    if (player) {
+      if (keys.pressedA) {
+        player.switchSprite('runLeft')
+        player.lastDirection = 'left'
+      } else if (keys.pressedD) {
+        player.switchSprite('runRight')
+        player.lastDirection = 'right'
+      } else if (keys.pressedW) {
+        if (player.lastDirection === 'right') {
+          player.switchSprite('jumpRight')
+        } else {
+          player.switchSprite('jumpLeft')
+        }
+      } else {
+        if (player.lastDirection === 'left') {
+          player.switchSprite('idleLeft')
+        } else {
+          player.lastDirection = 'right'
+          player.switchSprite('idleRight')
+        }
+      }
     }
   }, [keys, jumpTime])
 }
