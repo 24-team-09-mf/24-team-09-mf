@@ -20,9 +20,17 @@ export const useCoins = ({ gameModel }: Props) => {
             result.push(
               new Coin({
                 model: gameModel,
-                dimensions: { width: BLOCK_SIZE, height: BLOCK_SIZE },
-                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE },
-                color: '#17e4e7',
+                position: { x: x * BLOCK_SIZE, y: (y * BLOCK_SIZE) - 10 },
+                frameRate: 4,
+                frameBuffer: 15,
+                imageSrc: '/assets/sprites/coin/coin.png',
+                animations: {
+                  getCoin: {
+                    frameRate: 3,
+                    frameBuffer: 15,
+                    imageSrc: '/assets/sprites/coin/coinEffect.png'
+                  },
+                }
               })
             )
           }

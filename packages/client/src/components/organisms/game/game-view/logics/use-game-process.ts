@@ -48,6 +48,19 @@ export const useGameProcess = ({
   })
   // game block end
 
+  const startGameBackground = useSprite({
+    gameModel,
+    position: {
+      x: 0,
+      y: 0,
+    },
+    dimensions: {
+      width: WIDTH_VIEW,
+      height: HEIGHT_VIEW,
+    },
+    imageSrc: '/assets/startGame.png',
+  })
+
   const gameBackground = useSprite({
     gameModel,
     position: {
@@ -58,7 +71,7 @@ export const useGameProcess = ({
       width: WIDTH_VIEW * 2,
       height: HEIGHT_VIEW,
     },
-    color: '#000',
+    imageSrc: '/assets/background.png',
   })
 
   useEffect(() => {
@@ -71,6 +84,7 @@ export const useGameProcess = ({
       start()
       if (!isStartedGame && !isEndedGame) {
         console.log('draw start image')
+        startGameBackground.draw()
       } else {
         gameBackground.draw()
         coins.forEach(block => block.draw())
@@ -78,9 +92,7 @@ export const useGameProcess = ({
         startFinishCollisionBlocks.forEach(block => block.draw())
         enemies.forEach(enemy => enemy.update())
         drawPlayer()
-
-        collisionBlocks.forEach(block => block.draw());
-
+        collisionBlocks.forEach(block => block.draw())
       }
     }
     function start() {
