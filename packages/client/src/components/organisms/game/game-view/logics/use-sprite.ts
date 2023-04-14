@@ -1,5 +1,6 @@
 import { GameModel } from '@/components/organisms/game/game-view/game-view.types'
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
+import { Sprite } from '@/components/organisms/game/game-view/models/Sprite'
 
 type Props = {
   gameModel: GameModel
@@ -20,34 +21,17 @@ export const useSprite = ({
   position,
   dimensions,
   color,
-  imageSrc,
 }: Props) => {
-  const draw = useCallback(() => {
-    //TODO отрисовка наших изображений будет тут
-    if (gameModel) {
-      if (imageSrc) {
-        const image = new Image()
-        image.src = imageSrc
-        image.onload = () => {
-          gameModel.drawImage(
-            image,
-            position.x,
-            position.y,
-            dimensions.width,
-            dimensions.height
-          )
-        }
-      } else {
-        gameModel.fillStyle = color || '#000'
-        gameModel.fillRect(
-          position.x,
-          position.y,
-          dimensions.width,
-          dimensions.height
-        )
-      }
-    }
-  }, [gameModel, position, dimensions])
+  const backgorund = useMemo(
+    () =>
+      new Sprite({
+        model: gameModel,
+        position,
+        dimensions,
+        color,
+      }),
+    [gameModel]
+  )
 
-  return [draw]
+  return backgorund
 }

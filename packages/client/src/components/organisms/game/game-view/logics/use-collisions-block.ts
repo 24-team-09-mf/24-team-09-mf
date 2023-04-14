@@ -11,7 +11,7 @@ export const useCollisionsBlock = ({ gameModel }: Props) => {
   const collisions = useMemo(() => {
     const result: CollisionBlock[] = [];
     if (gameModel) {
-      parsedCollisions.forEach((row, y) => {
+      parsedCollisionLvl1.forEach((row, y) => {
         row.forEach((symbol, x) => {
           if (symbol === 306) {
             result.push(new CollisionBlock({
