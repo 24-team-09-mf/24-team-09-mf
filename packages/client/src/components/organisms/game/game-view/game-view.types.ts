@@ -1,7 +1,7 @@
 export type GameViewProps = {
   isStartedGame: boolean
   isEndedGame: boolean
-  onGameOver(): void;
+  onGameOver(): void
 }
 
 export type GameModel = CanvasRenderingContext2D | null
@@ -22,9 +22,15 @@ export type SpriteModel = {
     y: number
   }
 
+  dimensions?: {
+    width: number
+    height: number
+  }
+
   color?: string
   imageSrc?: string
   frameRate?: number
+  frameBuffer?: number
 
   animations?: SrpiteAnimation
 }

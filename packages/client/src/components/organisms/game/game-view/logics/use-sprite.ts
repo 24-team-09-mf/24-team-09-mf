@@ -1,5 +1,5 @@
 import { GameModel } from '@/components/organisms/game/game-view/game-view.types'
-import { useCallback, useMemo } from 'react'
+import { useMemo } from 'react'
 import { Sprite } from '@/components/organisms/game/game-view/models/Sprite'
 
 type Props = {
@@ -20,6 +20,7 @@ export const useSprite = ({
   gameModel,
   position,
   dimensions,
+  imageSrc,
   color,
 }: Props) => {
   const backgorund = useMemo(
@@ -27,6 +28,7 @@ export const useSprite = ({
       new Sprite({
         model: gameModel,
         position,
+        imageSrc,
         dimensions,
         color,
       }),

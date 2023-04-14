@@ -21,9 +21,8 @@ export const useStartFinishCollisionBlocks = ({ gameModel }: Props) => {
             result.push(
               new CollisionBlock({
                 model: gameModel,
-                dimensions: { width: BLOCK_SIZE, height: BLOCK_SIZE },
                 position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE },
-                color: 'yellow',
+                frameRate: 4,
               })
             )
           }
