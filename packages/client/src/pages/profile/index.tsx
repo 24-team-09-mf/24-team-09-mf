@@ -1,5 +1,5 @@
 // components
-import { Profile, LayoutMain } from '../../components'
+import { Profile } from '../../components'
 
 const ProfilePage = () => {
   return <Profile />

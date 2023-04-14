@@ -1,6 +1,7 @@
 import { createBrowserRouter, Routes, Route } from 'react-router-dom'
 import { ErrorWrapper } from '@/components/layouts/error-wrapper'
 import loadable from '@loadable/component'
+import { WithAuth } from '@/components/HOCs/withAuth'
 
 import { LayoutMain } from '@/components'
 
@@ -55,11 +56,19 @@ export const router = createBrowserRouter([
       },
       {
         path: '/profile',
-        element: <ProfilePage />,
+        element: (
+          <WithAuth>
+            <ProfilePage />
+          </WithAuth>
+        ),
       },
       {
         path: '/change-password',
-        element: <ChangePasswordPage />,
+        element: (
+          <WithAuth>
+            <ChangePasswordPage />
+          </WithAuth>
+        ),
       },
       {
         path: '/forum',
