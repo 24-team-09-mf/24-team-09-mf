@@ -5,8 +5,4 @@ export class CollisionBlock extends Sprite {
   constructor(props: SpriteModel) {
     super(props)
   }
-
-  draw() {
-    super.draw()
-  }
 }

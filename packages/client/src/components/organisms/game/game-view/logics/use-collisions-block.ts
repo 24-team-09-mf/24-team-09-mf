@@ -1,11 +1,11 @@
 import { useMemo } from 'react'
 import { GameModel } from '@/components/organisms/game/game-view/game-view.types'
-import { parsedCollisions } from '@/components/organisms/game/game-view/data/collisions'
 import { CollisionBlock } from '@/components/organisms/game/game-view/models/CollisionBlock'
+import { BLOCK_SIZE } from '@/components/organisms/game/game.constants'
 import {
-  BLOCK_SIZE,
-} from '@/components/organisms/game/game.constants'
-import { COLLISION_SYMBOL, parsedCollisionLvl1 } from '@/components/organisms/game/game-view/data/collisionsLvl1'
+  COLLISION_SYMBOL,
+  parsedCollisionLvl1,
+} from '@/components/organisms/game/game-view/data/collisionsLvl1'
 
 type Props = {
   gameModel: GameModel
