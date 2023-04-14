@@ -17,7 +17,7 @@ export const useCollisionsBlock = ({ gameModel }: Props) => {
             result.push(new CollisionBlock({
               model: gameModel,
               position: { x: x * 32, y: y * 32 },
-              imageSrc: '/assets/platforma.png',
+              imageSrc: '/assets/grass.png',
             }))
           }
         })
