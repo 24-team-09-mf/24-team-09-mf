@@ -21,16 +21,24 @@ export class Sprite {
   frameRate = 1
   currentFrame = 0
   elapsedFrames = 0
-  framesBuffer = 10
+  frameBuffer = 10
 
-  constructor({ position, model, color, imageSrc, frameRate, animations }: SpriteModel) {
-    this.position = position;
-    this.model = model;
+  constructor({ position, model, color, imageSrc, dimensions, frameRate, frameBuffer, animations }: SpriteModel) {
+    this.position = position
+    this.model = model
     this.color = color || 'red'
     this.imageSrc = imageSrc || undefined
 
+    if (dimensions) {
+      this.dimensions = dimensions
+    }
+
     if (frameRate) {
       this.frameRate = frameRate
+    }
+
+    if (frameBuffer) {
+      this.frameBuffer = frameBuffer
     }
 
     if (animations) {
@@ -45,9 +53,9 @@ export class Sprite {
       }
     }
 
-    this.image = new Image();
+    this.image = new Image()
     if (this.imageSrc) {
-      this.image.src = this.imageSrc;
+      this.image.src = this.imageSrc
     }
     this.image.onload = () => {
       this.dimensions.width = this.image.width / this.frameRate
@@ -80,9 +88,9 @@ export class Sprite {
 
         this.updateFrames()
       }
-      // TODO: можно будет удалить
+      // TODO: можно будет удалить на конечном этапе
       else {
-        this.model.fillStyle = this.color;
+        this.model.fillStyle = this.color
         this.model.fillRect(
           this.position.x,
           this.position.y,
@@ -96,7 +104,7 @@ export class Sprite {
   updateFrames() {
     this.elapsedFrames++
 
-    if (this.elapsedFrames % this.framesBuffer === 0) {
+    if (this.elapsedFrames % this.frameBuffer === 0) {
       if (this.currentFrame < this.frameRate - 1) {
         this.currentFrame++
       } else {

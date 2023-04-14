@@ -75,7 +75,7 @@ export class Player extends Sprite {
     if (animation?.image) {
       this.image = animation.image
       this.frameRate = animation.frameRate || 1
-      this.framesBuffer = animation.frameBuffer || 2
+      this.frameBuffer = animation.frameBuffer || 2
     }
   }
 
@@ -143,12 +143,12 @@ export class Player extends Sprite {
       const collisionBlock = this.collisionBlocks[i]
       if (this.checkCollision(collisionBlock)) {
         if (this.velocity.y < 0) {
-          this.velocity.y = 0;
+          this.velocity.y = 0
           this.position.y = collisionBlock.position.y + collisionBlock.dimensions.height + 0.03
           break
         }
         if (this.velocity.y > 0) {
-          this.velocity.y = 0;
+          this.velocity.y = 0
           this.position.y =
             collisionBlock.position.y - this.dimensions.height - 0.03
           break
