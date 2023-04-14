@@ -11,6 +11,9 @@ import {
 import { useKeysHandlers } from '@/components/organisms/game/game-view/logics/use-keys-handlers'
 import { usePlayer } from '@/components/organisms/game/game-view/logics/use-player'
 import { useCollisionsBlock } from '@/components/organisms/game/game-view/logics/use-collisions-block'
+import {
+  useStartFinishCollisionBlocks
+} from '@/components/organisms/game/game-view/logics/use-start-finish-collisions-block'
 
 type Props = {
   gameModel: GameModel
@@ -26,33 +29,26 @@ export const useGameProcess = ({
 }: Props) => {
   const keys = useKeysHandlers()
   const collisionBlocks = useCollisionsBlock({ gameModel })
-  const drawPlayer = usePlayer({ gameModel, keys, collisionBlocks, onGameOver })
-
-  const [drawBackground] = useSprite({
+  const startFinishCollisionBlocks = useStartFinishCollisionBlocks({ gameModel })
+  const gameBackground = useSprite({
     gameModel,
     position: {
       x: 0,
       y: 0,
     },
     dimensions: {
-      width: WIDTH_VIEW,
-      height: HEIGHT_VIEW,
-    },
-    color: '#192C3B',
-    imageSrc: '/assets/startGame.png',
-  })
-
-  const [drawGameBackground] = useSprite({
-    gameModel,
-    position: {
-      x: 0,
-      y: 0,
-    },
-    dimensions: {
-      width: WIDTH_VIEW,
+      width: WIDTH_VIEW * 2,
       height: HEIGHT_VIEW,
     },
     color: '#000',
+  })
+
+  const drawPlayer = usePlayer({
+    gameModel,
+    keys,
+    collisionBlocks,
+    onGameOver,
+    startFinishCollisionBlocks
   })
 
   useEffect(() => {
@@ -64,10 +60,11 @@ export const useGameProcess = ({
       requestId = null
       start()
       if (!isStartedGame && !isEndedGame) {
-        drawBackground()
+        console.log('draw start image')
       } else {
-        drawGameBackground()
+        gameBackground.draw()
         collisionBlocks.forEach(block => block.draw())
+        startFinishCollisionBlocks.forEach(block => block.draw())
         drawPlayer()
       }
     }
