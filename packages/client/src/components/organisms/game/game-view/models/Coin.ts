@@ -33,9 +33,9 @@ export class Coin extends Sprite {
 
     if (this.compeleAnimation) {
       this.shouldDraw = false
+      console.log('get coin, you should update score on one')
     }
 
-    console.log('get coin, you should update score on one')
   }
 
 
