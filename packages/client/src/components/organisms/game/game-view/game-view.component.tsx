@@ -30,5 +30,5 @@ export const GameView: FC<GameViewProps> = ({
 
   useGameProcess({ gameModel, isStartedGame, isEndedGame, onGameOver })
 
-  return <canvas ref={canvasRef} />
+  return <canvas data-testid="game-view" ref={canvasRef} />
 }

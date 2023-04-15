@@ -11,7 +11,10 @@ import { TextFieldProps } from './input.types'
 import { Wrapper, Error, InputComponent } from './input.styles'
 
 export const Input = forwardRef<HTMLInputElement, TextFieldProps>(
-  ({ className, errorMessage, isError, type = 'text', ...props }, ref) => {
+  (
+    { className, errorMessage, dataTestId, isError, type = 'text', ...props },
+    ref
+  ) => {
     const [isCapsLockOn, setIsCapsLockOn] = useState(false)
 
     const checkCapsLock = (event: KeyboardEvent) => {
@@ -28,6 +31,7 @@ export const Input = forwardRef<HTMLInputElement, TextFieldProps>(
           isError={isError}
           ref={ref}
           type={type}
+          data-testid={dataTestId}
           {...props}
           onKeyUp={checkCapsLock}
         />

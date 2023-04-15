@@ -12,7 +12,7 @@ import { FormSignInValues } from './form-signin.types'
 const schema: yup.SchemaOf<FormSignInValues> = yup.object().shape({
   login: loginScheme('Может содержать только латинские буквы'),
   password: passwordScheme(
-    'Минимум 8 символов, должен включать цифры и латинские буквы'
+    'Минимум 8 символов, должен включать цифры и латинские буквы. Как минимум одну заглавную букву и цифру'
   ),
 })
 

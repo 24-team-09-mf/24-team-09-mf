@@ -13,7 +13,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 11,
   },
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'testing-library', 'jest-dom'],
   ignorePatterns: [
     'packages/client/dist',
     'packages/server/dist',

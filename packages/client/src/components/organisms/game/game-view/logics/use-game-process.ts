@@ -25,7 +25,7 @@ export const useGameProcess = ({
   gameModel,
   isStartedGame,
   isEndedGame,
-  onGameOver
+  onGameOver,
 }: Props) => {
   const keys = useKeysHandlers()
   // game block start

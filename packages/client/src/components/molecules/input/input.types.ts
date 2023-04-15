@@ -5,4 +5,5 @@ export interface TextFieldProps extends HTMLAttributes<HTMLInputElement> {
   isError?: boolean
   disabled?: boolean
   type?: 'email' | 'password' | 'text' | 'number'
+  dataTestId?: string
 }

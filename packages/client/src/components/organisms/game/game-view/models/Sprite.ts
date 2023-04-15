@@ -1,4 +1,8 @@
-import { GameModel, SrpiteAnimation, SpriteModel } from '@/components/organisms/game/game-view/game-view.types'
+import {
+  GameModel,
+  SrpiteAnimation,
+  SpriteModel,
+} from '@/components/organisms/game/game-view/game-view.types'
 
 export class Sprite {
   position = {
@@ -15,7 +19,7 @@ export class Sprite {
 
   model: GameModel = null
   color = ''
-  imageSrc?= ''
+  imageSrc? = ''
   image: HTMLImageElement = new Image()
 
   frameRate = 1
@@ -23,7 +27,16 @@ export class Sprite {
   elapsedFrames = 0
   frameBuffer = 10
 
-  constructor({ position, model, color, imageSrc, dimensions, frameRate, frameBuffer, animations }: SpriteModel) {
+  constructor({
+    position,
+    model,
+    color,
+    imageSrc,
+    dimensions,
+    frameRate,
+    frameBuffer,
+    animations,
+  }: SpriteModel) {
     this.position = position
     this.model = model
     this.color = color || 'red'
@@ -69,10 +82,10 @@ export class Sprite {
         const cropbox = {
           position: {
             x: this.dimensions.width * this.currentFrame,
-            y: 0
+            y: 0,
           },
           width: this.dimensions.width,
-          height: this.dimensions.height
+          height: this.dimensions.height,
         }
         this.model.drawImage(
           this.image,
