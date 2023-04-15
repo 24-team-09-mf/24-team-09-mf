@@ -1,7 +1,7 @@
 import { createBrowserRouter, Routes, Route } from 'react-router-dom'
 import { ErrorWrapper } from '@/components/layouts/error-wrapper'
 import loadable from '@loadable/component'
-import { WithAuth } from '@/components/HOCs/withAuth'
+import { WithAuth } from '@/hooks/withAuth'
 
 import { LayoutMain } from '@/components'
 

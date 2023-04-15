@@ -6,9 +6,7 @@ type WithAuthProps = {
   children: React.ReactElement
 }
 
-type Props = FC<WithAuthProps>
-
-export const WithAuth: Props = ({ children }) => {
+export const WithAuth: FC<WithAuthProps> = ({ children }) => {
   const { user } = userStore()
 
   return user ? children : <Navigate to={'/'} />
