@@ -1,53 +1,102 @@
-import { ForumPostProps } from '@/components/organisms/forum/forum-types'
+import { ForumPostProps } from './forum-types'
 import {
-  FormButtonWrapper,
-  FormSeparator,
-  FormTextarea,
   ForumPostBlock,
   ForumPostBlockAvatar,
   ForumPostBottom,
   ForumPostContent,
   ForumPostDate,
+  ForumEmoji,
   ForumPostRate,
   ForumPostRateButton,
   ForumPostRateText,
+  ForumPostReplyBtn,
+  ForumPostText,
   ForumPostTop,
   ForumPostUserName,
-  H2,
+  ForumEmojiAddBtn,
+  ForumEmojiAddBlock,
+  ForumEmojiAddElement,
+  ForumEmojiElement,
 } from '@/components/templates/forum/forum.styles'
 import IconRateMinus from '@/assets/icons/rate_minus.svg'
 import IconRatePlus from '@/assets/icons/rate_plus.svg'
-import React, { useEffect, useState } from 'react'
-import useSectionForm from '@/components/organisms/forum/forum-logic'
-import { Button } from '@/components'
+import IconEmojiAdd from '@/assets/icons/emojiAdd.svg'
+import { useState } from 'react'
 import dateParse from '@/utils/dateParse'
+import avatarDefault from '@/assets/images/avatarDefault.png'
+import { EMOJI, ForumEditor } from '@/components'
 
 const ForumPost = (el: ForumPostProps) => {
   const [rate, setRate] = useState(el.rate)
-  const { userAvatar, userName, date, text } = el
+  const { userAvatar, userName, date, text, emoji } = el
+
+  const [replyOpen, setReplyOpen] = useState(false)
+  const [emojiAdd, setEmojiAdd] = useState('none')
+
+  const onReplyHandler = () => setReplyOpen(prev => !prev)
+  const onsetEmojiHandler = () =>
+    setEmojiAdd(prev => (prev === 'none' ? 'block' : 'none'))
+  const onSetRateMinusHandler = () => setRate(prev => prev - 1)
+  const onSetRatePlusHandler = () => setRate(prev => prev + 1)
 
   return (
     <ForumPostBlock>
       <ForumPostBlockAvatar>
-        {userAvatar && <img src={userAvatar} alt="" />}
+        <img src={userAvatar ? userAvatar : avatarDefault} alt={userName} />
       </ForumPostBlockAvatar>
       <ForumPostContent>
         <ForumPostTop>
           <ForumPostUserName>{userName}</ForumPostUserName>
           <ForumPostDate>{dateParse(date)}</ForumPostDate>
         </ForumPostTop>
-        <p>{text}</p>
+        <ForumPostText dangerouslySetInnerHTML={{ __html: text as string }} />
         <ForumPostBottom>
+          <div>
+            <ForumPostReplyBtn onClick={onReplyHandler}>
+              Ответить
+            </ForumPostReplyBtn>
+          </div>
           <ForumPostRate>
-            <ForumPostRateButton onClick={() => setRate(prev => prev - 1)}>
+            <ForumEmoji>
+              {emoji &&
+                emoji.map(el => (
+                  <ForumEmojiElement key={el.name}>
+                    <img src={EMOJI[el.name]} alt={el.name} />
+                    <span>{el.usersId.length}</span>
+                  </ForumEmojiElement>
+                ))}
+              <ForumEmojiAddBtn onClick={onsetEmojiHandler}>
+                <ForumEmojiAddBlock display={emojiAdd}>
+                  {Object.keys(EMOJI).map(el => (
+                    <ForumEmojiAddElement key={el}>
+                      <img src={EMOJI[el]} alt={el} />
+                    </ForumEmojiAddElement>
+                  ))}
+                </ForumEmojiAddBlock>
+                <img src={IconEmojiAdd} alt="Добавить эмоцию" />
+              </ForumEmojiAddBtn>
+            </ForumEmoji>
+            <ForumPostRateButton onClick={onSetRateMinusHandler}>
               <img src={IconRateMinus} alt="Не нравится" />
             </ForumPostRateButton>
             <ForumPostRateText>{rate}</ForumPostRateText>
-            <ForumPostRateButton onClick={() => setRate(prev => prev + 1)}>
+            <ForumPostRateButton onClick={onSetRatePlusHandler}>
               <img src={IconRatePlus} alt="Нравится" />
             </ForumPostRateButton>
           </ForumPostRate>
         </ForumPostBottom>
+        {replyOpen && (
+          <ForumEditor
+            title="Ответить на сообщение"
+            replyMessage={
+              <>
+                <strong>{userName}</strong>
+                <br />
+                <div dangerouslySetInnerHTML={{ __html: text as string }} />
+              </>
+            }
+          />
+        )}
       </ForumPostContent>
     </ForumPostBlock>
   )
@@ -60,51 +109,5 @@ export const ForumPosts = ({ data }: { data: ForumPostProps[] }) => {
         <ForumPost key={el.id} {...el} />
       ))}
     </div>
-  )
-}
-
-export const ForumPostsForm = ({
-  id,
-  postPageId,
-}: {
-  id: string
-  postPageId: string
-}) => {
-  const {
-    register,
-    onSubmitHandler,
-    handleSubmit,
-    isValid,
-    setValue,
-    getValues,
-  } = useSectionForm(id, postPageId)
-
-  return (
-    <form onSubmit={handleSubmit(onSubmitHandler)}>
-      <FormSeparator />
-      <H2 marginBottom="30px">Написать сообщение</H2>
-      <FormTextarea
-        {...register('message', { required: true })}
-        suppressContentEditableWarning={true}
-        onInput={e => {
-          setValue('message', e.currentTarget.innerHTML, {
-            shouldValidate: true,
-          })
-        }}
-        contentEditable="true"
-        placeholder="Сообщение...">
-        {getValues('message') == '' && ''}
-      </FormTextarea>
-      <FormButtonWrapper>
-        <Button
-          as="button"
-          type="submit"
-          color="#579945"
-          variant="contained"
-          disabled={!isValid}>
-          Отправить
-        </Button>
-      </FormButtonWrapper>
-    </form>
   )
 }

@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import { ForumFormsProps } from '@/components/organisms/forum/forum-types'
+import { ForumFormsProps } from './forum-types'
 
 const useSectionForm = (id: string, postPageId?: string) => {
   const {
@@ -8,7 +8,6 @@ const useSectionForm = (id: string, postPageId?: string) => {
     formState: { errors, isValid },
     reset,
     setValue,
-    getValues,
   } = useForm<any>({
     mode: 'onBlur',
   })
@@ -32,7 +31,6 @@ const useSectionForm = (id: string, postPageId?: string) => {
     errors,
     isValid,
     setValue,
-    getValues,
   }
 }
 

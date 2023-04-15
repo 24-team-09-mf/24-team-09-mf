@@ -1,3 +1,5 @@
+import { ReactElement } from 'react'
+
 export type ForumLastTopicProps = {
   id: string
   date: number
@@ -29,12 +31,24 @@ export type ForumFormsProps = {
   message: string
 }
 
+export type ForumEmoji = {
+  name: string
+  usersId: number[]
+}
+
 export type ForumPostProps = {
   id: string
-  text: string
+  text: string | ReactElement
   date: number
   rate: number
   userId: number
   userName: string
   userAvatar: null | string
+  emoji: ForumEmoji[] | null
+}
+
+export type ForumEditorProps = {
+  title: string
+  titleInput?: string | null
+  replyMessage?: ReactElement
 }
