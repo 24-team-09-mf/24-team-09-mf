@@ -1,6 +1,8 @@
+import { useEffect } from 'react'
 import { FC } from 'react'
 import { Navigate } from 'react-router-dom'
-import { userStore } from '@/store'
+import { userStore, useAppDispatch } from '@/store'
+import { getUser } from '@/store/user/auth/actions'
 
 type WithAuthProps = {
   children: React.ReactElement
@@ -8,6 +10,13 @@ type WithAuthProps = {
 
 export const WithAuth: FC<WithAuthProps> = ({ children }) => {
   const { user } = userStore()
+  const dispatch = useAppDispatch()
 
-  return user ? children : <Navigate to={'/'} />
+  useEffect(() => {
+    if (user?.login === '') {
+      dispatch(getUser())
+    }
+  }, [user])
+
+  return user?.login !== "" ? children : <Navigate to={'/'} />
 }

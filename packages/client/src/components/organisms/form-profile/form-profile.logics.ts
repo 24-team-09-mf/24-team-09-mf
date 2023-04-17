@@ -1,3 +1,6 @@
+// react
+import { useEffect } from 'react'
+
 // lib
 import { useForm } from 'react-hook-form'
 
@@ -10,14 +13,18 @@ import { useAppDispatch, userStore } from '@/store'
 import { updateProfile } from '@/store/user/profile/actions'
 import { getUser } from '@/store/user/auth/actions'
 
-// utils
-import { generateDefaultValues } from '@/utils/generateDefaultValues'
-
 // types
 import { FormProfileValues } from './form-profile.types'
 
 const useProfile = () => {
   const { user } = userStore()
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    if (user?.login === '') {
+      dispatch(getUser())
+    }
+  }, [user])
 
   const {
     register,
@@ -25,11 +32,10 @@ const useProfile = () => {
     formState: { errors, isValid },
   } = useForm<FormProfileValues>({
     mode: 'all',
-    defaultValues: generateDefaultValues(user),
 
     resolver: yupResolver(validationSchema),
   })
-  const dispatch = useAppDispatch()
+
 
   const onSubmitHandler = async (data: FormProfileValues) => {
     try {
