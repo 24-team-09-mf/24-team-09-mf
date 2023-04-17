@@ -23,7 +23,7 @@ export const useSprite = ({
   imageSrc,
   color,
 }: Props) => {
-  const backgorund = useMemo(
+  const background = useMemo(
     () =>
       new Sprite({
         model: gameModel,
@@ -35,5 +35,5 @@ export const useSprite = ({
     [gameModel]
   )
 
-  return backgorund
+  return background
 }

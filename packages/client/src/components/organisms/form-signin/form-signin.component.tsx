@@ -13,13 +13,15 @@ export const FormSignIn = () => {
       <InputComponent
         isError={!!errors.login}
         errorMessage={errors.login?.message}
+        dataTestId={'login'}
         {...register('login')}
-        placeholder="Login"
+        placeholder="Логин"
       />
       <InputComponent
         type="password"
         isError={!!errors.password}
         errorMessage={errors.password?.message}
+        dataTestId={'password'}
         {...register('password')}
         placeholder="Пароль"
       />

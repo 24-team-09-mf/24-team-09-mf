@@ -4,6 +4,8 @@ import { Player } from '@/components/organisms/game/game-view/models/Player'
 import { useKeysHandlers } from '@/components/organisms/game/game-view/logics/use-keys-handlers'
 import { CollisionBlock } from '@/components/organisms/game/game-view/models/CollisionBlock'
 import { Coin } from '@/components/organisms/game/game-view/models/Coin'
+import { Enemy } from '@/components/organisms/game/game-view/models/Enemy'
+
 import {
   BLOCK_SIZE,
   BORDER_LEFT,
@@ -13,7 +15,6 @@ import {
   RIGHT_VIEW_BOX_BORDER,
   SPEED,
 } from '@/components/organisms/game/game.constants'
-import { Enemy } from '@/components/organisms/game/game-view/models/Enemy'
 
 type Props = {
   gameModel: GameModel
@@ -37,9 +38,9 @@ function checkNextPosition(
       player.position.x <= nextPosition + collisionBlock.dimensions.width &&
       player.position.x + player.dimensions.width >= nextPosition &&
       player.position.y + player.dimensions.height >=
-      collisionBlock.position.y &&
+        collisionBlock.position.y &&
       player.position.y <=
-      collisionBlock.position.y + collisionBlock.dimensions.height
+        collisionBlock.position.y + collisionBlock.dimensions.height
     )
   })
 }
@@ -71,34 +72,34 @@ export const usePlayer = ({
           idleRight: {
             frameRate: 12,
             frameBuffer: 10,
-            imageSrc: '/assets/sprites/hero/idle.png'
+            imageSrc: '/assets/sprites/hero/idle.png',
           },
           idleLeft: {
             frameRate: 12,
             frameBuffer: 10,
-            imageSrc: '/assets/sprites/hero/idleLeft.png'
+            imageSrc: '/assets/sprites/hero/idleLeft.png',
           },
           runRight: {
             frameRate: 8,
             frameBuffer: 10,
-            imageSrc: '/assets/sprites/hero/run.png'
+            imageSrc: '/assets/sprites/hero/run.png',
           },
           runLeft: {
             frameRate: 8,
             frameBuffer: 10,
-            imageSrc: '/assets/sprites/hero/runLeft.png'
+            imageSrc: '/assets/sprites/hero/runLeft.png',
           },
           jumpRight: {
             frameRate: 4,
             frameBuffer: 10,
-            imageSrc: '/assets/sprites/hero/jump.png'
+            imageSrc: '/assets/sprites/hero/jump.png',
           },
           jumpLeft: {
             frameRate: 4,
             frameBuffer: 10,
-            imageSrc: '/assets/sprites/hero/jumpLeft.png'
-          }
-        }
+            imageSrc: '/assets/sprites/hero/jumpLeft.png',
+          },
+        },
       })
     }
   }, [gameModel])

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Тест компонента Avatar Тестирование снепшотом 1`] = `
+<div
+  className="sc-beqWaB cdlOZE"
+>
+  <img
+    alt="Аватар"
+    className="sc-dmqHEX iErOfx"
+  />
+  <input
+    accept=".png, .jpg"
+    className="sc-gueYoa dJCDxn"
+    onChange={[Function]}
+    type="file"
+  />
+</div>
+`;

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Тест компонента ErrorBlock Тестирование снепшотом 1`] = `
+<div
+  className="sc-beqWaB HcakY"
+>
+  <img
+    className="sc-gueYoa eJXQMp"
+    size="48px"
+  />
+  <h2
+    className="sc-dmqHEX ggbouM"
+    fontSize="48px"
+  >
+    hello world
+  </h2>
+</div>
+`;
