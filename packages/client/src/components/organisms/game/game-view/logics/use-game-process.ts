@@ -14,6 +14,7 @@ import { useCollisionsBlock } from '@/components/organisms/game/game-view/logics
 import { useStartFinishCollisionBlocks } from '@/components/organisms/game/game-view/logics/use-start-finish-collisions-block'
 import { useCoins } from '@/components/organisms/game/game-view/logics/use-coins'
 import { useEnemies } from '@/components/organisms/game/game-view/logics/use-enemies'
+import { Points } from '@/components/organisms/game/game-view/logics/use-points'
 
 type Props = {
   gameModel: GameModel
@@ -51,6 +52,8 @@ export const useGameProcess = ({
     enemiesCollisionBlocks,
     isEndedGame,
   })
+
+  let points = 0
   // game block end
 
   const startGameBackground = useSprite({
@@ -78,6 +81,8 @@ export const useGameProcess = ({
     },
     imageSrc: '/assets/background.png',
   })
+
+  points = Points({ coins: coins, enemies: enemies })
 
   useEffect(() => {
     let requestId: number | null = null
