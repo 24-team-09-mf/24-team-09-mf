@@ -29,9 +29,10 @@ export const useGameProcess = ({
 }: Props) => {
   const keys = useKeysHandlers()
   // game block start
-  const collisionBlocks = useCollisionsBlock({ gameModel })
+  const collisionBlocks = useCollisionsBlock({ gameModel, isEndedGame })
   const startFinishCollisionBlocks = useStartFinishCollisionBlocks({
     gameModel,
+    isEndedGame,
   })
   const coins = useCoins({ gameModel, isEndedGame })
   const [enemies, enemiesCollisionBlocks] = useEnemies({

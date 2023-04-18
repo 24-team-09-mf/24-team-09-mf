@@ -7,28 +7,30 @@ import {
   parsedCollisionLvl1,
 } from '@/components/organisms/game/game-view/data/collisionsLvl1'
 
-
 type Props = {
   gameModel: GameModel
+  isEndedGame: boolean
 }
-export const useCollisionsBlock = ({ gameModel }: Props) => {
+export const useCollisionsBlock = ({ gameModel, isEndedGame }: Props) => {
   const collisions = useMemo(() => {
     const result: CollisionBlock[] = []
     if (gameModel) {
       parsedCollisionLvl1.forEach((row, y) => {
         row.forEach((symbol, x) => {
           if (symbol === COLLISION_SYMBOL) {
-            result.push(new CollisionBlock({
-              model: gameModel,
-              position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE },
-              imageSrc: '/assets/grass.png',
-            }))
+            result.push(
+              new CollisionBlock({
+                model: gameModel,
+                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE },
+                imageSrc: '/assets/grass.png',
+              })
+            )
           }
         })
       })
     }
     return result
-  }, [gameModel])
+  }, [gameModel, isEndedGame])
 
   return collisions
 }

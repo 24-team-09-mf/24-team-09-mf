@@ -9,9 +9,13 @@ import { BLOCK_SIZE } from '@/components/organisms/game/game.constants'
 
 type Props = {
   gameModel: GameModel
+  isEndedGame: boolean
 }
 
-export const useStartFinishCollisionBlocks = ({ gameModel }: Props) => {
+export const useStartFinishCollisionBlocks = ({
+  gameModel,
+  isEndedGame,
+}: Props) => {
   const collisions = useMemo(() => {
     const result: CollisionBlock[] = []
     if (gameModel) {
@@ -30,7 +34,7 @@ export const useStartFinishCollisionBlocks = ({ gameModel }: Props) => {
       })
     }
     return result
-  }, [gameModel])
+  }, [gameModel, isEndedGame])
 
   return collisions
 }
