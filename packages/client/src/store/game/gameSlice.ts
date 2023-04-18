@@ -2,16 +2,13 @@ import { createSlice } from '@reduxjs/toolkit'
 import { gameStoreProps } from '@/store/game/types'
 
 const initialState: gameStoreProps = {
-  points: null,
+  points: 0,
 }
 
 const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    resetPoints: state => {
-      state.points = 0
-    },
     setPoints: (state, action) => {
       state.points = action.payload
     },

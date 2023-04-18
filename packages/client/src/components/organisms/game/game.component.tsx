@@ -5,6 +5,7 @@ import { GameView } from './game-view'
 import { StartView } from '@/components/organisms/game/start-view'
 import { EndView } from './end-view'
 import { InformationView } from '@/components/organisms/game/information-view'
+import { gameStore } from '@/store'
 
 export const GameComponent = () => {
   const [isShowInformation, setIsShowInformation] = useState(false)
@@ -28,6 +29,8 @@ export const GameComponent = () => {
 
   const handlerGameOver = useCallback(() => setIsGameEnded(true), [])
 
+  const { points } = gameStore()
+
   return (
     <Wrapper>
       <MainView>
@@ -46,7 +49,7 @@ export const GameComponent = () => {
           <InformationView onCloseInformation={handlerClickShowInformation} />
         )}
         {isGameEnded && (
-          <EndView onClickStartGame={handlerClickRestartGame} score={1034} />
+          <EndView onClickStartGame={handlerClickRestartGame} score={points} />
         )}
       </MainView>
     </Wrapper>
