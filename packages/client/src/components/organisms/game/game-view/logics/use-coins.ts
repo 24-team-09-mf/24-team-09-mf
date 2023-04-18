@@ -9,8 +9,9 @@ import { BLOCK_SIZE } from '@/components/organisms/game/game.constants'
 
 type Props = {
   gameModel: GameModel
+  isEndedGame: boolean
 }
-export const useCoins = ({ gameModel }: Props) => {
+export const useCoins = ({ gameModel, isEndedGame }: Props) => {
   return useMemo(() => {
     const result: Coin[] = []
     if (gameModel) {
@@ -20,7 +21,7 @@ export const useCoins = ({ gameModel }: Props) => {
             result.push(
               new Coin({
                 model: gameModel,
-                position: { x: x * BLOCK_SIZE, y: (y * BLOCK_SIZE) - 10 },
+                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE - 10 },
                 frameRate: 4,
                 frameBuffer: 15,
                 imageSrc: '/assets/sprites/coin/coin.png',
@@ -28,9 +29,9 @@ export const useCoins = ({ gameModel }: Props) => {
                   getCoin: {
                     frameRate: 3,
                     frameBuffer: 15,
-                    imageSrc: '/assets/sprites/coin/coinEffect.png'
+                    imageSrc: '/assets/sprites/coin/coinEffect.png',
                   },
-                }
+                },
               })
             )
           }
@@ -38,5 +39,5 @@ export const useCoins = ({ gameModel }: Props) => {
       })
     }
     return result
-  }, [gameModel])
+  }, [gameModel, isEndedGame])
 }

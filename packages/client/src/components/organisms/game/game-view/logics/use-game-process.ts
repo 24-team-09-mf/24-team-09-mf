@@ -33,7 +33,7 @@ export const useGameProcess = ({
   const startFinishCollisionBlocks = useStartFinishCollisionBlocks({
     gameModel,
   })
-  const coins = useCoins({ gameModel })
+  const coins = useCoins({ gameModel, isEndedGame })
   const [enemies, enemiesCollisionBlocks] = useEnemies({ gameModel })
 
   const drawPlayer = usePlayer({
