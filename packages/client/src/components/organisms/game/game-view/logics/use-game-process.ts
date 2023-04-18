@@ -30,13 +30,17 @@ export const useGameProcess = ({
 }: Props) => {
   const keys = useKeysHandlers()
   // game block start
-  const collisionBlocks = useCollisionsBlock({ gameModel })
+  const collisionBlocks = useCollisionsBlock({ gameModel, isEndedGame })
   const startFinishCollisionBlocks = useStartFinishCollisionBlocks({
     gameModel,
+    isEndedGame,
   })
-  const coins = useCoins({ gameModel })
-  const [enemies, enemiesCollisionBlocks] = useEnemies({ gameModel })
-  const gameBackground = useBackgroundGame({ gameModel })
+  const coins = useCoins({ gameModel, isEndedGame })
+  const [enemies, enemiesCollisionBlocks] = useEnemies({
+    gameModel,
+    isEndedGame,
+  })
+  const gameBackground = useBackgroundGame({ gameModel, isEndedGame })
 
   const drawPlayer = usePlayer({
     gameModel,
@@ -47,6 +51,7 @@ export const useGameProcess = ({
     coins,
     enemies,
     enemiesCollisionBlocks,
+    isEndedGame,
     gameBackground,
   })
   // game block end
@@ -86,17 +91,18 @@ export const useGameProcess = ({
       requestId = null
       start()
       if (!isStartedGame && !isEndedGame) {
-        console.log('draw start image')
         startGameBackground.draw()
-      } else {
+      } else if (!isEndedGame) {
         parallax.draw()
-        gameBackground?.draw()
+        gameBackground.draw()
         coins.forEach(block => block.draw())
         collisionBlocks.forEach(block => block.draw())
         startFinishCollisionBlocks.forEach(block => block.draw())
         enemies.forEach(enemy => enemy.update())
         collisionBlocks.forEach(block => block.draw())
         drawPlayer()
+      } else {
+        startGameBackground.draw()
       }
     }
     function start() {
@@ -117,7 +123,7 @@ export const useGameProcess = ({
     coins,
     startFinishCollisionBlocks,
     enemies,
-    gameBackground
+    gameBackground,
   ])
 
   if (!gameModel) return null

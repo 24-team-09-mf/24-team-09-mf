@@ -7,11 +7,11 @@ import {
   parsedCollisionLvl1,
 } from '@/components/organisms/game/game-view/data/collisionsLvl1'
 
-
 type Props = {
   gameModel: GameModel
+  isEndedGame: boolean
 }
-export const useCollisionsBlock = ({ gameModel }: Props) => {
+export const useCollisionsBlock = ({ gameModel, isEndedGame }: Props) => {
   const collisions = useMemo(() => {
     const result: CollisionBlock[] = []
     if (gameModel) {
@@ -28,7 +28,7 @@ export const useCollisionsBlock = ({ gameModel }: Props) => {
       })
     }
     return result
-  }, [gameModel])
+  }, [gameModel, isEndedGame])
 
   return collisions
 }

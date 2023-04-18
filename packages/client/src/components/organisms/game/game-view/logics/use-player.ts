@@ -26,6 +26,7 @@ type Props = {
   coins: Coin[]
   gameBackground: BackgroundGame
   onGameOver(): void
+  isEndedGame: boolean
 }
 
 function checkNextPosition(
@@ -55,6 +56,7 @@ export const usePlayer = ({
   coins,
   enemies,
   enemiesCollisionBlocks,
+  isEndedGame,
   gameBackground,
 }: Props) => {
   const [jumpTime, setJumpTime] = useState(0)
@@ -104,7 +106,7 @@ export const usePlayer = ({
         },
       })
     }
-  }, [gameModel])
+  }, [gameModel, isEndedGame])
 
   return useCallback(() => {
     if (player) {
