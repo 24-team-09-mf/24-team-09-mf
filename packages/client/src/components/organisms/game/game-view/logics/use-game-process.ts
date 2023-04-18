@@ -85,6 +85,10 @@ export const useGameProcess = ({
     imageSrc: '/assets/background.png',
   })
 
+  useEffect(() => {
+    dispatch(gameSliceActions.resetPoints())
+  }, [isStartedGame])
+
   points = Points({ coins: coins, enemies: enemies })
 
   useEffect(() => {

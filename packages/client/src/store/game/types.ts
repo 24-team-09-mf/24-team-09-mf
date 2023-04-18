@@ -1,3 +1,3 @@
 export type gameStoreProps = {
-  points: number
+  points: number | null
 }
