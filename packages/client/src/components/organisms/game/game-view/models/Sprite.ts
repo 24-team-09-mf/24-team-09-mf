@@ -103,7 +103,7 @@ export class Sprite {
       }
       // TODO: можно будет удалить на конечном этапе
       else {
-        this.model.fillStyle = this.color
+        this.model.fillStyle = 'transparent'
         this.model.fillRect(
           this.position.x,
           this.position.y,
