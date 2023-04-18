@@ -45,6 +45,7 @@ export const useGameProcess = ({
     coins,
     enemies,
     enemiesCollisionBlocks,
+    isEndedGame,
   })
   // game block end
 
@@ -83,16 +84,19 @@ export const useGameProcess = ({
       requestId = null
       start()
       if (!isStartedGame && !isEndedGame) {
-        console.log('draw start image')
         startGameBackground.draw()
       } else {
-        gameBackground.draw()
-        coins.forEach(block => block.draw())
-        collisionBlocks.forEach(block => block.draw())
-        startFinishCollisionBlocks.forEach(block => block.draw())
-        enemies.forEach(enemy => enemy.update())
-        collisionBlocks.forEach(block => block.draw())
-        drawPlayer()
+        if (!isEndedGame) {
+          gameBackground.draw()
+          coins.forEach(block => block.draw())
+          collisionBlocks.forEach(block => block.draw())
+          startFinishCollisionBlocks.forEach(block => block.draw())
+          enemies.forEach(enemy => enemy.update())
+          collisionBlocks.forEach(block => block.draw())
+          drawPlayer()
+        } else {
+          startGameBackground.draw()
+        }
       }
     }
     function start() {
