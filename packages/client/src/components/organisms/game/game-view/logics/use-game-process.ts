@@ -15,6 +15,8 @@ import { useStartFinishCollisionBlocks } from '@/components/organisms/game/game-
 import { useCoins } from '@/components/organisms/game/game-view/logics/use-coins'
 import { useEnemies } from '@/components/organisms/game/game-view/logics/use-enemies'
 import { Points } from '@/components/organisms/game/game-view/logics/use-points'
+import { useAppDispatch } from '@/store'
+import { gameSliceActions } from '@/store/game/gameSlice'
 
 type Props = {
   gameModel: GameModel
@@ -54,6 +56,7 @@ export const useGameProcess = ({
   })
 
   let points = 0
+  const dispatch = useAppDispatch()
   // game block end
 
   const startGameBackground = useSprite({
@@ -82,7 +85,15 @@ export const useGameProcess = ({
     imageSrc: '/assets/background.png',
   })
 
+  useEffect(() => {
+    dispatch(gameSliceActions.resetPoints())
+  }, [isStartedGame])
+
   points = Points({ coins: coins, enemies: enemies })
+
+  useEffect(() => {
+    if (!isEndedGame) dispatch(gameSliceActions.setPoints(points))
+  }, [points, enemies, isEndedGame])
 
   useEffect(() => {
     let requestId: number | null = null
