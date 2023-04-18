@@ -40,7 +40,7 @@ export const useGameProcess = ({
     gameModel,
     isEndedGame,
   })
-  const gameBackground = useBackgroundGame({ gameModel })
+  const gameBackground = useBackgroundGame({ gameModel, isEndedGame })
 
   const drawPlayer = usePlayer({
     gameModel,
@@ -125,7 +125,7 @@ export const useGameProcess = ({
     coins,
     startFinishCollisionBlocks,
     enemies,
-    gameBackground
+    gameBackground,
   ])
 
   if (!gameModel) return null
