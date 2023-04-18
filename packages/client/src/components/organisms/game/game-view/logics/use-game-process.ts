@@ -14,6 +14,7 @@ import { useCollisionsBlock } from '@/components/organisms/game/game-view/logics
 import { useStartFinishCollisionBlocks } from '@/components/organisms/game/game-view/logics/use-start-finish-collisions-block'
 import { useCoins } from '@/components/organisms/game/game-view/logics/use-coins'
 import { useEnemies } from '@/components/organisms/game/game-view/logics/use-enemies'
+import { useBackgroundGame } from '@/components/organisms/game/game-view/logics/use-background-game'
 
 type Props = {
   gameModel: GameModel
@@ -39,6 +40,7 @@ export const useGameProcess = ({
     gameModel,
     isEndedGame,
   })
+  const gameBackground = useBackgroundGame({ gameModel })
 
   const drawPlayer = usePlayer({
     gameModel,
@@ -50,6 +52,7 @@ export const useGameProcess = ({
     enemies,
     enemiesCollisionBlocks,
     isEndedGame,
+    gameBackground,
   })
   // game block end
 
@@ -66,7 +69,7 @@ export const useGameProcess = ({
     imageSrc: '/assets/startGame.png',
   })
 
-  const gameBackground = useSprite({
+  const parallax = useSprite({
     gameModel,
     position: {
       x: 0,
@@ -91,6 +94,7 @@ export const useGameProcess = ({
         startGameBackground.draw()
       } else {
         if (!isEndedGame) {
+          parallax.draw()
           gameBackground.draw()
           coins.forEach(block => block.draw())
           collisionBlocks.forEach(block => block.draw())
@@ -121,6 +125,7 @@ export const useGameProcess = ({
     coins,
     startFinishCollisionBlocks,
     enemies,
+    gameBackground
   ])
 
   if (!gameModel) return null

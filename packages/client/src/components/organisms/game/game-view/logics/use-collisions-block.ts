@@ -18,13 +18,11 @@ export const useCollisionsBlock = ({ gameModel, isEndedGame }: Props) => {
       parsedCollisionLvl1.forEach((row, y) => {
         row.forEach((symbol, x) => {
           if (symbol === COLLISION_SYMBOL) {
-            result.push(
-              new CollisionBlock({
-                model: gameModel,
-                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE },
-                imageSrc: '/assets/grass.png',
-              })
-            )
+            result.push(new CollisionBlock({
+              model: gameModel,
+              position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE },
+              dimensions: { width: BLOCK_SIZE, height: BLOCK_SIZE }
+            }))
           }
         })
       })

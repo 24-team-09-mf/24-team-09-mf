@@ -30,7 +30,7 @@ export const useEnemies = ({
               new CollisionBlock({
                 model: gameModel,
                 dimensions: { width: BLOCK_SIZE, height: BLOCK_SIZE },
-                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE - 8 },
+                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE - 0.03 },
               })
             )
           }
@@ -51,7 +51,7 @@ export const useEnemies = ({
                 model: gameModel,
                 frameRate: 8,
                 imageSrc: '/assets/sprites/cat/runLeft.png',
-                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE - 8 },
+                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE - 0.03 },
                 collisionBlocks: collisions,
                 startVelocity: x % 2 === 0 ? -2 : 2,
                 animations: {
