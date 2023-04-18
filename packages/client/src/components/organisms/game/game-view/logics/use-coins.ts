@@ -21,7 +21,7 @@ export const useCoins = ({ gameModel, isEndedGame }: Props) => {
             result.push(
               new Coin({
                 model: gameModel,
-                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE - 10 },
+                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE - 0.03 },
                 frameRate: 4,
                 frameBuffer: 15,
                 imageSrc: '/assets/sprites/coin/coin.png',

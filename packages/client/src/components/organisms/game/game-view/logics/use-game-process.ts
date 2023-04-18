@@ -92,19 +92,17 @@ export const useGameProcess = ({
       start()
       if (!isStartedGame && !isEndedGame) {
         startGameBackground.draw()
+      } else if (!isEndedGame) {
+        parallax.draw()
+        gameBackground.draw()
+        coins.forEach(block => block.draw())
+        collisionBlocks.forEach(block => block.draw())
+        startFinishCollisionBlocks.forEach(block => block.draw())
+        enemies.forEach(enemy => enemy.update())
+        collisionBlocks.forEach(block => block.draw())
+        drawPlayer()
       } else {
-        if (!isEndedGame) {
-          parallax.draw()
-          gameBackground.draw()
-          coins.forEach(block => block.draw())
-          collisionBlocks.forEach(block => block.draw())
-          startFinishCollisionBlocks.forEach(block => block.draw())
-          enemies.forEach(enemy => enemy.update())
-          collisionBlocks.forEach(block => block.draw())
-          drawPlayer()
-        } else {
-          startGameBackground.draw()
-        }
+        startGameBackground.draw()
       }
     }
     function start() {
