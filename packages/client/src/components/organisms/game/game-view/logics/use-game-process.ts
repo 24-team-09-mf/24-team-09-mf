@@ -34,7 +34,10 @@ export const useGameProcess = ({
     gameModel,
   })
   const coins = useCoins({ gameModel, isEndedGame })
-  const [enemies, enemiesCollisionBlocks] = useEnemies({ gameModel })
+  const [enemies, enemiesCollisionBlocks] = useEnemies({
+    gameModel,
+    isEndedGame,
+  })
 
   const drawPlayer = usePlayer({
     gameModel,
