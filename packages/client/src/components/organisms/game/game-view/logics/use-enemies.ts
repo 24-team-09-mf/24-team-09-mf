@@ -14,9 +14,11 @@ import { Enemy } from '@/components/organisms/game/game-view/models/Enemy'
 
 type Props = {
   gameModel: GameModel
+  isEndedGame: boolean
 }
 export const useEnemies = ({
   gameModel,
+  isEndedGame,
 }: Props): [Enemy[], CollisionBlock[]] => {
   const collisions = useMemo(() => {
     const result: CollisionBlock[] = []
@@ -28,7 +30,7 @@ export const useEnemies = ({
               new CollisionBlock({
                 model: gameModel,
                 dimensions: { width: BLOCK_SIZE, height: BLOCK_SIZE },
-                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE - 8 },
+                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE - 0.03 },
               })
             )
           }
@@ -36,7 +38,7 @@ export const useEnemies = ({
       })
     }
     return result
-  }, [gameModel])
+  }, [gameModel, isEndedGame])
 
   const enemies = useMemo(() => {
     const result: Enemy[] = []
@@ -49,21 +51,21 @@ export const useEnemies = ({
                 model: gameModel,
                 frameRate: 8,
                 imageSrc: '/assets/sprites/cat/runLeft.png',
-                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE - 8 },
+                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE - 0.03 },
                 collisionBlocks: collisions,
-                startVelocity: x % 2 === 0 ? - 2 : 2,
+                startVelocity: x % 2 === 0 ? -2 : 2,
                 animations: {
                   runRight: {
                     frameRate: 8,
                     frameBuffer: 13,
-                    imageSrc: '/assets/sprites/cat/run.png'
+                    imageSrc: '/assets/sprites/cat/run.png',
                   },
                   runLeft: {
                     frameRate: 8,
                     frameBuffer: 13,
-                    imageSrc: '/assets/sprites/cat/runLeft.png'
-                  }
-                }
+                    imageSrc: '/assets/sprites/cat/runLeft.png',
+                  },
+                },
               })
             )
           }

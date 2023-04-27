@@ -1,6 +1,12 @@
 const URLS = [
   '/',
-  '/assets/images/bg-left.png',
+  '/assets/lvl1.png',
+  '/assets/images/bold.svg',
+  '/assets/images/italic.svg',
+  '/assets/images/emojiPoop.svg',
+  '/assets/images/emojiCat.svg',
+  '/assets/images/emojiRobot.svg',
+  '/assets/images/emojiAdd.svg',
   '/assets/images/bg-right.png',
   '/assets/images/error.svg',
   '/assets/images/footer.png',
