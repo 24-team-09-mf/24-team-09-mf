@@ -1,6 +1,3 @@
-// react
-import { useEffect } from 'react'
-
 // images
 import image from '@/assets/images/header.png'
 
@@ -8,9 +5,7 @@ import image from '@/assets/images/header.png'
 import { Link } from 'react-router-dom'
 
 // redux
-import { userStore, useAppDispatch } from '@/store'
-
-import { getUser } from '@/store/user/auth/actions'
+import { userStore } from '@/store'
 
 // svg
 import userImg from '@/assets/icons/user.svg'
@@ -29,13 +24,6 @@ import {
 
 export const Header = () => {
   const { user } = userStore()
-  const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    if (user?.login === '') {
-      dispatch(getUser())
-    }
-  }, [user])
 
   return (
     <Wrapper>

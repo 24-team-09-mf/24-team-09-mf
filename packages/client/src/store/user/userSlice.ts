@@ -16,7 +16,7 @@ const initialState: UserState = {
     avatar: '',
     status: '',
   },
-  isLoading: false,
+  isLoading: true,
   error: '',
 }
 

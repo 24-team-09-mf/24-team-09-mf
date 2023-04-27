@@ -32,7 +32,13 @@ const useSignIn = () => {
       const result = await dispatch(getUser())
       if (result.meta.requestStatus === 'fulfilled') {
         reset()
-        navigate('/profile')
+        const queryParams = new URLSearchParams(window.location.search)
+        const fromUrl = queryParams.get('fromUrl')
+        if (fromUrl) {
+          navigate(fromUrl)
+        } else {
+          navigate('/profile')
+        }
       }
     } catch (error) {
       console.log(error)

@@ -1,6 +1,3 @@
-// react
-import { useEffect } from 'react'
-
 // lib
 import { useForm } from 'react-hook-form'
 
@@ -20,12 +17,6 @@ const useProfile = () => {
   const { user } = userStore()
   const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    if (user?.login === '') {
-      dispatch(getUser())
-    }
-  }, [user])
-
   const {
     register,
     handleSubmit,
@@ -35,7 +26,6 @@ const useProfile = () => {
 
     resolver: yupResolver(validationSchema),
   })
-
 
   const onSubmitHandler = async (data: FormProfileValues) => {
     try {
