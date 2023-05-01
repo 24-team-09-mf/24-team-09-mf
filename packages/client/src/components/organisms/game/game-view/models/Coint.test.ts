@@ -6,6 +6,8 @@ import {
   BLOCK_SIZE,
 } from '@/components/organisms/game/game.constants'
 
+const fn = jest.fn();
+
 describe('Тест класса Coin', () => {
   let canvas, ctx: CanvasRenderingContext2D, coin: Coin
   beforeEach(() => {
@@ -35,7 +37,7 @@ describe('Тест класса Coin', () => {
 
   it('Проверяю изменение анимации', () => {
     const switchSpriteSpy = jest.spyOn(coin, 'switchSprite')
-    coin.getCoin()
+    coin.getCoin(fn)
     expect(switchSpriteSpy).toHaveBeenCalledWith('getCoin')
   })
 
@@ -43,7 +45,7 @@ describe('Тест класса Coin', () => {
     jest.useFakeTimers()
     coin.compeleAnimation = true
     coin.shouldDraw = true
-    coin.getCoin()
+    coin.getCoin(fn)
     jest.runAllTimers()
     expect(coin.shouldDraw).toBe(false)
   })
