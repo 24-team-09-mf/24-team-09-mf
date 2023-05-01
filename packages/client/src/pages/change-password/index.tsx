@@ -1,11 +1,7 @@
 // components
-import { ChangePassword, LayoutMain } from '../../components'
+import { ChangePassword } from '../../components'
 
 const ChangePasswordPage = () => {
-  return (
-    <LayoutMain>
-      <ChangePassword />
-    </LayoutMain>
-  )
+  return <ChangePassword />
 }
 export default ChangePasswordPage

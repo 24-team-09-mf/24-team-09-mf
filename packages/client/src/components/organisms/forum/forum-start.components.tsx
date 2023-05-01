@@ -1,15 +1,14 @@
 import {
   CatalogBlock,
   CatalogRowContent,
-  CatalogRow1Title,
+  CatalogRowContentTitle,
   CatalogRowThreadsCount,
   CatalogRowMessage,
   CatalogRowMessageDate,
   CatalogRowMessageLink,
   CatalogRowMessageUser,
 } from '@/components/templates/forum/forum.styles'
-import React from 'react'
-import { ForumStartProps } from '@/components/organisms/forum/forum-types'
+import { ForumStartProps } from './forum-types'
 import dateParse from '@/utils/dateParse'
 
 const ForumStartElement = (el: ForumStartProps) => {
@@ -18,7 +17,9 @@ const ForumStartElement = (el: ForumStartProps) => {
   return (
     <CatalogBlock>
       <CatalogRowContent>
-        <CatalogRow1Title to={`/forum/${id}`}>{title}</CatalogRow1Title>
+        <CatalogRowContentTitle to={`/forum/${id}`}>
+          {title}
+        </CatalogRowContentTitle>
         <p>{text}</p>
       </CatalogRowContent>
       <CatalogRowThreadsCount>{topicsCount}</CatalogRowThreadsCount>

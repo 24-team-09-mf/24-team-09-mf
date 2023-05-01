@@ -1,1 +1,1 @@
-export * from "./game-view.component"
+export * from './game-view.component'

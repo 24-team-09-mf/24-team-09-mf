@@ -1,5 +1,9 @@
 // lib
-import { Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
+
+// redux
+import { useAppDispatch } from '@/store'
+import { signOut } from '@/store/user/auth/actions'
 
 // components
 import { Button } from '../../atoms'
@@ -9,6 +13,14 @@ import { FormProfile } from '../../organisms'
 import { Section } from './profile.styles'
 
 export const Profile = () => {
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
+  const onHandleClick = () => {
+    dispatch(signOut())
+    navigate('/signin')
+  }
+
   return (
     <Section>
       <FormProfile />
@@ -17,11 +29,9 @@ export const Profile = () => {
           Изменить пароль
         </Button>
       </Link>
-      <Link to="/signin">
-        <Button color="#C22020" variant="text">
-          Выход
-        </Button>
-      </Link>
+      <Button color="#C22020" variant="text" onClick={onHandleClick}>
+        Выход
+      </Button>
     </Section>
   )
 }

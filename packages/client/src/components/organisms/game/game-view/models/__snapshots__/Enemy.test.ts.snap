@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Тест класса Enemy Проверяю метод draw 1`] = `
+Array [
+  Object {
+    "props": Object {
+      "dHeight": 0,
+      "dWidth": 0,
+      "dx": 192,
+      "dy": 376,
+      "img": <img
+        src="/assets/sprites/cat/runLeft.png"
+      />,
+      "sHeight": 0,
+      "sWidth": 0,
+      "sx": 0,
+      "sy": 0,
+    },
+    "transform": Array [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
+    "type": "drawImage",
+  },
+]
+`;

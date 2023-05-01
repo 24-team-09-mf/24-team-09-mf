@@ -10,4 +10,3 @@ export const Section = styled.div`
   align-items: center;
   margin: 1.5rem auto;
 `
-

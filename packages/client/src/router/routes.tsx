@@ -1,6 +1,9 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, Routes, Route } from 'react-router-dom'
 import { ErrorWrapper } from '@/components/layouts/error-wrapper'
 import loadable from '@loadable/component'
+import { WithAuth } from '@/hooks/withAuth'
+
+import { LayoutMain } from '@/components'
 
 const ErrorPage = loadable(() => import('@/pages/ErrorPage'))
 const PageNotFound = loadable(() => import('@/pages/PageNotFound'))
@@ -15,94 +18,78 @@ const ForumPostPage = loadable(() => import('@/pages/forum/forum-post'))
 const LandingPage = loadable(() => import('@/pages/landing'))
 const StatisticsPage = loadable(() => import('@/pages/statistics'))
 
-// Необходимо обернуть каждую новую страницу в ErrorWrapper за исключением страниц ошибок
+export const Router = () => (
+  <Routes>
+    <Route element={<LayoutMain />}>
+      <Route path="/landing" element={<LandingPage />} />
+    </Route>
+  </Routes>
+)
+
 export const router = createBrowserRouter([
   {
-    path: '/',
     element: (
       <ErrorWrapper>
-        <LandingPage />
+        <LayoutMain />
       </ErrorWrapper>
     ),
-  },
-  {
-    path: '/500',
-    // element: <ErrorPage />,
-  },
-  {
-    path: '/*',
-    element: <PageNotFound />,
-  },
-  {
-    path: '/signin',
-    element: (
-      <ErrorWrapper>
-        <SignInPage />
-      </ErrorWrapper>
-    ),
-  },
-  {
-    path: '/signup',
-    element: (
-      <ErrorWrapper>
-        <SignUpPage />
-      </ErrorWrapper>
-    ),
-  },
-  {
-    path: '/profile',
-    element: (
-      <ErrorWrapper>
-        <ProfilePage />
-      </ErrorWrapper>
-    ),
-  },
-  {
-    path: '/change-password',
-    element: (
-      <ErrorWrapper>
-        <ChangePasswordPage />
-      </ErrorWrapper>
-    ),
-  },
-  {
-    path: '/forum',
-    element: (
-      <ErrorWrapper>
-        <ForumPage />
-      </ErrorWrapper>
-    ),
-  },
-  {
-    path: `/forum/:id`,
-    element: (
-      <ErrorWrapper>
-        <ForumSectionPage />
-      </ErrorWrapper>
-    ),
-  },
-  {
-    path: `/forum/:id/:postPageId`,
-    element: (
-      <ErrorWrapper>
-        <ForumPostPage />
-      </ErrorWrapper>
-    ),
-  },
-  {
-    path: '/statistics',
-    element: (
-      <ErrorWrapper>
-        <StatisticsPage />
-      </ErrorWrapper>
-    ),
-  },
-  {
-    path: '/game',
-    element: (
-      <ErrorWrapper>
-        <GamePage />
-      </ErrorWrapper>
-    ),
+    children: [
+      {
+        path: '/',
+        element: <LandingPage />,
+      },
+      {
+        path: '/500',
+        element: <ErrorPage />,
+      },
+      {
+        path: '/*',
+        element: <PageNotFound />,
+      },
+      {
+        path: '/signin',
+        element: <SignInPage />,
+      },
+      {
+        path: '/signup',
+        element: <SignUpPage />,
+      },
+      {
+        path: '/profile',
+        element: (
+          <WithAuth>
+            <ProfilePage />
+          </WithAuth>
+        ),
+      },
+      {
+        path: '/change-password',
+        element: (
+          <WithAuth>
+            <ChangePasswordPage />
+          </WithAuth>
+        ),
+      },
+      {
+        path: '/forum',
+        element: <ForumPage />,
+      },
+      {
+        path: `/forum/:id`,
+        element: <ForumSectionPage />,
+      },
+      {
+        path: `/forum/:id/:postPageId`,
+        element: <ForumPostPage />,
+      },
+      {
+        path: '/statistics',
+        element: <StatisticsPage />,
+      },
+      {
+        path: '/game',
+        element: <GamePage />,
+      },
+    ],
   },
 ])

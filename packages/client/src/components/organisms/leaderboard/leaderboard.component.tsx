@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react'
 import {
   Control,
-  H2,
   Item,
   Search,
   ControlTitle,
   Sort,
-  Wrapper,
   Number,
   User,
   ItemLeft,
@@ -19,6 +17,9 @@ import { Input } from '@/components/molecules'
 import IconSort from '@/assets/icons/sort.svg'
 import { LeaderboardElementProps } from './leaderboard-types'
 import mergeSort from '@/utils/mergeSort'
+import { H2 } from '@/global-styles'
+
+import avatarDefault from '@/assets/images/avatarDefault.png'
 
 const LeaderboardElement = (props: LeaderboardElementProps) => {
   const { position, points, userName, userAvatar } = props
@@ -29,7 +30,7 @@ const LeaderboardElement = (props: LeaderboardElementProps) => {
         <Number>{position}</Number>
         <User>
           <UserAvatar>
-            {userAvatar && <img src={userAvatar} alt={userName} />}
+            <img src={userAvatar ? userAvatar : avatarDefault} alt={userName} />
           </UserAvatar>
           {userName}
         </User>
@@ -60,7 +61,7 @@ export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
   }, [positionSort])
 
   return (
-    <Wrapper>
+    <>
       <H2>Таблица лидеров</H2>
       <Control>
         <Search>
@@ -96,6 +97,6 @@ export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
       {sortData.map(el => (
         <LeaderboardElement key={el.position} {...el} />
       ))}
-    </Wrapper>
+    </>
   )
 }

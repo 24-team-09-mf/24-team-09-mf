@@ -1,19 +1,5 @@
 import styled from 'styled-components'
 
-export const H2 = styled.h2((props: { marginBottom?: string }) => {
-  const marginBottom = props.marginBottom ? props.marginBottom : '1.875rem'
-  return `
-    font-weight: 700;
-    font-size: 1.25rem;
-    margin-bottom: ${marginBottom};
-  `
-})
-
-export const Wrapper = styled.div`
-  width: 64rem;
-  margin: 0 auto;
-`
-
 export const Control = styled.div`
   display: flex;
   justify-content: space-between;

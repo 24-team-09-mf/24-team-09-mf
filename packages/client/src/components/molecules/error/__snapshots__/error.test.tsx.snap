@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Тест компонента ErrorBlock Тестирование снепшотом 1`] = `
+<div
+  className="sc-beqWaB dpjSCD"
+>
+  <h3
+    className="sc-gueYoa dAPtVp"
+  >
+    404
+  </h3>
+  <p
+    className="sc-dmqHEX bSYZBS"
+  >
+    sorry
+  </p>
+  <a
+    className="sc-hLseeU fznFxu"
+    onClick={[Function]}
+  >
+    Назад
+  </a>
+</div>
+`;

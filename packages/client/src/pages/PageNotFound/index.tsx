@@ -1,11 +1,7 @@
-import { LayoutMain, PageNotFound } from '../../components'
+import { PageNotFound } from '../../components'
 
 const SignUpPage: React.FC = () => {
-  return (
-    <LayoutMain>
-      <PageNotFound />
-    </LayoutMain>
-  )
+  return <PageNotFound />
 }
 
 export default SignUpPage

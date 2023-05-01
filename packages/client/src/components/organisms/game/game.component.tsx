@@ -8,7 +8,7 @@ import { InformationView } from '@/components/organisms/game/information-view'
 
 export const GameComponent = () => {
   const [isShowInformation, setIsShowInformation] = useState(false)
-  const [isGameStarted, setIsGameStarted] = useState(true)
+  const [isGameStarted, setIsGameStarted] = useState(false)
   const [isGameEnded, setIsGameEnded] = useState(false)
 
   const handlerClickStartGame = useCallback(
@@ -26,10 +26,16 @@ export const GameComponent = () => {
     []
   )
 
+  const handlerGameOver = useCallback(() => setIsGameEnded(true), [])
+
   return (
     <Wrapper>
       <MainView>
-        <GameView isStartedGame={isGameStarted} isEndedGame={isGameEnded} />
+        <GameView
+          isStartedGame={isGameStarted}
+          isEndedGame={isGameEnded}
+          onGameOver={() => setIsGameEnded(true)}
+        />
         {!isGameStarted && !isGameEnded && (
           <StartView
             onClickStartGame={handlerClickStartGame}
@@ -37,17 +43,11 @@ export const GameComponent = () => {
           />
         )}
         {isShowInformation && (
-          <InformationView
-            onCloseInformation={handlerClickShowInformation}
-          />
+          <InformationView onCloseInformation={handlerClickShowInformation} />
         )}
-        {!isGameEnded && (
-            <EndView
-              onClickStartGame={handlerClickRestartGame}
-              score={1034}
-            />
-          )
-        }
+        {isGameEnded && (
+          <EndView onClickStartGame={handlerClickRestartGame} score={1034} />
+        )}
       </MainView>
     </Wrapper>
   )

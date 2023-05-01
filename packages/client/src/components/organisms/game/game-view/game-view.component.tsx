@@ -9,7 +9,11 @@ import {
 } from '@/components/organisms/game/game.constants'
 import { useGameProcess } from '@/components/organisms/game/game-view/logics/use-game-process'
 
-export const GameView: FC<GameViewProps> = ({ isStartedGame, isEndedGame }) => {
+export const GameView: FC<GameViewProps> = ({
+  isStartedGame,
+  isEndedGame,
+  onGameOver,
+}) => {
   const [gameModel, setGameModel] = useState<GameModel>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -24,7 +28,7 @@ export const GameView: FC<GameViewProps> = ({ isStartedGame, isEndedGame }) => {
     }
   }, [canvasRef.current])
 
-  useGameProcess({ gameModel, isStartedGame, isEndedGame })
+  useGameProcess({ gameModel, isStartedGame, isEndedGame, onGameOver })
 
-  return <canvas ref={canvasRef} />
+  return <canvas data-testid="game-view" ref={canvasRef} />
 }

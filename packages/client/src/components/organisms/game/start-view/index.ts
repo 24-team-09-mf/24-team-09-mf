@@ -1,1 +1,1 @@
-export * from "./start-view.component"
+export * from './start-view.component'

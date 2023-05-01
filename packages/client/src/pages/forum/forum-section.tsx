@@ -1,12 +1,7 @@
-import { ForumSection, LayoutMain } from '@/components'
-import React from 'react'
+import { ForumSection } from '@/components'
 
 const ForumSectionPage = () => {
-  return (
-    <LayoutMain>
-      <ForumSection />
-    </LayoutMain>
-  )
+  return <ForumSection />
 }
 
 export default ForumSectionPage

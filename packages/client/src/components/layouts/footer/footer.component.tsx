@@ -32,7 +32,7 @@ export const Footer = () => {
           leopard-work
         </LinkComponent>
       </FooterText>
-      <FooterText>{COPYRIGHT_SYMBOL} game name 2023</FooterText>
+      <FooterText>{COPYRIGHT_SYMBOL} Джунглевая опасность 2023</FooterText>
       <Img src={image} alt="профиль" />
     </Wrapper>
   )
