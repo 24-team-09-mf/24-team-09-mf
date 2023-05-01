@@ -8,10 +8,10 @@ export type GameModel = CanvasRenderingContext2D | null
 
 export type SrpiteAnimation = {
   [key: string]: {
-    frameRate: number,
-    frameBuffer: number,
-    imageSrc: string,
-    image?: HTMLImageElement,
+    frameRate: number
+    frameBuffer: number
+    imageSrc: string
+    image?: HTMLImageElement
   }
 }
 

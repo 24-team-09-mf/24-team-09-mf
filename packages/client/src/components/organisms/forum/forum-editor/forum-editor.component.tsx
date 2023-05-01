@@ -27,7 +27,7 @@ export const ForumEditor = ({
     useSectionForm(id!, postPageId)
   const messageRef = useRef(null)
   const messageClear = () => {
-    (messageRef!.current! as HTMLDivElement).innerHTML = ''
+    ;(messageRef!.current! as HTMLDivElement).innerHTML = ''
   }
 
   // TODO Deprecated, но пока замены нет
