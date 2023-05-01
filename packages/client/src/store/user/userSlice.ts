@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { getUser, signIn, signOut, signUp } from './auth/actions'
+import { oAuthGetServiseId, oAuthCodePost } from './oauth/actions'
 import { updateAvatar, updatePassword, updateProfile } from './profile/actions'
 import { UserState } from './types'
 import { AvatarUrl } from '@/api/base'
@@ -109,6 +110,30 @@ const userSlice = createSlice({
         state.isLoading = true
       })
       .addCase(signUp.rejected, (state, action) => {
+        state.error = action.payload as string
+        state.isLoading = false
+      })
+
+      .addCase(oAuthGetServiseId.fulfilled, state => {
+        state.isLoading = false
+        state.error = ''
+      })
+      .addCase(oAuthGetServiseId.pending, state => {
+        state.isLoading = true
+      })
+      .addCase(oAuthGetServiseId.rejected, (state, action) => {
+        state.error = action.payload as string
+        state.isLoading = false
+      })
+
+      .addCase(oAuthCodePost.fulfilled, state => {
+        state.isLoading = false
+        state.error = ''
+      })
+      .addCase(oAuthCodePost.pending, state => {
+        state.isLoading = true
+      })
+      .addCase(oAuthCodePost.rejected, (state, action) => {
         state.error = action.payload as string
         state.isLoading = false
       })

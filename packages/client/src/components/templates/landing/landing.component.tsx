@@ -1,3 +1,7 @@
+import { useEffect } from 'react'
+import { useAppDispatch } from '@/store'
+import { RedirectUrl } from '@/api/base'
+import { oAuthCodePost } from '@/store/user/oauth/actions'
 import { JungleHeader } from '@/components/molecules'
 import Container from '@/components/layouts/container/container.component'
 
@@ -13,6 +17,16 @@ import {
 import Game from '@/assets/images/landing/game.gif'
 
 export const Landing = () => {
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    const oauthCode = new URLSearchParams(window.location.search).get('code')
+    if (oauthCode) {
+      window.history.pushState({}, '', RedirectUrl)
+
+      dispatch(oAuthCodePost(oauthCode))
+    }
+  }, [])
+
   return (
     <Container>
       <Wrapper>

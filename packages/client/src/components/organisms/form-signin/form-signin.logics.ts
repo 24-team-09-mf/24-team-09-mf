@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 // redux
 import { useAppDispatch } from '@/store'
 import { signIn, getUser } from '@/store/user/auth/actions'
+import { oAuthGetServiseId } from '@/store/user/oauth/actions'
 
 // validation
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -39,12 +40,17 @@ const useSignIn = () => {
     }
   }
 
+  const handleOauth = (): void => {
+    dispatch(oAuthGetServiseId())
+  }
+
   return {
     register,
     onSubmitHandler,
     handleSubmit,
     errors,
     isValid,
+    handleOauth
   }
 }
 
