@@ -34,7 +34,7 @@ export const FormSignIn = () => {
         Войти
       </BtnSave>
       <BtnYandex as="button" type="button" color="#579945" variant="outlined" onClick={handleOauth}>
-        Войти через Яндекс
+        Авторизация через Яндекс
       </BtnYandex>
     </Form>
   )

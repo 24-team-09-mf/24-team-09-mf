@@ -15,6 +15,7 @@ const setup = () => {
     loginInput,
     passwordInput,
     submitBtn,
+
     ...utils,
   }
 }

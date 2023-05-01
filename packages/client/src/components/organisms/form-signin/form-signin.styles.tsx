@@ -20,4 +20,5 @@ export const BtnSave = styled(Button)`
 export const BtnYandex = styled(Button)`
   font-size: 12px;
   font-weight: 600;
+  line-height: 1rem;
 `
