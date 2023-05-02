@@ -14,7 +14,7 @@ export const FormProfile = () => {
   const { register, onSubmitHandler, handleSubmit, errors, isValid, user } =
     useProfile()
 
-
+  // console.log(user)
 
   return (
     <Form onSubmit={handleSubmit(onSubmitHandler)}>

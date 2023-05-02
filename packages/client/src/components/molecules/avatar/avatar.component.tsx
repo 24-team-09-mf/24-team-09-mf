@@ -17,7 +17,7 @@ import avatarDefault from '@/assets/images/avatarDefault.png'
 export const Avatar = forwardRef<HTMLInputElement, AvatarProps>(
   ({ src, ...props }, ref) => {
     const dispatch = useAppDispatch()
-    const [avatarSrc, setAvatarSrc] = useState<string | null>(null)
+    const [avatarSrc, setAvatarSrc] = useState<string | undefined>(src)
 
     const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0]
