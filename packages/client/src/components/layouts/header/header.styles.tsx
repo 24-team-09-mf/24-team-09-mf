@@ -67,7 +67,6 @@ export const Profile = styled(NavLink)`
 export const User = styled.p`
   font-size: 1.25rem;
   line-height: 1.6875rem;
-  marg
 
   &:hover {
     text-decoration: underline;
