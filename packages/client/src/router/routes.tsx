@@ -4,6 +4,8 @@ import loadable from '@loadable/component'
 
 import { LayoutMain } from '@/components'
 import ProtectedRoute from './utils/ProtectedRoute'
+import LandingPage from '@/pages/landing'
+import StatisticsPage from '@/pages/statistics'
 
 const ErrorPage = loadable(() => import('@/pages/ErrorPage'))
 const PageNotFound = loadable(() => import('@/pages/PageNotFound'))
@@ -15,10 +17,11 @@ const GamePage = loadable(() => import('@/pages/game'))
 const ForumPage = loadable(() => import('@/pages/forum/forum-start'))
 const ForumSectionPage = loadable(() => import('@/pages/forum/forum-section'))
 const ForumPostPage = loadable(() => import('@/pages/forum/forum-post'))
-const LandingPage = loadable(() => import('@/pages/landing'))
-const StatisticsPage = loadable(() => import('@/pages/statistics'))
+// const LandingPage = loadable(() => import('@/pages/landing'))
+// const StatisticsPage = loadable(() => import('@/pages/statistics'))
+// TODO настроить loadable для ssr
 
-export const router = createBrowserRouter([
+export const routes = [
   {
     element: (
       <ErrorWrapper>
@@ -84,4 +87,6 @@ export const router = createBrowserRouter([
       },
     ],
   },
-])
+]
+
+export const router = createBrowserRouter(routes)
