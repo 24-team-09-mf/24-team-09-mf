@@ -1,4 +1,3 @@
-import { createBrowserRouter } from 'react-router-dom'
 import { ErrorWrapper } from '@/components/layouts/error-wrapper'
 import loadable from '@loadable/component'
 
@@ -88,5 +87,3 @@ export const routes = [
     ],
   },
 ]
-
-export const router = createBrowserRouter(routes)
