@@ -12,6 +12,13 @@ import { GlobalStyle } from './src/global-styles'
 import * as React from 'react'
 import { routes } from './src/router/routes'
 
+const isDev = process.env.NODE_ENV === 'development'
+// suppress useLayoutEffect (and its warnings) when not running in a browser
+if (!isDev && typeof window === 'undefined') {
+  // @ts-ignore
+  React.useLayoutEffect = React.useEffect
+}
+
 export async function render(request: any) {
   const { query, dataRoutes } = createStaticHandler(routes)
   const remixRequest = createFetchRequest(request)

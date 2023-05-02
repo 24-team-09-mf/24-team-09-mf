@@ -20,12 +20,6 @@ import App from './App'
 // startServiceWorker()
 // requestNotificationPermission()
 
-// suppress useLayoutEffect (and its warnings) when not running in a browser
-if (typeof window === 'undefined') {
-  // @ts-ignore
-  React.useLayoutEffect = React.useEffect
-}
-
 ReactDOM.hydrateRoot(
   document.getElementById('root') as HTMLElement,
   <React.StrictMode>
