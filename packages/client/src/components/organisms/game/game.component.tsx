@@ -6,6 +6,9 @@ import { StartView } from '@/components/organisms/game/start-view'
 import { EndView } from './end-view'
 import { InformationView } from '@/components/organisms/game/information-view'
 
+
+import { addLeaderboardItem } from '@/api/leaderboard'
+
 export const GameComponent = () => {
   const [isShowInformation, setIsShowInformation] = useState(false)
   const [isGameStarted, setIsGameStarted] = useState(false)
@@ -17,7 +20,14 @@ export const GameComponent = () => {
   )
 
   const handlerClickRestartGame = useCallback(
-    () => setIsGameEnded(prev => !prev),
+    // () => setIsGameEnded(prev => !prev),
+    // []
+
+    () => addLeaderboardItem({
+      score: 30,
+      name: 'Johny',
+      avatar: 'https://sun9-7.userapi.com/impf/c824601/v824601111/eb480/OLjT9b9_GKs.jpg?size=690x841&quality=96&sign=5fe7154d6d87469793a95088c215e207&type=album'
+    }),
     []
   )
 

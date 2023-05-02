@@ -1,49 +1,43 @@
 import { Section } from './statistics.styles'
 import { Leaderboard } from '@/components'
 import Container from '@/components/layouts/container/container.component'
-import React from 'react'
 import { H1 } from '@/global-styles'
 
-export const Statistics = () => {
-  //TODO Поменять, демо
-  const demoData = [
-    {
-      position: 1,
-      points: 2025,
-      userName: 'ivan99',
-      userAvatar: null,
-    },
-    {
-      position: 2,
-      points: 2025,
-      userName: 'ivan1',
-      userAvatar: null,
-    },
-    {
-      position: 3,
-      points: 1950,
-      userName: 'ivan2',
-      userAvatar: null,
-    },
-    {
-      position: 4,
-      points: 1900,
-      userName: 'noname',
-      userAvatar: null,
-    },
-    {
-      position: 5,
-      points: 270,
-      userName: 'user0001',
-      userAvatar: null,
-    },
-  ]
+import { FC, useEffect, useState } from 'react';
+import { ILeaderboard, getLeaderboardList } from '@/api/leaderboard'
+
+
+export const Statistics: FC = () => {
+
+  const [leaderboardData, setLeaderboardData] = useState([]);
+
+  useEffect(() => {
+
+    getLeaderboardList(10).then(response => {
+      console.log(response);
+      setLeaderboardData(response);
+    }).catch(error => {
+      console.error(error);
+    });
+  }, []);
+
+
+  // fetchedRows.forEach((item) => {
+  //   if (item.avatar) {
+  //     item.avatar = `${AvatarUrl}${item.avatar}`;
+  //   }
+  // });
+  // setRows(fetchedRows);
+
+  //   });
+  // }, []);
+
 
   return (
     <Container>
       <Section>
         <H1>СТАТИСТИКА</H1>
-        <Leaderboard data={demoData} />
+        <Leaderboard data={leaderboardData} />
       </Section>
     </Container>
   )

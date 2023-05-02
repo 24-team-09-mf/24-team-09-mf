@@ -22,7 +22,7 @@ import { H2 } from '@/global-styles'
 import avatarDefault from '@/assets/images/avatarDefault.png'
 
 const LeaderboardElement = (props: LeaderboardElementProps) => {
-  const { position, points, userName, userAvatar } = props
+  const { position, score, name, avatar} = props
 
   return (
     <Item>
@@ -30,12 +30,12 @@ const LeaderboardElement = (props: LeaderboardElementProps) => {
         <Number>{position}</Number>
         <User>
           <UserAvatar>
-            <img src={userAvatar ? userAvatar : avatarDefault} alt={userName} />
+            <img src={avatar ? avatar : avatarDefault} alt={name} />
           </UserAvatar>
-          {userName}
+          {name}
         </User>
       </ItemLeft>
-      <Points>{points}</Points>
+      <Points>{score}</Points>
     </Item>
   )
 }
@@ -47,13 +47,13 @@ export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
   const [sortData, setSortData] = useState(data)
 
   useEffect(() => {
-    const s = data.filter(el => el.userName.indexOf(search) !== -1)
+    const s = data.filter(el => el.name.indexOf(search) !== -1)
     setSortData(mergeSort(s, 'position', 'DESC'))
     setPositionSort('DESC')
   }, [search])
 
   useEffect(() => {
-    setSortData(mergeSort(sortData, 'userName', nameSort))
+    setSortData(mergeSort(sortData, 'name', nameSort))
   }, [nameSort])
 
   useEffect(() => {
@@ -94,8 +94,8 @@ export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
         </Sort>
       </Control>
 
-      {sortData.map(el => (
-        <LeaderboardElement key={el.position} {...el} />
+      {sortData.map((el, index) => (
+        <LeaderboardElement key={index} {...el} />
       ))}
     </>
   )
