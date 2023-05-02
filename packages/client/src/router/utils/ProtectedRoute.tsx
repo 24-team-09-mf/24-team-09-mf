@@ -1,4 +1,4 @@
-import { Navigate } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 import { userStore } from '@/store'
 
 type Props = {
@@ -6,9 +6,12 @@ type Props = {
 }
 
 const ProtectedRoute: React.FC<Props> = ({ children }) => {
+  const location = useLocation()
   const { user, isLoading } = userStore()
 
-  const fromUrl = `${window.location.pathname}${window.location.search}`
+  console.log(location)
+
+  const fromUrl = `${location.pathname}${location.search}`
 
   if (isLoading) return null
 

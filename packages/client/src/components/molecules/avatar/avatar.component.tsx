@@ -17,11 +17,7 @@ import avatarDefault from '@/assets/images/avatarDefault.png'
 export const Avatar = forwardRef<HTMLInputElement, AvatarProps>(
   ({ src, ...props }, ref) => {
     const dispatch = useAppDispatch()
-    const [avatarSrc, setAvatarSrc] = useState(src)
-
-    useEffect(() => {
-      !src ? setAvatarSrc(avatarDefault) : setAvatarSrc(src)
-    }, [src])
+    const [avatarSrc, setAvatarSrc] = useState<string | null>(null)
 
     const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0]
@@ -44,7 +40,7 @@ export const Avatar = forwardRef<HTMLInputElement, AvatarProps>(
 
     return (
       <Wrapper>
-        <AvatarImage src={avatarSrc} alt="Аватар" />
+        <AvatarImage src={avatarSrc || avatarDefault} alt="Аватар" />
         <AvatarInput
           type="file"
           accept=".png, .jpg"

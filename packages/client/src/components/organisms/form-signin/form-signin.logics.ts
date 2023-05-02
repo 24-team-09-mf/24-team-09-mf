@@ -1,6 +1,6 @@
 // lib
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 // redux
 import { useAppDispatch } from '@/store'
@@ -25,6 +25,7 @@ const useSignIn = () => {
   })
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
 
   const onSubmitHandler = async (data: FormSignInValues) => {
     try {
@@ -32,8 +33,7 @@ const useSignIn = () => {
       const result = await dispatch(getUser())
       if (result.meta.requestStatus === 'fulfilled') {
         reset()
-        const queryParams = new URLSearchParams(window.location.search)
-        const fromUrl = queryParams.get('fromUrl')
+        const fromUrl = searchParams.get('fromUrl')
         if (fromUrl) {
           navigate(fromUrl)
         } else {
