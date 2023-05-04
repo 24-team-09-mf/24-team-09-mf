@@ -3,41 +3,35 @@ import { Leaderboard } from '@/components'
 import Container from '@/components/layouts/container/container.component'
 import { H1 } from '@/global-styles'
 
-import { FC, useEffect, useState } from 'react';
-import { ILeaderboard, getLeaderboardList } from '@/api/leaderboard'
+import { useEffect, useState } from 'react';
+import { getLeaderboardList } from '@/api/leaderboard'
+import { LeaderboardElementProps } from '@/components/organisms/leaderboard/leaderboard-types'
 
 
-export const Statistics: FC = () => {
+export const Statistics = () => {
 
-  const [leaderboardData, setLeaderboardData] = useState([]);
+  const [leaderboardData, setLeaderboardData] = useState<LeaderboardElementProps[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-
     getLeaderboardList(10).then(response => {
-      console.log(response);
-      setLeaderboardData(response);
+      setLeaderboardData(response)
+      setIsLoading(false)
     }).catch(error => {
-      console.error(error);
+      console.error(error)
+      setIsLoading(false)
     });
   }, []);
-
-
-  // fetchedRows.forEach((item) => {
-  //   if (item.avatar) {
-  //     item.avatar = `${AvatarUrl}${item.avatar}`;
-  //   }
-  // });
-  // setRows(fetchedRows);
-
-  //   });
-  // }, []);
-
 
   return (
     <Container>
       <Section>
         <H1>СТАТИСТИКА</H1>
-        <Leaderboard data={leaderboardData} />
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <Leaderboard data={leaderboardData} />
+        )}
       </Section>
     </Container>
   )

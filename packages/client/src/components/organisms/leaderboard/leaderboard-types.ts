@@ -3,4 +3,5 @@ export type LeaderboardElementProps = {
   score: number
   name: string
   avatar: string | null
+  id: string
 }

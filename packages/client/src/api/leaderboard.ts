@@ -1,5 +1,5 @@
 import http, { ApiEndpoints } from '@/api/base'
-import { PATH_CURRENT_LEADERBOARD, PATH_LEADERBOARD, TEAM_NAME } from "@/constants/constants";
+import { TEAM_NAME } from "@/constants/constants"
 import { LeaderboardElementProps } from '@/components/organisms/leaderboard/leaderboard-types'
 
 export interface ILeaderboard {
@@ -18,11 +18,7 @@ export const addLeaderboardItem = (data: ILeaderboard) => http.post(ApiEndpoints
   data,
   ratingFieldName: 'score',
   teamName: TEAM_NAME,
-}).then(response => {
-  console.log(response);
-}).catch(error => {
-  console.error(error);
-});
+})
 
 // шаблон добавления
 // () => addLeaderboardItem({
@@ -35,4 +31,4 @@ export const getLeaderboardList = (limit: number) => http.post(ApiEndpoints.Lead
   ratingFieldName: 'score',
   cursor: 0,
   limit,
-}).then((response: ILeaderboardResponse) => response.data.map(({ data }) => data));
+}).then((response: ILeaderboardResponse) => response.data.map(({ data }) => data))

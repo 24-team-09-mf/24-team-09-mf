@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, memo } from 'react'
 import {
   Control,
   Item,
@@ -21,8 +21,8 @@ import { H2 } from '@/global-styles'
 
 import avatarDefault from '@/assets/images/avatarDefault.png'
 
-const LeaderboardElement = (props: LeaderboardElementProps) => {
-  const { position, score, name, avatar} = props
+const LeaderboardElement = memo((props: LeaderboardElementProps) => {
+  const { position, score, name, avatar } = props
 
   return (
     <Item>
@@ -38,13 +38,14 @@ const LeaderboardElement = (props: LeaderboardElementProps) => {
       <Points>{score}</Points>
     </Item>
   )
-}
+})
 
 export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
   const [search, setSearch] = useState('')
   const [nameSort, setNameSort] = useState('ASC')
   const [positionSort, setPositionSort] = useState('DESC')
   const [sortData, setSortData] = useState(data)
+  const [scoreSort, setScoreSort] = useState('ASC')
 
   useEffect(() => {
     const s = data.filter(el => el.name.indexOf(search) !== -1)
@@ -59,6 +60,12 @@ export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
   useEffect(() => {
     setSortData(mergeSort(sortData, 'position', positionSort))
   }, [positionSort])
+
+  useEffect(() => {
+    setSortData(mergeSort(sortData, 'score', scoreSort))
+  }, [scoreSort]);
+
+  const sortedData = sortData.map((el, index) => ({ ...el, position: index + 1 }))
 
   return (
     <>
@@ -84,7 +91,7 @@ export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
           </SortElement>
           <SortElement
             onClick={() =>
-              setPositionSort(positionSort === 'ASC' ? 'DESC' : 'ASC')
+              setScoreSort(scoreSort === 'ASC' ? 'DESC' : 'ASC')
             }>
             По очкам
             <SortElementIcon dir={positionSort}>
@@ -94,8 +101,10 @@ export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
         </Sort>
       </Control>
 
-      {sortData.map((el, index) => (
-        <LeaderboardElement key={index} {...el} />
+      {sortedData.map((el) => (
+        <LeaderboardElement
+          key={el.name}
+          {...el} />
       ))}
     </>
   )

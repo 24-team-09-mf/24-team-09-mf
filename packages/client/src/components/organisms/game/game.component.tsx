@@ -24,9 +24,8 @@ export const GameComponent = () => {
     // []
 
     () => addLeaderboardItem({
-      score: 30,
-      name: 'Johny',
-      avatar: 'https://sun9-7.userapi.com/impf/c824601/v824601111/eb480/OLjT9b9_GKs.jpg?size=690x841&quality=96&sign=5fe7154d6d87469793a95088c215e207&type=album'
+      score: 170,
+      name: 'Kenny'
     }),
     []
   )
