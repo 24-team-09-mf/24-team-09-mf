@@ -5,6 +5,7 @@ import { GameView } from './game-view'
 import { StartView } from '@/components/organisms/game/start-view'
 import { EndView } from './end-view'
 import { InformationView } from '@/components/organisms/game/information-view'
+import { GameInformation } from '@/components/organisms/game/game-information'
 
 
 import { addLeaderboardItem } from '@/api/leaderboard'
@@ -43,8 +44,9 @@ export const GameComponent = () => {
         <GameView
           isStartedGame={isGameStarted}
           isEndedGame={isGameEnded}
-          onGameOver={() => setIsGameEnded(true)}
+          onGameOver={handlerGameOver}
         />
+        {isGameStarted && !isGameEnded && <GameInformation />}
         {!isGameStarted && !isGameEnded && (
           <StartView
             onClickStartGame={handlerClickStartGame}
@@ -54,9 +56,7 @@ export const GameComponent = () => {
         {isShowInformation && (
           <InformationView onCloseInformation={handlerClickShowInformation} />
         )}
-        {isGameEnded && (
-          <EndView onClickStartGame={handlerClickRestartGame} score={1034} />
-        )}
+        {isGameEnded && <EndView onClickStartGame={handlerClickRestartGame} />}
       </MainView>
     </Wrapper>
   )

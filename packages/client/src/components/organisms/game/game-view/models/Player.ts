@@ -9,12 +9,12 @@ type Props = SpriteModel & {
   collisionBlocks: CollisionBlock[]
   coins: Coin[]
   enemies: Enemy[]
-  onGameOver: () => void
+  decrementLives: () => void
+  incrementScore: (value: number) => void
   color?: string
   imageSrc?: string
 }
 export class Player extends Sprite {
-
   velocity = {
     x: 0,
     y: 0,
@@ -32,8 +32,12 @@ export class Player extends Sprite {
     collisionBlocks,
     coins,
     enemies,
-    onGameOver,
-    imageSrc, color, frameRate, animations
+    decrementLives,
+    imageSrc,
+    color,
+    frameRate,
+    animations,
+    incrementScore,
   }: Props) {
     super({ position, model, imageSrc, color, frameRate, animations })
     this.position = position
@@ -41,11 +45,15 @@ export class Player extends Sprite {
     this.collisionBlocks = collisionBlocks
     this.coins = coins
     this.enemies = enemies
-    this.gameOver = onGameOver
+    this.decrementLives = decrementLives
+    this.incrementScore = incrementScore
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  gameOver() { }
+  decrementLives() {}
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  incrementScore(_value: number) {}
 
   update() {
     this.position.x += this.velocity.x
@@ -60,13 +68,12 @@ export class Player extends Sprite {
       this.position.y + this.dimensions.height + this.velocity.y >
       HEIGHT_VIEW
     ) {
-      this.gameOver()
+      this.decrementLives()
     }
     this.draw()
   }
 
   switchSprite(name: string) {
-
     const animation = this.animations?.[name]
     if (this.image === animation?.image) return
 
@@ -87,7 +94,7 @@ export class Player extends Sprite {
           this.position.x <= enemy.position.x + enemy.dimensions.width &&
           this.position.x + this.dimensions.width >= enemy.position.x &&
           enemy.position.y - (this.position.y + this.dimensions.height) <=
-          0.5 &&
+            0.5 &&
           enemy.position.y - (this.position.y + this.dimensions.height) > -0.3
         ) {
           enemy.destroyEnemy()
@@ -99,9 +106,9 @@ export class Player extends Sprite {
           this.position.x + this.dimensions.width >= enemy.position.x &&
           this.position.y + this.dimensions.height > enemy.position.y &&
           this.position.y + this.dimensions.height <=
-          enemy.position.y + enemy.dimensions.height
+            enemy.position.y + enemy.dimensions.height
         ) {
-          this.gameOver()
+          this.decrementLives()
           break
         }
       }
@@ -113,7 +120,7 @@ export class Player extends Sprite {
       const coin = this.coins[i]
       if (this.checkCollision(coin)) {
         if (coin.shouldDraw) {
-          coin.getCoin()
+          coin.getCoin(() => this.incrementScore(100))
           break
         }
       }
@@ -144,7 +151,8 @@ export class Player extends Sprite {
       if (this.checkCollision(collisionBlock)) {
         if (this.velocity.y < 0) {
           this.velocity.y = 0
-          this.position.y = collisionBlock.position.y + collisionBlock.dimensions.height + 0.03
+          this.position.y =
+            collisionBlock.position.y + collisionBlock.dimensions.height + 0.03
           break
         }
         if (this.velocity.y > 0) {
@@ -160,11 +168,11 @@ export class Player extends Sprite {
   checkCollision(collisionBlock: CollisionBlock | Coin) {
     return (
       this.position.x <=
-      collisionBlock.position.x + collisionBlock.dimensions.width &&
+        collisionBlock.position.x + collisionBlock.dimensions.width &&
       this.position.x + this.dimensions.width >= collisionBlock.position.x &&
       this.position.y + this.dimensions.height >= collisionBlock.position.y &&
       this.position.y <=
-      collisionBlock.position.y + collisionBlock.dimensions.height
+        collisionBlock.position.y + collisionBlock.dimensions.height
     )
   }
 
