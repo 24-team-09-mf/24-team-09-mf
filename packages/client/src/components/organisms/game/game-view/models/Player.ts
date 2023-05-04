@@ -97,7 +97,7 @@ export class Player extends Sprite {
           this.position.x + this.dimensions.width >= enemy.position.x &&
           this.position.y + this.dimensions.height > enemy.position.y &&
           this.position.y + this.dimensions.height <
-            enemy.position.y + enemy.dimensions.height / 2 - ENEMY_FIX
+            enemy.position.y + enemy.dimensions.height - ENEMY_FIX
         ) {
           enemy.destroyEnemy()
           return
