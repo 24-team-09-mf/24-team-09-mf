@@ -1,5 +1,5 @@
 import http, { ApiEndpoints } from '@/api/base'
-import { TEAM_NAME } from '@/constants/constants'
+import { TEAM_NAME } from '../constants/constants'
 import { LeaderboardElementProps } from '@/components/organisms/leaderboard/leaderboard-types'
 
 export interface ILeaderboard {
