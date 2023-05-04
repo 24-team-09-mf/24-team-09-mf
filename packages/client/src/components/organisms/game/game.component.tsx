@@ -7,9 +7,6 @@ import { EndView } from './end-view'
 import { InformationView } from '@/components/organisms/game/information-view'
 import { GameInformation } from '@/components/organisms/game/game-information'
 
-
-import { addLeaderboardItem } from '@/api/leaderboard'
-
 export const GameComponent = () => {
   const [isShowInformation, setIsShowInformation] = useState(false)
   const [isGameStarted, setIsGameStarted] = useState(false)
@@ -21,13 +18,7 @@ export const GameComponent = () => {
   )
 
   const handlerClickRestartGame = useCallback(
-    // () => setIsGameEnded(prev => !prev),
-    // []
-
-    () => addLeaderboardItem({
-      score: 170,
-      name: 'Kenny'
-    }),
+    () => setIsGameEnded(prev => !prev),
     []
   )
 

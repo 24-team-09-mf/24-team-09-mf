@@ -4,7 +4,7 @@ import { LeaderboardElementProps } from '@/components/organisms/leaderboard/lead
 
 export interface ILeaderboard {
   score: number,
-  name: string,
+  name?: string,
   avatar?: string,
 }
 
@@ -19,13 +19,6 @@ export const addLeaderboardItem = (data: ILeaderboard) => http.post(ApiEndpoints
   ratingFieldName: 'score',
   teamName: TEAM_NAME,
 })
-
-// шаблон добавления
-// () => addLeaderboardItem({
-//   score: 10,
-//   name: 'John',
-//   avatar: 'avatar.png'
-// }),
 
 export const getLeaderboardList = (limit: number) => http.post(ApiEndpoints.Leaderboard.Leaderboard, {
   ratingFieldName: 'score',
