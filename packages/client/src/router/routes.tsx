@@ -76,7 +76,10 @@ export const router = createBrowserRouter([
       },
       {
         path: '/statistics',
-        element: <StatisticsPage />,
+        element: (
+          <ProtectedRoute>
+            <StatisticsPage />
+          </ProtectedRoute>),
       },
       {
         path: '/game',
