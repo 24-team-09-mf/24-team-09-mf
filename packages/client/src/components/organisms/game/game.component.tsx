@@ -55,7 +55,7 @@ export const GameComponent = () => {
       if (document.fullscreenElement) {
         setTimeout(() => {
           const target = event.target! as HTMLDivElement
-          const scaleX = target.clientWidth / WIDTH_VIEW
+          const scaleX = target.clientWidth / (WIDTH_VIEW + 8)
           const scaleY = target.clientHeight / (HEIGHT_VIEW + 8)
           gameBlock.style.transform = `scale(${scaleX},${scaleY})`
         }, 1)
