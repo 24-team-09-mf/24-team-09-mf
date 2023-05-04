@@ -87,15 +87,17 @@ export class Player extends Sprite {
   }
 
   checkEnemiesCollision() {
+    const ENEMY_FIX = 12 // противник изначально находится ниже игрока на это значение пикселей
+
     for (let i = 0; i < this.enemies.length; i++) {
       const enemy = this.enemies[i]
       if (enemy.shouldDraw) {
         if (
           this.position.x <= enemy.position.x + enemy.dimensions.width &&
           this.position.x + this.dimensions.width >= enemy.position.x &&
-          enemy.position.y - (this.position.y + this.dimensions.height) <=
-            0.5 &&
-          enemy.position.y - (this.position.y + this.dimensions.height) > -0.3
+          this.position.y + this.dimensions.height > enemy.position.y &&
+          this.position.y + this.dimensions.height <
+            enemy.position.y + enemy.dimensions.height / 2 - ENEMY_FIX
         ) {
           enemy.destroyEnemy()
           return
