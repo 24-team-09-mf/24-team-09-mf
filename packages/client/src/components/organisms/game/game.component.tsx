@@ -43,15 +43,17 @@ export const GameComponent = () => {
   )
 
   useEffect(() => {
-    if (isGameFullScreen) document.documentElement.requestFullscreen().then()
-    else if (document.fullscreenElement !== null)
-      document.exitFullscreen().then()
+    if (isGameFullScreen) {
+      document.documentElement.requestFullscreen().then()
+    } else {
+      if (document.fullscreenElement !== null) document.exitFullscreen().then()
+    }
   }, [isGameFullScreen])
 
   useEffect(() => {
     const gameBlock = mainViewRef.current! as HTMLDivElement
 
-    addEventListener('fullscreenchange', event => {
+    const onFullscreenChange = (event: Event) => {
       if (document.fullscreenElement) {
         setTimeout(() => {
           const target = event.target! as HTMLDivElement
@@ -63,7 +65,11 @@ export const GameComponent = () => {
         gameBlock.style.transform = `none`
         setIsGameFullScreen(false)
       }
-    })
+    }
+
+    addEventListener('fullscreenchange', event => onFullscreenChange(event))
+
+    return () => removeEventListener('fullscreenchange', onFullscreenChange)
   }, [])
 
   return (
