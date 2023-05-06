@@ -42,7 +42,7 @@ async function startServer() {
 
     try {
       let template: string
-      let render: any
+      let render: (url: string) => Promise<[string, string]>
 
       if (isDev) {
         template = fs.readFileSync(path.resolve(srcPath, 'index.html'), 'utf-8')
@@ -58,7 +58,7 @@ async function startServer() {
       }
 
       try {
-        const [appHtml, css] = await render(req)
+        const [appHtml, css] = await render(url)
 
         const html = template
           .replace('<!--ssr-body-->', appHtml)

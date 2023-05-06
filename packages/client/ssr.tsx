@@ -1,7 +1,7 @@
 import { renderToString } from 'react-dom/server'
 import { StrictMode } from 'react'
 
-export async function render() {
+export async function render(url: string) {
   const html = renderToString(
     <StrictMode>
       <div>TEST SSR</div>
