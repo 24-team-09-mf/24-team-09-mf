@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+// import { useSearchParams } from 'react-router-dom'
 import { useAppDispatch } from '@/store'
 import { RedirectUrl } from '@/api/base'
 import { oAuthCodePost } from '@/store/user/oauth/actions'
@@ -18,8 +19,12 @@ import Game from '@/assets/images/landing/game.gif'
 
 export const Landing = () => {
   const dispatch = useAppDispatch()
+
+  // const [searchParams] = useSearchParams()
+
   useEffect(() => {
     const oauthCode = new URLSearchParams(window.location.search).get('code')
+    // const oauthCode = searchParams.get('code')
     if (oauthCode) {
       window.history.pushState({}, '', RedirectUrl)
 
