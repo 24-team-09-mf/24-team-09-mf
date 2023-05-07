@@ -3,8 +3,7 @@ import axios from 'axios'
 export const BaseUrl = 'https://ya-praktikum.tech/api/v2/'
 export const AvatarUrl = 'https://ya-praktikum.tech/api/v2/resources'
 export const OAuthUrl = 'https://oauth.yandex.ru/authorize?response_type=code'
-export const RedirectUrl = 'http://localhost:3000'
-// export const RedirectUrl = process.env.REACT_APP_OAUTH_REDIRECT_URL
+export const RedirectUrl = import.meta.env.VITE_OAUTH_REDIRECT_URL
 
 export const ApiEndpoints = {
   Auth: {
