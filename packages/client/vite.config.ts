@@ -1,5 +1,6 @@
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
+import EnvironmentPlugin from 'vite-plugin-environment';
 
 import * as path from 'path'
 import dotenv from 'dotenv'
@@ -36,7 +37,7 @@ export default defineConfig({
   define: {
     __SERVER_PORT__: process.env.SERVER_PORT,
   },
-  plugins: [react()],
+  plugins: [react(),  EnvironmentPlugin('all')],
   resolve: {
     alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
   },

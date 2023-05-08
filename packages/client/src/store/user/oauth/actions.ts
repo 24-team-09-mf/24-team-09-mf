@@ -15,7 +15,7 @@ export const oAuthGetServiseId = createAsyncThunk(
       const url = new URL(OAuthUrl)
 
       url.searchParams.set('client_id', data.service_id)
-      url.searchParams.set('redirect_uri', RedirectUrl)
+      RedirectUrl && url.searchParams.set('redirect_uri', RedirectUrl)
       window.location.href = url.href
     } catch (e) {
       return rejectWithValue('OAuth авторизация: Ошибка получения id')
