@@ -1,7 +1,7 @@
-import { PageNotFound } from '../../components'
+import { PageNotFound } from '@/components'
 
-const SignUpPage: React.FC = () => {
+const Component: React.FC = () => {
   return <PageNotFound />
 }
 
-export default SignUpPage
+export const element = <Component />
