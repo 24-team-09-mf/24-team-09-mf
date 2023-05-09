@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import { useAppDispatch } from '@/store'
-import { RedirectUrl } from '@/api/base'
+import { useSearchParams } from 'react-router-dom'
+import { useAppDispatch, userStore } from '@/store'
 import { oAuthCodePost } from '@/store/user/oauth/actions'
 import { JungleHeader } from '@/components/molecules'
 import Container from '@/components/layouts/container/container.component'
@@ -18,12 +18,14 @@ import Game from '@/assets/images/landing/game.gif'
 
 export const Landing = () => {
   const dispatch = useAppDispatch()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const { user } = userStore()
 
   useEffect(() => {
-    const oauthCode = new URLSearchParams(window.location.search).get('code')
-    if (oauthCode) {
-      window.history.pushState({}, '', RedirectUrl)
+    const oauthCode = searchParams.get('code')
+    if (oauthCode && !user?.id) {
       dispatch(oAuthCodePost(oauthCode))
+      setSearchParams('')
     }
   }, [])
 
