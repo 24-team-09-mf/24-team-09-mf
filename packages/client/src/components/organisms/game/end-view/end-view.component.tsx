@@ -1,23 +1,36 @@
 import { Link } from 'react-router-dom'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { EndViewProps } from './end-view.types'
 import { BtnText, Content } from '../game.styles'
 import { BtnStart, Title, Score, Footer, Wrapper } from './end-view.styles'
 import { useGameStore } from '@/store/gameStore'
-import { userStore } from '@/store'
+import { useAppDispatch, userStore } from '@/store'
 import { addLeaderboardItem } from '@/api/leaderboard'
 
 export const EndView: FC<EndViewProps> = ({ onClickStartGame }) => {
   const { score, resetGame } = useGameStore()
   const { user } = userStore()
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    const addLeader = async () => {
+      try {
+        await dispatch(
+          addLeaderboardItem({
+            score: score,
+            name: user?.login,
+            avatar: user?.avatar,
+          })
+        );
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    addLeader()
+  }, [dispatch])
 
   const handlerStartGame = () => {
     resetGame()
-    addLeaderboardItem({
-      score: score,
-      name: user?.login,
-      avatar: user?.avatar,
-    })
     onClickStartGame()
   }
 
