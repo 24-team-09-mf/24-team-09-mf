@@ -66,7 +66,7 @@ export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
 
   useEffect(() => {
     setSortData(mergeSort(sortData, 'score', scoreSort))
-  }, [scoreSort]);
+  }, [scoreSort])
 
   const sortedData = sortData.map((el) => {
     const position = sortData.indexOf(el) + 1
