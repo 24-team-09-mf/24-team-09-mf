@@ -2,7 +2,7 @@ import { Section } from './statistics.styles'
 import { Leaderboard } from '@/components'
 import Container from '@/components/layouts/container/container.component'
 import { H1 } from '@/global-styles'
-import { useEffect } from 'react';
+import { useEffect } from 'react'
 import { getLeaderboardList } from '@/api/leaderboard'
 import { useAppDispatch, useAppSelector } from '@/store'
 
