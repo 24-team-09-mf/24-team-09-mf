@@ -2,26 +2,20 @@ import { Section } from './statistics.styles'
 import { Leaderboard } from '@/components'
 import Container from '@/components/layouts/container/container.component'
 import { H1 } from '@/global-styles'
-
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { getLeaderboardList } from '@/api/leaderboard'
-import { LeaderboardElementProps } from '@/components/organisms/leaderboard/leaderboard-types'
-
+import { useAppDispatch, useAppSelector } from '@/store'
 
 export const Statistics = () => {
 
-  const [leaderboardData, setLeaderboardData] = useState<LeaderboardElementProps[]>([])
-  const [isLoading, setIsLoading] = useState(true)
+  const leaderboardData = useAppSelector((state) => state.leaderboard.data)
+  const isLoading = useAppSelector((state) => state.leaderboard.isLoading)
+
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
-    getLeaderboardList(10).then(response => {
-      setLeaderboardData(response)
-      setIsLoading(false)
-    }).catch(error => {
-      console.error(error)
-      setIsLoading(false)
-    });
-  }, []);
+    dispatch(getLeaderboardList(10))
+  }, [dispatch])
 
   return (
     <Container>
