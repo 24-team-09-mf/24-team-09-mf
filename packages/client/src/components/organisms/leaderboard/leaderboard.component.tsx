@@ -40,17 +40,20 @@ const LeaderboardElement = memo((props: LeaderboardElementProps) => {
   )
 })
 
+
 export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
   const [search, setSearch] = useState('')
   const [nameSort, setNameSort] = useState('ASC')
   const [positionSort, setPositionSort] = useState('DESC')
   const [sortData, setSortData] = useState(data)
   const [scoreSort, setScoreSort] = useState('ASC')
+  const [noResults, setNoResults] = useState(false)
 
   useEffect(() => {
-    const s = data.filter(el => el.name.indexOf(search) !== -1)
-    setSortData(mergeSort(s, 'position', 'DESC'))
+    const filteredData = data.filter(el => el.name.indexOf(search) !== -1)
+    setSortData(mergeSort(filteredData, 'position', 'DESC'))
     setPositionSort('DESC')
+    setNoResults(filteredData.length === 0)
   }, [search])
 
   useEffect(() => {
@@ -65,7 +68,10 @@ export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
     setSortData(mergeSort(sortData, 'score', scoreSort))
   }, [scoreSort]);
 
-  const sortedData = sortData.map((el, index) => ({ ...el, position: index + 1 }))
+  const sortedData = sortData.map((el) => {
+    const position = sortData.indexOf(el) + 1
+    return { ...el, position }
+  })
 
   return (
     <>
@@ -101,11 +107,15 @@ export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
         </Sort>
       </Control>
 
-      {sortedData.map((el) => (
-        <LeaderboardElement
-          key={el.name}
-          {...el} />
-      ))}
+      {noResults ? (
+        <div>Пользователь не найден</div>
+      ) : (
+        sortedData.map((el) => (
+          <LeaderboardElement
+            key={el.name}
+            {...el} />
+        ))
+      )}
     </>
   )
 }
