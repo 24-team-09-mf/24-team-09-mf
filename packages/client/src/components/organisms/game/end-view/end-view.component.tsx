@@ -13,20 +13,12 @@ export const EndView: FC<EndViewProps> = ({ onClickStartGame }) => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    const addLeader = async () => {
-      try {
-        await dispatch(
-          addLeaderboardItem({
-            score: score,
-            name: user?.login,
-            avatar: user?.avatar,
-          })
-        );
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    addLeader()
+    dispatch(
+      addLeaderboardItem({
+        score: score,
+        name: user?.login,
+        avatar: user?.avatar,
+      }))
   }, [dispatch])
 
   const handlerStartGame = () => {
