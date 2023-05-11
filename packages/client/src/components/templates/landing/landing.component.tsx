@@ -27,7 +27,7 @@ export const Landing = () => {
       dispatch(oAuthCodePost(oauthCode))
       setSearchParams('')
     }
-  }, [])
+  }, [dispatch, setSearchParams, user?.id, searchParams])
 
   return (
     <Container>

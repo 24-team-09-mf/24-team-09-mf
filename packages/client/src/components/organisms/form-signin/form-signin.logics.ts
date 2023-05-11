@@ -1,3 +1,6 @@
+// react
+import { useCallback } from 'react'
+
 // lib
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
@@ -27,22 +30,25 @@ const useSignIn = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const onSubmitHandler = async (data: FormSignInValues) => {
-    try {
-      await dispatch(signIn(data))
-      const result = await dispatch(getUser())
-      if (result.meta.requestStatus === 'fulfilled') {
-        reset()
-        navigate('/profile')
+  const onSubmitHandler = useCallback(
+    async (data: FormSignInValues) => {
+      try {
+        await dispatch(signIn(data))
+        const result = await dispatch(getUser())
+        if (result.meta.requestStatus === 'fulfilled') {
+          reset()
+          navigate('/profile')
+        }
+      } catch (error) {
+        console.log(error)
       }
-    } catch (error) {
-      console.log(error)
-    }
-  }
+    },
+    [reset, navigate, dispatch]
+  )
 
-  const handleOauth = (): void => {
+  const handleOauth = useCallback(() => {
     dispatch(oAuthGetServiseId())
-  }
+  }, [dispatch])
 
   return {
     register,
@@ -50,7 +56,7 @@ const useSignIn = () => {
     handleSubmit,
     errors,
     isValid,
-    handleOauth
+    handleOauth,
   }
 }
 
