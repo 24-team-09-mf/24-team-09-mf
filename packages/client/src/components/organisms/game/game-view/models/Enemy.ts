@@ -40,7 +40,6 @@ export class Enemy extends Sprite {
   }
 
   switchSprite(name: string) {
-
     const animation = this.animations?.[name]
     if (this.image === animation?.image) return
 
@@ -68,7 +67,7 @@ export class Enemy extends Sprite {
   checkCollision(collisionBlock: CollisionBlock) {
     return (
       this.position.x <=
-      collisionBlock.position.x + collisionBlock.dimensions.width &&
+        collisionBlock.position.x + collisionBlock.dimensions.width &&
       this.position.x + this.dimensions.width >= collisionBlock.position.x &&
       this.position.y === collisionBlock.position.y
     )
