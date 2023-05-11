@@ -8,7 +8,6 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier',
-    "plugin:react-hooks/recommended"
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -22,7 +21,5 @@ module.exports = {
   ],
   rules: {
     '@typescript-eslint/ban-ts-comment': 1,
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn" 
   },
 }
