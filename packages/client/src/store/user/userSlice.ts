@@ -5,8 +5,6 @@ import { updateAvatar, updatePassword, updateProfile } from './profile/actions'
 import { UserState } from './types'
 import { AvatarUrl } from '@/api/base'
 
-import avatarDefault from '@/assets/images/avatarDefault.png'
-
 const initialState: UserState = {
   user: {
     id: null,
@@ -16,10 +14,10 @@ const initialState: UserState = {
     login: '',
     email: '',
     phone: '',
-    avatar: `${avatarDefault}`,
+    avatar: '',
     status: '',
   },
-  isLoading: false,
+  isLoading: true,
   error: '',
 }
 

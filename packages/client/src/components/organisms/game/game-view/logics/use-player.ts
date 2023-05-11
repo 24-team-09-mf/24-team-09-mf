@@ -25,7 +25,8 @@ type Props = {
   enemiesCollisionBlocks: CollisionBlock[]
   coins: Coin[]
   gameBackground: BackgroundGame
-  onGameOver(): void
+  changeLivesCount(value: number): void
+  changeScore(value: number): void
   isEndedGame: boolean
 }
 
@@ -51,13 +52,14 @@ export const usePlayer = ({
   gameModel,
   keys,
   collisionBlocks,
-  onGameOver,
+  changeLivesCount,
   startFinishCollisionBlocks,
   coins,
   enemies,
   enemiesCollisionBlocks,
   isEndedGame,
   gameBackground,
+  changeScore,
 }: Props) => {
   const [jumpTime, setJumpTime] = useState(0)
 
@@ -70,7 +72,8 @@ export const usePlayer = ({
         collisionBlocks,
         enemies,
         coins,
-        onGameOver,
+        decrementLives: () => changeLivesCount(-1),
+        incrementScore: value => changeScore(value),
         imageSrc: '/assets/sprites/hero/idle.png',
         animations: {
           idleRight: {

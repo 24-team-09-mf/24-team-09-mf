@@ -15,6 +15,7 @@ import { useStartFinishCollisionBlocks } from '@/components/organisms/game/game-
 import { useCoins } from '@/components/organisms/game/game-view/logics/use-coins'
 import { useEnemies } from '@/components/organisms/game/game-view/logics/use-enemies'
 import { useBackgroundGame } from '@/components/organisms/game/game-view/logics/use-background-game'
+import { useGameStore } from '@/store/gameStore'
 
 type Props = {
   gameModel: GameModel
@@ -28,6 +29,7 @@ export const useGameProcess = ({
   isEndedGame,
   onGameOver,
 }: Props) => {
+  const { score, lives, changeLives, changeScore } = useGameStore()
   const keys = useKeysHandlers()
   // game block start
   const collisionBlocks = useCollisionsBlock({ gameModel, isEndedGame })
@@ -46,7 +48,8 @@ export const useGameProcess = ({
     gameModel,
     keys,
     collisionBlocks,
-    onGameOver,
+    changeLivesCount: changeLives,
+    changeScore: changeScore,
     startFinishCollisionBlocks,
     coins,
     enemies,
@@ -83,16 +86,23 @@ export const useGameProcess = ({
   })
 
   useEffect(() => {
+    if (lives === 0) {
+      onGameOver?.()
+    }
+  }, [lives, onGameOver])
+
+  useEffect(() => {
     let requestId: number | null = null
     if (gameModel) {
       animate()
     }
+    // eslint-disable-next-line no-inner-declarations
     function animate() {
       requestId = null
       start()
       if (!isStartedGame && !isEndedGame) {
         startGameBackground.draw()
-      } else if (!isEndedGame) {
+      } else if (!isEndedGame && lives > 0) {
         parallax.draw()
         gameBackground.draw()
         coins.forEach(block => block.draw())
@@ -105,6 +115,7 @@ export const useGameProcess = ({
         startGameBackground.draw()
       }
     }
+    // eslint-disable-next-line no-inner-declarations
     function start() {
       if (!requestId) requestId = window.requestAnimationFrame(animate)
     }
@@ -124,6 +135,7 @@ export const useGameProcess = ({
     startFinishCollisionBlocks,
     enemies,
     gameBackground,
+    lives,
   ])
 
   if (!gameModel) return null

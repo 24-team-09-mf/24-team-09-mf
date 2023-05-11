@@ -29,13 +29,13 @@ describe('Тестирую класс Player', () => {
     canvas.width = WIDTH_VIEW
     canvas.height = HEIGHT_VIEW
     ctx = canvas.getContext('2d') as CanvasRenderingContext2D
+    const fn = jest.fn()
 
     const position = { x: 0, y: 0 }
     const model = ctx
     const collisionBlocks: CollisionBlock[] = []
     const coins: Coin[] = []
     const enemies: Enemy[] = []
-    const onGameOver = jest.fn()
     const imageSrc = '/assets/sprites/hero/idle.png'
     player = new Player({
       position,
@@ -43,7 +43,8 @@ describe('Тестирую класс Player', () => {
       collisionBlocks,
       coins,
       enemies,
-      onGameOver,
+      decrementLives: fn,
+      incrementScore: fn,
       imageSrc,
       animations,
     })
