@@ -1,7 +1,6 @@
 export type LeaderboardElementProps = {
-  position: number
+  position?: number
   score: number
   name: string
   avatar: string | null
-  id: string
 }

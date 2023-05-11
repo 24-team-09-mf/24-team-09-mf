@@ -40,36 +40,42 @@ const LeaderboardElement = memo((props: LeaderboardElementProps) => {
   )
 })
 
-
 export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
   const [search, setSearch] = useState('')
-  const [nameSort, setNameSort] = useState('ASC')
+  const [nameSort, setNameSort] = useState('DESC')
   const [positionSort, setPositionSort] = useState('DESC')
   const [sortData, setSortData] = useState(data)
-  const [scoreSort, setScoreSort] = useState('ASC')
   const [noResults, setNoResults] = useState(false)
 
   useEffect(() => {
-    const filteredData = data.filter(el => el.name.indexOf(search) !== -1)
-    setSortData(mergeSort(filteredData, 'position', 'DESC'))
-    setPositionSort('DESC')
-    setNoResults(filteredData.length === 0)
-  }, [search])
+    let filteredData = data
+    if (search !== '') {
+      filteredData = data.filter(el => el.name.indexOf(search) !== -1)
+      setNoResults(filteredData.length === 0)
+    }
+    const sortedData = mergeSort(filteredData, 'position', 'DESC')
+    setSortData(sortedData)
+    setPositionSort('ASC')
+  }, [data, search])
 
   useEffect(() => {
-    setSortData(mergeSort(sortData, 'name', nameSort))
+    setSortData(prevSortData => {
+      const sortedData = mergeSort(prevSortData, 'name', nameSort)
+      return sortedData
+    })
   }, [nameSort])
 
   useEffect(() => {
-    setSortData(mergeSort(sortData, 'position', positionSort))
+    setSortData(prevSortData => {
+      const sortedData = mergeSort(prevSortData, 'position', positionSort)
+      return sortedData
+    })
   }, [positionSort])
 
-  useEffect(() => {
-    setSortData(mergeSort(sortData, 'score', scoreSort))
-  }, [scoreSort])
+  const dataWithPositions = data.map((el, index) => ({ ...el, position: index + 1 }))
 
   const sortedData = sortData.map((el) => {
-    const position = sortData.indexOf(el) + 1
+    const position = dataWithPositions.find((e) => e.name === el.name)?.position
     return { ...el, position }
   })
 
@@ -97,7 +103,7 @@ export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
           </SortElement>
           <SortElement
             onClick={() =>
-              setScoreSort(scoreSort === 'ASC' ? 'DESC' : 'ASC')
+              setPositionSort(positionSort === 'ASC' ? 'DESC' : 'ASC')
             }>
             По очкам
             <SortElementIcon dir={positionSort}>
