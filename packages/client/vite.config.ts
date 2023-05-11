@@ -4,6 +4,7 @@ import EnvironmentPlugin from 'vite-plugin-environment';
 
 import * as path from 'path'
 import dotenv from 'dotenv'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 dotenv.config()
 
@@ -37,7 +38,20 @@ export default defineConfig({
   define: {
     __SERVER_PORT__: process.env.SERVER_PORT,
   },
-  plugins: [react(),  EnvironmentPlugin('all')],
+
+  plugins: [
+    react(),
+    EnvironmentPlugin('all'),
+    viteStaticCopy({
+      targets: [
+        {
+          src: 'sw.js',
+          dest: '',
+        },
+      ],
+    }),
+  ],
+
   resolve: {
     alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
   },
