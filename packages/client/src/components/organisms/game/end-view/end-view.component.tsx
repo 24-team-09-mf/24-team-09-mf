@@ -3,8 +3,16 @@ import { FC } from 'react'
 import { EndViewProps } from './end-view.types'
 import { BtnText, Content } from '../game.styles'
 import { BtnStart, Title, Score, Footer, Wrapper } from './end-view.styles'
+import { useGameStore } from '@/store/gameStore'
 
-export const EndView: FC<EndViewProps> = ({ onClickStartGame, score }) => {
+export const EndView: FC<EndViewProps> = ({ onClickStartGame }) => {
+  const { score, resetGame } = useGameStore()
+
+  const handlerStartGame = () => {
+    resetGame()
+    onClickStartGame()
+  }
+
   return (
     <Wrapper>
       <Content>
@@ -37,7 +45,7 @@ export const EndView: FC<EndViewProps> = ({ onClickStartGame, score }) => {
             color="#fff"
             variant="contained"
             disabled={false}
-            onClick={onClickStartGame}>
+            onClick={handlerStartGame}>
             Retry
           </BtnStart>
         </Footer>

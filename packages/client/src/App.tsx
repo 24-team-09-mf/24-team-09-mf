@@ -1,31 +1,23 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import { useEffect } from 'react'
 import { RouterProvider } from 'react-router-dom'
-import { store } from './store'
-import { Provider } from 'react-redux'
+import { useAppDispatch } from './store'
+import { getUser } from '@/store/user/auth/actions'
+
 import { router } from './router/routes'
 import { GlobalStyle } from './global-styles'
 
-const startServiceWorker = () => {
-  if ('serviceWorker' in navigator && import.meta.env.MODE === 'production') {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js').then()
-    })
-  }
-}
+const App: React.FC = () => {
+  const dispatch = useAppDispatch()
 
-const requestNotificationPermission = () => {
-  const permission = window.Notification.requestPermission()
-}
+  useEffect(() => {
+    dispatch(getUser())
+  })
 
-startServiceWorker()
-requestNotificationPermission()
-
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <Provider store={store}>
+  return (
+    <>
       <GlobalStyle />
       <RouterProvider router={router} />
-    </Provider>
-  </React.StrictMode>
-)
+    </>
+  )
+}
+export default App

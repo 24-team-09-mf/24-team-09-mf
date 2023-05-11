@@ -1,9 +1,9 @@
-import { createBrowserRouter, Routes, Route } from 'react-router-dom'
+import { createBrowserRouter } from 'react-router-dom'
 import { ErrorWrapper } from '@/components/layouts/error-wrapper'
 import loadable from '@loadable/component'
-import { WithAuth } from '@/hooks/withAuth'
 
 import { LayoutMain } from '@/components'
+import ProtectedRoute from './utils/ProtectedRoute'
 
 const ErrorPage = loadable(() => import('@/pages/ErrorPage'))
 const PageNotFound = loadable(() => import('@/pages/PageNotFound'))
@@ -17,14 +17,6 @@ const ForumSectionPage = loadable(() => import('@/pages/forum/forum-section'))
 const ForumPostPage = loadable(() => import('@/pages/forum/forum-post'))
 const LandingPage = loadable(() => import('@/pages/landing'))
 const StatisticsPage = loadable(() => import('@/pages/statistics'))
-
-export const Router = () => (
-  <Routes>
-    <Route element={<LayoutMain />}>
-      <Route path="/landing" element={<LandingPage />} />
-    </Route>
-  </Routes>
-)
 
 export const router = createBrowserRouter([
   {
@@ -57,17 +49,17 @@ export const router = createBrowserRouter([
       {
         path: '/profile',
         element: (
-          <WithAuth>
+          <ProtectedRoute>
             <ProfilePage />
-          </WithAuth>
+          </ProtectedRoute>
         ),
       },
       {
         path: '/change-password',
         element: (
-          <WithAuth>
+          <ProtectedRoute>
             <ChangePasswordPage />
-          </WithAuth>
+          </ProtectedRoute>
         ),
       },
       {
