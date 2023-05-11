@@ -4,7 +4,6 @@ import { useAppDispatch } from './store'
 import { getUser } from '@/store/user/auth/actions'
 
 import { router } from './router/routes'
-
 import { GlobalStyle } from './global-styles'
 
 const App: React.FC = () => {
