@@ -3,7 +3,7 @@ import { useCallback } from 'react'
 
 // lib
 import { useForm } from 'react-hook-form'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 // redux
 import { useAppDispatch } from '@/store'
@@ -29,7 +29,6 @@ const useSignIn = () => {
   })
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
 
   const onSubmitHandler = useCallback(
     async (data: FormSignInValues) => {
@@ -42,7 +41,6 @@ const useSignIn = () => {
         }
       } catch (error) {
         console.log(error)
-
       }
     },
     [reset, navigate, dispatch]
