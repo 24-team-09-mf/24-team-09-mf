@@ -9,6 +9,8 @@ import { createClientAndConnect } from './db'
 import { installGlobals } from '@remix-run/node'
 import { Image } from 'canvas'
 
+import { ApiRepository } from './repository/apiRepository'
+
 dotenv.config()
 
 const isDev = process.env.NODE_ENV === 'development'
@@ -50,8 +52,8 @@ async function startServer() {
     try {
       let template: string
       let render: (args: {
-        request: express.Request
-      }) => Promise<[string, string]>
+        request: express.Request,
+      }, repository: any) => Promise<[string, string, object]>
 
       if (isDev) {
         template = fs.readFileSync(path.resolve(srcPath, 'index.html'), 'utf-8')
@@ -67,11 +69,17 @@ async function startServer() {
       }
 
       try {
-        const [appHtml, css] = await render({ request: req })
-
+        const [appHtml, css, initialState] = await render({ request: req }, new ApiRepository(req.headers['cookie']))
+        // TODO добавить сериализацию
+        const initialStateSerialized =
+          initialState && JSON.stringify(initialState)
         const html = template
           .replace('<!--ssr-body-->', appHtml)
           .replace(`<!--ssr-styles-->`, css)
+          .replace(
+            '<!--ssr-initialState-->',
+            `<script>window.__INITIAL_STATE__ = ${initialStateSerialized}</script>`
+          )
 
         res.setHeader('Content-Type', 'text/html')
         res.status(200).end(html)

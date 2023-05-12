@@ -9,7 +9,10 @@ import { Provider } from 'react-redux'
 import { routes } from '@/router/routes'
 import { GlobalStyle } from '@/global-styles'
 import CheckAuthorizedPerson from '@/components/organisms/check-authorized-person'
-import { store } from './store'
+import { createStore } from './store'
+
+import { UserService } from '@/services/user/userService'
+import { ApiService } from './api/apiService'
 
 const startServiceWorker = () => {
   // TODO изменить расположение файлов и добавить sw
@@ -26,6 +29,10 @@ const requestNotificationPermission = () => {
 
 startServiceWorker()
 requestNotificationPermission()
+
+// PreloadedState from ssr
+const initialState = window.__INITIAL_STATE__
+delete window['__INITIAL_STATE__']
 
 hydrate()
 async function hydrate() {
@@ -47,7 +54,7 @@ async function hydrate() {
   ReactDOM.hydrateRoot(
     document.getElementById('root') as HTMLElement,
     <React.StrictMode>
-      <Provider store={store}>
+      <Provider store={createStore(new UserService(new ApiService()), initialState)}>
         <GlobalStyle />
         <RouterProvider router={router} fallbackElement={null} />
         <CheckAuthorizedPerson />

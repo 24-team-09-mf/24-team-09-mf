@@ -3,6 +3,7 @@ import type { RouteObject } from 'react-router-dom'
 
 import { LayoutMain } from '@/components'
 import ProtectedRoute from '@/router/utils/ProtectedRoute'
+import { getUser } from '@/store/user/auth/actions'
 
 export const routes: RouteObject[] = [
   {
@@ -12,6 +13,9 @@ export const routes: RouteObject[] = [
       {
         index: true,
         lazy: () => import('@/pages/landing'),
+        loader: () => {
+          return getUser
+        },
       },
       {
         path: Path.NOT_FOUND,

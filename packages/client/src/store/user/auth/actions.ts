@@ -1,13 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import http, { ApiEndpoints } from '@/api/base'
 import { SignIn, SignUp, User } from '../types'
+import { IUserService } from '@/services/user/userService'
 
 export const getUser = createAsyncThunk(
   'user/getuser',
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, extra }) => {
     try {
-      const response = await http.get<User>(ApiEndpoints.Auth.UserInfo)
-      return response.data
+      const service = extra as IUserService;
+      // console.log('service.getUser()',service.getUser())
+      return service.getUser()
+      // const response = await http.get<User>(ApiEndpoints.Auth.UserInfo)
+      // return response.data
     } catch (error) {
       return rejectWithValue('Ошибка при получении данных пользователя')
     }

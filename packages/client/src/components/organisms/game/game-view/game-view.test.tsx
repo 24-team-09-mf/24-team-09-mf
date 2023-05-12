@@ -6,9 +6,15 @@ import {
   WIDTH_VIEW,
 } from '@/components/organisms/game/game.constants'
 import { Provider } from 'react-redux'
-import { store } from '@/store'
+import { createStore } from '@/store'
+
+
+import { UserService } from '@/services/user/userService'
+import { ApiService } from '@/api/apiService'
 
 const mockGameOver = jest.fn()
+
+const store = createStore(new UserService(new ApiService()))
 
 const setup = () => {
   const utils = render(
