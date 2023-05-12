@@ -23,6 +23,7 @@ import avatarDefault from '@/assets/images/avatarDefault.png'
 
 const LeaderboardElement = memo((props: LeaderboardElementProps) => {
   const { position, score, name, avatar } = props
+  const avatarSrc = avatar ? avatar : avatarDefault
 
   return (
     <Item>
@@ -30,7 +31,7 @@ const LeaderboardElement = memo((props: LeaderboardElementProps) => {
         <Number>{position}</Number>
         <User>
           <UserAvatar>
-            <img src={avatar ? avatar : avatarDefault} alt={name} />
+            <img src={avatarSrc} alt={name} />
           </UserAvatar>
           {name}
         </User>
@@ -48,7 +49,7 @@ export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
   const [noResults, setNoResults] = useState(false)
 
   useEffect(() => {
-    let filteredData = data
+    let filteredData = [...data]
     if (search !== '') {
       filteredData = data.filter(el => el.name.indexOf(search) !== -1)
       setNoResults(filteredData.length === 0)
