@@ -112,27 +112,33 @@ export const useGameProcess = ({
     }
   }, [lives, onGameOver])
 
+  let lastTime: number, elapsedMS: number
+  const FPS = 80
+
   useEffect(() => {
     let requestId: number | null = null
     if (gameModel) {
-      animate()
+      animate(performance.now())
     }
     // eslint-disable-next-line no-inner-declarations
-    function animate() {
+    function animate(now: number) {
+      lastTime = lastTime || now
+      elapsedMS = now - lastTime
       requestId = null
       start()
       if (!isStartedGame && !isEndedGame) {
         startGameBackground.draw()
       } else if (!isEndedGame && lives > 0) {
-        parallax.draw()
-        gameBackground.draw()
-        coins.forEach(block => block.draw())
-        collisionBlocks.forEach(block => block.draw())
-        startBlock.forEach(block => block.draw())
-        finishBlock.forEach(block => block.draw())
-        startFinishCollisionBlocks.forEach(block => block.draw())
-        enemies.forEach(enemy => enemy.update())
-        collisionBlocks.forEach(block => block.draw())
+        if (elapsedMS > 1000 / FPS) {
+          lastTime = now
+          parallax.draw()
+          gameBackground.draw()
+          coins.forEach(block => block.draw())
+          collisionBlocks.forEach(block => block.draw())
+          startFinishCollisionBlocks.forEach(block => block.draw())
+          enemies.forEach(enemy => enemy.update())
+          collisionBlocks.forEach(block => block.draw())
+        }
         drawPlayer()
       } else {
         startGameBackground.draw()

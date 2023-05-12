@@ -1,4 +1,3 @@
-import { createBrowserRouter } from 'react-router-dom'
 import { ErrorWrapper } from '@/components/layouts/error-wrapper'
 import loadable from '@loadable/component'
 
@@ -18,7 +17,7 @@ const ForumPostPage = loadable(() => import('@/pages/forum/forum-post'))
 const LandingPage = loadable(() => import('@/pages/landing'))
 const StatisticsPage = loadable(() => import('@/pages/statistics'))
 
-export const router = createBrowserRouter([
+export const routes = [
   {
     element: (
       <ErrorWrapper>
@@ -84,4 +83,4 @@ export const router = createBrowserRouter([
       },
     ],
   },
-])
+]

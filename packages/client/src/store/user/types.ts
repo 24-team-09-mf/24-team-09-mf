@@ -34,3 +34,7 @@ export interface UserState {
   isLoading: boolean
   error?: string
 }
+
+export interface ServiceId {
+  service_id: string;
+}

@@ -10,11 +10,12 @@ export const Wrapper = styled.div`
 `
 export const Content = styled(ContentComponent)`
   margin: 0;
-  padding: 15px 30px 0;
-  justify-content: flex-end;
-  flex-direction: row;
   height: 100%;
   width: 100%;
+  justify-content: right;
+  align-items: flex-start;
+  flex-direction: row;
+  padding: 34px 90px 0 90px;
 `
 
 export const Title = styled.h1`

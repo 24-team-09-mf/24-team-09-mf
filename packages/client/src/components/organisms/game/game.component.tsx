@@ -1,16 +1,24 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { MainView, Wrapper } from './game.styles'
+import { FullScreenBtn, MainView, Wrapper } from './game.styles'
 import { GameView } from './game-view'
 import { StartView } from '@/components/organisms/game/start-view'
 import { EndView } from './end-view'
 import { InformationView } from '@/components/organisms/game/information-view'
 import { GameInformation } from '@/components/organisms/game/game-information'
+import {
+  HEIGHT_VIEW,
+  WIDTH_VIEW,
+} from '@/components/organisms/game/game.constants'
+import fullScreenIcon from '@/assets/icons/fullscreen.svg'
 
 export const GameComponent = () => {
   const [isShowInformation, setIsShowInformation] = useState(false)
   const [isGameStarted, setIsGameStarted] = useState(false)
   const [isGameEnded, setIsGameEnded] = useState(false)
+  const [isGameFullScreen, setIsGameFullScreen] = useState(false)
+
+  const mainViewRef = useRef(null)
 
   const handlerClickStartGame = useCallback(
     () => setIsGameStarted(prev => !prev),
@@ -29,9 +37,47 @@ export const GameComponent = () => {
 
   const handlerGameOver = useCallback(() => setIsGameEnded(true), [])
 
+  const handlerClickFullscreen = useCallback(
+    () => setIsGameFullScreen(prev => !prev),
+    []
+  )
+
+  useEffect(() => {
+    if (isGameFullScreen) {
+      document.documentElement.requestFullscreen().then()
+    } else {
+      if (document.fullscreenElement !== null) document.exitFullscreen().then()
+    }
+  }, [isGameFullScreen])
+
+  useEffect(() => {
+    const gameBlock = mainViewRef.current! as HTMLDivElement
+
+    const onFullscreenChange = (event: Event) => {
+      if (document.fullscreenElement) {
+        setTimeout(() => {
+          const target = event.target! as HTMLDivElement
+          const scaleX = target.clientWidth / (WIDTH_VIEW + 8)
+          const scaleY = target.clientHeight / (HEIGHT_VIEW + 8)
+          gameBlock.style.transform = `scale(${scaleX},${scaleY})`
+        }, 1)
+      } else {
+        gameBlock.style.transform = `none`
+        setIsGameFullScreen(false)
+      }
+    }
+
+    addEventListener('fullscreenchange', event => onFullscreenChange(event))
+
+    return () => removeEventListener('fullscreenchange', onFullscreenChange)
+  }, [])
+
   return (
-    <Wrapper>
-      <MainView>
+    <Wrapper fullScreen={isGameFullScreen}>
+      <MainView ref={mainViewRef}>
+        <FullScreenBtn onClick={handlerClickFullscreen}>
+          <img src={fullScreenIcon} alt="На весь экран" />
+        </FullScreenBtn>
         <GameView
           isStartedGame={isGameStarted}
           isEndedGame={isGameEnded}
