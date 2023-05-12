@@ -22,9 +22,9 @@ export const useFinishBlock = ({ gameModel, isEndedGame }: Props) => {
             result.push(
               new CollisionBlock({
                 model: gameModel,
-                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE },
+                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE + 3 },
                 frameRate: 4,
-                frameBuffer: 15,
+                frameBuffer: 12,
                 imageSrc: '/assets/sprites/cat/licks1.png'
               })
             )
