@@ -131,25 +131,17 @@ export const usePlayer = ({
       if (
         keys.pressedA &&
         (player.position.x > LEFT_VIEW_BOX_BORDER ||
-          startFinishCollisionBlocks.some(
-            block => block.position.x === BORDER_LEFT
-          ) ||
-          startBlock.some(
-            block => block.position.x === BORDER_LEFT
-          )
+          startFinishCollisionBlocks
+            .some(block => block.position.x === BORDER_LEFT)
         )
       ) {
         player.velocity.x = -SPEED
       } else if (
         keys.pressedD &&
         (player.position.x < RIGHT_VIEW_BOX_BORDER ||
-          startFinishCollisionBlocks.some(
-            block => block.dimensions.width + block.position.x === BORDER_RIGHT
-          )
-          ||
-          startBlock.some(
-            block => block.dimensions.width + block.position.x === BORDER_RIGHT
-          ))
+          startFinishCollisionBlocks
+            .some(block => block.dimensions.width + block.position.x === BORDER_RIGHT)
+        )
       ) {
         player.velocity.x = SPEED
       } else {
@@ -158,12 +150,9 @@ export const usePlayer = ({
         if (keys.pressedD) {
           if (!checkNextPosition(player, collisionBlocks, -SPEED)) {
             collisionBlocks.forEach(block => (block.position.x -= SPEED))
-            startFinishCollisionBlocks.forEach(
-              block => (block.position.x -= SPEED)
-            )
-            startBlock.forEach(
-              block => (block.position.x -= SPEED)
-            )
+            startBlock.forEach(block => (block.position.x -= SPEED))
+            finishBlock.forEach(block => (block.position.x -= SPEED))
+            startFinishCollisionBlocks.forEach(block => (block.position.x -= SPEED))
             coins.forEach(block => (block.position.x -= SPEED))
             enemies.forEach(enemy => (enemy.position.x -= SPEED))
             enemiesCollisionBlocks.forEach(block => (block.position.x -= SPEED))
@@ -172,12 +161,9 @@ export const usePlayer = ({
         } else if (keys.pressedA) {
           if (!checkNextPosition(player, collisionBlocks, SPEED)) {
             collisionBlocks.forEach(block => (block.position.x += SPEED))
-            startFinishCollisionBlocks.forEach(
-              block => (block.position.x += SPEED)
-            )
-            startBlock.forEach(
-              block => (block.position.x += SPEED)
-            )
+            startBlock.forEach(block => (block.position.x += SPEED))
+            finishBlock.forEach(block => (block.position.x += SPEED))
+            startFinishCollisionBlocks.forEach(block => (block.position.x += SPEED))
             coins.forEach(block => (block.position.x += SPEED))
             enemies.forEach(enemy => (enemy.position.x += SPEED))
             enemiesCollisionBlocks.forEach(block => (block.position.x += SPEED))
