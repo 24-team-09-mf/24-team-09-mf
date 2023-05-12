@@ -6,6 +6,8 @@ import { createServer as createViteServer } from 'vite'
 import type { ViteDevServer } from 'vite'
 import express from 'express'
 import { createClientAndConnect } from './db'
+import { installGlobals } from '@remix-run/node'
+import { Image } from 'canvas'
 
 dotenv.config()
 
@@ -14,6 +16,11 @@ const app = express()
 const port = Number(process.env.SERVER_PORT) || 3001
 
 async function startServer() {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //@ts-ignore
+  global.Image = Image
+  installGlobals()
+
   app.use(cors())
   createClientAndConnect()
   app.get('/api', (_, res) => {
@@ -42,7 +49,9 @@ async function startServer() {
 
     try {
       let template: string
-      let render: (url: string) => Promise<[string, string]>
+      let render: (args: {
+        request: express.Request
+      }) => Promise<[string, string]>
 
       if (isDev) {
         template = fs.readFileSync(path.resolve(srcPath, 'index.html'), 'utf-8')
@@ -58,7 +67,7 @@ async function startServer() {
       }
 
       try {
-        const [appHtml, css] = await render(url)
+        const [appHtml, css] = await render({ request: req })
 
         const html = template
           .replace('<!--ssr-body-->', appHtml)

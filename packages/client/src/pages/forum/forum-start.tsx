@@ -4,4 +4,4 @@ const ForumPage = () => {
   return <Forum />
 }
 
-export default ForumPage
+export const element = <ForumPage />
