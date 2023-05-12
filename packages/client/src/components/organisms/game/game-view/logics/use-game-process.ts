@@ -135,6 +135,8 @@ export const useGameProcess = ({
           gameBackground.draw()
           coins.forEach(block => block.draw())
           collisionBlocks.forEach(block => block.draw())
+          startBlock.forEach(block => block.draw())
+          finishBlock.forEach(block => block.draw())
           startFinishCollisionBlocks.forEach(block => block.draw())
           enemies.forEach(enemy => enemy.update())
           collisionBlocks.forEach(block => block.draw())
