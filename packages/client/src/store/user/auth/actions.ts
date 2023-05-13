@@ -8,11 +8,12 @@ export const getUser = createAsyncThunk(
   async (_, { rejectWithValue, extra }) => {
     try {
       const service = extra as IUserService;
-      // console.log('service.getUser()',service.getUser())
-      return service.getUser()
+      const data = await service.getUser()
+      return data
       // const response = await http.get<User>(ApiEndpoints.Auth.UserInfo)
       // return response.data
     } catch (error) {
+      console.error(error)
       return rejectWithValue('Ошибка при получении данных пользователя')
     }
   }

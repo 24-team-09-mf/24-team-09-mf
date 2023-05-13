@@ -5,6 +5,9 @@ import fs from 'fs'
 import { createServer as createViteServer } from 'vite'
 import type { ViteDevServer } from 'vite'
 import express from 'express'
+import cookieParser from 'cookie-parser'
+import { createProxyMiddleware } from 'http-proxy-middleware'
+import jsesc from 'jsesc'
 import { createClientAndConnect } from './db'
 import { installGlobals } from '@remix-run/node'
 import { Image } from 'canvas'
@@ -46,14 +49,28 @@ async function startServer() {
     app.use('/sw.js', express.static(require.resolve('client/sw.js')))
   }
 
-  app.use('*', async (req, res, next) => {
+  app.use(
+    '/api/v2',
+    createProxyMiddleware({
+      changeOrigin: true,
+      cookieDomainRewrite: {
+        '*': '',
+      },
+      target: 'https://ya-praktikum.tech',
+    })
+  )
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //@ts-ignore
+  app.use('*', cookieParser(), async (req, res, next) => {
     const url = req.originalUrl
 
     try {
       let template: string
       let render: (args: {
         request: express.Request,
-      }, repository: any) => Promise<[string, string, object]>
+        repository: any
+      }) => Promise<[string, string, object]>
 
       if (isDev) {
         template = fs.readFileSync(path.resolve(srcPath, 'index.html'), 'utf-8')
@@ -69,10 +86,11 @@ async function startServer() {
       }
 
       try {
-        const [appHtml, css, initialState] = await render({ request: req }, new ApiRepository(req.headers['cookie']))
-        // TODO добавить сериализацию
+        const [appHtml, css, initialState] = await render({ request: req, repository: new ApiRepository(req.headers['cookie'])} )
+        console.log('cookies', req.headers?.cookie)
+
         const initialStateSerialized =
-          initialState && JSON.stringify(initialState)
+          initialState && jsesc(initialState)
         const html = template
           .replace('<!--ssr-body-->', appHtml)
           .replace(`<!--ssr-styles-->`, css)

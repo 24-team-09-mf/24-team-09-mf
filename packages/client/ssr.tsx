@@ -20,14 +20,14 @@ type Args = {
   repository: any
 }
 
-import Path from './src/router/path'
+// import Path from './src/router/path'
 import { getUser } from './src/store/user/auth/actions'
 
 // Loader данных для страницы 
 const getDataForRoute = async (path: string, dispatch: AppDispatch) => {
-  if (path === Path.DEFAULT) {
-    dispatch(getUser())
-  }
+  // if (path === Path.DEFAULT) {
+   await dispatch(getUser())
+  // }
 }
 
 export async function render({ request, repository }: Args) {
@@ -36,9 +36,8 @@ export async function render({ request, repository }: Args) {
   const store = createStore(new UserService(repository))
   const route = routes.find(page => page.path === request.originalUrl)
   const context = await query(remixRequest)
-
   if (route && route.path) {
-    getDataForRoute(route.path, store.dispatch)
+    await getDataForRoute(route.path, store.dispatch)
   }
 
   if (context instanceof Response) {
@@ -48,8 +47,6 @@ export async function render({ request, repository }: Args) {
   const sheet = new ServerStyleSheet()
   const router = createStaticRouter(dataRoutes, context)
   const initialState = store.getState()
-
-  console.log('initialState', { initialState })
 
   const html = renderToString(
     <StrictMode>

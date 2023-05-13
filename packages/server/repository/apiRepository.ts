@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_ROOT = 'https://ya-practicum.tech/api/v2'
+const API_ROOT = 'https://ya-praktikum.tech/api/v2'
 
 export class ApiRepository {
   constructor(private _cookiesHeader: string | undefined){}
