@@ -68,7 +68,7 @@ async function startServer() {
     try {
       let template: string
       let render: (args: {
-        request: express.Request,
+        request: express.Request
         repository: any
       }) => Promise<[string, string, object]>
 
@@ -86,11 +86,13 @@ async function startServer() {
       }
 
       try {
-        const [appHtml, css, initialState] = await render({ request: req, repository: new ApiRepository(req.headers['cookie'])} )
+        const [appHtml, css, initialState] = await render({
+          request: req,
+          repository: new ApiRepository(req.headers['cookie']),
+        })
         console.log('cookies', req.headers?.cookie)
 
-        const initialStateSerialized =
-          initialState && jsesc(initialState)
+        const initialStateSerialized = initialState && jsesc(initialState)
         const html = template
           .replace('<!--ssr-body-->', appHtml)
           .replace(`<!--ssr-styles-->`, css)

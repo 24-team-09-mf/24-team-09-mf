@@ -16,17 +16,17 @@ import CheckAuthorizedPerson from './src/components/organisms/check-authorized-p
 import { UserService } from './src/services/user/userService'
 
 type Args = {
-  request: express.Request,
+  request: express.Request
   repository: any
 }
 
 // import Path from './src/router/path'
 import { getUser } from './src/store/user/auth/actions'
 
-// Loader данных для страницы 
+// Loader данных для страницы
 const getDataForRoute = async (path: string, dispatch: AppDispatch) => {
   // if (path === Path.DEFAULT) {
-   await dispatch(getUser())
+  await dispatch(getUser())
   // }
 }
 

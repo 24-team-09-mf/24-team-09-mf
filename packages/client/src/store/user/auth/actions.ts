@@ -7,7 +7,7 @@ export const getUser = createAsyncThunk(
   'user/getuser',
   async (_, { rejectWithValue, extra }) => {
     try {
-      const service = extra as IUserService;
+      const service = extra as IUserService
       const data = await service.getUser()
       return data
       // const response = await http.get<User>(ApiEndpoints.Auth.UserInfo)

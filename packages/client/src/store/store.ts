@@ -4,7 +4,7 @@ import { rootReducer } from './rootReducer'
 import { User, UserState } from '@/store/user/types'
 
 export interface IInitialStore {
-  user: UserState,
+  user: UserState
   game: any
 }
 // TODO Подумать куда вынести
@@ -12,17 +12,20 @@ export interface IStoreSerices {
   getUser(): Promise<User>
 }
 
-export function createStore(service: IStoreSerices, initialState?: IInitialStore) {
+export function createStore(
+  service: IStoreSerices,
+  initialState?: IInitialStore
+) {
   const store = configureStore({
     reducer: rootReducer,
     preloadedState: initialState,
-    middleware: (getDefaultMiddleWare) => {
+    middleware: getDefaultMiddleWare => {
       return getDefaultMiddleWare({
         thunk: {
-          extraArgument: service
-        }
+          extraArgument: service,
+        },
       })
-    }
+    },
   })
   console.log('store', store.getState())
   return store
