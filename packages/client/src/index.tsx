@@ -30,7 +30,7 @@ const requestNotificationPermission = () => {
 startServiceWorker()
 requestNotificationPermission()
 
-// PreloadedState from ssr
+// InitialState from ssr
 const initialState = window.__INITIAL_STATE__
 delete window['__INITIAL_STATE__']
 
