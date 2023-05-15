@@ -7,7 +7,7 @@ export interface IInitialStore {
   user: UserState
   game: any
 }
-// TODO Подумать куда вынести
+
 export interface IStoreSerices {
   getUser(): Promise<User>
 }
@@ -27,7 +27,6 @@ export function createStore(
       })
     },
   })
-  console.log('store', store.getState())
   return store
 }
 

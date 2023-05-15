@@ -90,7 +90,6 @@ async function startServer() {
           request: req,
           repository: new ApiRepository(req.headers['cookie']),
         })
-        console.log('cookies', req.headers?.cookie)
 
         const initialStateSerialized = initialState && jsesc(initialState)
         const html = template
