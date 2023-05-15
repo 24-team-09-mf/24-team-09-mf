@@ -13,7 +13,11 @@ import { ApiService } from '@/api/apiService'
 
 const mockGameOver = jest.fn()
 
-const store = createStore(new UserService(new ApiService()))
+const services = {
+  user: new UserService(new ApiService()),
+}
+
+const store = createStore(services)
 
 const setup = () => {
   const utils = render(

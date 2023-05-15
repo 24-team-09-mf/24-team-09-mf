@@ -1,11 +1,7 @@
-import { User } from '@/store/user/types'
-
-export interface IUserService {
-  getUser(): Promise<User>
-}
+import { IStoreServices } from '@/store/store'
 
 export class UserService {
-  constructor(private _service: IUserService) {}
+  constructor(private _service: IStoreServices['user']) {}
   getUser() {
     return this._service.getUser()
   }

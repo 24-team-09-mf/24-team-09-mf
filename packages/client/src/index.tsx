@@ -51,11 +51,14 @@ async function hydrate() {
 
   const router = createBrowserRouter(routes)
 
+  const apiServices = {
+    user: new UserService(new ApiService()),
+  }
+
   ReactDOM.hydrateRoot(
     document.getElementById('root') as HTMLElement,
     <React.StrictMode>
-      <Provider
-        store={createStore(new UserService(new ApiService()), initialState)}>
+      <Provider store={createStore(apiServices, initialState)}>
         <GlobalStyle />
         <RouterProvider router={router} fallbackElement={null} />
         <CheckAuthorizedPerson />

@@ -8,12 +8,14 @@ export interface IInitialStore {
   game: any
 }
 
-export interface IStoreSerices {
-  getUser(): Promise<User>
+export interface IStoreServices {
+  user: {
+    getUser(): Promise<User>
+  }
 }
 
 export function createStore(
-  service: IStoreSerices,
+  service: IStoreServices,
   initialState?: IInitialStore
 ) {
   const store = configureStore({
@@ -30,6 +32,4 @@ export function createStore(
   return store
 }
 
-// export type RootState = ReturnType<typeof store.getState>
-// export type AppDispatch = typeof store.dispatch
 export type AppDispatch = ReturnType<typeof createStore>['dispatch']

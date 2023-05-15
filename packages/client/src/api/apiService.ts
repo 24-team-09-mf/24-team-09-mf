@@ -1,13 +1,12 @@
 import axios from 'axios'
 
-import { IUserService } from '@/services/user/userService'
 import { User } from '@/store/user/types'
 import { ApiEndpoints } from './base'
 
-export class ApiService implements IUserService {
+export class ApiService {
   async getUser(): Promise<User> {
     const { data } = await axios.get(
-      `http://:localhost:3001/${ApiEndpoints.Auth.UserInfo}`,
+      `http://localhost:3001/api/v2/${ApiEndpoints.Auth.UserInfo}`,
       {
         withCredentials: true,
       }

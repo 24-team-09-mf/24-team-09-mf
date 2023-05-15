@@ -20,21 +20,30 @@ type Args = {
   repository: any
 }
 
-// import Path from './src/router/path'
 import { getUser } from './src/store/user/auth/actions'
 
 // Loader данных для страницы
 const getDataForRoute = async (path: string, dispatch: AppDispatch) => {
-  // if (path === Path.DEFAULT) {
   await dispatch(getUser())
-  // }
 }
+
+const getCurrentPath = (pathname: string) =>
+  routes.find(page => {
+    // Условие для главной стр
+    if (pathname === '/' && page.index) return true
+    return pathname === page.path
+  })
 
 export async function render({ request, repository }: Args) {
   const { query, dataRoutes } = createStaticHandler(routes)
   const remixRequest = createFetchRequest(request)
-  const store = createStore(new UserService(repository))
-  const route = routes.find(page => page.path === request.originalUrl)
+
+  const apiServices = {
+    user: new UserService(repository),
+  }
+
+  const store = createStore(apiServices)
+  const route = getCurrentPath(request.originalUrl)
   const context = await query(remixRequest)
   if (route && route.path) {
     await getDataForRoute(route.path, store.dispatch)
