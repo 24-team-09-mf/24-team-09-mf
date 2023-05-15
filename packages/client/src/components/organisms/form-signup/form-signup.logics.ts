@@ -1,3 +1,6 @@
+// react
+import { useCallback } from 'react'
+
 // lib
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
@@ -26,7 +29,7 @@ const useSignUp = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const onSubmitHandler = async (data: FormSignUpValues) => {
+  const onSubmitHandler = useCallback(async (data: FormSignUpValues) => {
     try {
       await dispatch(signUp(data))
       const result = await dispatch(getUser())
@@ -37,7 +40,7 @@ const useSignUp = () => {
     } catch (error) {
       console.log(error)
     }
-  }
+  }, [reset, navigate, dispatch])
 
   return {
     register,

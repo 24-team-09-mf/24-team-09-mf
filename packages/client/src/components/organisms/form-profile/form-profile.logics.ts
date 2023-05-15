@@ -1,3 +1,6 @@
+// react
+import { useCallback } from 'react'
+
 // lib
 import { useForm } from 'react-hook-form'
 
@@ -27,14 +30,17 @@ const useProfile = () => {
     resolver: yupResolver(validationSchema),
   })
 
-  const onSubmitHandler = async (data: FormProfileValues) => {
-    try {
-      await dispatch(updateProfile(data))
-      await dispatch(getUser())
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  const onSubmitHandler = useCallback(
+    async (data: FormProfileValues) => {
+      try {
+        await dispatch(updateProfile(data))
+        await dispatch(getUser())
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    [dispatch]
+  )
 
   return {
     register,

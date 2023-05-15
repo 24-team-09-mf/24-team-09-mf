@@ -1,7 +1,8 @@
 // components
-import { ChangePassword } from '../../components'
+import { ChangePassword } from '@/components'
 
 const ChangePasswordPage = () => {
   return <ChangePassword />
 }
-export default ChangePasswordPage
+
+export const element = <ChangePasswordPage />

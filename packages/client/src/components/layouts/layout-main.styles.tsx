@@ -9,7 +9,7 @@ export const Layout = styled.div`
 export const Content = styled.main`
   flex: 1;
   display: flex;
-  position: relative;
+  position: static;
 `
 
 export const ImgRight = styled.img`

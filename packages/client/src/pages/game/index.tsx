@@ -1,4 +1,4 @@
 import { GameComponent } from '@/components'
 const Game = () => <GameComponent />
 
-export default Game
+export const element = <Game />

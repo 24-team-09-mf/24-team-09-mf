@@ -20,6 +20,7 @@ export class Coin extends Sprite {
       this.frameBuffer = animation.frameBuffer || 2
     }
     setTimeout(() => {
+
       this.compeleAnimation = true
     }, 100)
   }

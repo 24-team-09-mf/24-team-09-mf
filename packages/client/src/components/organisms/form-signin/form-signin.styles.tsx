@@ -16,3 +16,9 @@ export const InputComponent = styled(Input)`
 export const BtnSave = styled(Button)`
   margin-block: 0.625rem;
 `
+
+export const BtnYandex = styled(Button)`
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1rem;
+`

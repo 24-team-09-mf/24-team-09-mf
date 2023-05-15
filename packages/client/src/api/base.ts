@@ -2,7 +2,9 @@ import axios from 'axios'
 import { TEAM_NAME } from '../constants/constants'
 
 export const BaseUrl = 'https://ya-praktikum.tech/api/v2/'
-export const AvatarUrl = 'https://ya-praktikum.tech/api/v2/resources/'
+export const AvatarUrl = 'https://ya-praktikum.tech/api/v2/resources'
+export const OAuthUrl = 'https://oauth.yandex.ru/authorize?response_type=code'
+export const RedirectUrl = process.env.VITE_OAUTH_REDIRECT_URL
 
 export const ApiEndpoints = {
   Auth: {
@@ -10,6 +12,8 @@ export const ApiEndpoints = {
     SignUp: 'auth/signup',
     SignOut: 'auth/logout',
     UserInfo: 'auth/user',
+    OAuth: 'oauth/yandex',
+    ServiceId: 'oauth/yandex/service-id',
   },
   User: {
     UpdateProfile: 'user/profile',

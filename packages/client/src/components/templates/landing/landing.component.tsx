@@ -1,3 +1,7 @@
+import { useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import { useAppDispatch, userStore } from '@/store'
+import { oAuthCodePost } from '@/store/user/oauth/actions'
 import { JungleHeader } from '@/components/molecules'
 import Container from '@/components/layouts/container/container.component'
 
@@ -13,6 +17,18 @@ import {
 import Game from '@/assets/images/landing/game.gif'
 
 export const Landing = () => {
+  const dispatch = useAppDispatch()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const { user } = userStore()
+
+  useEffect(() => {
+    const oauthCode = searchParams.get('code')
+    if (oauthCode && !user?.id) {
+      dispatch(oAuthCodePost(oauthCode))
+      setSearchParams('')
+    }
+  }, [dispatch, setSearchParams, user?.id, searchParams])
+
   return (
     <Container>
       <Wrapper>
