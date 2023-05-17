@@ -50,7 +50,7 @@ export const useEnemies = ({
               new Enemy({
                 model: gameModel,
                 frameRate: 6,
-                imageSrc: '/assets/sprites/boar/runLeft.png',
+                imageSrc: '/assets/sprites/boar/runLeft1.png',
                 position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE - 0.03 },
                 collisionBlocks: collisions,
                 startVelocity: x % 2 === 0 ? -2 : 2,
@@ -58,12 +58,12 @@ export const useEnemies = ({
                   runRight: {
                     frameRate: 6,
                     frameBuffer: 10,
-                    imageSrc: '/assets/sprites/boar/run.png',
+                    imageSrc: '/assets/sprites/boar/run1.png',
                   },
                   runLeft: {
                     frameRate: 6,
                     frameBuffer: 10,
-                    imageSrc: '/assets/sprites/boar/runLeft.png',
+                    imageSrc: '/assets/sprites/boar/runLeft1.png',
                   },
                 },
               })
