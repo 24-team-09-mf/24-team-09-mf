@@ -5,6 +5,7 @@ import { useKeysHandlers } from '@/components/organisms/game/game-view/logics/us
 import { CollisionBlock } from '@/components/organisms/game/game-view/models/CollisionBlock'
 import { Coin } from '@/components/organisms/game/game-view/models/Coin'
 import { Enemy } from '@/components/organisms/game/game-view/models/Enemy'
+import { Finish } from '@/components/organisms/game/game-view/models/Finish'
 import { BackgroundGame } from '@/components/organisms/game/game-view/models/BackgroundGame'
 import {
   BLOCK_SIZE,
@@ -22,7 +23,7 @@ type Props = {
   collisionBlocks: CollisionBlock[]
   startFinishCollisionBlocks: CollisionBlock[]
   startBlock: CollisionBlock[]
-  finishBlock: CollisionBlock[]
+  finish: Finish[]
   enemies: Enemy[]
   enemiesCollisionBlocks: CollisionBlock[]
   coins: Coin[]
@@ -57,9 +58,9 @@ export const usePlayer = ({
   changeLivesCount,
   startFinishCollisionBlocks,
   startBlock,
-  finishBlock,
   coins,
   enemies,
+  finish,
   enemiesCollisionBlocks,
   isEndedGame,
   gameBackground,
@@ -75,6 +76,7 @@ export const usePlayer = ({
         model: gameModel,
         collisionBlocks,
         enemies,
+        finish,
         coins,
         decrementLives: () => changeLivesCount(-1),
         incrementScore: value => changeScore(value),
@@ -151,7 +153,7 @@ export const usePlayer = ({
           if (!checkNextPosition(player, collisionBlocks, -SPEED)) {
             collisionBlocks.forEach(block => (block.position.x -= SPEED))
             startBlock.forEach(block => (block.position.x -= SPEED))
-            finishBlock.forEach(block => (block.position.x -= SPEED))
+            finish.forEach(block => (block.position.x -= SPEED))
             startFinishCollisionBlocks.forEach(block => (block.position.x -= SPEED))
             coins.forEach(block => (block.position.x -= SPEED))
             enemies.forEach(enemy => (enemy.position.x -= SPEED))
@@ -162,7 +164,7 @@ export const usePlayer = ({
           if (!checkNextPosition(player, collisionBlocks, SPEED)) {
             collisionBlocks.forEach(block => (block.position.x += SPEED))
             startBlock.forEach(block => (block.position.x += SPEED))
-            finishBlock.forEach(block => (block.position.x += SPEED))
+            finish.forEach(block => (block.position.x += SPEED))
             startFinishCollisionBlocks.forEach(block => (block.position.x += SPEED))
             coins.forEach(block => (block.position.x += SPEED))
             enemies.forEach(enemy => (enemy.position.x += SPEED))

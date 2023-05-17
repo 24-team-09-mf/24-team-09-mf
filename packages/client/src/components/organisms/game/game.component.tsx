@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { FullScreenBtn, MainView, Wrapper } from './game.styles'
-import { GameView } from './game-view'
+import { GameView } from '@/components/organisms/game/game-view'
 import { StartView } from '@/components/organisms/game/start-view'
-import { EndView } from './end-view'
+import { EndView } from '@/components/organisms/game/end-view'
 import { InformationView } from '@/components/organisms/game/information-view'
 import { GameInformation } from '@/components/organisms/game/game-information'
 import {
@@ -17,6 +17,7 @@ export const GameComponent = () => {
   const [isGameStarted, setIsGameStarted] = useState(false)
   const [isGameEnded, setIsGameEnded] = useState(false)
   const [isGameFullScreen, setIsGameFullScreen] = useState(false)
+  const [outcome, setOutcome] = useState('')
 
   const mainViewRef = useRef(null)
 
@@ -35,7 +36,10 @@ export const GameComponent = () => {
     []
   )
 
-  const handlerGameOver = useCallback(() => setIsGameEnded(true), [])
+  const handlerGameOver = useCallback((outcome: string) => {
+    setIsGameEnded(true)
+    setOutcome(outcome)
+  }, [])
 
   const handlerClickFullscreen = useCallback(
     () => setIsGameFullScreen(prev => !prev),
@@ -93,7 +97,7 @@ export const GameComponent = () => {
         {isShowInformation && (
           <InformationView onCloseInformation={handlerClickShowInformation} />
         )}
-        {isGameEnded && <EndView onClickStartGame={handlerClickRestartGame} />}
+        {isGameEnded && <EndView outcome={outcome} onClickStartGame={handlerClickRestartGame} />}
       </MainView>
     </Wrapper>
   )

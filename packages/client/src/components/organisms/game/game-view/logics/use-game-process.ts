@@ -13,9 +13,9 @@ import { usePlayer } from '@/components/organisms/game/game-view/logics/use-play
 import { useCollisionsBlock } from '@/components/organisms/game/game-view/logics/use-collisions-block'
 import { useStartFinishCollisionBlocks } from '@/components/organisms/game/game-view/logics/use-start-finish-collisions-block'
 import { useStartBlock } from '@/components/organisms/game/game-view/logics/use-start-block'
-import { useFinishBlock } from '@/components/organisms/game/game-view/logics/use-finish-block'
 import { useCoins } from '@/components/organisms/game/game-view/logics/use-coins'
 import { useEnemies } from '@/components/organisms/game/game-view/logics/use-enemies'
+import { useFinish } from '@/components/organisms/game/game-view/logics/use-finish'
 import { useBackgroundGame } from '@/components/organisms/game/game-view/logics/use-background-game'
 import { useGameStore } from '@/store/gameStore'
 
@@ -46,9 +46,10 @@ export const useGameProcess = ({
     gameModel,
     isEndedGame
   })
-  const finishBlock = useFinishBlock({
+  const finish = useFinish({
     gameModel,
-    isEndedGame
+    isEndedGame,
+    onGameOver
   })
   const coins = useCoins({
     gameModel,
@@ -71,7 +72,7 @@ export const useGameProcess = ({
     changeScore: changeScore,
     startFinishCollisionBlocks,
     startBlock,
-    finishBlock,
+    finish,
     coins,
     enemies,
     enemiesCollisionBlocks,
@@ -108,7 +109,7 @@ export const useGameProcess = ({
 
   useEffect(() => {
     if (lives === 0) {
-      onGameOver?.()
+      onGameOver?.('lose')
     }
   }, [lives, onGameOver])
 
@@ -136,7 +137,7 @@ export const useGameProcess = ({
           coins.forEach(block => block.draw())
           collisionBlocks.forEach(block => block.draw())
           startBlock.forEach(block => block.draw())
-          finishBlock.forEach(block => block.draw())
+          finish.forEach(block => block.draw())
           startFinishCollisionBlocks.forEach(block => block.draw())
           enemies.forEach(enemy => enemy.update())
           collisionBlocks.forEach(block => block.draw())
@@ -165,7 +166,7 @@ export const useGameProcess = ({
     coins,
     startFinishCollisionBlocks,
     startBlock,
-    finishBlock,
+    finish,
     enemies,
     gameBackground,
     lives,
