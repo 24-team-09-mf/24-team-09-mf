@@ -13,7 +13,7 @@ import { AppDispatch, createStore } from './src/store'
 import { GlobalStyle } from './src/global-styles'
 import CheckAuthorizedPerson from './src/components/organisms/check-authorized-person'
 
-import { UserService } from './src/services/user/userService'
+import { ApiService } from './src/services/apiService'
 
 type Args = {
   request: express.Request
@@ -21,30 +21,33 @@ type Args = {
 }
 
 import { getUser } from './src/store/user/auth/actions'
+import { matchRoutes } from 'react-router-dom'
 
 // Loader данных для страницы
 const getDataForRoute = async (path: string, dispatch: AppDispatch) => {
   await dispatch(getUser())
 }
 
-const getCurrentPath = (pathname: string) =>
-  routes.find(page => {
-    // Условие для главной стр
-    if (pathname === '/' && page.index) return true
-    return pathname === page.path
-  })
+const getCurrentPath = (pathname: string) => {
+  if (pathname === undefined) return routes[0]
+  const match = matchRoutes(routes, pathname)?.find(
+    item => pathname === item.pathnameBase
+  )
+  return match?.route
+}
 
 export async function render({ request, repository }: Args) {
   const { query, dataRoutes } = createStaticHandler(routes)
   const remixRequest = createFetchRequest(request)
 
   const apiServices = {
-    user: new UserService(repository),
+    user: new ApiService(repository),
   }
 
   const store = createStore(apiServices)
-  const route = getCurrentPath(request.originalUrl)
+  const route = getCurrentPath(request.baseUrl)
   const context = await query(remixRequest)
+
   if (route && route.path) {
     await getDataForRoute(route.path, store.dispatch)
   }

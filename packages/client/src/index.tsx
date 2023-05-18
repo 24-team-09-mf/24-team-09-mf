@@ -11,8 +11,8 @@ import { GlobalStyle } from '@/global-styles'
 import CheckAuthorizedPerson from '@/components/organisms/check-authorized-person'
 import { createStore } from './store'
 
-import { UserService } from '@/services/user/userService'
-import { ApiService } from './api/apiService'
+import { ApiService } from '@/services/apiService'
+import { AuthService } from './api/authService'
 
 const startServiceWorker = () => {
   // TODO изменить расположение файлов и добавить sw
@@ -52,7 +52,7 @@ async function hydrate() {
   const router = createBrowserRouter(routes)
 
   const apiServices = {
-    user: new UserService(new ApiService()),
+    user: new ApiService(new AuthService()),
   }
 
   ReactDOM.hydrateRoot(

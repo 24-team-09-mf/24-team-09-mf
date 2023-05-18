@@ -28,9 +28,6 @@ async function startServer() {
 
   app.use(cors())
   createClientAndConnect()
-  app.get('/api', (_, res) => {
-    res.json('👋 Howdy from the server :)')
-  })
 
   let vite: ViteDevServer
   const distPath = path.dirname(require.resolve('client/dist/index.html'))
@@ -53,9 +50,7 @@ async function startServer() {
     '/api/v2',
     createProxyMiddleware({
       changeOrigin: true,
-      cookieDomainRewrite: {
-        '*': '',
-      },
+      cookieDomainRewrite: 'localhost',
       target: 'https://ya-praktikum.tech',
     })
   )
@@ -83,7 +78,7 @@ async function startServer() {
           'utf-8'
         )
         render = (await import(ssrClientPath)).render
-      }
+      } 
 
       try {
         const [appHtml, css, initialState] = await render({

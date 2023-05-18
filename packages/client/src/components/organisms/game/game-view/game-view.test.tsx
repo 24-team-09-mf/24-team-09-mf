@@ -8,13 +8,13 @@ import {
 import { Provider } from 'react-redux'
 import { createStore } from '@/store'
 
-import { UserService } from '@/services/user/userService'
-import { ApiService } from '@/api/apiService'
+import { ApiService } from '@/services/apiService'
+import { AuthService } from '@/api/authService'
 
 const mockGameOver = jest.fn()
 
 const services = {
-  user: new UserService(new ApiService()),
+  user: new ApiService(new AuthService()),
 }
 
 const store = createStore(services)

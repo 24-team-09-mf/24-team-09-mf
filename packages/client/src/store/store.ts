@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { rootReducer } from './rootReducer'
 
-import { User, UserState } from '@/store/user/types'
+import { SignIn, User, UserState } from '@/store/user/types'
 
 export interface IInitialStore {
   user: UserState
@@ -11,6 +11,8 @@ export interface IInitialStore {
 export interface IStoreServices {
   user: {
     getUser(): Promise<User>
+    signIn(signInData: SignIn): Promise<User>,
+    logout(): Promise<null>
   }
 }
 
