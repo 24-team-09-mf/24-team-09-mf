@@ -26,7 +26,7 @@ export type ForumSectionProps = {
 }
 
 export type ForumFormsProps = {
-  user: UserState
+  user: unknown
   id: string
   postPageId?: string
   title: string
