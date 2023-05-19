@@ -4,8 +4,9 @@ import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { ForumFormsProps } from './forum-types'
 import http from '@/api/base'
+import { UserState } from '@/store/user/types'
 
-const useSectionForm = (user: any, id: string, postPageId?: string) => {
+const useSectionForm = (user: UserState, id: string, postPageId?: string) => {
   const {
     register,
     handleSubmit,

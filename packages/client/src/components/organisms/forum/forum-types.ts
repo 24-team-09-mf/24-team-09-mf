@@ -1,4 +1,5 @@
 import { ReactElement } from 'react'
+import { UserState } from '@/store/user/types'
 
 export type ForumLastTopicProps = {
   id: string
@@ -25,7 +26,7 @@ export type ForumSectionProps = {
 }
 
 export type ForumFormsProps = {
-  user: any
+  user: UserState
   id: string
   postPageId?: string
   title: string
