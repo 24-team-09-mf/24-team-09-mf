@@ -3,8 +3,9 @@ import { useCallback } from 'react'
 
 import { useForm } from 'react-hook-form'
 import { ForumFormsProps } from './forum-types'
+import http from '@/api/base'
 
-const useSectionForm = (id: string, postPageId?: string) => {
+const useSectionForm = (user: any, id: string, postPageId?: string) => {
   const {
     register,
     handleSubmit,
@@ -18,9 +19,16 @@ const useSectionForm = (id: string, postPageId?: string) => {
   const onSubmitHandler = useCallback(
     async (data: ForumFormsProps) => {
       try {
-        data = { ...data, id: id }
-        if (postPageId) data = { ...data, postPageId: postPageId }
-        console.log(data)
+        // TODO изменить в следующей задаче
+        data = { ...data, user: user.user, id: id }
+        let url = 'http://localhost:3001/api/forum/addTopic/'
+        if (postPageId) {
+          data = { ...data, user: user.user, id: postPageId }
+          url = 'http://localhost:3001/api/forum/addPost/'
+        }
+        await http.post(url, data).then(res => {
+          console.log(res)
+        })
         reset()
         setValue('message', '')
       } catch (error) {

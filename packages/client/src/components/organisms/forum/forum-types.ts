@@ -25,6 +25,7 @@ export type ForumSectionProps = {
 }
 
 export type ForumFormsProps = {
+  user: any
   id: string
   postPageId?: string
   title: string

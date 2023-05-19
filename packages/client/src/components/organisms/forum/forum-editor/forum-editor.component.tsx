@@ -15,6 +15,7 @@ import { useParams } from 'react-router-dom'
 import { ForumEditorProps } from '@/components/organisms/forum/forum-types'
 import IconBold from '@/assets/icons/bold.svg'
 import IconItalic from '@/assets/icons/italic.svg'
+import { userStore } from '@/store'
 
 export const ForumEditor = ({
   title,
@@ -22,9 +23,10 @@ export const ForumEditor = ({
   replyMessage,
 }: ForumEditorProps) => {
   const { id, postPageId } = useParams()
+  const user = userStore()
 
   const { register, onSubmitHandler, handleSubmit, isValid, setValue } =
-    useSectionForm(id!, postPageId)
+    useSectionForm(user, id!, postPageId)
   const messageRef = useRef(null)
   const messageClear = () => {
     ;(messageRef!.current! as HTMLDivElement).innerHTML = ''
