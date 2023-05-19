@@ -5,9 +5,9 @@ import fs from 'fs'
 import { createServer as createViteServer } from 'vite'
 import type { ViteDevServer } from 'vite'
 import express from 'express'
-import { createClientAndConnect } from './db'
 import { installGlobals } from '@remix-run/node'
 import { Image } from 'canvas'
+import { dbConnect } from './db'
 
 dotenv.config()
 
@@ -22,7 +22,7 @@ async function startServer() {
   installGlobals()
 
   app.use(cors())
-  createClientAndConnect()
+  dbConnect()
   app.get('/api', (_, res) => {
     res.json('👋 Howdy from the server :)')
   })

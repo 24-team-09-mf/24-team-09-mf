@@ -18,7 +18,10 @@
     "cross-env": "^7.0.3",
     "express": "^4.18.1",
     "pg": "^8.8.0",
-    "prettier": "^2.7.1"
+    "prettier": "^2.7.1",
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^6.31.1",
+    "sequelize-typescript": "^2.1.5"
   },
   "devDependencies": {
     "@types/cookie": "^0.5.1",
