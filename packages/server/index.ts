@@ -8,6 +8,7 @@ import express from 'express'
 import { installGlobals } from '@remix-run/node'
 import { Image } from 'canvas'
 import { dbConnect } from './db'
+import { apiRouter } from './src/routes'
 
 dotenv.config()
 
@@ -23,9 +24,8 @@ async function startServer() {
 
   app.use(cors())
   dbConnect()
-  app.get('/api', (_, res) => {
-    res.json('👋 Howdy from the server :)')
-  })
+  app.use(express.json())
+  app.use('/api', apiRouter)
 
   let vite: ViteDevServer
   const distPath = path.dirname(require.resolve('client/dist/index.html'))
