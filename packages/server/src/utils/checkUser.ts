@@ -1,6 +1,7 @@
 import { UsersModel } from '../models/users'
+import type { UserProps } from './types'
 
-export async function checkUser(user: any) {
+export async function checkUser(user: UserProps) {
   let userId = await UsersModel.findOne({
     attributes: ['id'],
     where: {
