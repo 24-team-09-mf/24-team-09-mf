@@ -5,10 +5,18 @@ import { useState, useContext } from 'react'
 import sun from '@/assets/icons/sun.svg'
 import night from '@/assets/icons/night.svg'
 
-import { ThemeContext } from '@/context/themeContext'
+import { ThemeContext } from '../../../context/themeContext'
 
 // styles
-import * as S from './switch.styles'
+import {
+  Wrapper,
+  ToggleSwitch,
+  Checkbox,
+  Label,
+  Inner,
+  SwitchItem,
+  Icon,
+} from './switch.styles'
 
 export const Switch = () => {
   const { theme, toggleTheme } = useContext(ThemeContext)
@@ -20,30 +28,30 @@ export const Switch = () => {
   }
 
   return (
-    <S.Wrapper>
-      <S.ToggleSwitch>
-        <S.Checkbox
+    <Wrapper>
+      <ToggleSwitch>
+        <Checkbox
           type="checkbox"
           name="themeToggleSwitch"
           id="themeToggleSwitch"
           checked={checked}
           onChange={handleSwitchToggle}
         />
-        <S.Label htmlFor="themeToggleSwitch">
-          <S.Inner />
-          <S.Switch>
+        <Label htmlFor="themeToggleSwitch">
+          <Inner />
+          <SwitchItem>
             {theme !== 'light' ? (
-              <S.Icon>
+              <Icon>
                 <img src={night} />
-              </S.Icon>
+              </Icon>
             ) : (
-              <S.Icon>
+              <Icon>
                 <img src={sun} />
-              </S.Icon>
+              </Icon>
             )}
-          </S.Switch>
-        </S.Label>
-      </S.ToggleSwitch>
-    </S.Wrapper>
+          </SwitchItem>
+        </Label>
+      </ToggleSwitch>
+    </Wrapper>
   )
 }

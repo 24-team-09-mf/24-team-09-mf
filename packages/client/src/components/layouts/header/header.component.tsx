@@ -1,6 +1,3 @@
-// react
-import { FC, memo } from 'react'
-
 // images
 import image from '@/assets/images/header.png'
 

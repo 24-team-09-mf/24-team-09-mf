@@ -57,7 +57,7 @@ export const Inner = styled.span`
   }
 `
 
-export const Switch = styled.span`
+export const SwitchItem= styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,7 +82,7 @@ export const Checkbox = styled.input`
       margin-left: 0;
     }
 
-    ${Switch} {
+    ${SwitchItem} {
       right: 0rem;
     }
   }
