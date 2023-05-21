@@ -17,6 +17,7 @@ import {
   ForumEmojiAddBlock,
   ForumEmojiAddElement,
   ForumEmojiElement,
+  Count
 } from '@/components/templates/forum/forum.styles'
 import IconRateMinus from '@/assets/icons/rate_minus.svg'
 import IconRatePlus from '@/assets/icons/rate_plus.svg'
@@ -62,7 +63,7 @@ const ForumPost = (el: ForumPostProps) => {
                 emoji.map(el => (
                   <ForumEmojiElement key={el.name}>
                     <img src={EMOJI[el.name]} alt={el.name} />
-                    <span>{el.usersId.length}</span>
+                    <Count>{el.usersId.length}</Count>
                   </ForumEmojiElement>
                 ))}
               <ForumEmojiAddBtn onClick={onsetEmojiHandler}>

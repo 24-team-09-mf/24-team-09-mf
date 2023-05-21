@@ -1,14 +1,16 @@
+// react
+import { FC, memo } from 'react'
+
 // images
 import image from '@/assets/images/header.png'
 
 // lib
 import { Link } from 'react-router-dom'
 
+import { Switch } from '../../atoms'
+
 // redux
 import { userStore } from '@/store'
-
-// svg
-import userImg from '@/assets/icons/user.svg'
 
 // styles
 import {
@@ -20,6 +22,7 @@ import {
   Btn,
   Profile,
   User,
+  StyledIconWrapper,
 } from './header.styles'
 
 export const Header = () => {
@@ -40,8 +43,9 @@ export const Header = () => {
             </Btn>
           </Link>
         </Navigation>
+        <Switch />
         <Profile to="/profile">
-          <img src={userImg} alt="профиль" />
+          <StyledIconWrapper />
           <User>{user?.login}</User>
         </Profile>
       </Container>

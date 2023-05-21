@@ -15,21 +15,23 @@ export const InputComponent = styled.input<{
   pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
   opacity: ${({ disabled }) => (disabled ? '0.5' : '1')};
   outline: none;
-  border: ${({ isError }) =>
-    isError ? '1px solid #c22020' : '1px solid #182c3b'};
+  border: 1px solid;
+  border-color: ${({ isError }) =>
+    isError ? ' #c22020' : 'var(--color-text)'};
   border-radius: 5px;
   font-weight: 400;
   font-size: 14px;
   line-height: 19px;
   padding: 11px 13px;
-  color: #333333;
+  color: var(--color-text);
+  background-color: var(--bg-color);
 
   &::placeholder {
-    color: rgba(0, 0, 0, 0.51);
+    color: rgba(var(--color-text-rgb), 0.51);
   }
 
   &:focus {
-    border-color: #333333;
+    border-color: var(--color-text);
   }
 `
 

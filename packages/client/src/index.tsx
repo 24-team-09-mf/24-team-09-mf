@@ -10,6 +10,7 @@ import { routes } from '@/router/routes'
 import { GlobalStyle } from '@/global-styles'
 import CheckAuthorizedPerson from '@/components/organisms/check-authorized-person'
 import { store } from './store'
+import { ThemeContextProvider } from '@/context/themeContext'
 
 const startServiceWorker = () => {
   // TODO изменить расположение файлов и добавить sw
@@ -47,11 +48,13 @@ async function hydrate() {
   ReactDOM.hydrateRoot(
     document.getElementById('root') as HTMLElement,
     <React.StrictMode>
-      <Provider store={store}>
-        <GlobalStyle />
-        <RouterProvider router={router} fallbackElement={null} />
-        <CheckAuthorizedPerson />
-      </Provider>
+      <ThemeContextProvider>
+        <Provider store={store}>
+          <GlobalStyle />
+          <RouterProvider router={router} fallbackElement={null} />
+          <CheckAuthorizedPerson />
+        </Provider>
+      </ThemeContextProvider>
     </React.StrictMode>
   )
 }

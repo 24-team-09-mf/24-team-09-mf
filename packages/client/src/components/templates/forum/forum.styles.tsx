@@ -28,8 +28,8 @@ export const CatalogRowThreadsCount = styled.div`
   width: 6.25rem;
   font-size: 0.75rem;
   text-align: center;
-  border-left: solid 0.063rem #ffffff;
-  border-right: solid 0.063rem #ffffff;
+  border-left: solid 0.063rem var(--bg-color);
+  border-right: solid 0.063rem var(--bg-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -86,7 +86,7 @@ export const CatalogRowMessageLink = styled(Link)`
   border-bottom: dashed 1px var(--color-text);
   margin-bottom: 0.438rem;
   cursor: pointer;
-  color: #333333;
+  color: var(--color-text);
   transition: all 0.3s;
   &:hover {
     border-color: transparent;
@@ -100,14 +100,15 @@ export const SectionRowContent = styled(Link)`
   padding: 1.25rem;
   padding-right: 1.25rem;
   width: calc(100% - 21.875rem);
+  color: var(--color-text);
 `
 
 export const SectionRowMessagesCount = styled.div`
   width: 6.25rem;
   font-size: 0.75rem;
   text-align: center;
-  border-left: solid 0.063rem #ffffff;
-  border-right: solid 0.063rem #ffffff;
+  border-left: solid 0.063rem var(--bg-color);
+  border-right: solid 0.063rem var(--bg-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -138,6 +139,7 @@ export const FormInput = styled.input`
   margin-bottom: 0.938rem;
   border: none;
   outline: none;
+  color: #333;
 `
 
 export const FormTextareaWrapper = styled.div`
@@ -180,6 +182,7 @@ export const FormTextarea = styled.div`
   outline: none;
   overflow-y: scroll;
   position: relative;
+  color: #333;
 
   blockquote {
     border: solid 1px #000000;
@@ -347,6 +350,7 @@ export const ForumPostBlock = styled.div`
   }
   &:nth-child(even) {
     background: #ffffff;
+    color: #333;
   }
 
   &:hover {
@@ -365,4 +369,8 @@ export const ForumPostText = styled.div`
     border-radius: 0.313rem;
     margin-bottom: 0.938rem;
   }
+`
+
+export const Count = styled.span`
+  color: #333;
 `
