@@ -7,8 +7,8 @@ CREATE TABLE categories (
 );
 
 CREATE TABLE users (
-    id SERIAL,
-    user_id INTEGER PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER,
     login TEXT NOT NULL,
     avatar TEXT,
     "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL default NOW(),
@@ -22,7 +22,8 @@ CREATE TABLE topics (
     user_id INTEGER,
     "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL default NOW(),
     "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL default NOW(),
-    FOREIGN KEY (parent_id) REFERENCES categories (id) ON DELETE CASCADE
+    FOREIGN KEY (parent_id) REFERENCES categories (id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
 CREATE TABLE posts (
@@ -32,7 +33,8 @@ CREATE TABLE posts (
     user_id INTEGER,
     "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL default NOW(),
     "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL default NOW(),
-    FOREIGN KEY (parent_id) REFERENCES topics (id) ON DELETE CASCADE
+    FOREIGN KEY (parent_id) REFERENCES topics (id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
 INSERT INTO categories (title, description) VALUES ('Сообщество 1', 'Обсуждение игры'), ('Поддержка', 'Возникли затруднения с установкой игры, игровым процессом или учетной записью? Приглашаем на форум службы поддержки.');
