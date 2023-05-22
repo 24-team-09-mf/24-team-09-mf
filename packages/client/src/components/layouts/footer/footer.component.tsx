@@ -2,7 +2,7 @@
 import image from '@/assets/images/footer.png'
 
 // constants
-import { COPYRIGHT_SYMBOL } from '../../../сonstants/constants'
+import { COPYRIGHT_SYMBOL } from '../../../constants/constants'
 
 // styles
 import { Wrapper, FooterText, LinkComponent, Img } from './footer.styles'
