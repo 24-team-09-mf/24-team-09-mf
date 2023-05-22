@@ -11,7 +11,7 @@ export interface IInitialStore {
 export interface IStoreServices {
   user: {
     getUser(): Promise<User>
-    signIn(signInData: SignIn): Promise<User>,
+    signIn(signInData: SignIn): Promise<User>
     logout(): Promise<null>
   }
 }

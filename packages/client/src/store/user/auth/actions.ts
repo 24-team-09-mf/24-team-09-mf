@@ -8,11 +8,9 @@ export const getUser = createAsyncThunk(
   async (_, { rejectWithValue, extra }) => {
     try {
       const service = extra as IStoreServices
-      console.log(service.user.getUser)
       const data = await service.user.getUser()
       return data
     } catch (error) {
-      console.error(error)
       return rejectWithValue('Ошибка при получении данных пользователя')
     }
   }

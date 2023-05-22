@@ -15,10 +15,7 @@ export class ApiRepository {
       ...data,
     }
   }
-  async signIn(signinData: {
-    login: string
-    password: string
-  }): Promise<any> {
+  async signIn(signinData: { login: string; password: string }): Promise<any> {
     const { data } = await axios.post(`${API_ROOT}/auth/signin`, signinData)
     return {
       ...data,

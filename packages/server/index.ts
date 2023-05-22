@@ -78,7 +78,7 @@ async function startServer() {
           'utf-8'
         )
         render = (await import(ssrClientPath)).render
-      } 
+      }
 
       try {
         const [appHtml, css, initialState] = await render({

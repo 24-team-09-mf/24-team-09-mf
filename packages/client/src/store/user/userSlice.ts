@@ -77,7 +77,7 @@ const userSlice = createSlice({
         state.isLoading = false
         state.error = action.payload as string
       })
-      .addCase(signIn.fulfilled, (state) => {
+      .addCase(signIn.fulfilled, state => {
         state.isLoading = false
         state.error = ''
       })
