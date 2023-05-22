@@ -8,11 +8,9 @@ type Props = {
 
 const ProtectedRoute: FC<Props> = ({ children }) => {
   const location = useLocation()
-  const { user, isLoading } = userStore()
+  const { user } = userStore()
 
   const fromUrl = `${location.pathname}${location.search}`
-
-  if (isLoading) return null
 
   if (!user?.login) {
     return <Navigate to={`/signin?fromUrl=${fromUrl}`} />

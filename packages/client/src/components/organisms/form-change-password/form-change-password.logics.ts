@@ -29,17 +29,20 @@ const useChangePassword = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const onSubmitHandler = useCallback(async (data: FormPasswordValues) => {
-    try {
-      const result = await dispatch(updatePassword(data))
-      if (result.meta.requestStatus === 'fulfilled') {
-        reset()
-        navigate('/profile')
+  const onSubmitHandler = useCallback(
+    async (data: FormPasswordValues) => {
+      try {
+        const result = await dispatch(updatePassword(data))
+        if (result.meta.requestStatus === 'fulfilled') {
+          reset()
+          navigate('/profile')
+        }
+      } catch (error) {
+        console.log(error)
       }
-    } catch (error) {
-      console.log(error)
-    }
-  }, [reset, navigate, dispatch])
+    },
+    [reset, navigate, dispatch]
+  )
 
   return {
     register,

@@ -29,18 +29,21 @@ const useSignUp = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const onSubmitHandler = useCallback(async (data: FormSignUpValues) => {
-    try {
-      await dispatch(signUp(data))
-      const result = await dispatch(getUser())
-      if (result.meta.requestStatus === 'fulfilled') {
-        reset()
-        navigate('/profile')
+  const onSubmitHandler = useCallback(
+    async (data: FormSignUpValues) => {
+      try {
+        await dispatch(signUp(data))
+        const result = await dispatch(getUser())
+        if (result.meta.requestStatus === 'fulfilled') {
+          reset()
+          navigate('/profile')
+        }
+      } catch (error) {
+        console.log(error)
       }
-    } catch (error) {
-      console.log(error)
-    }
-  }, [reset, navigate, dispatch])
+    },
+    [reset, navigate, dispatch]
+  )
 
   return {
     register,

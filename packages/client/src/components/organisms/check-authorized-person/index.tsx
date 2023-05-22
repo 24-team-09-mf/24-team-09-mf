@@ -6,7 +6,7 @@ export default () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(getUser())
+    // dispatch(getUser())
   })
 
   return null
