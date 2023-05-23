@@ -20,7 +20,6 @@ const useSectionForm = (id: string, postPageId?: string) => {
       try {
         data = { ...data, id: id }
         if (postPageId) data = { ...data, postPageId: postPageId }
-        console.log(data)
         reset()
         setValue('message', '')
       } catch (error) {
