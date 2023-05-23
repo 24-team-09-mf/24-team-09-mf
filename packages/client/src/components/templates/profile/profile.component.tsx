@@ -16,8 +16,8 @@ export const Profile = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const onHandleClick = () => {
-    dispatch(signOut())
+  const onHandleClick = async () => {
+    await dispatch(signOut())
     navigate('/signin')
   }
 

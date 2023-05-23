@@ -9,18 +9,48 @@ import {
 } from 'react-router-dom/server'
 import { ServerStyleSheet, StyleSheetManager } from 'styled-components'
 import { routes } from './src/router/routes'
-import { store } from './src/store'
+import { AppDispatch, createStore } from './src/store'
 import { GlobalStyle } from './src/global-styles'
 import CheckAuthorizedPerson from './src/components/organisms/check-authorized-person'
 
+import { ApiService } from './src/services/apiService'
+
 type Args = {
   request: express.Request
+  repository: any
 }
 
-export async function render({ request }: Args) {
+import { getUser } from './src/store/user/auth/actions'
+import { matchRoutes } from 'react-router-dom'
+
+// Loader данных для страницы
+const getDataForRoute = async (path: string, dispatch: AppDispatch) => {
+  await dispatch(getUser())
+}
+
+const getCurrentPath = (pathname: string) => {
+  if (pathname === undefined) return routes[0]
+  const match = matchRoutes(routes, pathname)?.find(
+    item => pathname === item.pathnameBase
+  )
+  return match?.route
+}
+
+export async function render({ request, repository }: Args) {
   const { query, dataRoutes } = createStaticHandler(routes)
   const remixRequest = createFetchRequest(request)
+
+  const apiServices = {
+    user: new ApiService(repository),
+  }
+
+  const store = createStore(apiServices)
+  const route = getCurrentPath(request.baseUrl)
   const context = await query(remixRequest)
+
+  if (route && route.path) {
+    await getDataForRoute(route.path, store.dispatch)
+  }
 
   if (context instanceof Response) {
     throw context
@@ -28,6 +58,7 @@ export async function render({ request }: Args) {
 
   const sheet = new ServerStyleSheet()
   const router = createStaticRouter(dataRoutes, context)
+  const initialState = store.getState()
 
   const html = renderToString(
     <StrictMode>
@@ -44,7 +75,7 @@ export async function render({ request }: Args) {
   const css = sheet.getStyleTags()
   sheet.seal()
 
-  return [html, css]
+  return [html, css, initialState]
 }
 
 export function createFetchRequest(req: express.Request) {
