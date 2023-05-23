@@ -8,9 +8,10 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import { createProxyMiddleware } from 'http-proxy-middleware'
 import jsesc from 'jsesc'
-import { createClientAndConnect } from './db'
 import { installGlobals } from '@remix-run/node'
 import { Image } from 'canvas'
+import { dbConnect } from './db'
+import { apiRouter } from './src/routes'
 
 import { ApiRepository } from './repository/apiRepository'
 
@@ -27,7 +28,11 @@ async function startServer() {
   installGlobals()
 
   app.use(cors())
-  createClientAndConnect()
+
+  dbConnect()
+  app.use(express.json())
+  app.use('/api', apiRouter)
+
 
   let vite: ViteDevServer
   const distPath = path.dirname(require.resolve('client/dist/index.html'))

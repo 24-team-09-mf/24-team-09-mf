@@ -14,12 +14,12 @@ export const ForumPost = () => {
   const { id, postPageId } = useParams()
 
   // TODO: Поменять, демо
-  if (id !== '1' && id !== '2') {
-    return <Navigate to="/404" replace />
-  }
-  if (postPageId !== '55' && postPageId !== '56') {
-    return <Navigate to="/404" replace />
-  }
+  // if (id !== '1' && id !== '2') {
+  //   return <Navigate to="/404" replace />
+  // }
+  // if (postPageId !== '55' && postPageId !== '56') {
+  //   return <Navigate to="/404" replace />
+  // }
   const data = forumPostsDemo
 
   return (
