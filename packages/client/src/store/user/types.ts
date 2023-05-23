@@ -36,5 +36,5 @@ export interface UserState {
 }
 
 export interface ServiceId {
-  service_id: string;
+  service_id: string
 }

@@ -5,8 +5,14 @@ import useSignIn from './form-signin.logics'
 import { Form, InputComponent, BtnSave, BtnYandex } from './form-signin.styles'
 
 export const FormSignIn = () => {
-  const { register, onSubmitHandler, handleSubmit, handleOauth, errors, isValid } =
-    useSignIn()
+  const {
+    register,
+    onSubmitHandler,
+    handleSubmit,
+    handleOauth,
+    errors,
+    isValid,
+  } = useSignIn()
 
   return (
     <Form onSubmit={handleSubmit(onSubmitHandler)}>
@@ -33,7 +39,12 @@ export const FormSignIn = () => {
         disabled={!isValid}>
         Войти
       </BtnSave>
-      <BtnYandex as="button" type="button" color="#579945" variant="outlined" onClick={handleOauth}>
+      <BtnYandex
+        as="button"
+        type="button"
+        color="#579945"
+        variant="outlined"
+        onClick={handleOauth}>
         Авторизация через Яндекс
       </BtnYandex>
     </Form>

@@ -20,6 +20,7 @@ const useSectionForm = (user: UserState, id: string, postPageId?: string) => {
   const onSubmitHandler = useCallback(
     async (data: ForumFormsProps) => {
       try {
+
         // TODO изменить в следующей задаче
         data = { ...data, user: user.user, id: id }
         let url = 'http://localhost:3001/api/forum/topic/'
@@ -30,6 +31,7 @@ const useSectionForm = (user: UserState, id: string, postPageId?: string) => {
         await http.post(url, data).then(res => {
           console.log(res)
         })
+
         reset()
         setValue('message', '')
       } catch (error) {

@@ -14,7 +14,6 @@ export const FormProfile = () => {
   const { register, onSubmitHandler, handleSubmit, errors, isValid, user } =
     useProfile()
 
-
   return (
     <Form onSubmit={handleSubmit(onSubmitHandler)}>
       <AvatarComponent {...register('avatar')} src={user?.avatar} />
