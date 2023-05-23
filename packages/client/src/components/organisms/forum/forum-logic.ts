@@ -22,10 +22,10 @@ const useSectionForm = (user: UserState, id: string, postPageId?: string) => {
       try {
         // TODO изменить в следующей задаче
         data = { ...data, user: user.user, id: id }
-        let url = 'http://localhost:3001/api/forum/addTopic/'
+        let url = 'http://localhost:3001/api/forum/topic/'
         if (postPageId) {
           data = { ...data, user: user.user, id: postPageId }
-          url = 'http://localhost:3001/api/forum/addPost/'
+          url = 'http://localhost:3001/api/forum/post/'
         }
         await http.post(url, data).then(res => {
           console.log(res)
