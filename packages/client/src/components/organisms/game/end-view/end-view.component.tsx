@@ -15,11 +15,7 @@ export const EndView: FC<EndViewProps> = ({ onClickStartGame, outcome }) => {
   }
 
   useEffect(() => {
-    if (outcome === 'win') {
-      setTitle('YOU WON!')
-    } else if (outcome === 'lose') {
-      setTitle('YOU LOSE!')
-    }
+    setTitle(outcome === 'win' ? 'YOU WON' : 'YOU LOSE!')
   }, [outcome, score])
 
   return (
