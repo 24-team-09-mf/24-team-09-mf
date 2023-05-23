@@ -143,8 +143,13 @@ export const FormInput = styled.input`
 `
 
 export const FormTextareaWrapper = styled.div`
-  background: var(--color-gray1);
+  background-color: var(--bg-color);
   padding: 0.938rem 0 0 0;
+  border: 1px solid;
+  border-color: var(--color-text);
+  border-radius: 10px;
+  border-radius: 10px;
+  margin-block-end: 10px;
 `
 
 export const FormTextareaButtons = styled.div`
@@ -173,16 +178,15 @@ export const FormTextareaButton = styled.div`
 `
 
 export const FormTextarea = styled.div`
-  background: var(--color-gray1);
   height: 7.5rem;
   width: 100%;
   padding: 0.938rem;
   margin-bottom: 0.938rem;
-  border: none;
   outline: none;
   overflow-y: scroll;
   position: relative;
-  color: #333;
+  color: var(--color-text);
+  background-color: var(--bg-color);
 
   blockquote {
     border: solid 1px #000000;
@@ -349,7 +353,7 @@ export const ForumPostBlock = styled.div`
     margin-top: 1.875rem;
   }
   &:nth-child(even) {
-    background: #ffffff;
+    background: var(--color-green3);
     color: #333;
   }
 

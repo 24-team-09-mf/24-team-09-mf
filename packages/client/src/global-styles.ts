@@ -16,6 +16,8 @@ export const GlobalStyle = createGlobalStyle`
     --color-green2: #579945;
     --color-green2-rgb: 87, 153, 69;
     --color-gray1: #FAFAFA;
+    --color-green3: #FFF;
+    --color-green4: #FFF;
 }
 
 html[data-theme='dark'] {
@@ -27,6 +29,8 @@ html[data-theme='dark'] {
   --color-green2: #579945;
   --color-green2-rgb: 87, 153, 69;
   --color-gray1: #FAFAFA;
+  --color-green3: #dfebc5;
+  --color-green3:#edf4de;
 }
 
   :root {
