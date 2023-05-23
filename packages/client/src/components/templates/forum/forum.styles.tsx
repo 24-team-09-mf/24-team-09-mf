@@ -132,14 +132,15 @@ export const FormSeparator = styled.div`
 `
 
 export const FormInput = styled.input`
-  background: var(--color-gray1);
+  color: var(--color-text);
+  background-color: var(--bg-color);
+  border: 1px solid;
+  border-color: var(--color-text);
   height: 2.5rem;
   width: 100%;
   padding: 0 0.938rem;
   margin-bottom: 0.938rem;
-  border: none;
   outline: none;
-  color: #333;
 `
 
 export const FormTextareaWrapper = styled.div`
@@ -147,7 +148,6 @@ export const FormTextareaWrapper = styled.div`
   padding: 0.938rem 0 0 0;
   border: 1px solid;
   border-color: var(--color-text);
-  border-radius: 10px;
   border-radius: 10px;
   margin-block-end: 10px;
 `
@@ -272,7 +272,7 @@ export const ForumEmojiAddBtn = styled.div`
   width: 1.625rem;
   height: 1.625rem;
   position: relative;
-  background-color: #ffffff;
+  background-color: var(--color-green4);
   border-radius: 0.313rem;
   display: flex;
   justify-content: center;
@@ -316,7 +316,7 @@ export const ForumEmojiAddElement = styled.div`
 
 export const ForumEmojiElement = styled.div`
   height: 1.375rem;
-  background-color: #ffffff;
+  background-color: var(--color-green4);
   border: solid 1px var(--color-text);
   border-radius: 0.313rem;
   display: flex;
@@ -354,7 +354,6 @@ export const ForumPostBlock = styled.div`
   }
   &:nth-child(even) {
     background: var(--color-green3);
-    color: #333;
   }
 
   &:hover {

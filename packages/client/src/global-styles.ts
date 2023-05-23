@@ -29,8 +29,8 @@ html[data-theme='dark'] {
   --color-green2: #579945;
   --color-green2-rgb: 87, 153, 69;
   --color-gray1: #FAFAFA;
-  --color-green3: #dfebc5;
-  --color-green3:#edf4de;
+  --color-green3: #525944;
+  --color-green4: #edf4de;
 }
 
   :root {
