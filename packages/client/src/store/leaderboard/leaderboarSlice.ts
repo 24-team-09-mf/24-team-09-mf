@@ -2,8 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { LeaderboardElementProps } from '@/components/organisms/leaderboard/leaderboard-types'
 import { getLeaderboardList } from '../../api/leaderboard'
 
-
-interface LeaderboardState {
+export interface LeaderboardState {
   data: LeaderboardElementProps[]
   isLoading: boolean
   error: string | null
@@ -14,6 +13,7 @@ const initialState: LeaderboardState = {
   isLoading: false,
   error: null,
 }
+
 export const leaderboardSlice = createSlice({
   name: 'leaderboard',
   initialState,

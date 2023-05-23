@@ -2,10 +2,13 @@ import { configureStore } from '@reduxjs/toolkit'
 import { rootReducer } from './rootReducer'
 
 import { SignIn, User, UserState } from '@/store/user/types'
+import { IGame } from './game/types'
+import { LeaderboardState } from './leaderboard/leaderboarSlice'
 
 export interface IInitialStore {
   user: UserState
-  game: any
+  game: IGame
+  leaderboard: LeaderboardState
 }
 
 export interface IStoreServices {
