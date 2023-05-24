@@ -15,14 +15,23 @@ COPY . .
 RUN yarn lerna bootstrap
 RUN rm -rf /app/packages/server/dist/ && yarn build
 
-FROM node:$NODE_VERSION-buster-slim as production
+FROM ubuntu:latest as os-ubuntu
+
+RUN apt-get update
+RUN apt-get -y install curl gnupg
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+RUN apt-get install -y netcat
+RUN apt-get -y install nodejs
+RUN npm install --global yarn
 
 WORKDIR /app
 
 COPY --from=builder /app/packages/server/dist/ /app/
 COPY --from=builder /app/packages/server/package.json /app/package.json
-RUN yarn install --production=true
+COPY --from=builder /app/utils/wait-for.sh /app/wait-for.sh
 
+RUN chmod +x wait-for.sh
+RUN yarn install --production=true
 
 COPY --from=builder /app/packages/client/dist/ /app/node_modules/client/dist/
 COPY --from=builder /app/packages/client/dist-ssr/ /app/node_modules/client/dist-ssr/
