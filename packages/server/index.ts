@@ -29,7 +29,7 @@ async function startServer() {
 
   app.use(cors())
 
-  dbConnect()
+  await dbConnect()
   // Использовать до express.json()
   app.use(
     '/api/v2',
