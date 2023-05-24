@@ -4,6 +4,7 @@ import { TopicsModel } from '../models/forumTopics'
 import { literal } from 'sequelize'
 import { PostsModel } from '../models/forumPosts'
 import { UsersModel } from '../models/users'
+import { EmojiModel } from '../models/forumEmoji'
 import { checkUser } from '../utils/checkUser'
 
 export function forumController() {
@@ -82,6 +83,9 @@ export function forumController() {
               model: UsersModel,
               attributes: ['user_id', 'login', 'avatar'],
             },
+            {
+              model: EmojiModel,
+            }
           ],
           where: {
             parent_id: req.params.id,

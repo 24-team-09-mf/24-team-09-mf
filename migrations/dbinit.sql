@@ -41,6 +41,8 @@ CREATE TABLE emoji (
     id SERIAL PRIMARY KEY,
     emoji TEXT,
     count INTEGER,
+    parent_id INTEGER,
+    user_id INTEGER,
     "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL default NOW(),
     "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL default NOW(),
     FOREIGN KEY (parent_id) REFERENCES posts (id) ON DELETE CASCADE,
