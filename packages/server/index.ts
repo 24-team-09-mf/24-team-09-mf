@@ -46,8 +46,13 @@ async function startServer() {
 
   let vite: ViteDevServer
   const distPath = path.dirname(require.resolve('client/dist/index.html'))
+  console.log(distPath, "distPath");
   const ssrClientPath = require.resolve('client/dist-ssr/client.cjs')
-  const srcPath = path.dirname(require.resolve('client/ssr.tsx'))
+  console.log(ssrClientPath, 'ssrClientPath');
+  let srcPath = ''
+  if (isDev) {
+    srcPath = path.dirname(require.resolve('client/ssr.tsx'))
+  }
 
   if (isDev) {
     vite = await createViteServer({
@@ -58,7 +63,7 @@ async function startServer() {
     app.use(vite.middlewares)
   } else {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')))
-    app.use('/sw.js', express.static(require.resolve('client/sw.js')))
+    app.use('/sw.js', express.static(path.resolve(distPath, 'sw.js')))
   }
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment

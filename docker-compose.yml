@@ -28,9 +28,24 @@ services:
             - "${SERVER_PORT}:${SERVER_PORT}"
         environment:
           SERVER_PORT: ${SERVER_PORT}
+    ssr:
+      container_name: prakticum-ssr
+      image: prakticum-ssr
+      build:
+        context: .
+        dockerfile: Dockerfile.ssr
+        args:
+          SERVER_PORT: ${SSR_SERVER_PORT}
+      restart: always
+      ports:
+        - "${SSR_SERVER_PORT}:${SSR_SERVER_PORT}"
+      environment:
+        SERVER_PORT: ${SSR_SERVER_PORT}
+      command: node /app/index.js
+
 
     postgres:
-      image: postgres:14     
+      image: postgres:14
       ports:
         - "${POSTGRES_PORT}:${POSTGRES_PORT}"
       environment:
