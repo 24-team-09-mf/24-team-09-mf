@@ -5,7 +5,6 @@ import {
   Column,
   AllowNull,
   ForeignKey,
-  BelongsTo,
 } from 'sequelize-typescript'
 import { PostsModel } from './forumPosts'
 import { UsersModel } from './users'
@@ -46,22 +45,4 @@ export class PostEmojisModel extends Model {
     onDelete: 'CASCADE',
   })
   user_id: number
-
-  @BelongsTo(() => PostsModel, {
-    foreignKey: 'post_id',
-    as: 'post',
-  })
-  post: PostsModel
-
-  @BelongsTo(() => EmojiModel, {
-    foreignKey: 'emoji_id',
-    as: 'emoji',
-  })
-  emoji: EmojiModel
-
-  @BelongsTo(() => UsersModel, {
-    foreignKey: 'user_id',
-    as: 'user',
-  })
-  user: UsersModel
 }

@@ -5,7 +5,7 @@ import { literal } from 'sequelize'
 import { PostsModel } from '../models/forumPosts'
 import { UsersModel } from '../models/users'
 import { checkUser } from '../utils/checkUser'
-import { PostEmojisModel, EmojiModel } from '../models/forumEmoji'
+import { PostEmojisModel } from '../models/forumEmoji'
 
 export function forumController() {
   return {
@@ -77,7 +77,10 @@ export function forumController() {
     async getForumPosts(req: Request, res: Response) {
       try {
         const data = await PostsModel.findAll({
-          attributes: ['id', 'message'],
+          attributes: [
+            'id',
+            'message',
+          ],
           include: [
             {
               model: UsersModel,
@@ -85,12 +88,7 @@ export function forumController() {
             },
             {
               model: PostEmojisModel,
-              include: [
-                {
-                  model: EmojiModel,
-                  attributes: ['emoji_name'],
-                },
-              ],
+              attributes: ['id', 'user_id']
             },
           ],
           where: {
