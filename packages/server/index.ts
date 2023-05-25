@@ -46,9 +46,7 @@ async function startServer() {
 
   let vite: ViteDevServer
   const distPath = path.dirname(require.resolve('client/dist/index.html'))
-  console.log(distPath, "distPath");
   const ssrClientPath = require.resolve('client/dist-ssr/client.cjs')
-  console.log(ssrClientPath, 'ssrClientPath');
   let srcPath = ''
   if (isDev) {
     srcPath = path.dirname(require.resolve('client/ssr.tsx'))
