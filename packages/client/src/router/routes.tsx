@@ -47,30 +47,27 @@ export const routes: RouteObject[] = [
       },
       {
         path: Path.FORUM,
-        lazy: () => import('@/pages/forum/forum-start')
-        // async lazy() {
-        //   const { element } = await import('@/pages/forum/forum-start')
+        async lazy() {
+          const { element } = await import('@/pages/forum/forum-start')
 
-        //   return { Component: () => <ProtectedRoute>{element}</ProtectedRoute> }
-        // },
+          return { Component: () => <ProtectedRoute>{element}</ProtectedRoute> }
+        },
       },
       {
         path: Path.FORUM_ID,
-        lazy: () => import('@/pages/forum/forum-section')
-        // async lazy() {
-        //   const { element } = await import('@/pages/forum/forum-section')
+        async lazy() {
+          const { element } = await import('@/pages/forum/forum-section')
 
-        //   return { Component: () => <ProtectedRoute>{element}</ProtectedRoute> }
-        // },
+          return { Component: () => <ProtectedRoute>{element}</ProtectedRoute> }
+        },
       },
       {
         path: Path.FORUM_POST_PAGE,
-        lazy: () => import('@/pages/forum/forum-post')
-        // async lazy() {
-        //   const { element } = await import('@/pages/forum/forum-post')
+        async lazy() {
+          const { element } = await import('@/pages/forum/forum-post')
 
-        //   return { Component: () => <ProtectedRoute>{element}</ProtectedRoute> }
-        // },
+          return { Component: () => <ProtectedRoute>{element}</ProtectedRoute> }
+        },
       },
       {
         path: Path.STATISTICS,
