@@ -4,7 +4,7 @@ import { DataType, Model, Table, Column, AllowNull } from 'sequelize-typescript'
 export class UsersModel extends Model {
   @AllowNull(false)
   @Column(DataType.INTEGER)
-  user_id: string
+  user_id: number
 
   @AllowNull(false)
   @Column(DataType.STRING)
