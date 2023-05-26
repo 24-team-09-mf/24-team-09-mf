@@ -24,6 +24,15 @@ RUN apt-get install -y netcat
 RUN apt-get -y install nodejs
 RUN npm install --global yarn
 
+WORKDIR /app/client
+
+COPY --from=builder /app/packages/client/dist/ /app/client/dist/
+COPY --from=builder /app/packages/client/dist-ssr/ /app/client/dist-ssr/
+COPY --from=builder /app/packages/client/package.json /app/client/package.json
+
+RUN yarn install --production=true
+RUN yarn link
+
 WORKDIR /app
 
 COPY --from=builder /app/packages/server/dist/ /app/
@@ -32,8 +41,6 @@ COPY --from=builder /app/utils/wait-for.sh /app/wait-for.sh
 
 RUN chmod +x wait-for.sh
 RUN yarn install --production=true
-
-COPY --from=builder /app/packages/client/dist/ /app/node_modules/client/dist/
-COPY --from=builder /app/packages/client/dist-ssr/ /app/node_modules/client/dist-ssr/
+RUN yarn link client
 
 EXPOSE $SERVER_PORT
