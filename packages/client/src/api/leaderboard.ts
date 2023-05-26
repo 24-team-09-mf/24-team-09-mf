@@ -4,12 +4,13 @@ import { TEAM_NAME } from '../constants/constants'
 import { LeaderboardElementProps } from '@/components/organisms/leaderboard/leaderboard-types'
 
 export interface ILeaderboard {
-  score: number,
-  name?: string,
-  avatar?: string,
+  score: number
+  name?: string
+  avatar?: string
 }
 
-export const addLeaderboardItem = createAsyncThunk('leaderboard/add',
+export const addLeaderboardItem = createAsyncThunk(
+  'leaderboard/add',
   async (data: ILeaderboard, { rejectWithValue }) => {
     try {
       await http.post(ApiEndpoints.Leaderboard.AddUser, {
@@ -23,7 +24,8 @@ export const addLeaderboardItem = createAsyncThunk('leaderboard/add',
   }
 )
 
-export const getLeaderboardList = createAsyncThunk('leaderboard/getList',
+export const getLeaderboardList = createAsyncThunk(
+  'leaderboard/getList',
   async (limit: number, { rejectWithValue }) => {
     try {
       const response = await http.post(ApiEndpoints.Leaderboard.Leaderboard, {
@@ -31,7 +33,9 @@ export const getLeaderboardList = createAsyncThunk('leaderboard/getList',
         cursor: 0,
         limit,
       })
-      return response.data.map(({ data }: { data: LeaderboardElementProps }) => data)
+      return response.data.map(
+        ({ data }: { data: LeaderboardElementProps }) => data
+      )
     } catch (e) {
       return rejectWithValue('Ошибка при получении списка лидеров')
     }

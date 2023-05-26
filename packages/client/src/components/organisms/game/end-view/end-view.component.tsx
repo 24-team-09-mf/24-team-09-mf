@@ -18,7 +18,8 @@ export const EndView: FC<EndViewProps> = ({ onClickStartGame }) => {
         score: score,
         name: user?.login,
         avatar: user?.avatar,
-      }))
+      })
+    )
   }, [dispatch])
 
   const handlerStartGame = () => {

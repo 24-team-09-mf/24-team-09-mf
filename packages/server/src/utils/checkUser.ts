@@ -3,7 +3,7 @@ import type { UserProps } from './types'
 
 export async function checkUser(user: UserProps) {
   let userId = await UsersModel.findOne({
-    attributes: ['id'],
+    attributes: ['id', 'user_id', 'login'],
     where: {
       user_id: user.id,
     },

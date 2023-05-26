@@ -33,7 +33,6 @@ async function startServer() {
   app.use(express.json())
   app.use('/api', apiRouter)
 
-
   let vite: ViteDevServer
   const distPath = path.dirname(require.resolve('client/dist/index.html'))
   const ssrClientPath = require.resolve('client/dist-ssr/client.cjs')

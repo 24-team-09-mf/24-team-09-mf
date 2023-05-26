@@ -1,7 +1,8 @@
 import type { Response, Request } from 'express'
+import { literal } from 'sequelize'
+
 import { CategoriesModel } from '../models/forumCategories'
 import { TopicsModel } from '../models/forumTopics'
-import { literal } from 'sequelize'
 import { PostsModel } from '../models/forumPosts'
 import { UsersModel } from '../models/users'
 import { checkUser } from '../utils/checkUser'
@@ -14,6 +15,7 @@ export function forumController() {
           attributes: [
             'id',
             'title',
+            'description',
             [
               literal(
                 '(select count(topics.id) from topics where "topics"."parent_id" = "categories"."id")'
@@ -49,6 +51,7 @@ export function forumController() {
           attributes: [
             'id',
             'title',
+            'parent_id',
             [
               literal(
                 '(select count(posts.id) from posts where "posts"."parent_id" = "topics"."id")'
@@ -67,27 +70,40 @@ export function forumController() {
           },
           order: [['createdAt', 'ASC']],
         })
+        if (data.length === 0) throw new Error('Ресурс не найден')
         return res.status(200).send(data)
       } catch (e) {
+        if (e instanceof Error) {
+          if (e.message === 'Ресурс не найден') {
+            return res.status(404).send('Ресурс не найден')
+          }
+        }
         return res.status(500).send(e)
       }
     },
 
     async getForumPosts(req: Request, res: Response) {
       try {
-        const data = await PostsModel.findAll({
-          attributes: ['id', 'message'],
+        const data = await TopicsModel.findAll({
+          attributes: ['title'],
           include: [
             {
-              model: UsersModel,
-              attributes: ['user_id', 'login', 'avatar'],
+              model: PostsModel,
+              attributes: ['id', 'message'],
+              include: [
+                {
+                  model: UsersModel,
+                  attributes: ['user_id', 'login', 'avatar'],
+                },
+              ],
             },
           ],
           where: {
-            parent_id: req.params.id,
+            id: req.params.id,
           },
           order: [['createdAt', 'ASC']],
         })
+        if (data.length === 0) throw new Error('Ресурс не найден')
         return res.status(200).send(data)
       } catch (e) {
         return res.status(500).send(e)
@@ -103,8 +119,19 @@ export function forumController() {
           parent_id: id,
           user_id: userId.dataValues.id,
         })
-        return res.status(201).json(post)
+        return res.status(201).json({
+          ...post.dataValues,
+          user: {
+            user_id: userId.dataValues.user_id,
+            login: userId.dataValues.login,
+          },
+        })
       } catch (e) {
+        if (e instanceof Error) {
+          if (e.message === 'Ресурс не найден') {
+            return res.status(404).send('Ресурс не найден')
+          }
+        }
         return res.status(500).send(e)
       }
     },
@@ -123,7 +150,15 @@ export function forumController() {
           parent_id: topic.id,
           user_id: userId.dataValues.id,
         })
-        return res.status(201).json(topic)
+        return res.status(201).json({
+          ...topic.dataValues,
+          title: title,
+          postCount: 1,
+          user: {
+            user_id: userId.dataValues.user_id,
+            login: userId.dataValues.login,
+          },
+        })
       } catch (e) {
         return res.status(500).send(e)
       }

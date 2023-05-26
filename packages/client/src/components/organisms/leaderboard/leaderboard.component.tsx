@@ -89,11 +89,7 @@ export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
       {noResults ? (
         <div>Пользователь не найден</div>
       ) : (
-        sortedData.map((el) => (
-          <LeaderboardElement
-            key={el.name}
-            {...el} />
-        ))
+        sortedData.map(el => <LeaderboardElement key={el.name} {...el} />)
       )}
     </>
   )

@@ -7,9 +7,8 @@ import { getLeaderboardList } from '@/api/leaderboard'
 import { useAppDispatch, useAppSelector } from '@/store'
 
 export const Statistics = () => {
-
-  const leaderboardData = useAppSelector((state) => state.leaderboard.data)
-  const isLoading = useAppSelector((state) => state.leaderboard.isLoading)
+  const leaderboardData = useAppSelector(state => state.leaderboard.data)
+  const isLoading = useAppSelector(state => state.leaderboard.isLoading)
 
   const dispatch = useAppDispatch()
 
@@ -21,11 +20,7 @@ export const Statistics = () => {
     <Container>
       <Section>
         <H1>СТАТИСТИКА</H1>
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : (
-          <Leaderboard data={leaderboardData} />
-        )}
+        {isLoading ? <p>Loading...</p> : <Leaderboard data={leaderboardData} />}
       </Section>
     </Container>
   )

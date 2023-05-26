@@ -6,6 +6,7 @@ export const AvatarUrl = 'https://ya-praktikum.tech/api/v2/resources'
 export const OAuthUrl = 'https://oauth.yandex.ru/authorize?response_type=code'
 export const RedirectUrl = process.env.VITE_OAUTH_REDIRECT_URL
 
+// TODO отрефакторить API ендпоинты
 export const ApiEndpoints = {
   Auth: {
     SignIn: 'auth/signin',
@@ -23,8 +24,15 @@ export const ApiEndpoints = {
   },
   Leaderboard: {
     AddUser: '/leaderboard',
-    Leaderboard: `/leaderboard/${TEAM_NAME}`
-  }
+    Leaderboard: `/leaderboard/${TEAM_NAME}`,
+  },
+  Forum: {
+    getCategories: '/',
+    getTopics: '/topics/:id',
+    getPosts: '/posts/:id',
+    addPost: '/post',
+    addTopic: '/topic',
+  },
 }
 
 const http = axios.create({

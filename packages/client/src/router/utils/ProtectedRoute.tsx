@@ -12,9 +12,9 @@ const ProtectedRoute: FC<Props> = ({ children }) => {
 
   const fromUrl = `${location.pathname}${location.search}`
 
-  if (!user?.login) {
-    return <Navigate to={`/signin?fromUrl=${fromUrl}`} />
-  }
+  // if (!user?.login) {
+  //   return <Navigate to={`/signin?fromUrl=${fromUrl}`} />
+  // }
 
   return <>{children}</>
 }
