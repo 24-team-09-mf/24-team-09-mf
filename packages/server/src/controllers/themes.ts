@@ -44,7 +44,7 @@ export function themeController() {
 
     async getUserTheme(req: Request, res: Response) {
       try {
-        const data = await UserThemeModel.findAll({
+        const data = await UserThemeModel.findOne({
           attributes: ['id'],
           include: [
             {
@@ -57,7 +57,10 @@ export function themeController() {
           },
           order: [['createdAt', 'ASC']],
         })
-        return res.status(200).send(data)
+        if (data && data) {
+          return res.status(200).json(data)
+        }
+        return res.status(404).json('для пользователя нет темы')
       } catch (e) {
         return res.status(500).send(e)
       }
