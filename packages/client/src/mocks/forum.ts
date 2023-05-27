@@ -5,7 +5,7 @@ export const forumStartDemo = [
     text: 'Обсуждение игры',
     topicsCount: 12,
     lastTopic: {
-      id: '55',
+      id: '1',
       date: 1681213333000,
       title: 'Предложения по улучшению игры',
       userId: 99,
@@ -18,7 +18,7 @@ export const forumStartDemo = [
     text: 'Возникли затруднения с установкой игры, игровым процессом или учетной записью? Приглашаем на форум службы поддержки.',
     topicsCount: 12,
     lastTopic: {
-      id: '55',
+      id: '2',
       date: 1682213533000,
       title: 'Предложения по улучшению игры',
       userId: 99,
@@ -31,7 +31,7 @@ export const forumSectionDemo = {
   title: 'Сообщество',
   topics: [
     {
-      id: '55',
+      id: '1',
       parentId: '1',
       title: 'Предложения по улучшению игры',
       postCount: 33,
@@ -45,7 +45,7 @@ export const forumSectionDemo = {
       },
     },
     {
-      id: '56',
+      id: '2',
       parentId: '1',
       title: 'Предложения по улучшению игры 22222',
       postCount: 44,
