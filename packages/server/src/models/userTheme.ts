@@ -6,7 +6,6 @@ import {
   AllowNull,
   ForeignKey,
   BelongsTo,
-  Index,
 } from 'sequelize-typescript'
 
 import { UsersModel } from './users'
@@ -14,23 +13,19 @@ import { SiteThemeModel } from './themes'
 
 @Table({ timestamps: false, paranoid: true, modelName: 'user_themes' })
 export class UserThemeModel extends Model {
+  @AllowNull(false)
   @ForeignKey(() => SiteThemeModel)
-  @AllowNull(false)
   @Column({
     type: DataType.INTEGER,
-    field: 'theme_id',
+    field: 'parent_id',
     onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
-  @ForeignKey(() => UsersModel)
-  @AllowNull(false)
-  @Index
-  @Column({
-    type: DataType.INTEGER,
-    field: 'user_id',
-    onDelete: 'CASCADE',
+  parent_id: number
+
+  @BelongsTo(() => UsersModel, {
+    foreignKey: 'user_id',
+    as: 'user',
   })
   user_id: number
-
-  @BelongsTo(() => SiteThemeModel, 'theme_id')
-  theme: SiteThemeModel
 }

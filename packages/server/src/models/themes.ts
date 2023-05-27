@@ -19,6 +19,6 @@ export class SiteThemeModel extends Model {
   @Column(DataType.STRING)
   theme_name: string
 
-  @HasMany(() => UserThemeModel, 'id')
-  user_themes!: UserThemeModel
+  @HasMany(() => UserThemeModel, 'parent_id')
+  user_themes: Array<UserThemeModel>
 }

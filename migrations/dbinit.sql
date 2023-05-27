@@ -61,11 +61,11 @@ CREATE TABLE site_themes (
 
 CREATE TABLE user_themes (
     id SERIAL PRIMARY KEY,
-    theme_id INTEGER,
+    parent_id INTEGER,
     user_id INTEGER,
     "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL default NOW(),
     "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL default NOW(),
-    FOREIGN KEY (theme_id ) REFERENCES site_themes (id) ON DELETE CASCADE,
+    FOREIGN KEY (parent_id) REFERENCES site_themes (id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
@@ -76,4 +76,4 @@ INSERT INTO posts (message, parent_id, user_id) VALUES ('Оставляйте с
 INSERT INTO emojis (emoji_name) VALUES ('emojiCat.svg'), ('emojiPoop'), ('emojiRobot');
 INSERT INTO post_emojis (post_id, emoji_id, user_id) VALUES (1, 1, 1), (2, 2, 1), (3, 3, 1);
 INSERT INTO site_themes (theme_name) VALUES ('dark'), ('light');
-INSERT INTO user_themes (theme_id, user_id) VALUES (1, 1), (2, 2);
+INSERT INTO user_themes (parent_id, user_id) VALUES (1, 1), (2, 2);
