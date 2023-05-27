@@ -75,5 +75,5 @@ INSERT INTO topics (title, parent_id, user_id) VALUES ('Предложения �
 INSERT INTO posts (message, parent_id, user_id) VALUES ('Оставляйте свои предложения и вопросы', 1, 1),('Текст для темы 2', 2, 2), ('Ничего не работает !!!', 3, 1);
 INSERT INTO emojis (emoji_name) VALUES ('emojiCat.svg'), ('emojiPoop'), ('emojiRobot');
 INSERT INTO post_emojis (post_id, emoji_id, user_id) VALUES (1, 1, 1), (2, 2, 1), (3, 3, 1);
-INSERT INTO themes (title) VALUES ('dark'), ('light');
-INSERT INTO user_themes (parent_id, user_id) VALUES (1, 1), (2, 2);
+INSERT INTO site_themes (title) VALUES ('dark'), ('light');
+INSERT INTO themes (parent_id, user_id) VALUES (1, 1), (2, 2);
