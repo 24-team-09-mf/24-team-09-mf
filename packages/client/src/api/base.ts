@@ -24,7 +24,12 @@ export const ApiEndpoints = {
   Leaderboard: {
     AddUser: '/leaderboard',
     Leaderboard: `/leaderboard/${TEAM_NAME}`
-  }
+  },
+  Theme: {
+    getThemes: '/',
+    getUserTheme: '/userTheme/:id',
+    addTheme: '/userTheme',
+  },
 }
 
 const http = axios.create({

@@ -6,7 +6,7 @@ export enum Theme {
   DARK = 'dark',
 }
 
-const DEFAULT_THEME = Theme.DARK
+const DEFAULT_THEME = Theme.LIGHT
 
 type ThemeContextType = {
   theme: string
