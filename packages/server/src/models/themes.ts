@@ -17,8 +17,8 @@ export class SiteThemeModel extends Model {
   @AllowNull(false)
   @Unique
   @Column(DataType.STRING)
-  theme_name: string
+  title: string
 
   @HasMany(() => UserThemeModel, 'parent_id')
-  user_themes: Array<UserThemeModel>
+  themes: Array<UserThemeModel>
 }

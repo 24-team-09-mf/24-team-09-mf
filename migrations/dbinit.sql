@@ -54,12 +54,12 @@ CREATE TABLE post_emojis (
 
 CREATE TABLE site_themes (
     id SERIAL PRIMARY KEY,
-    theme_name TEXT NOT NULL,
+    title VARCHAR(255) NOT NULL,
     "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL default NOW(),
     "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL default NOW()
 );
 
-CREATE TABLE user_themes (
+CREATE TABLE themes (
     id SERIAL PRIMARY KEY,
     parent_id INTEGER,
     user_id INTEGER,
@@ -75,5 +75,5 @@ INSERT INTO topics (title, parent_id, user_id) VALUES ('Предложения �
 INSERT INTO posts (message, parent_id, user_id) VALUES ('Оставляйте свои предложения и вопросы', 1, 1),('Текст для темы 2', 2, 2), ('Ничего не работает !!!', 3, 1);
 INSERT INTO emojis (emoji_name) VALUES ('emojiCat.svg'), ('emojiPoop'), ('emojiRobot');
 INSERT INTO post_emojis (post_id, emoji_id, user_id) VALUES (1, 1, 1), (2, 2, 1), (3, 3, 1);
-INSERT INTO site_themes (theme_name) VALUES ('dark'), ('light');
+INSERT INTO themes (title) VALUES ('dark'), ('light');
 INSERT INTO user_themes (parent_id, user_id) VALUES (1, 1), (2, 2);

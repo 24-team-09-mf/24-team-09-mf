@@ -11,18 +11,18 @@ export function themeController() {
         const data = await SiteThemeModel.findAll({
           attributes: [
             'id',
-            'theme_name',
+            'title',
             [
               literal(
-                '(select count(user_themes.id) from user_themes where "user_themes"."parent_id" = "site_themes"."id")'
+                '(select count(themes.id) from themes where "themes"."parent_id" = "site_themes"."id")'
               ),
-              'userThemesCount',
+              'themesCount',
             ],
           ],
           include: [
             {
               model: UserThemeModel,
-              attributes: ['id', 'theme_name', 'user_id'],
+              attributes: ['id', 'user_id'],
               limit: 1,
               order: [['id', 'DESC']],
               include: [
