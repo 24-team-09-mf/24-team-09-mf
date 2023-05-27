@@ -52,34 +52,28 @@ CREATE TABLE post_emojis (
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
-<<<<<<< HEAD
-CREATE TABLE site_theme (
+CREATE TABLE site_themes (
     id SERIAL PRIMARY KEY,
     theme_name TEXT NOT NULL,
     "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL default NOW(),
     "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL default NOW()
 );
 
-CREATE TABLE user_theme (
+CREATE TABLE user_themes (
     id SERIAL PRIMARY KEY,
     theme_id INTEGER,
     user_id INTEGER,
     "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL default NOW(),
     "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL default NOW(),
-    FOREIGN KEY (theme_id ) REFERENCES site_theme (id) ON DELETE CASCADE,
+    FOREIGN KEY (theme_id ) REFERENCES site_themes (id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
-=======
->>>>>>> 8830cdff2ad6b5667fe61ec5753919b87244b8a6
 INSERT INTO categories (title, description) VALUES ('Сообщество 1', 'Обсуждение игры'), ('Поддержка', 'Возникли затруднения с установкой игры, игровым процессом или учетной записью? Приглашаем на форум службы поддержки.');
 INSERT INTO users (user_id, login, avatar) VALUES (532132, 'test 0001', 'https://ya-praktikum.tech/api/v2/resources/e1092287-ff24-410f-965d-0bf50bd35955/56c760b9-598e-42ad-acc8-d02afed05c21_61492-derevo_minimalizm_vodoem_holm.jpg'), (532135, 'test 0002', null);
 INSERT INTO topics (title, parent_id, user_id) VALUES ('Предложения по улучшению игры', 1, 1), ('Тема 222', 1, 2), ('Нужна помощь !!!', 2, 1);
 INSERT INTO posts (message, parent_id, user_id) VALUES ('Оставляйте свои предложения и вопросы', 1, 1),('Текст для темы 2', 2, 2), ('Ничего не работает !!!', 3, 1);
 INSERT INTO emojis (emoji_name) VALUES ('emojiCat.svg'), ('emojiPoop'), ('emojiRobot');
 INSERT INTO post_emojis (post_id, emoji_id, user_id) VALUES (1, 1, 1), (2, 2, 1), (3, 3, 1);
-<<<<<<< HEAD
-INSERT INTO siteTheme (theme_name) VALUES ('dark'), ('light');
-INSERT INTO userTheme (theme_id, user_id) VALUES (1, 1), (2, 2);
-=======
->>>>>>> 8830cdff2ad6b5667fe61ec5753919b87244b8a6
+INSERT INTO site_themes (theme_name) VALUES ('dark'), ('light');
+INSERT INTO user_themes (theme_id, user_id) VALUES (1, 1), (2, 2);

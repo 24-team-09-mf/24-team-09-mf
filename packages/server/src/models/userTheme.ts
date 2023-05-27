@@ -12,7 +12,7 @@ import {
 import { UsersModel } from './users'
 import { SiteThemeModel } from './themes'
 
-@Table({ timestamps: false, paranoid: true, modelName: 'user_theme' })
+@Table({ timestamps: false, paranoid: true, modelName: 'user_themes' })
 export class UserThemeModel extends Model {
   @ForeignKey(() => SiteThemeModel)
   @AllowNull(false)

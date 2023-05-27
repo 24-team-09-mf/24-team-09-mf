@@ -11,7 +11,7 @@ import {
 
 import { UserThemeModel } from './userTheme'
 
-@Table({ modelName: 'site_theme' })
+@Table({ modelName: 'site_themes' })
 export class SiteThemeModel extends Model {
   @Index
   @AllowNull(false)
