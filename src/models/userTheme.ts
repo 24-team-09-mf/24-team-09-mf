@@ -7,17 +7,14 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript'
-import { TopicsModel } from './forumTopics'
+
 import { UsersModel } from './users'
+import { SiteThemeModel } from './themes'
 
-@Table({ modelName: 'posts' })
-export class PostsModel extends Model {
+@Table({ timestamps: false, paranoid: true, modelName: 'themes' })
+export class UserThemeModel extends Model {
   @AllowNull(false)
-  @Column(DataType.STRING)
-  message: string
-
-  @AllowNull(false)
-  @ForeignKey(() => TopicsModel)
+  @ForeignKey(() => SiteThemeModel)
   @Column({
     type: DataType.INTEGER,
     field: 'parent_id',

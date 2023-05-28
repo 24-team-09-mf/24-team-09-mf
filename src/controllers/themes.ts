@@ -6,7 +6,6 @@ import { literal } from 'sequelize'
 import { checkUser } from '../utils/checkUser'
 
 export function themeController() {
-  const THEME_ERROR = 'для пользователя нет темы'
   return {
     async getSiteThemes(_: Request, res: Response) {
       try {
@@ -61,7 +60,7 @@ export function themeController() {
         if (data && data) {
           return res.status(200).json(data)
         }
-        return res.status(404).json(THEME_ERROR)
+        return res.status(404).json('для пользователя нет темы')
       } catch (e) {
         return res.status(500).send(e)
       }

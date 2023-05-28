@@ -5,7 +5,6 @@ import { PostsModel } from './src/models/forumPosts'
 import { UsersModel } from './src/models/users'
 import { SiteThemeModel } from './src/models/themes'
 import { UserThemeModel } from './src/models/userTheme'
-import { EmojiModel, PostEmojisModel } from './src/models/forumEmoji'
 
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
   process.env
@@ -22,8 +21,6 @@ const sequelizeOptions: SequelizeOptions = {
     TopicsModel,
     PostsModel,
     UsersModel,
-    EmojiModel,
-    PostEmojisModel,
     SiteThemeModel,
     UserThemeModel,
   ],
