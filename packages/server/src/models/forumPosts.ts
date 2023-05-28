@@ -6,9 +6,11 @@ import {
   AllowNull,
   ForeignKey,
   BelongsTo,
+  HasMany
 } from 'sequelize-typescript'
 import { TopicsModel } from './forumTopics'
 import { UsersModel } from './users'
+import { PostEmojisModel } from './forumEmoji'
 
 @Table({ modelName: 'posts' })
 export class PostsModel extends Model {
@@ -31,4 +33,10 @@ export class PostsModel extends Model {
     as: 'user',
   })
   user_id: number
+
+  @HasMany(() => PostEmojisModel, {
+    foreignKey: 'post_id',
+    as: 'emojis',
+  })
+  emojis: PostEmojisModel[];
 }

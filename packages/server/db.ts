@@ -3,6 +3,7 @@ import { CategoriesModel } from './src/models/forumCategories'
 import { TopicsModel } from './src/models/forumTopics'
 import { PostsModel } from './src/models/forumPosts'
 import { UsersModel } from './src/models/users'
+import { EmojiModel, PostEmojisModel } from './src/models/forumEmoji'
 
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, POSTGRES_HOST } =
   process.env
@@ -14,7 +15,7 @@ const sequelizeOptions: SequelizeOptions = {
   password: POSTGRES_PASSWORD,
   database: POSTGRES_DB,
   dialect: 'postgres',
-  models: [CategoriesModel, TopicsModel, PostsModel, UsersModel],
+  models: [CategoriesModel, TopicsModel, PostsModel, UsersModel, EmojiModel, PostEmojisModel],
 }
 
 export const sequelize = new Sequelize(sequelizeOptions)
