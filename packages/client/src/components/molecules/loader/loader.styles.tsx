@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
 `
 
 export const Loader = styled.div`
-  border: 10px solid #f3f3f3;
+  border: 10px solid var(--color-gray2);
   border-top: 10px solid var(--color-green2);
   border-radius: 50%;
   width: 80px;
