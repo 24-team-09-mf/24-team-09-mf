@@ -20,8 +20,6 @@ const useProfile = () => {
   const { user } = userStore()
   const dispatch = useAppDispatch()
 
-  console.log(user)
-
   const {
     register,
     handleSubmit,

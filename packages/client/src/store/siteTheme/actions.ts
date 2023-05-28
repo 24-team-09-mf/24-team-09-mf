@@ -46,7 +46,7 @@ interface IAddTheme {
   user: Partial<User> | null
 }
 
-export const themeAddTheme = createAsyncThunk(
+export const themeAddUserTheme = createAsyncThunk(
   'themes-add-theme',
   async (data: IAddTheme, { rejectWithValue }) => {
     try {

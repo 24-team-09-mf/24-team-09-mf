@@ -1,13 +1,20 @@
+// react
+import { useEffect, useState } from 'react'
+
 // images
 import image from '@/assets/images/header.png'
 
 // lib
 import { Link } from 'react-router-dom'
 
+// components
 import { Switch } from '../../atoms'
 
 // redux
-import { userStore } from '@/store'
+import { userStore, useAppDispatch } from '@/store'
+
+// import { themeStore } from '@/store/themeStore'
+import { themeGetUserTheme } from '@/store/siteTheme/actions'
 
 // styles
 import {
@@ -24,6 +31,10 @@ import {
 
 export const Header = () => {
   const { user } = userStore()
+
+  const dispatch = useAppDispatch()
+
+  console.log(user?.id)
 
   return (
     <Wrapper>

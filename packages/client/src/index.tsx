@@ -55,8 +55,6 @@ async function hydrate() {
     user: new ApiService(new AuthService()),
   }
 
-  console.log()
-
   ReactDOM.hydrateRoot(
     document.getElementById('root') as HTMLElement,
     <React.StrictMode>

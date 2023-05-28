@@ -24,6 +24,6 @@ export interface Themes {
 }
 
 export interface ThemeStore {
-  thems: Themes
+  themes: Themes
   userTheme: UserTheme
 }

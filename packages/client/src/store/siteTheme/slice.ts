@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { themeGetSiteThemes, themeGetUserTheme, themeAddTheme } from './actions'
+import { themeGetSiteThemes, themeGetUserTheme, themeAddUserTheme } from './actions'
 import { ThemeStore } from './types'
 
 const initialState: ThemeStore = {
-  thems: {
+  themes: {
     items: [],
     error: '',
   },
@@ -21,11 +21,11 @@ const themeSlice = createSlice({
     builder
       // Themes
       .addCase(themeGetSiteThemes.fulfilled, (state, action) => {
-        state.thems.error = ''
-        state.thems.items = action.payload
+        state.themes.error = ''
+        state.themes.items = action.payload
       })
       .addCase(themeGetSiteThemes.rejected, (state, action) => {
-        state.thems.error = action.payload as string
+        state.themes.error = action.payload as string
       })
       // UserTheme
       .addCase(themeGetUserTheme.fulfilled, (state, action) => {
@@ -36,12 +36,12 @@ const themeSlice = createSlice({
         state.userTheme.error = action.payload as string
       })
       // Add Theme
-      .addCase(themeAddTheme.fulfilled, (state, action) => {
-        state.thems.error = ''
-        state.thems.items = [...state.thems.items, action.payload]
+      .addCase(themeAddUserTheme.fulfilled, (state, action) => {
+        state.userTheme.error = ''
+        state.userTheme.items = [...state.userTheme.items, action.payload]
       })
-      .addCase(themeAddTheme.rejected, (state, action) => {
-        state.thems.error = action.payload as string
+      .addCase(themeAddUserTheme.rejected, (state, action) => {
+        state.userTheme.error = action.payload as string
       })
   },
 })
