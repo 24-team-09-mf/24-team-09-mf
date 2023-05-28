@@ -7,6 +7,7 @@ import { checkUser } from '../utils/checkUser'
 
 export function themeController() {
   const THEME_ERROR = 'для пользователя нет темы'
+  
   return {
     async getSiteThemes(_: Request, res: Response) {
       try {
