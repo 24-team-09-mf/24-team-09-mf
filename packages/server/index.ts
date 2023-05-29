@@ -29,14 +29,27 @@ async function startServer() {
 
   app.use(cors())
 
-  dbConnect()
+  await dbConnect()
+  // Использовать до express.json()
+  app.use(
+    '/api/v2',
+    createProxyMiddleware({
+      changeOrigin: true,
+      cookieDomainRewrite: 'localhost',
+      target: 'https://ya-praktikum.tech',
+    })
+  )
+
   app.use(express.json())
   app.use('/api', apiRouter)
 
   let vite: ViteDevServer
   const distPath = path.dirname(require.resolve('client/dist/index.html'))
   const ssrClientPath = require.resolve('client/dist-ssr/client.cjs')
-  const srcPath = path.dirname(require.resolve('client/ssr.tsx'))
+  let srcPath = ''
+  if (isDev) {
+    srcPath = path.dirname(require.resolve('client/ssr.tsx'))
+  }
 
   if (isDev) {
     vite = await createViteServer({
@@ -47,17 +60,8 @@ async function startServer() {
     app.use(vite.middlewares)
   } else {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')))
-    app.use('/sw.js', express.static(require.resolve('client/sw.js')))
+    app.use('/sw.js', express.static(path.resolve(distPath, 'sw.js')))
   }
-
-  app.use(
-    '/api/v2',
-    createProxyMiddleware({
-      changeOrigin: true,
-      cookieDomainRewrite: 'localhost',
-      target: 'https://ya-praktikum.tech',
-    })
-  )
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   //@ts-ignore

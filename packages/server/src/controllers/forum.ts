@@ -6,6 +6,7 @@ import { TopicsModel } from '../models/forumTopics'
 import { PostsModel } from '../models/forumPosts'
 import { UsersModel } from '../models/users'
 import { checkUser } from '../utils/checkUser'
+import { EmojiModel, PostEmojisModel } from '../models/forumEmoji'
 
 export function forumController() {
   return {
@@ -96,6 +97,16 @@ export function forumController() {
                   attributes: ['user_id', 'login', 'avatar'],
                 },
               ],
+            },
+            {
+              model: PostEmojisModel,
+              attributes: ['id', 'user_id'],
+              include: [
+                {
+                  model: EmojiModel,
+                  attributes: ['emoji_name']
+                }
+              ]
             },
           ],
           where: {
