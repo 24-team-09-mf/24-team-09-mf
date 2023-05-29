@@ -90,29 +90,29 @@ export function forumController() {
           include: [
             {
               model: PostsModel,
-              attributes: ['id', 'message'],
+              attributes: ['id', 'message', 'createdAt'],
               include: [
                 {
                   model: UsersModel,
                   attributes: ['user_id', 'login', 'avatar'],
                 },
-              ],
-            },
-            {
-              model: PostEmojisModel,
-              attributes: ['id', 'user_id'],
-              include: [
                 {
-                  model: EmojiModel,
-                  attributes: ['emoji_name']
-                }
-              ]
+                  model: PostEmojisModel,
+                  attributes: ['id', 'user_id'],
+                  include: [
+                    {
+                      model: EmojiModel,
+                      attributes: ['emoji_name'],
+                    },
+                  ],
+                },
+              ],
             },
           ],
           where: {
             id: req.params.id,
           },
-          order: [['createdAt', 'ASC']],
+          order: [[PostsModel, 'createdAt', 'ASC']],
         })
         if (data.length === 0) throw new Error('Ресурс не найден')
         return res.status(200).send(data)
