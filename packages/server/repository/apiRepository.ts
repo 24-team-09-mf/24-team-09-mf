@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { checkUser } from '../src/utils/checkUser'
 
 const API_ROOT = 'https://ya-praktikum.tech/api/v2'
 
@@ -11,6 +12,7 @@ export class ApiRepository {
         cookie: this._cookiesHeader,
       },
     })
+    await checkUser(data)
     return {
       ...data,
     }

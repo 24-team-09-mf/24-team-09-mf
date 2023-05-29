@@ -123,18 +123,18 @@ export function forumController() {
 
     async addForumPost(req: Request, res: Response) {
       const { id, message, user } = req.body
-      const userId = await checkUser(user)
+      const userDB = await checkUser(user)
       try {
         const post = await PostsModel.create({
           message: message,
           parent_id: id,
-          user_id: userId.dataValues.id,
+          user_id: userDB.id,
         })
         return res.status(201).json({
           ...post.dataValues,
           user: {
-            user_id: userId.dataValues.user_id,
-            login: userId.dataValues.login,
+            user_id: userDB.user_id,
+            login: userDB.login,
           },
         })
       } catch (e) {
@@ -150,24 +150,24 @@ export function forumController() {
     async addForumTopic(req: Request, res: Response) {
       try {
         const { id, title, message, user } = req.body
-        const userId = await checkUser(user)
+        const userDB = await checkUser(user)
         const topic = await TopicsModel.create({
           title: title,
           parent_id: id,
-          user_id: userId.dataValues.id,
+          user_id: userDB.id,
         })
         await PostsModel.create({
           message: message,
           parent_id: topic.id,
-          user_id: userId.dataValues.id,
+          user_id: userDB.id,
         })
         return res.status(201).json({
           ...topic.dataValues,
           title: title,
           postCount: 1,
           user: {
-            user_id: userId.dataValues.user_id,
-            login: userId.dataValues.login,
+            user_id: userDB.user_id,
+            login: userDB.login,
           },
         })
       } catch (e) {
