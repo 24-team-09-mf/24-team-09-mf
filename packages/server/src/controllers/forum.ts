@@ -35,6 +35,12 @@ export function forumController() {
                   model: UsersModel,
                   attributes: ['user_id', 'login'],
                 },
+                {
+                  model: PostsModel,
+                  attributes: ['createdAt'],
+                  limit: 1,
+                  order: [['id', 'DESC']],
+                },
               ],
             },
           ],
@@ -170,7 +176,12 @@ export function forumController() {
         return res.status(201).json({
           ...topic.dataValues,
           title: title,
-          postCount: 1,
+          postsCount: 1,
+          posts: [
+            {
+              createdAt: topic.dataValues.createdAt,
+            },
+          ],
           user: {
             user_id: userDB.user_id,
             login: userDB.login,
