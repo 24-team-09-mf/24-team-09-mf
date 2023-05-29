@@ -65,6 +65,12 @@ export function forumController() {
               model: UsersModel,
               attributes: ['user_id', 'login'],
             },
+            {
+              model: PostsModel,
+              attributes: ['createdAt'],
+              limit: 1,
+              order: [['id', 'DESC']],
+            },
           ],
           where: {
             parent_id: req.params.id,

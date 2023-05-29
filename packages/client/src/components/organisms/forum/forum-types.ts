@@ -17,7 +17,7 @@ export type ForumSectionProps = {
   title: string
   postsCount: number
   user: Partial<User>
-  lastTopic: ForumLastTopicProps
+  posts: Record<number, { createdAt: string }>
 }
 
 export type ForumFormsProps = {
