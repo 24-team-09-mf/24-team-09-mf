@@ -16,7 +16,7 @@ import {
   ForumEmojiAddBtn,
   ForumEmojiAddBlock,
   ForumEmojiAddElement,
-  ForumEmojiElement,
+  // ForumEmojiElement,
 } from '@/components/templates/forum/forum.styles'
 import IconRateMinus from '@/assets/icons/rate_minus.svg'
 import IconRatePlus from '@/assets/icons/rate_plus.svg'
@@ -28,7 +28,7 @@ import { EMOJI, ForumEditor } from '@/components'
 
 const ForumPost = (el: ForumPostProps) => {
   const [rate, setRate] = useState(el.rate)
-  const { userAvatar, userName, date, text, emoji } = el
+  const { user, date, message } = el
 
   const [replyOpen, setReplyOpen] = useState(false)
   const [emojiAdd, setEmojiAdd] = useState('none')
@@ -42,14 +42,16 @@ const ForumPost = (el: ForumPostProps) => {
   return (
     <ForumPostBlock>
       <ForumPostBlockAvatar>
-        <img src={userAvatar ? userAvatar : avatarDefault} alt={userName} />
+        <img src={user.avatar ? user.avatar : avatarDefault} alt={user.login} />
       </ForumPostBlockAvatar>
       <ForumPostContent>
         <ForumPostTop>
-          <ForumPostUserName>{userName}</ForumPostUserName>
+          <ForumPostUserName>{user.login}</ForumPostUserName>
           <ForumPostDate>{dateParse(date)}</ForumPostDate>
         </ForumPostTop>
-        <ForumPostText dangerouslySetInnerHTML={{ __html: text as string }} />
+        <ForumPostText
+          dangerouslySetInnerHTML={{ __html: message as string }}
+        />
         <ForumPostBottom>
           <div>
             <ForumPostReplyBtn onClick={onReplyHandler}>
@@ -58,13 +60,14 @@ const ForumPost = (el: ForumPostProps) => {
           </div>
           <ForumPostRate>
             <ForumEmoji>
-              {emoji &&
+              {/* TODO сделать emoji */}
+              {/* {emoji &&
                 emoji.map(el => (
                   <ForumEmojiElement key={el.name}>
                     <img src={EMOJI[el.name]} alt={el.name} />
                     <span>{el.usersId.length}</span>
                   </ForumEmojiElement>
-                ))}
+                ))} */}
               <ForumEmojiAddBtn onClick={onsetEmojiHandler}>
                 <ForumEmojiAddBlock display={emojiAdd}>
                   {Object.keys(EMOJI).map(el => (
@@ -90,9 +93,9 @@ const ForumPost = (el: ForumPostProps) => {
             title="Ответить на сообщение"
             replyMessage={
               <>
-                <strong>{userName}</strong>
+                <strong>{user.login}</strong>
                 <br />
-                <div dangerouslySetInnerHTML={{ __html: text as string }} />
+                <div dangerouslySetInnerHTML={{ __html: message as string }} />
               </>
             }
           />

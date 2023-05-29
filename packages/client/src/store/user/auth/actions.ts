@@ -1,7 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import http, { ApiEndpoints } from '@/api/base'
-import { SignIn, SignUp } from '../types'
 import { IStoreServices } from '@/store/store'
+
+import { SignIn, SignUp } from '../types'
 
 export const getUser = createAsyncThunk(
   'user/getuser',

@@ -8,6 +8,7 @@ const NODE_API_URL = process.env.NODE_API_URL
 export class AuthService {
   async getUser(): Promise<User> {
     const { data } = await axios.get(
+      // TODO убрать NODE_API_URL
       `${NODE_API_URL}/api/v2/${ApiEndpoints.Auth.UserInfo}`,
       {
         withCredentials: true,
@@ -17,6 +18,7 @@ export class AuthService {
   }
   async signIn(signinData: SignIn): Promise<User> {
     const { data } = await axios.post(
+      // TODO убрать NODE_API_URL
       `${NODE_API_URL}/api/v2/${ApiEndpoints.Auth.SignIn}`,
       signinData
     )
@@ -25,6 +27,7 @@ export class AuthService {
     }
   }
   async logout(): Promise<null> {
+    // TODO убрать NODE_API_URL
     await axios.post(`${NODE_API_URL}/api/v2/${ApiEndpoints.Auth.SignOut}`)
     return null
   }

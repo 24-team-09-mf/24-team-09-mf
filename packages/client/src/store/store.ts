@@ -4,11 +4,13 @@ import { rootReducer } from './rootReducer'
 import { SignIn, User, UserState } from '@/store/user/types'
 import { IGame } from './game/types'
 import { LeaderboardState } from './leaderboard/leaderboarSlice'
+import { ForumStore } from './forum/types'
 
 export interface IInitialStore {
   user: UserState
   game: IGame
   leaderboard: LeaderboardState
+  forum: ForumStore
 }
 
 export interface IStoreServices {

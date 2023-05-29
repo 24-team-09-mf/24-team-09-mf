@@ -18,9 +18,9 @@ export const leaderboardSlice = createSlice({
   name: 'leaderboard',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
-      .addCase(getLeaderboardList.pending, (state) => {
+      .addCase(getLeaderboardList.pending, state => {
         state.isLoading = true
         state.error = null
       })
@@ -32,7 +32,7 @@ export const leaderboardSlice = createSlice({
         state.isLoading = false
         state.error = action.payload as string
       })
-  }
+  },
 })
 
 export default leaderboardSlice.reducer
