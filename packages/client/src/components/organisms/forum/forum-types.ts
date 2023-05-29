@@ -41,7 +41,7 @@ export type ForumEmoji = {
 export type ForumPostProps = {
   id: string
   message: string | ReactElement
-  date: number
+  createdAt: string
   user: Partial<User>
   rate: number
   // userId: number

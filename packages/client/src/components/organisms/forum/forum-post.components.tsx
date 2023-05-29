@@ -23,7 +23,7 @@ import avatarDefault from '@/assets/images/avatarDefault.png'
 import { EMOJI, ForumEditor } from '@/components'
 
 const ForumPost = (el: ForumPostProps) => {
-  const { user, date, message } = el
+  const { user, createdAt, message } = el
 
   const [replyOpen, setReplyOpen] = useState(false)
   const [emojiAdd, setEmojiAdd] = useState('none')
@@ -40,7 +40,7 @@ const ForumPost = (el: ForumPostProps) => {
       <ForumPostContent>
         <ForumPostTop>
           <ForumPostUserName>{user.login}</ForumPostUserName>
-          <ForumPostDate>{dateParse(date)}</ForumPostDate>
+          <ForumPostDate>{dateParse(createdAt)}</ForumPostDate>
         </ForumPostTop>
         <ForumPostText
           dangerouslySetInnerHTML={{ __html: message as string }}
