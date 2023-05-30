@@ -1,8 +1,8 @@
 // components
-import { Profile } from '../../components'
+import { Profile } from '@/components'
 
 const ProfilePage = () => {
   return <Profile />
 }
 
-export default ProfilePage
+export const element = <ProfilePage />

@@ -1,10 +1,16 @@
 // react
 import { useCallback } from 'react'
 
+import { forumAddTopic, forumAddPost } from '@/store/forum/actions'
+import { useAppDispatch } from '@/store'
+
 import { useForm } from 'react-hook-form'
 import { ForumFormsProps } from './forum-types'
+import { UserState } from '@/store/user/types'
 
-const useSectionForm = (id: string, postPageId?: string) => {
+const useSectionForm = (user: UserState, id: string, postPageId?: string) => {
+  const dispatch = useAppDispatch()
+
   const {
     register,
     handleSubmit,
@@ -18,9 +24,13 @@ const useSectionForm = (id: string, postPageId?: string) => {
   const onSubmitHandler = useCallback(
     async (data: ForumFormsProps) => {
       try {
-        data = { ...data, id: id }
-        if (postPageId) data = { ...data, postPageId: postPageId }
-        console.log(data)
+        if (postPageId) {
+          await dispatch(
+            forumAddPost({ ...data, user: user.user, id: postPageId })
+          )
+        } else {
+          await dispatch(forumAddTopic({ ...data, user: user.user, id: id }))
+        }
         reset()
         setValue('message', '')
       } catch (error) {

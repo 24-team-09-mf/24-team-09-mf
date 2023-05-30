@@ -12,7 +12,7 @@
     "format": "lerna run format",
     "preview": "lerna run preview",
     "create:link": "cd packages/client && yarn link && cd ../server && yarn link client && cd ../../",
-    "build:ssr": "yarn create:link && lerna run build  --scope=client && lerna run build --scope=server",
+    "build:ssr": "yarn create:link && lerna run build --scope=client && lerna run build --scope=server",
     "start:ssr": "yarn build:ssr && lerna run preview --scope=server"
   },
   "license": "MIT",

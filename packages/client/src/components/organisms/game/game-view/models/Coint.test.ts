@@ -6,7 +6,7 @@ import {
   BLOCK_SIZE,
 } from '@/components/organisms/game/game.constants'
 
-const fn = jest.fn();
+const fn = jest.fn()
 
 describe('Тест класса Coin', () => {
   let canvas, ctx: CanvasRenderingContext2D, coin: Coin

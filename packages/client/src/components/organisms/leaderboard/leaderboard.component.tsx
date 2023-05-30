@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { memo } from 'react'
 import {
   Control,
   Item,
@@ -13,16 +13,17 @@ import {
   SortElement,
   SortElementIcon,
 } from './leaderboard.styles'
+import { H2 } from '@/global-styles'
 import { Input } from '@/components/molecules'
 import IconSort from '@/assets/icons/sort.svg'
 import { LeaderboardElementProps } from './leaderboard-types'
-import mergeSort from '@/utils/mergeSort'
-import { H2 } from '@/global-styles'
+import useLeaderboard from './leaderboard.logics'
 
 import avatarDefault from '@/assets/images/avatarDefault.png'
 
-const LeaderboardElement = (props: LeaderboardElementProps) => {
-  const { position, points, userName, userAvatar } = props
+const LeaderboardElement = memo((props: LeaderboardElementProps) => {
+  const { position, score, name, avatar } = props
+  const avatarSrc = avatar ? avatar : avatarDefault
 
   return (
     <Item>
@@ -30,35 +31,26 @@ const LeaderboardElement = (props: LeaderboardElementProps) => {
         <Number>{position}</Number>
         <User>
           <UserAvatar>
-            <img src={userAvatar ? userAvatar : avatarDefault} alt={userName} />
+            <img src={avatarSrc} alt={name} />
           </UserAvatar>
-          {userName}
+          {name}
         </User>
       </ItemLeft>
-      <Points>{points}</Points>
+      <Points>{score}</Points>
     </Item>
   )
-}
+})
 
 export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
-  const [search, setSearch] = useState('')
-  const [nameSort, setNameSort] = useState('ASC')
-  const [positionSort, setPositionSort] = useState('DESC')
-  const [sortData, setSortData] = useState(data)
-
-  useEffect(() => {
-    const s = data.filter(el => el.userName.indexOf(search) !== -1)
-    setSortData(mergeSort(s, 'position', 'DESC'))
-    setPositionSort('DESC')
-  }, [search])
-
-  useEffect(() => {
-    setSortData(mergeSort(sortData, 'userName', nameSort))
-  }, [nameSort])
-
-  useEffect(() => {
-    setSortData(mergeSort(sortData, 'position', positionSort))
-  }, [positionSort])
+  const {
+    setSearch,
+    nameSort,
+    setNameSort,
+    positionSort,
+    setPositionSort,
+    sortedData,
+    noResults,
+  } = useLeaderboard({ data })
 
   return (
     <>
@@ -94,9 +86,11 @@ export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
         </Sort>
       </Control>
 
-      {sortData.map(el => (
-        <LeaderboardElement key={el.position} {...el} />
-      ))}
+      {noResults ? (
+        <div>Пользователь не найден</div>
+      ) : (
+        sortedData.map(el => <LeaderboardElement key={el.name} {...el} />)
+      )}
     </>
   )
 }

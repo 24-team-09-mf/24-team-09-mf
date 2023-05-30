@@ -1,7 +1,7 @@
-import { ErrorTemplate } from '../../components'
+import { ErrorTemplate } from '@/components'
 
 const ErrorPage: React.FC = () => {
   return <ErrorTemplate />
 }
 
-export default ErrorPage
+export const element = <ErrorPage />

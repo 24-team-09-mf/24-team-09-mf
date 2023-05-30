@@ -10,17 +10,20 @@ import imageRight from '@/assets/images/bg-right.png'
 
 // styles
 import { Layout, Content, ImgLeft, ImgRight } from './layout-main.styles'
+import { ErrorWrapper } from '@/components/layouts/error-wrapper'
 
 export const LayoutMain: FC = () => {
   return (
-    <Layout>
-      <Header />
-      <Content>
-        <Outlet />
-      </Content>
-      <Footer />
-      <ImgLeft alt="фон" src={imageLeft} />
-      <ImgRight alt="фон" src={imageRight} />
-    </Layout>
+    <ErrorWrapper>
+      <Layout>
+        <Header />
+        <Content>
+          <Outlet />
+        </Content>
+        <Footer />
+        <ImgLeft alt="фон" src={imageLeft} />
+        <ImgRight alt="фон" src={imageRight} />
+      </Layout>
+    </ErrorWrapper>
   )
 }
