@@ -14,12 +14,20 @@ import { dbConnect } from './db'
 import { apiRouter } from './src/routes'
 
 import { ApiRepository } from './repository/apiRepository'
-
-dotenv.config()
+import * as process from 'process'
 
 const isDev = process.env.NODE_ENV === 'development'
 const app = express()
 const port = Number(process.env.SERVER_PORT) || 3001
+
+
+if (isDev) {
+  dotenv.config({ path: '../.env.dev' })
+} else {
+  dotenv.config()
+}
+
+console.log(process.env);
 
 async function startServer() {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
