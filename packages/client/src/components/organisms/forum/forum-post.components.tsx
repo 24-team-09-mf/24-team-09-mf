@@ -7,8 +7,6 @@ import {
   ForumPostDate,
   ForumEmoji,
   ForumPostRate,
-  ForumPostRateButton,
-  ForumPostRateText,
   ForumPostReplyBtn,
   ForumPostText,
   ForumPostTop,
@@ -18,8 +16,6 @@ import {
   ForumEmojiAddElement,
   // ForumEmojiElement,
 } from '@/components/templates/forum/forum.styles'
-import IconRateMinus from '@/assets/icons/rate_minus.svg'
-import IconRatePlus from '@/assets/icons/rate_plus.svg'
 import IconEmojiAdd from '@/assets/icons/emojiAdd.svg'
 import { useState } from 'react'
 import dateParse from '@/utils/dateParse'
@@ -27,8 +23,7 @@ import avatarDefault from '@/assets/images/avatarDefault.png'
 import { EMOJI, ForumEditor } from '@/components'
 
 const ForumPost = (el: ForumPostProps) => {
-  const [rate, setRate] = useState(el.rate)
-  const { user, date, message } = el
+  const { user, createdAt, message } = el
 
   const [replyOpen, setReplyOpen] = useState(false)
   const [emojiAdd, setEmojiAdd] = useState('none')
@@ -36,8 +31,6 @@ const ForumPost = (el: ForumPostProps) => {
   const onReplyHandler = () => setReplyOpen(prev => !prev)
   const onsetEmojiHandler = () =>
     setEmojiAdd(prev => (prev === 'none' ? 'block' : 'none'))
-  const onSetRateMinusHandler = () => setRate(prev => prev - 1)
-  const onSetRatePlusHandler = () => setRate(prev => prev + 1)
 
   return (
     <ForumPostBlock>
@@ -47,7 +40,7 @@ const ForumPost = (el: ForumPostProps) => {
       <ForumPostContent>
         <ForumPostTop>
           <ForumPostUserName>{user.login}</ForumPostUserName>
-          <ForumPostDate>{dateParse(date)}</ForumPostDate>
+          <ForumPostDate>{dateParse(createdAt)}</ForumPostDate>
         </ForumPostTop>
         <ForumPostText
           dangerouslySetInnerHTML={{ __html: message as string }}
@@ -79,13 +72,6 @@ const ForumPost = (el: ForumPostProps) => {
                 <img src={IconEmojiAdd} alt="Добавить эмоцию" />
               </ForumEmojiAddBtn>
             </ForumEmoji>
-            <ForumPostRateButton onClick={onSetRateMinusHandler}>
-              <img src={IconRateMinus} alt="Не нравится" />
-            </ForumPostRateButton>
-            <ForumPostRateText>{rate}</ForumPostRateText>
-            <ForumPostRateButton onClick={onSetRatePlusHandler}>
-              <img src={IconRatePlus} alt="Нравится" />
-            </ForumPostRateButton>
           </ForumPostRate>
         </ForumPostBottom>
         {replyOpen && (

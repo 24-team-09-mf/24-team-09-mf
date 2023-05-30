@@ -88,7 +88,6 @@ const forumSlice = createSlice({
       })
       // Add Post
       .addCase(forumAddPost.fulfilled, (state, action) => {
-        console.log([...state.posts.items, action.payload])
         state.posts.isLoading = false
         state.posts.error = ''
         state.posts.items = [...state.posts.items, action.payload]

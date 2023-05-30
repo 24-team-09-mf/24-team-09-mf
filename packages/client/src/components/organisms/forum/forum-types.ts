@@ -1,7 +1,9 @@
 import { ReactElement } from 'react'
 import { User } from '@/store/user/types'
 
-export type ForumLastTopicProps = ForumSectionProps & { user: Partial<User> }
+export type ForumLastTopicProps = ForumSectionProps & {
+  user: Partial<User>
+} & { posts: Record<number, { createdAt: string }> }
 
 export type ForumStartProps = {
   id: number
@@ -17,7 +19,7 @@ export type ForumSectionProps = {
   title: string
   postsCount: number
   user: Partial<User>
-  lastTopic: ForumLastTopicProps
+  posts: Record<number, { createdAt: string }>
 }
 
 export type ForumFormsProps = {
@@ -41,7 +43,7 @@ export type ForumEmoji = {
 export type ForumPostProps = {
   id: string
   message: string | ReactElement
-  date: number
+  createdAt: string
   user: Partial<User>
   rate: number
   // userId: number

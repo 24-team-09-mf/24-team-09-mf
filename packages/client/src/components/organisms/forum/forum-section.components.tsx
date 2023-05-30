@@ -6,7 +6,7 @@ import {
   SectionRowLastMessage,
 } from '@/components/templates/forum/forum.styles'
 import { ForumSectionProps } from './forum-types'
-// import dateParse from '@/utils/dateParse'
+import dateParse from '@/utils/dateParse'
 import { H2 } from '@/global-styles'
 
 export const ForumSectionTitle = ({ title }: { title: string }) => {
@@ -14,8 +14,7 @@ export const ForumSectionTitle = ({ title }: { title: string }) => {
 }
 
 const ForumSectionTopicsElement = (el: ForumSectionProps) => {
-  const { parent_id, id, title, postsCount, user } = el
-
+  const { parent_id, id, title, postsCount, user, posts } = el
   return (
     <CatalogBlock>
       <SectionRowContent to={`/forum/${parent_id}/${id}`}>
@@ -23,8 +22,9 @@ const ForumSectionTopicsElement = (el: ForumSectionProps) => {
       </SectionRowContent>
       <SectionRowMessagesCount>{postsCount}</SectionRowMessagesCount>
       <SectionRowMessagesCount>{user.login}</SectionRowMessagesCount>
-      <SectionRowLastMessage>{user.id}</SectionRowLastMessage>
-      {/* <SectionRowLastMessage>{dateParse(lastTopic.date)}</SectionRowLastMessage> */}
+      <SectionRowLastMessage>
+        {dateParse(posts[0].createdAt)}
+      </SectionRowLastMessage>
     </CatalogBlock>
   )
 }

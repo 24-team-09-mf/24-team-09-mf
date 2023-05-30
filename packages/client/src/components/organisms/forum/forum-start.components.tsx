@@ -1,4 +1,4 @@
-// import dateParse from '@/utils/dateParse'
+import dateParse from '@/utils/dateParse'
 
 import {
   CatalogBlock,
@@ -6,7 +6,7 @@ import {
   CatalogRowContentTitle,
   CatalogRowThreadsCount,
   CatalogRowMessage,
-  // CatalogRowMessageDate,
+  CatalogRowMessageDate,
   CatalogRowMessageLink,
   CatalogRowMessageUser,
 } from '@/components/templates/forum/forum.styles'
@@ -29,9 +29,9 @@ const ForumStartElement = (el: ForumStartProps) => {
       <CatalogRowThreadsCount>{topicsCount}</CatalogRowThreadsCount>
       <CatalogRowMessage>
         <div>
-          {/* <CatalogRowMessageDate> */}
-          {/* {dateParse(lastTopic.date)} */}
-          {/* </CatalogRowMessageDate> */}
+          <CatalogRowMessageDate>
+            {dateParse(lastTopic.posts[0].createdAt)}
+          </CatalogRowMessageDate>
           <CatalogRowMessageLink to={`/forum/${id}/${lastTopic.id}`}>
             {lastTopic.title}
           </CatalogRowMessageLink>
