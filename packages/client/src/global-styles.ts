@@ -17,6 +17,7 @@ export const GlobalStyle = createGlobalStyle`
     --color-green2-rgb: 87, 153, 69;
 
     --color-gray1: #FAFAFA;
+    --color-gray2: #F3F3F3;
   }
 
 

@@ -4,11 +4,11 @@ import {
   Table,
   Column,
   AllowNull,
-  ForeignKey,
   BelongsTo,
+  HasMany,
 } from 'sequelize-typescript'
-import { CategoriesModel } from './forumCategories'
 import { UsersModel } from './users'
+import { PostsModel } from './forumPosts'
 
 @Table({ modelName: 'topics' })
 export class TopicsModel extends Model {
@@ -16,13 +16,9 @@ export class TopicsModel extends Model {
   @Column(DataType.STRING)
   title: string
 
-  @AllowNull(false)
-  @ForeignKey(() => CategoriesModel)
-  @Column({
-    type: DataType.INTEGER,
-    field: 'parent_id',
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
+  @HasMany(() => PostsModel, {
+    foreignKey: 'parent_id',
+    as: 'posts',
   })
   parent_id: number
 
