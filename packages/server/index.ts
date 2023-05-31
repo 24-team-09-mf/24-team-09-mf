@@ -21,12 +21,10 @@ const app = express()
 const port = Number(process.env.SERVER_PORT) || 3001
 
 if (isDev) {
-  dotenv.config({ path: '../.env.dev' })
+  dotenv.config({ path: path.resolve(__dirname, '..', '..', 'configs', '.env.dev'), override: true })
 } else {
   dotenv.config()
 }
-
-console.log(process.env)
 
 async function startServer() {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
