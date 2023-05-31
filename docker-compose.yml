@@ -48,7 +48,6 @@ services:
         POSTGRES_USER: ${POSTGRES_USER}
         POSTGRES_DB: ${POSTGRES_DB}
         POSTGRES_PORT: ${POSTGRES_PORT}
-        NODE_API_URL: "${NODE_API_URL}:${SSR_SERVER_PORT}"
       command: ./wait-for.sh postgres:5432 -- node ./index.js
       networks:
         - team09

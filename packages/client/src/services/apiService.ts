@@ -12,4 +12,10 @@ export class ApiService {
   logout() {
     return this._service.logout()
   }
+  addLeaderboardItem(data: any) {
+    return this._service.addLeaderboardItem(data)
+  }
+  getLeaderboardList(data: any) {
+    return this._service.getLeaderboardList(data)
+  }
 }

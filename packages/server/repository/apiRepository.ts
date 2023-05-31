@@ -25,4 +25,22 @@ export class ApiRepository {
     await axios.post(`${API_ROOT}/auth/signin`)
     return null
   }
+
+  async addLeaderboardItem(data: any): Promise<any> {
+    const response = await axios.post(`${API_ROOT}/leaderboard`, data)
+    return {
+      ...response.data,
+    }
+  }
+
+  async getLeaderboardList(data: any): Promise<any> {
+    try {
+      const response = await axios.post(`${API_ROOT}/leaderboard/team09`, data, { headers: {
+        cookie: this._cookiesHeader,
+      }})
+      return response.data
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }

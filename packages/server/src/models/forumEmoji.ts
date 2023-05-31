@@ -5,7 +5,7 @@ import {
   Column,
   AllowNull,
   ForeignKey,
-  BelongsTo
+  BelongsTo,
 } from 'sequelize-typescript'
 import { PostsModel } from './forumPosts'
 import { UsersModel } from './users'

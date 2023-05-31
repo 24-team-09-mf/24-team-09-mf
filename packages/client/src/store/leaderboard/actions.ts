@@ -1,23 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import http, { ApiEndpoints } from '@/api/base'
-import { TEAM_NAME } from '../constants/constants'
+// import { TEAM_NAME } from '../../constants/constants'
 import { LeaderboardElementProps } from '@/components/organisms/leaderboard/leaderboard-types'
+import { IStoreServices } from '@/store/store'
 
-export interface ILeaderboard {
-  score: number
-  name?: string
-  avatar?: string
-}
+import { IAddLeaderboard, IGetLeaderboard } from './types'
 
 export const addLeaderboardItem = createAsyncThunk(
   'leaderboard/add',
-  async (data: ILeaderboard, { rejectWithValue }) => {
+  async (data: IAddLeaderboard, { extra, rejectWithValue }) => {
     try {
-      await http.post(ApiEndpoints.Leaderboard.AddUser, {
-        data,
-        ratingFieldName: 'score',
-        teamName: TEAM_NAME,
-      })
+      const service = extra as IStoreServices
+      await service.user.addLeaderboardItem(data)
     } catch (e) {
       return rejectWithValue('Ошибка при добавлении данных в таблицу лидеров')
     }
@@ -26,16 +19,19 @@ export const addLeaderboardItem = createAsyncThunk(
 
 export const getLeaderboardList = createAsyncThunk(
   'leaderboard/getList',
-  async (limit: number, { rejectWithValue }) => {
+  async (limit: IGetLeaderboard['limit'], { extra, rejectWithValue }) => {
     try {
-      const response = await http.post(ApiEndpoints.Leaderboard.Leaderboard, {
+      const service = extra as IStoreServices
+
+      const response = await service.user.getLeaderboardList({
         ratingFieldName: 'score',
         cursor: 0,
         limit,
       })
-      return response.data.map(
+      const preparedData = response.map(
         ({ data }: { data: LeaderboardElementProps }) => data
       )
+      return preparedData
     } catch (e) {
       return rejectWithValue('Ошибка при получении списка лидеров')
     }
