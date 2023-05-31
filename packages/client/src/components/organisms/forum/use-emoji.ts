@@ -1,10 +1,10 @@
 // react
 import { useCallback } from 'react'
 
-import { addEmoji, deleteEmoji } from '@/store/forum/actions'
+import { addEmoji, deleteEmoji, getEmoji } from '@/store/forum/actions'
 import { useAppDispatch } from '@/store'
 
-import { ForumPostEmoji } from './forum-types'
+import { ForumPostEmoji, ForumEmojis } from './forum-types'
 import { UserState } from '@/store/user/types'
 
 const useEmoji = (user: UserState, emojiId: string | undefined, postId: string | undefined) => {
@@ -13,9 +13,19 @@ const useEmoji = (user: UserState, emojiId: string | undefined, postId: string |
   const addEmojiHandler = useCallback(
     async (data: ForumPostEmoji) => {
       try {
-        await dispatch(
-          addEmoji({ ...data, user: user.user })
-        )
+        const emojiKey = data.emojiName
+        const response = await dispatch(getEmoji(emojiKey))
+
+        if (response && response.payload && response.payload.id) {
+          console.log('Adding emoji:', emojiKey)
+          await dispatch(
+            addEmoji({
+              postId: data.postId,
+              emojiId: response.payload.id,
+              user: user.user
+            })
+          )
+        }
       } catch (e) {
         console.log(e)
       }
@@ -23,23 +33,23 @@ const useEmoji = (user: UserState, emojiId: string | undefined, postId: string |
     [dispatch, postId, emojiId, user]
   )
 
-  const deleteEmojiHandler = useCallback(
-    async (emojiId: string) => {
-      try {
-        if (emojiId) {
-          await dispatch(
-            deleteEmoji({ emojiId }))
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    },
-    [dispatch, emojiId]
-  )
+  // const deleteEmojiHandler = useCallback(
+  //   async (emojiId: string) => {
+  //     try {
+  //       if (emojiName) {
+  //         await dispatch(
+  //           deleteEmoji({ emojiName }))
+  //       }
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   },
+  //   [dispatch, emojiName]
+  // )
 
   return {
     addEmojiHandler,
-    deleteEmojiHandler,
+    // deleteEmojiHandler,
   }
 }
 

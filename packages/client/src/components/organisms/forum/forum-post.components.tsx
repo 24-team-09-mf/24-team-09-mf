@@ -17,7 +17,7 @@ import {
   ForumEmojiElement,
 } from '@/components/templates/forum/forum.styles'
 import IconEmojiAdd from '@/assets/icons/emojiAdd.svg'
-import { useState } from 'react'
+import { useEffect, useState, memo } from 'react'
 import dateParse from '@/utils/dateParse'
 import avatarDefault from '@/assets/images/avatarDefault.png'
 import { EMOJI, ForumEditor } from '@/components'
@@ -27,7 +27,7 @@ import useEmoji from './use-emoji'
 
 const ForumPost = (el: ForumPostProps) => {
   const { id, user, createdAt, message, emojis } = el
-  const { emojiId, postId } = useParams()
+  const { emoji_name, postId } = useParams()
   const userId = userStore()
 
   const [replyOpen, setReplyOpen] = useState(false)
@@ -37,23 +37,30 @@ const ForumPost = (el: ForumPostProps) => {
   const onsetEmojiHandler = () =>
     setEmojiAdd(prev => (prev === 'none' ? 'block' : 'none'))
 
-  const { addEmojiHandler, deleteEmojiHandler } = useEmoji(
+  const { addEmojiHandler } = useEmoji(
     userId,
-    emojiId,
+    emoji_name,
     postId
   )
 
-  const onAddEmojiHandler = (emojiKey: string) => {
+  const onAddEmojiHandler = async (emojiKey: string) => {
+    console.log('Adding emoji:', emojiKey)
     addEmojiHandler({
       postId: id,
-      emojiId: emojiKey,
+      emojiName: emojiKey,
       user: user
     })
   }
 
   const onDeleteEmojiHandler = (emojiId: string) => {
-    deleteEmojiHandler(emojiId)
+    // deleteEmojiHandler(emojiId)
   }
+
+  useEffect(() => {
+    console.log('Emojis updated:', emojis)
+  }, [emojis])
+
+  console.log('Rendering ForumPost:', id);
 
   return (
     <ForumPostBlock>
@@ -114,6 +121,7 @@ const ForumPost = (el: ForumPostProps) => {
 }
 
 export const ForumPosts = ({ data }: { data: ForumPostProps[] }) => {
+  console.log('Rendering ForumPosts');
   return (
     <div>
       {data.map(el => (

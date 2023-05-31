@@ -39,10 +39,11 @@ export type ForumPostEmoji = {
   postPageId?: string
   postId?: string
   emojiId?: string
+  emojiName: string
   user: unknown
 }
 
-export type ForumEmoji = {
+export type ForumEmojis = {
   id: string
   user_id: string
   file: {
@@ -56,10 +57,7 @@ export type ForumPostProps = {
   createdAt: string
   user: Partial<User>
   rate: number
-  // userId: number
-  // userName: string
-  // userAvatar: null | string
-  emojis: ForumEmoji[]
+  emojis: ForumEmojis[]
 }
 
 export type ForumEditorProps = {

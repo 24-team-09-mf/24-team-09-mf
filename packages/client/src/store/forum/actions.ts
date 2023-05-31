@@ -133,3 +133,17 @@ export const deleteEmoji = createAsyncThunk(
     }
   }
 )
+
+export const getEmoji = createAsyncThunk(
+  'forum-get-emoji',
+  async (emojiName: string, { rejectWithValue }) => {
+    try {
+      const response = await http.get(generatePath(ApiEndpoints.Forum.getEmoji, { emojiName }),
+        { baseURL: BACKEND_URL }
+      )
+      return response.data
+    } catch (error) {
+      return rejectWithValue('Ошибка при получении реакций')
+    }
+  }
+)

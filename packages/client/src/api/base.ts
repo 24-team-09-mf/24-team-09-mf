@@ -30,6 +30,7 @@ export const ApiEndpoints = {
     getCategories: '/',
     getTopics: '/topics/:id',
     getPosts: '/posts/:id',
+    getEmoji: '/emojis/:emojiName',
     addPost: '/post',
     addTopic: '/topic',
     addEmoji: '/emoji',

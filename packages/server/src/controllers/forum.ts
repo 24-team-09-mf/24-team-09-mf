@@ -224,6 +224,26 @@ export function forumController() {
       } catch (e) {
         return res.status(500).send(e);
       }
+    },
+
+    async getEmoji(req: Request, res: Response) {
+      try {
+        const { emojiName } = req.params
+
+        const emoji = await EmojiModel.findOne({
+          where: {
+            emoji_name: emojiName
+          }
+        })
+
+        if (emoji) {
+          return res.status(200).json(emoji)
+        } else {
+          return res.status(404).send('Ресурс не найден')
+        }
+      } catch (e) {
+        return res.status(500).send(e)
+      }
     }
   }
 }
