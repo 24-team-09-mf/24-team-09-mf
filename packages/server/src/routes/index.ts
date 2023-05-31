@@ -5,5 +5,7 @@ import checkAuth from '../middlewares/checkAuth'
 
 export const apiRouter = Router()
 
-apiRouter.use('/forum', (...args) => checkAuth(forumRouter, ...args))
+checkAuth(apiRouter)
+
+apiRouter.use('/forum', forumRouter);
 apiRouter.use('/theme', themeRouter)
