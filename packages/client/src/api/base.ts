@@ -27,8 +27,8 @@ export const ApiEndpoints = {
   },
   Theme: {
     getThemes: '/',
-    getUserTheme: '/userTheme/:id',
-    addTheme: '/userTheme',
+    getUserTheme: '/user-theme/:id',
+    addTheme: '/user-theme',
   },
 }
 

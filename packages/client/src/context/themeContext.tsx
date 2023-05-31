@@ -1,5 +1,6 @@
-// react
-import { useEffect, useState, createContext, useCallback } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { addUserTheme, getUserTheme } from '@/api/userTheme'
+import { userStore } from '@/store'
 
 export enum Theme {
   LIGHT = 'light',
@@ -9,36 +10,67 @@ export enum Theme {
 const DEFAULT_THEME = Theme.LIGHT
 
 type ThemeContextType = {
-  theme: string
+  currentTheme: string
   toggleTheme: () => void
 }
 
-export const ThemeContext = createContext<ThemeContextType>(
+const ThemeContext = React.createContext<ThemeContextType>(
   {} as ThemeContextType
 )
 
-export const ThemeContextProvider = ({
-  children,
-}: {
-  children: React.ReactElement
-}) => {
-  const [theme, setTheme] = useState(
-    localStorage.getItem('app-theme') || DEFAULT_THEME
+export const ThemeContextProvider: React.FC<{
+  children: React.ReactNode
+  cookies?: string
+}> = ({ children }) => {
+  const localTheme = localStorage.getItem('app-theme') as Theme
+
+  // const { user } = userStore()
+
+  const [currentTheme, setCurrentTheme] = useState<Theme>(
+    localTheme || DEFAULT_THEME
   )
 
-  const toggleTheme = useCallback(async () => {
-    const ThemeValue = theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT
-    setTheme(ThemeValue)
-  }, [theme])
+  const toggleTheme = async () => {
+    const theme = currentTheme === Theme.DARK ? Theme.LIGHT : Theme.DARK
+    setCurrentTheme(theme)
+    // if (user) await addUserTheme({ title: theme })
+  }
+
+  // useEffect(() => {
+  //   ;(async () => {
+  //     if (!localTheme && user) {
+  //       const themeNameFromDB = await getUserTheme()
+  //       const themeNameFromDBIsValid =
+  //         typeof themeNameFromDB === 'string' &&
+  //         themeNameFromDB !== currentTheme &&
+  //         Object.values(Theme).includes(themeNameFromDB)
+
+  //       if (themeNameFromDBIsValid) {
+  //         console.log('устанавливаю тему из базы', themeNameFromDB)
+  //         setCurrentTheme(themeNameFromDB)
+  //       }
+  //     }
+  //   })()
+  // }, [])
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('app-theme', theme)
-  }, [theme])
+    localStorage.setItem('app-theme', currentTheme)
+    document.documentElement.setAttribute('data-theme', currentTheme)
+  }, [currentTheme])
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ currentTheme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   )
+}
+
+export const useThemeContext = () => {
+  const context = useContext(ThemeContext)
+
+  if (!context) {
+    throw new Error('Контекст темы недоступен')
+  }
+
+  return context
 }

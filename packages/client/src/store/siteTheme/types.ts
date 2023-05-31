@@ -14,11 +14,13 @@ export interface UserThemesProps {
 }
 
 export interface UserTheme {
+  isLoading: boolean
   items: UserThemesProps[]
   error: string
 }
 
 export interface Themes {
+  isLoading: boolean
   items: ThemesProps[]
   error: string
 }

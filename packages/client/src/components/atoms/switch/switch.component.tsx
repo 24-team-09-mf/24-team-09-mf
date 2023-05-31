@@ -1,11 +1,11 @@
 // react
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 
 // icons
 import sun from '@/assets/icons/sun.svg'
 import night from '@/assets/icons/night.svg'
 
-import { ThemeContext } from '../../../context/themeContext'
+import { useThemeContext } from '../../../context/themeContext'
 
 // styles
 import {
@@ -19,12 +19,12 @@ import {
 } from './switch.styles'
 
 export const Switch = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext)
-  const checkedValue = theme !== 'light' ? true : false
+  const { toggleTheme, currentTheme } = useThemeContext()
+  const checkedValue = currentTheme !== 'light' ? true : false
   const [checked, setChecked] = useState(checkedValue)
   const handleSwitchToggle = () => {
     setChecked(prev => !prev)
-    toggleTheme()
+    toggleTheme && toggleTheme()
   }
 
   return (
@@ -40,7 +40,7 @@ export const Switch = () => {
         <Label htmlFor="themeToggleSwitch">
           <Inner />
           <SwitchItem>
-            {theme !== 'light' ? (
+            {currentTheme !== 'light' ? (
               <Icon>
                 <img src={night} />
               </Icon>
