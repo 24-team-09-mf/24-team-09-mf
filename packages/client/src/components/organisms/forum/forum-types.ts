@@ -35,10 +35,19 @@ export type ForumFormsProps = {
   postCount: number
 }
 
-export type ForumEmoji = {
+export type ForumPostEmoji = {
+  postPageId?: string
   postId?: string
   emojiId?: string
-  user: Partial<User>
+  user: unknown
+}
+
+export type ForumEmoji = {
+  id: string
+  user_id: string
+  file: {
+    emoji_name: string
+  }
 }
 
 export type ForumPostProps = {
@@ -50,7 +59,7 @@ export type ForumPostProps = {
   // userId: number
   // userName: string
   // userAvatar: null | string
-  emoji: ForumEmoji[] | null
+  emojis: ForumEmoji[]
 }
 
 export type ForumEditorProps = {

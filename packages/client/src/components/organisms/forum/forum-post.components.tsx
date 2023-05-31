@@ -14,7 +14,7 @@ import {
   ForumEmojiAddBtn,
   ForumEmojiAddBlock,
   ForumEmojiAddElement,
-  // ForumEmojiElement,
+  ForumEmojiElement,
 } from '@/components/templates/forum/forum.styles'
 import IconEmojiAdd from '@/assets/icons/emojiAdd.svg'
 import { useState } from 'react'
@@ -26,7 +26,7 @@ import { userStore } from '@/store'
 import useEmoji from './use-emoji'
 
 const ForumPost = (el: ForumPostProps) => {
-  const { user, createdAt, message } = el
+  const { id, user, createdAt, message, emojis } = el
   const { emojiId, postId } = useParams()
   const userId = userStore()
 
@@ -45,15 +45,15 @@ const ForumPost = (el: ForumPostProps) => {
 
   const onAddEmojiHandler = (emojiKey: string) => {
     addEmojiHandler({
-      postId,
+      postId: id,
       emojiId: emojiKey,
       user: user
-    });
-  };
+    })
+  }
 
-  const onDeleteEmojiHandler = () => {
-    deleteEmojiHandler();
-  };
+  const onDeleteEmojiHandler = (emojiId: string) => {
+    deleteEmojiHandler(emojiId)
+  }
 
   return (
     <ForumPostBlock>
@@ -76,14 +76,13 @@ const ForumPost = (el: ForumPostProps) => {
           </div>
           <ForumPostRate>
             <ForumEmoji>
-              {/* TODO сделать emoji */}
-              {/* {emoji &&
-                emoji.map(el => (
-                  <ForumEmojiElement key={el.name}>
-                    <img src={EMOJI[el.name]} alt={el.name} />
-                    <span>{el.usersId.length}</span>
+              {emojis &&
+                emojis.map(el => (
+                  <ForumEmojiElement key={el.file.emoji_name} onClick={() => onDeleteEmojiHandler(el.file.emoji_name)}>
+                    <img src={EMOJI[el.file.emoji_name]} alt={el.file.emoji_name} />
+                    <span>{el.user_id}</span>
                   </ForumEmojiElement>
-                ))} */}
+                ))}
               <ForumEmojiAddBtn onClick={onsetEmojiHandler}>
                 <ForumEmojiAddBlock display={emojiAdd}>
                   {Object.keys(EMOJI).map(el => (

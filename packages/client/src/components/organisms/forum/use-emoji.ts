@@ -4,17 +4,18 @@ import { useCallback } from 'react'
 import { addEmoji, deleteEmoji } from '@/store/forum/actions'
 import { useAppDispatch } from '@/store'
 
-import { ForumEmoji } from './forum-types'
+import { ForumPostEmoji } from './forum-types'
 import { UserState } from '@/store/user/types'
 
 const useEmoji = (user: UserState, emojiId: string | undefined, postId: string | undefined) => {
   const dispatch = useAppDispatch()
 
   const addEmojiHandler = useCallback(
-    async (data: ForumEmoji) => {
+    async (data: ForumPostEmoji) => {
       try {
         await dispatch(
-          addEmoji({ ...data }))
+          addEmoji({ ...data, user: user.user })
+        )
       } catch (e) {
         console.log(e)
       }
@@ -23,7 +24,7 @@ const useEmoji = (user: UserState, emojiId: string | undefined, postId: string |
   )
 
   const deleteEmojiHandler = useCallback(
-    async () => {
+    async (emojiId: string) => {
       try {
         if (emojiId) {
           await dispatch(
