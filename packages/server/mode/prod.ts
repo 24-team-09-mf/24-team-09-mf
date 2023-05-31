@@ -4,8 +4,8 @@ import fs from 'fs'
 import express from 'express'
 
 export default (app: Express) => {
-  let distPath: string;
-  let ssrClientPath: string;
+  let distPath: string
+  let ssrClientPath: string
 
   async function preload() {
     distPath = path.dirname(require.resolve('client/dist/index.html'))
@@ -15,8 +15,7 @@ export default (app: Express) => {
     app.use('/sw.js', express.static(path.resolve(distPath, 'sw.js')))
   }
 
-  async function resolve(
-  ): Promise<
+  async function resolve(): Promise<
     [
       string,
       (args: {
@@ -31,12 +30,11 @@ export default (app: Express) => {
     )
     const render = (await import(ssrClientPath)).render
 
-
     return [template, render]
   }
 
   function catchError(e: unknown) {
-    console.error(e);
+    console.error(e)
   }
 
   return { preload, resolve, catchError }

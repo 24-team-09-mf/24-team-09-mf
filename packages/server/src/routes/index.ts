@@ -7,5 +7,5 @@ export const apiRouter = Router()
 
 checkAuth(apiRouter)
 
-apiRouter.use('/forum', forumRouter);
+apiRouter.use('/forum', forumRouter)
 apiRouter.use('/theme', themeRouter)

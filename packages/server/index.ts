@@ -19,7 +19,10 @@ const app = express()
 const port = Number(process.env.SERVER_PORT) || 3001
 
 if (isDev) {
-  dotenv.config({ path: path.resolve(__dirname, '..', '..', 'configs', '.env.dev'), override: true })
+  dotenv.config({
+    path: path.resolve(__dirname, '..', '..', 'configs', '.env.dev'),
+    override: true,
+  })
 } else {
   dotenv.config()
 }
@@ -41,9 +44,9 @@ async function startServer() {
   app.use(express.json())
   app.use('/api', apiRouter)
 
-  const configuration =  isDev ? dev(app) : prod(app);
+  const configuration = isDev ? dev(app) : prod(app)
 
-  await configuration.preload();
+  await configuration.preload()
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   //@ts-ignore
@@ -51,7 +54,7 @@ async function startServer() {
     const url = req.originalUrl
 
     try {
-      const [ template, render ] = await configuration.resolve(url);
+      const [template, render] = await configuration.resolve(url)
       try {
         const [appHtml, css, initialState] = await render({
           request: req,
