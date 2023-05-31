@@ -36,8 +36,9 @@ export type ForumFormsProps = {
 }
 
 export type ForumEmoji = {
-  name: string
-  usersId: number[]
+  postId?: string
+  emojiId?: string
+  user: Partial<User>
 }
 
 export type ForumPostProps = {

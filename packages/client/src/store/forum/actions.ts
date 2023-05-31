@@ -94,3 +94,42 @@ export const forumAddPost = createAsyncThunk(
     }
   }
 )
+
+interface IAddEmoji {
+  postId?: string
+  emojiId?: string
+  user: Partial<User> | null
+}
+
+export const addEmoji = createAsyncThunk(
+  'forum-add-emoji',
+  async (data: IAddEmoji, { rejectWithValue }) => {
+    try {
+      const response = await http.post(ApiEndpoints.Forum.addEmoji, data, {
+        baseURL: BACKEND_URL,
+      })
+      return response.data
+    } catch (error) {
+      return rejectWithValue('Ошибка при добавлении реакции')
+    }
+  }
+)
+
+interface IDeleteEmoji {
+  emojiId: string
+}
+
+export const deleteEmoji = createAsyncThunk(
+  'forum-delete-emoji',
+  async (data: IDeleteEmoji, { rejectWithValue }) => {
+    try {
+      const response = await http.delete(ApiEndpoints.Forum.deleteEmoji, {
+        data,
+        baseURL: BACKEND_URL,
+      })
+      return response.data
+    } catch (error) {
+      return rejectWithValue('Ошибка при добавлении реакции')
+    }
+  }
+)

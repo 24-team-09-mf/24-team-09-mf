@@ -191,5 +191,39 @@ export function forumController() {
         return res.status(500).send(e)
       }
     },
+
+    async addEmoji(req: Request, res: Response) {
+      const { postId, emojiId, user } = req.body
+      const userDB = await checkUser(user)
+      try {
+        const emoji = await PostEmojisModel.create({
+          post_id: postId,
+          emoji_id: emojiId,
+          user_id: userDB.id,
+        })
+        return res.status(201).json({
+          ...emoji.dataValues,
+          user: {
+            user_id: userDB.user_id
+          },
+        })
+      } catch (e) {
+        return res.status(500).send(e)
+      }
+    },
+
+    async deleteEmoji(req: Request, res: Response) {
+      try {
+        const { emojiId } = req.params
+        await PostEmojisModel.destroy({
+          where: {
+            id: emojiId
+          }
+        })
+        return res.status(200).json({ success: true })
+      } catch (e) {
+        return res.status(500).send(e);
+      }
+    }
   }
 }

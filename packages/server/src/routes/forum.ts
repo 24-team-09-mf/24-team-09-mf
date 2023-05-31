@@ -9,3 +9,7 @@ forumRouter.get('/posts/:id', forumController().getForumPosts)
 
 forumRouter.post('/post/', forumController().addForumPost)
 forumRouter.post('/topic/', forumController().addForumTopic)
+
+forumRouter.post('/emoji/', forumController().addEmoji)
+forumRouter.post('/emoji/:emojiId', forumController().deleteEmoji)
+

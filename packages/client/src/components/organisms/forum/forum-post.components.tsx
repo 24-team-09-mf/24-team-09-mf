@@ -21,9 +21,14 @@ import { useState } from 'react'
 import dateParse from '@/utils/dateParse'
 import avatarDefault from '@/assets/images/avatarDefault.png'
 import { EMOJI, ForumEditor } from '@/components'
+import { useParams } from 'react-router-dom'
+import { userStore } from '@/store'
+import useEmoji from './use-emoji'
 
 const ForumPost = (el: ForumPostProps) => {
   const { user, createdAt, message } = el
+  const { emojiId, postId } = useParams()
+  const userId = userStore()
 
   const [replyOpen, setReplyOpen] = useState(false)
   const [emojiAdd, setEmojiAdd] = useState('none')
@@ -31,6 +36,24 @@ const ForumPost = (el: ForumPostProps) => {
   const onReplyHandler = () => setReplyOpen(prev => !prev)
   const onsetEmojiHandler = () =>
     setEmojiAdd(prev => (prev === 'none' ? 'block' : 'none'))
+
+  const { addEmojiHandler, deleteEmojiHandler } = useEmoji(
+    userId,
+    emojiId,
+    postId
+  )
+
+  const onAddEmojiHandler = (emojiKey: string) => {
+    addEmojiHandler({
+      postId,
+      emojiId: emojiKey,
+      user: user
+    });
+  };
+
+  const onDeleteEmojiHandler = () => {
+    deleteEmojiHandler();
+  };
 
   return (
     <ForumPostBlock>
@@ -64,7 +87,7 @@ const ForumPost = (el: ForumPostProps) => {
               <ForumEmojiAddBtn onClick={onsetEmojiHandler}>
                 <ForumEmojiAddBlock display={emojiAdd}>
                   {Object.keys(EMOJI).map(el => (
-                    <ForumEmojiAddElement key={el}>
+                    <ForumEmojiAddElement key={el} onClick={() => onAddEmojiHandler(el)}>
                       <img src={EMOJI[el]} alt={el} />
                     </ForumEmojiAddElement>
                   ))}
