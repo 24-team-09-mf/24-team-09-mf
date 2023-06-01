@@ -12,7 +12,7 @@ import { useGameProcess } from '@/components/organisms/game/game-view/logics/use
 export const GameView: FC<GameViewProps> = ({
   isStartedGame,
   isEndedGame,
-  onGameOver,
+  onGameOver
 }) => {
   const [gameModel, setGameModel] = useState<GameModel>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)

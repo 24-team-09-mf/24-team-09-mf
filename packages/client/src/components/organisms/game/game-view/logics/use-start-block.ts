@@ -2,9 +2,9 @@ import { GameModel } from '@/components/organisms/game/game-view/game-view.types
 import { useMemo } from 'react'
 import { CollisionBlock } from '@/components/organisms/game/game-view/models/CollisionBlock'
 import {
-  parsedStartFinishCollisionsLvl1,
-  START_FINISH_SYMBOL,
-} from '@/components/organisms/game/game-view/data/startFinishCollisionsLvl1'
+  parsedStartLvl1,
+  START_SYMBOL,
+} from '@/components/organisms/game/game-view/data/startLvl1'
 import { BLOCK_SIZE } from '@/components/organisms/game/game.constants'
 
 type Props = {
@@ -12,17 +12,20 @@ type Props = {
   isEndedGame: boolean
 }
 
-export const useStartFinishCollisionBlocks = ({ gameModel, isEndedGame }: Props) => {
-  const collisions = useMemo(() => {
+export const useStartBlock = ({ gameModel, isEndedGame }: Props) => {
+  const start = useMemo(() => {
     const result: CollisionBlock[] = []
     if (gameModel) {
-      parsedStartFinishCollisionsLvl1.forEach((row, y) => {
+      parsedStartLvl1.forEach((row, y) => {
         row.forEach((symbol, x) => {
-          if (symbol === START_FINISH_SYMBOL) {
+          if (symbol === START_SYMBOL) {
             result.push(
               new CollisionBlock({
                 model: gameModel,
-                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE }
+                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE + 3 },
+                frameRate: 4,
+                frameBuffer: 15,
+                imageSrc: '/assets/sprites/cat/idle.png'
               })
             )
           }
@@ -32,5 +35,5 @@ export const useStartFinishCollisionBlocks = ({ gameModel, isEndedGame }: Props)
     return result
   }, [gameModel, isEndedGame])
 
-  return collisions
+  return start
 }

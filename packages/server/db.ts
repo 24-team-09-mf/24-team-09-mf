@@ -44,6 +44,6 @@ export async function dbConnect() {
       'Connection has been established successfully.'
     )
   } catch (error) {
-    console.error('\x1b[31m%s', error)
+    console.error('\x1b[31m%s\x1b[0m', error)
   }
 }
