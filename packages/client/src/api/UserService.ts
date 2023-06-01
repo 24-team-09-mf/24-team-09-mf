@@ -9,7 +9,7 @@ import { ApiEndpoints } from './base'
 export class UserService {
   // Методы авторизации
   async getUser(): Promise<User> {
-    const { data } = await axios.get(`/api/v2/${ApiEndpoints.Auth.UserInfo}`, {
+    const { data } = await axios.get(ApiEndpoints.Auth.UserInfo, {
       withCredentials: true,
     })
     return data
@@ -17,7 +17,7 @@ export class UserService {
 
   async signIn(signinData: SignIn): Promise<User> {
     const { data } = await axios.post(
-      `/api/v2/${ApiEndpoints.Auth.SignIn}`,
+      ApiEndpoints.Auth.SignIn,
       signinData
     )
     return {
@@ -26,7 +26,7 @@ export class UserService {
   }
 
   async logout(): Promise<null> {
-    await axios.post(`/api/v2/${ApiEndpoints.Auth.SignOut}`)
+    await axios.post(ApiEndpoints.Auth.SignOut)
     return null
   }
 
@@ -35,7 +35,7 @@ export class UserService {
     data: IAddLeaderboard
   ): Promise<LeaderboardElementProps> {
     const response = await axios.post(
-      `/api/v2/${ApiEndpoints.Leaderboard.AddUser}`,
+      ApiEndpoints.Leaderboard.AddUser,
       { data, ratingFieldName: 'score', teamName: 'team09' }
     )
     return {
@@ -47,7 +47,7 @@ export class UserService {
     data: IGetLeaderboard
   ): Promise<{ data: LeaderboardElementProps }[]> {
     const response = await axios.post(
-      `/api/v2/${ApiEndpoints.Leaderboard.Leaderboard}`,
+      ApiEndpoints.Leaderboard.Leaderboard,
       data
     )
     return response.data

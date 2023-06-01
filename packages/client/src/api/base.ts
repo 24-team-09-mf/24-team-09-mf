@@ -7,22 +7,22 @@ export const RedirectUrl = process.env.VITE_OAUTH_REDIRECT_URL
 
 export const ApiEndpoints = {
   Auth: {
-    SignIn: 'auth/signin',
-    SignUp: 'auth/signup',
-    SignOut: 'auth/logout',
-    UserInfo: 'auth/user',
+    SignIn: '/api/v2/auth/signin',
+    SignUp: '/api/v2/auth/signup',
+    SignOut: '/api/v2/auth/logout',
+    UserInfo: '/api/v2/auth/user',
     OAuth: 'oauth/yandex',
     ServiceId: 'oauth/yandex/service-id',
   },
   User: {
-    UpdateProfile: 'api/v2/user/profile',
-    UpdatePassword: 'api/v2/user/password',
-    UpdateProfileAvatar: 'api/v2/user/profile/avatar',
-    Search: 'api/v2/user/search',
+    UpdateProfile: '/api/v2/user/profile',
+    UpdatePassword: '/api/v2/user/password',
+    UpdateProfileAvatar: '/api/v2/user/profile/avatar',
+    Search: '/api/v2/user/search',
   },
   Leaderboard: {
-    AddUser: '/leaderboard',
-    Leaderboard: `/leaderboard/${TEAM_NAME}`,
+    AddUser: '/api/v2/leaderboard',
+    Leaderboard: `/api/v2/leaderboard/${TEAM_NAME}`,
   },
   Theme: {
     getThemes: '/',
@@ -30,11 +30,11 @@ export const ApiEndpoints = {
     addTheme: '/user-theme',
   },
   Forum: {
-    getCategories: '/',
-    getTopics: '/topics/:id',
-    getPosts: '/posts/:id',
-    addPost: '/post',
-    addTopic: '/topic',
+    getCategories: '/api/forum/',
+    getTopics: '/api/forum/topics/:id',
+    getPosts: '/api/forum/posts/:id',
+    addPost: '/api/forum/post',
+    addTopic: '/api/forum/topic',
   },
 }
 
