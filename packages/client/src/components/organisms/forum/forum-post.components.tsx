@@ -1,4 +1,4 @@
-import { ForumPostProps } from './forum-types'
+import { ForumPostProps, ForumEmojis } from './forum-types'
 import {
   ForumPostBlock,
   ForumPostBlockAvatar,
@@ -17,7 +17,7 @@ import {
   ForumEmojiElement,
 } from '@/components/templates/forum/forum.styles'
 import IconEmojiAdd from '@/assets/icons/emojiAdd.svg'
-import { useEffect, useState, memo } from 'react'
+import { useEffect, useState } from 'react'
 import dateParse from '@/utils/dateParse'
 import avatarDefault from '@/assets/images/avatarDefault.png'
 import { EMOJI, ForumEditor } from '@/components'
@@ -32,12 +32,13 @@ const ForumPost = (el: ForumPostProps) => {
 
   const [replyOpen, setReplyOpen] = useState(false)
   const [emojiAdd, setEmojiAdd] = useState('none')
+  const [emojiList, setEmojiList] = useState(emojis)
 
   const onReplyHandler = () => setReplyOpen(prev => !prev)
   const onsetEmojiHandler = () =>
     setEmojiAdd(prev => (prev === 'none' ? 'block' : 'none'))
 
-  const { addEmojiHandler } = useEmoji(
+  const { addEmojiHandler, deleteEmojiHandler } = useEmoji(
     userId,
     emoji_name,
     postId
@@ -50,15 +51,24 @@ const ForumPost = (el: ForumPostProps) => {
       emojiName: emojiKey,
       user: user
     })
+
+    setEmojiList(
+      prevList =>
+        [...prevList, { file: { emoji_name: emojiKey } }] as ForumEmojis[])
   }
 
-  const onDeleteEmojiHandler = (emojiId: string) => {
-    // deleteEmojiHandler(emojiId)
+  const onDeleteEmojiHandler = async (emojiKey: string) => {
+    deleteEmojiHandler({
+      postId: id,
+      emojiName: emojiKey,
+      user: user
+    })
+    console.log('delete', emojiKey);
   }
 
-  useEffect(() => {
-    console.log('Emojis updated:', emojis)
-  }, [emojis])
+  // useEffect(() => {
+  //   console.log('Emojis updated:', emojis)
+  // }, [emojis])
 
   console.log('Rendering ForumPost:', id);
 
@@ -83,11 +93,11 @@ const ForumPost = (el: ForumPostProps) => {
           </div>
           <ForumPostRate>
             <ForumEmoji>
-              {emojis &&
-                emojis.map(el => (
+              {emojiList &&
+                emojiList.map(el => (
                   <ForumEmojiElement key={el.file.emoji_name} onClick={() => onDeleteEmojiHandler(el.file.emoji_name)}>
                     <img src={EMOJI[el.file.emoji_name]} alt={el.file.emoji_name} />
-                    <span>{el.user_id}</span>
+                    {/* <span>{el.user_id}</span> */}
                   </ForumEmojiElement>
                 ))}
               <ForumEmojiAddBtn onClick={onsetEmojiHandler}>

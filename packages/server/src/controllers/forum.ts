@@ -213,14 +213,22 @@ export function forumController() {
     },
 
     async deleteEmoji(req: Request, res: Response) {
+      const { postId, emojiId, user } = req.body
+      const userDB = await checkUser(user)
       try {
-        const { emojiId } = req.params
-        await PostEmojisModel.destroy({
+        const emoji = await PostEmojisModel.findOne({
           where: {
-            id: emojiId
+            post_id: postId,
+            emoji_id: emojiId,
+            user_id: userDB.id,
           }
         })
-        return res.status(200).json({ success: true })
+        if (emoji) {
+          await emoji.destroy();
+          return res.status(200).json({ success: true });
+        } else {
+          return res.status(404).send('Ресурс не найден');
+        }
       } catch (e) {
         return res.status(500).send(e);
       }

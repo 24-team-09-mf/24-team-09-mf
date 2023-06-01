@@ -33,23 +33,37 @@ const useEmoji = (user: UserState, emojiId: string | undefined, postId: string |
     [dispatch, postId, emojiId, user]
   )
 
-  // const deleteEmojiHandler = useCallback(
-  //   async (emojiId: string) => {
-  //     try {
-  //       if (emojiName) {
-  //         await dispatch(
-  //           deleteEmoji({ emojiName }))
-  //       }
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   },
-  //   [dispatch, emojiName]
-  // )
+  const deleteEmojiHandler = useCallback(
+
+    async (data: ForumPostEmoji) => {
+      try {
+        const emojiKey = data.emojiName
+        const response = await dispatch(getEmoji(emojiKey))
+
+        if (response && response.payload && response.payload.id) {
+
+          const emojiId = response.payload.id
+          console.log('Deleting emoji:', emojiId)
+          await dispatch(
+            deleteEmoji({
+              postId: data.postId,
+              emojiId: response.payload.id,
+              user: user.user
+            })
+          )
+          console.log('Emoji deleted:', emojiKey)
+
+        }
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    [dispatch]
+  )
 
   return {
     addEmojiHandler,
-    // deleteEmojiHandler,
+    deleteEmojiHandler,
   }
 }
 

@@ -116,17 +116,21 @@ export const addEmoji = createAsyncThunk(
 )
 
 interface IDeleteEmoji {
-  emojiId: string
+  postId?: string
+  emojiId?: string
+  user: Partial<User> | null
 }
 
 export const deleteEmoji = createAsyncThunk(
   'forum-delete-emoji',
   async (data: IDeleteEmoji, { rejectWithValue }) => {
     try {
-      const response = await http.delete(ApiEndpoints.Forum.deleteEmoji, {
-        data,
-        baseURL: BACKEND_URL,
-      })
+      const response = await http.delete(ApiEndpoints.Forum.deleteEmoji,
+        {
+          data,
+          baseURL: BACKEND_URL
+        })
+
       return response.data
     } catch (error) {
       return rejectWithValue('Ошибка при добавлении реакции')
