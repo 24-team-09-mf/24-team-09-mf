@@ -21,11 +21,15 @@ type Args = {
 }
 
 import { getUser } from './src/store/user/auth/actions'
+import { getLeaderboardList } from './src/store/leaderboard/actions'
 import { matchRoutes } from 'react-router-dom'
 
 // Loader данных для страницы
 const getDataForRoute = async (path: string, dispatch: AppDispatch) => {
   await dispatch(getUser())
+  if (path === 'statistics') {
+    await dispatch(getLeaderboardList(10))
+  }
 }
 
 const getCurrentPath = (pathname: string) => {

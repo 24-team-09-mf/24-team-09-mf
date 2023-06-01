@@ -5,7 +5,7 @@ import { BtnText, Content } from '../game.styles'
 import { BtnStart, Title, Score, Footer, Wrapper } from './end-view.styles'
 import { useGameStore } from '@/store/gameStore'
 import { useAppDispatch, userStore } from '@/store'
-import { addLeaderboardItem } from '@/api/leaderboard'
+import { addLeaderboardItem } from '@/store/leaderboard/actions'
 
 export const EndView: FC<EndViewProps> = ({ onClickStartGame, outcome }) => {
   const { score, resetGame } = useGameStore()

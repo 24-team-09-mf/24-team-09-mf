@@ -12,7 +12,7 @@ import CheckAuthorizedPerson from '@/components/organisms/check-authorized-perso
 import { createStore } from './store'
 
 import { ApiService } from '@/services/apiService'
-import { AuthService } from './api/authService'
+import { UserService } from './api/UserService'
 
 const startServiceWorker = () => {
   // TODO изменить расположение файлов и добавить sw
@@ -32,7 +32,10 @@ requestNotificationPermission()
 
 // InitialState from ssr
 const initialState = window.__INITIAL_STATE__
-delete window['__INITIAL_STATE__']
+// Для режима разработки
+if (import.meta.env.MODE === 'production') {
+  delete window['__INITIAL_STATE__']
+}
 
 hydrate()
 async function hydrate() {
@@ -52,7 +55,7 @@ async function hydrate() {
   const router = createBrowserRouter(routes)
 
   const apiServices = {
-    user: new ApiService(new AuthService()),
+    user: new ApiService(new UserService()),
   }
 
   ReactDOM.hydrateRoot(

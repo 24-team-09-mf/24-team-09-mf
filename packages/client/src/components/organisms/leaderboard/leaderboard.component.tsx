@@ -19,11 +19,13 @@ import IconSort from '@/assets/icons/sort.svg'
 import { LeaderboardElementProps } from './leaderboard-types'
 import useLeaderboard from './leaderboard.logics'
 
+import changeAvatarDomain from '@/utils/changeAvatarDomain'
+
 import avatarDefault from '@/assets/images/avatarDefault.png'
 
 const LeaderboardElement = memo((props: LeaderboardElementProps) => {
   const { position, score, name, avatar } = props
-  const avatarSrc = avatar ? avatar : avatarDefault
+  const avatarSrc = avatar ? changeAvatarDomain(avatar) : avatarDefault
 
   return (
     <Item>

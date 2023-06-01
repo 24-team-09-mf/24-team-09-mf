@@ -22,6 +22,8 @@ import dateParse from '@/utils/dateParse'
 import avatarDefault from '@/assets/images/avatarDefault.png'
 import { EMOJI, ForumEditor } from '@/components'
 
+import changeAvatarDomain from '@/utils/changeAvatarDomain'
+
 const ForumPost = (el: ForumPostProps) => {
   const { user, createdAt, message } = el
 
@@ -35,7 +37,10 @@ const ForumPost = (el: ForumPostProps) => {
   return (
     <ForumPostBlock>
       <ForumPostBlockAvatar>
-        <img src={user.avatar ? user.avatar : avatarDefault} alt={user.login} />
+        <img
+          src={user.avatar ? changeAvatarDomain(user.avatar) : avatarDefault}
+          alt={user.login}
+        />
       </ForumPostBlockAvatar>
       <ForumPostContent>
         <ForumPostTop>
