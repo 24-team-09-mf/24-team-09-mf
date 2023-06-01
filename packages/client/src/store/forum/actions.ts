@@ -3,16 +3,13 @@ import { generatePath } from 'react-router-dom'
 
 import http, { ApiEndpoints } from '@/api/base'
 import { User } from '../user/types'
-
-const BACKEND_URL = 'http://localhost:3001/api/forum'
+import axios from 'axios'
 
 export const forumGetCategories = createAsyncThunk(
   'forum-get-categories',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await http.get(ApiEndpoints.Forum.getCategories, {
-        baseURL: BACKEND_URL,
-      })
+      const response = await axios.get(ApiEndpoints.Forum.getCategories)
       return response.data
     } catch (error) {
       return rejectWithValue('Ошибка при получении категорий форума')
@@ -25,8 +22,7 @@ export const forumGetTopics = createAsyncThunk(
   async (id: string, { rejectWithValue }) => {
     try {
       const response = await http.get(
-        generatePath(ApiEndpoints.Forum.getTopics, { id }),
-        { baseURL: BACKEND_URL }
+        generatePath(ApiEndpoints.Forum.getTopics, { id })
       )
       return response.data
     } catch (error) {
@@ -40,8 +36,7 @@ export const forumGetPosts = createAsyncThunk(
   async (id: string, { rejectWithValue }) => {
     try {
       const response = await http.get(
-        generatePath(ApiEndpoints.Forum.getPosts, { id }),
-        { baseURL: BACKEND_URL }
+        generatePath(ApiEndpoints.Forum.getPosts, { id })
       )
       return response.data[0]
     } catch (error) {
@@ -65,9 +60,7 @@ export const forumAddTopic = createAsyncThunk(
   'forum-add-topic',
   async (data: IAddTopic, { rejectWithValue }) => {
     try {
-      const response = await http.post(ApiEndpoints.Forum.addTopic, data, {
-        baseURL: BACKEND_URL,
-      })
+      const response = await http.post(ApiEndpoints.Forum.addTopic, data)
       return response.data
     } catch (error) {
       return rejectWithValue('Ошибка при добавлении темы форума')
@@ -85,9 +78,7 @@ export const forumAddPost = createAsyncThunk(
   'forum-add-post',
   async (data: IAddPost, { rejectWithValue }) => {
     try {
-      const response = await http.post(ApiEndpoints.Forum.addPost, data, {
-        baseURL: BACKEND_URL,
-      })
+      const response = await http.post(ApiEndpoints.Forum.addPost, data)
       return response.data
     } catch (error) {
       return rejectWithValue('Ошибка при добавлении поста форума')
