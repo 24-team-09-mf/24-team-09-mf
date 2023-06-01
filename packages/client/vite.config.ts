@@ -37,6 +37,8 @@ export default defineConfig({
   },
   define: {
     __SERVER_PORT__: process.env.SERVER_PORT,
+    'process.env.OAUTH_REDIRECT_URL': process.env.OAUTH_REDIRECT_URL,
+    'process.env.NODE_API_URL': process.env.NODE_API_URL,
   },
 
   plugins: [
