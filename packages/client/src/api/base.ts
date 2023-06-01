@@ -15,10 +15,10 @@ export const ApiEndpoints = {
     ServiceId: 'oauth/yandex/service-id',
   },
   User: {
-    UpdateProfile: 'user/profile',
-    UpdatePassword: 'user/password',
-    UpdateProfileAvatar: 'user/profile/avatar',
-    Search: 'user/search',
+    UpdateProfile: 'api/v2/user/profile',
+    UpdatePassword: 'api/v2/user/password',
+    UpdateProfileAvatar: 'api/v2/user/profile/avatar',
+    Search: 'api/v2/user/search',
   },
   Leaderboard: {
     AddUser: 'leaderboard',

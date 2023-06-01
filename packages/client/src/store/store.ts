@@ -22,7 +22,9 @@ export interface IStoreServices {
     logout(): Promise<null>
     // Убрать any
     addLeaderboardItem(data: IAddLeaderboard): Promise<LeaderboardElementProps>
-    getLeaderboardList(data: IGetLeaderboard): Promise<{data: LeaderboardElementProps}[]>
+    getLeaderboardList(
+      data: IGetLeaderboard
+    ): Promise<{ data: LeaderboardElementProps }[]>
   }
 }
 

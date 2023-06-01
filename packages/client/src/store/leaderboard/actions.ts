@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-// import { TEAM_NAME } from '../../constants/constants'
 import { LeaderboardElementProps } from '@/components/organisms/leaderboard/leaderboard-types'
 import { IStoreServices } from '@/store/store'
 
