@@ -19,10 +19,15 @@ export const ApiEndpoints = {
     UpdatePassword: '/api/v2/user/password',
     UpdateProfileAvatar: '/api/v2/user/profile/avatar',
     Search: '/api/v2/user/search',
-  },  
+  },
   Leaderboard: {
     AddUser: '/api/v2/leaderboard',
     Leaderboard: `/api/v2/leaderboard/${TEAM_NAME}`,
+  },
+  Theme: {
+    getThemes: '/',
+    getUserTheme: '/user-theme/:id',
+    addTheme: '/user-theme',
   },
   Forum: {
     getCategories: '/api/forum/',

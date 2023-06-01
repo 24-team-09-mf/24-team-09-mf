@@ -25,7 +25,7 @@ export const useStartBlock = ({ gameModel, isEndedGame }: Props) => {
                 position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE + 3 },
                 frameRate: 4,
                 frameBuffer: 15,
-                imageSrc: '/assets/sprites/cat/idle.png'
+                imageSrc: '/assets/sprites/cat/idle.png',
               })
             )
           }

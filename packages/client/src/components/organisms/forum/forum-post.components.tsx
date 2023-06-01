@@ -63,7 +63,7 @@ const ForumPost = (el: ForumPostProps) => {
                 emoji.map(el => (
                   <ForumEmojiElement key={el.name}>
                     <img src={EMOJI[el.name]} alt={el.name} />
-                    <span>{el.usersId.length}</span>
+                    <Count>{el.usersId.length}</Count>
                   </ForumEmojiElement>
                 ))} */}
               <ForumEmojiAddBtn onClick={onsetEmojiHandler}>

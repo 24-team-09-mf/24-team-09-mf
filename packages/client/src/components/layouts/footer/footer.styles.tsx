@@ -14,7 +14,7 @@ export const FooterText = styled.p`
 `
 
 export const LinkComponent = styled(Link)`
-  color: #000000;
+  color: var(--color-text);
   cursor: pointer;
 
   &:hover {

@@ -36,7 +36,7 @@ export const useGameProcess = ({
   // game block start
   const collisionBlocks = useCollisionsBlock({
     gameModel,
-    isEndedGame
+    isEndedGame,
   })
   const startFinishCollisionBlocks = useStartFinishCollisionBlocks({
     gameModel,
@@ -44,24 +44,24 @@ export const useGameProcess = ({
   })
   const startBlock = useStartBlock({
     gameModel,
-    isEndedGame
+    isEndedGame,
   })
   const finish = useFinish({
     gameModel,
     isEndedGame,
-    onGameOver
+    onGameOver,
   })
   const coins = useCoins({
     gameModel,
-    isEndedGame
+    isEndedGame,
   })
   const [enemies, enemiesCollisionBlocks] = useEnemies({
     gameModel,
-    isEndedGame
+    isEndedGame,
   })
   const gameBackground = useBackgroundGame({
     gameModel,
-    isEndedGame
+    isEndedGame,
   })
 
   const drawPlayer = usePlayer({

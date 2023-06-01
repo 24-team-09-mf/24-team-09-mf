@@ -12,10 +12,11 @@ import {
   UserAvatar,
   SortElement,
   SortElementIcon,
+  StyledIconWrapper,
 } from './leaderboard.styles'
 import { H2 } from '@/global-styles'
 import { Input } from '@/components/molecules'
-import IconSort from '@/assets/icons/sort.svg'
+
 import { LeaderboardElementProps } from './leaderboard-types'
 import useLeaderboard from './leaderboard.logics'
 
@@ -73,7 +74,7 @@ export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
             onClick={() => setNameSort(nameSort === 'ASC' ? 'DESC' : 'ASC')}>
             По имени
             <SortElementIcon dir={nameSort}>
-              <img src={IconSort} alt="Сортировать" />
+              <StyledIconWrapper />
             </SortElementIcon>
           </SortElement>
           <SortElement
@@ -82,7 +83,7 @@ export const Leaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
             }>
             По очкам
             <SortElementIcon dir={positionSort}>
-              <img src={IconSort} alt="Сортировать" />
+              <StyledIconWrapper />
             </SortElementIcon>
           </SortElement>
         </Sort>

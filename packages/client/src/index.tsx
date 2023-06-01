@@ -10,7 +10,7 @@ import { routes } from '@/router/routes'
 import { GlobalStyle } from '@/global-styles'
 import CheckAuthorizedPerson from '@/components/organisms/check-authorized-person'
 import { createStore } from './store'
-
+import { ThemeContextProvider } from '@/context/themeContext'
 import { ApiService } from '@/services/apiService'
 import { UserService } from './api/UserService'
 
@@ -61,11 +61,13 @@ async function hydrate() {
   ReactDOM.hydrateRoot(
     document.getElementById('root') as HTMLElement,
     <React.StrictMode>
-      <Provider store={createStore(apiServices, initialState)}>
-        <GlobalStyle />
-        <RouterProvider router={router} fallbackElement={null} />
-        <CheckAuthorizedPerson />
-      </Provider>
+      <ThemeContextProvider>
+        <Provider store={createStore(apiServices, initialState)}>
+          <GlobalStyle />
+          <RouterProvider router={router} fallbackElement={null} />
+          <CheckAuthorizedPerson />
+        </Provider>
+      </ThemeContextProvider>
     </React.StrictMode>
   )
 }
