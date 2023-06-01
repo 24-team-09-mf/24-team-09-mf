@@ -17,7 +17,7 @@ import {
   ForumEmojiElement,
 } from '@/components/templates/forum/forum.styles'
 import IconEmojiAdd from '@/assets/icons/emojiAdd.svg'
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import dateParse from '@/utils/dateParse'
 import avatarDefault from '@/assets/images/avatarDefault.png'
 import { EMOJI, ForumEditor } from '@/components'
@@ -45,7 +45,6 @@ const ForumPost = (el: ForumPostProps) => {
   )
 
   const onAddEmojiHandler = async (emojiKey: string) => {
-    console.log('Adding emoji:', emojiKey)
     addEmojiHandler({
       postId: id,
       emojiName: emojiKey,
@@ -58,19 +57,20 @@ const ForumPost = (el: ForumPostProps) => {
   }
 
   const onDeleteEmojiHandler = async (emojiKey: string) => {
-    deleteEmojiHandler({
-      postId: id,
-      emojiName: emojiKey,
-      user: user
-    })
-    console.log('delete', emojiKey);
+    try {
+      await deleteEmojiHandler({
+        postId: id,
+        emojiName: emojiKey,
+        user: user,
+      })
+
+      setEmojiList((prevList) =>
+        prevList.filter((emojiList) => emojiList.file.emoji_name !== emojiKey)
+      )
+    } catch (e) {
+      console.log(e)
+    }
   }
-
-  // useEffect(() => {
-  //   console.log('Emojis updated:', emojis)
-  // }, [emojis])
-
-  console.log('Rendering ForumPost:', id);
 
   return (
     <ForumPostBlock>
@@ -97,7 +97,6 @@ const ForumPost = (el: ForumPostProps) => {
                 emojiList.map(el => (
                   <ForumEmojiElement key={el.file.emoji_name} onClick={() => onDeleteEmojiHandler(el.file.emoji_name)}>
                     <img src={EMOJI[el.file.emoji_name]} alt={el.file.emoji_name} />
-                    {/* <span>{el.user_id}</span> */}
                   </ForumEmojiElement>
                 ))}
               <ForumEmojiAddBtn onClick={onsetEmojiHandler}>
@@ -131,7 +130,6 @@ const ForumPost = (el: ForumPostProps) => {
 }
 
 export const ForumPosts = ({ data }: { data: ForumPostProps[] }) => {
-  console.log('Rendering ForumPosts');
   return (
     <div>
       {data.map(el => (
