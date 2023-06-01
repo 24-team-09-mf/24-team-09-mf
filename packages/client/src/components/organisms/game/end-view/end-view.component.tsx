@@ -23,7 +23,6 @@ export const EndView: FC<EndViewProps> = ({ onClickStartGame, outcome }) => {
     )
   }, [dispatch])
 
-
   const handlerStartGame = () => {
     resetGame()
     onClickStartGame()

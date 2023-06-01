@@ -22,4 +22,3 @@ export const Title = styled.h1`
 export const SignUpBtn = styled(Button)`
   color: var(--color-text);
 `
-

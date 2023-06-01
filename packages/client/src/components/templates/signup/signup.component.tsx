@@ -13,7 +13,9 @@ export const SignUp = () => {
       <Title>Регистрация</Title>
       <FormSignUp />
       <Link to="/signin">
-        <SignInBtn color="#333" variant="text">Вход</SignInBtn>
+        <SignInBtn color="#333" variant="text">
+          Вход
+        </SignInBtn>
       </Link>
     </Section>
   )

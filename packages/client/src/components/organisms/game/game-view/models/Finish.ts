@@ -15,7 +15,6 @@ export class Finish extends Sprite {
       callback()
       this.finished = true
       this.onGameOver('win')
-
     }
   }
 }

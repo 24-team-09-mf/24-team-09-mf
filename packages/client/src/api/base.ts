@@ -22,7 +22,7 @@ export const ApiEndpoints = {
   },
   Leaderboard: {
     AddUser: '/leaderboard',
-    Leaderboard: `/leaderboard/${TEAM_NAME}`
+    Leaderboard: `/leaderboard/${TEAM_NAME}`,
   },
   Theme: {
     getThemes: '/',

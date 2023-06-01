@@ -57,7 +57,7 @@ export const Inner = styled.span`
   }
 `
 
-export const SwitchItem= styled.span`
+export const SwitchItem = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;

@@ -27,7 +27,7 @@ export const useFinish = ({ gameModel, isEndedGame, onGameOver }: Props) => {
                 frameRate: 4,
                 frameBuffer: 12,
                 imageSrc: '/assets/sprites/cat/licks1.png',
-                onGameOver
+                onGameOver,
               })
             )
           }
