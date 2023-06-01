@@ -14,12 +14,20 @@ import { dbConnect } from './db'
 import { apiRouter } from './src/routes'
 
 import { ApiRepository } from './repository/apiRepository'
-
-dotenv.config()
+import * as process from 'process'
 
 const isDev = process.env.NODE_ENV === 'development'
 const app = express()
 const port = Number(process.env.SERVER_PORT) || 3001
+
+
+if (isDev) {
+  dotenv.config({ path: '../.env.dev' })
+} else {
+  dotenv.config()
+}
+
+console.log(process.env);
 
 async function startServer() {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -29,7 +37,7 @@ async function startServer() {
 
   app.use(cors())
 
-  dbConnect()
+  await dbConnect()
   // Использовать до express.json()
   app.use(
     '/api/v2',
@@ -43,11 +51,13 @@ async function startServer() {
   app.use(express.json())
   app.use('/api', apiRouter)
 
-
   let vite: ViteDevServer
   const distPath = path.dirname(require.resolve('client/dist/index.html'))
   const ssrClientPath = require.resolve('client/dist-ssr/client.cjs')
-  const srcPath = path.dirname(require.resolve('client/ssr.tsx'))
+  let srcPath = ''
+  if (isDev) {
+    srcPath = path.dirname(require.resolve('client/ssr.tsx'))
+  }
 
   if (isDev) {
     vite = await createViteServer({
@@ -58,7 +68,7 @@ async function startServer() {
     app.use(vite.middlewares)
   } else {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')))
-    app.use('/sw.js', express.static(require.resolve('client/sw.js')))
+    app.use('/sw.js', express.static(path.resolve(distPath, 'sw.js')))
   }
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment

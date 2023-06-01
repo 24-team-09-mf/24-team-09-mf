@@ -4,11 +4,13 @@ import { HEIGHT_VIEW } from '@/components/organisms/game/game.constants'
 import { CollisionBlock } from '@/components/organisms/game/game-view/models/CollisionBlock'
 import { Coin } from '@/components/organisms/game/game-view/models/Coin'
 import { Enemy } from '@/components/organisms/game/game-view/models/Enemy'
+import { Finish } from '@/components/organisms/game/game-view/models/Finish'
 
 type Props = SpriteModel & {
   collisionBlocks: CollisionBlock[]
   coins: Coin[]
   enemies: Enemy[]
+  finish: Finish[]
   decrementLives: () => void
   incrementScore: (value: number) => void
   color?: string
@@ -19,12 +21,12 @@ export class Player extends Sprite {
     x: 0,
     y: 0,
   }
-
   lastDirection = ''
   gravity = 0.6
   collisionBlocks: CollisionBlock[] = []
   coins: Coin[] = []
   enemies: Enemy[] = []
+  finish: Finish[] = []
 
   constructor({
     position,
@@ -32,6 +34,7 @@ export class Player extends Sprite {
     collisionBlocks,
     coins,
     enemies,
+    finish,
     decrementLives,
     imageSrc,
     color,
@@ -45,15 +48,16 @@ export class Player extends Sprite {
     this.collisionBlocks = collisionBlocks
     this.coins = coins
     this.enemies = enemies
+    this.finish = finish
     this.decrementLives = decrementLives
     this.incrementScore = incrementScore
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  decrementLives() {}
+  decrementLives() { }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  incrementScore(_value: number) {}
+  incrementScore(_value: number) { }
 
   update() {
     this.position.x += this.velocity.x
@@ -64,6 +68,7 @@ export class Player extends Sprite {
 
     this.checkCoinCollision()
     this.checkEnemiesCollision()
+    this.checkFinishCollision()
     if (
       this.position.y + this.dimensions.height + this.velocity.y >
       HEIGHT_VIEW
@@ -97,7 +102,7 @@ export class Player extends Sprite {
           this.position.x + this.dimensions.width >= enemy.position.x &&
           this.position.y + this.dimensions.height > enemy.position.y &&
           this.position.y + this.dimensions.height <
-            enemy.position.y + enemy.dimensions.height - ENEMY_FIX
+          enemy.position.y + enemy.dimensions.height - ENEMY_FIX
         ) {
           enemy.destroyEnemy()
           return
@@ -108,7 +113,7 @@ export class Player extends Sprite {
           this.position.x + this.dimensions.width >= enemy.position.x &&
           this.position.y + this.dimensions.height > enemy.position.y &&
           this.position.y + this.dimensions.height <=
-            enemy.position.y + enemy.dimensions.height
+          enemy.position.y + enemy.dimensions.height
         ) {
           this.decrementLives()
           break
@@ -125,6 +130,16 @@ export class Player extends Sprite {
           coin.getCoin(() => this.incrementScore(100))
           break
         }
+      }
+    }
+  }
+
+  checkFinishCollision() {
+    for (let i = 0; i < this.finish.length; i++) {
+      const finish = this.finish[i]
+      if (this.checkCollision(finish)) {
+        finish.getFinish(() => this.incrementScore(150))
+        break
       }
     }
   }
@@ -167,14 +182,14 @@ export class Player extends Sprite {
     }
   }
 
-  checkCollision(collisionBlock: CollisionBlock | Coin) {
+  checkCollision(collisionBlock: CollisionBlock | Coin | Finish) {
     return (
       this.position.x <=
-        collisionBlock.position.x + collisionBlock.dimensions.width &&
+      collisionBlock.position.x + collisionBlock.dimensions.width &&
       this.position.x + this.dimensions.width >= collisionBlock.position.x &&
       this.position.y + this.dimensions.height >= collisionBlock.position.y &&
       this.position.y <=
-        collisionBlock.position.y + collisionBlock.dimensions.height
+      collisionBlock.position.y + collisionBlock.dimensions.height
     )
   }
 

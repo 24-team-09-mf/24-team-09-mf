@@ -6,12 +6,19 @@ import { UsersModel } from './src/models/users'
 import { SiteThemeModel } from './src/models/themes'
 import { UserThemeModel } from './src/models/userTheme'
 import { EmojiModel, PostEmojisModel } from './src/models/forumEmoji'
+import { SiteThemeModel } from './src/models/themes'
+import { UserThemeModel } from './src/models/userTheme'
 
-const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
-  process.env
+const {
+  POSTGRES_USER,
+  POSTGRES_PASSWORD,
+  POSTGRES_DB,
+  POSTGRES_PORT,
+  POSTGRES_HOST,
+} = process.env
 
 const sequelizeOptions: SequelizeOptions = {
-  host: 'localhost',
+  host: POSTGRES_HOST || 'localhost',
   port: Number(POSTGRES_PORT),
   username: POSTGRES_USER,
   password: POSTGRES_PASSWORD,
@@ -34,8 +41,11 @@ export const sequelize = new Sequelize(sequelizeOptions)
 export async function dbConnect() {
   try {
     await sequelize.authenticate()
-    console.log('Connection has been established successfully.')
+    console.log(
+      '\x1b[36m%s\x1b[0m',
+      'Connection has been established successfully.'
+    )
   } catch (error) {
-    console.error('Unable to connect to the database:', error)
+    console.error('\x1b[31m%s\x1b[0m', error)
   }
 }

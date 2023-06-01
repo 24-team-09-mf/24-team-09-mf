@@ -12,10 +12,7 @@ type Props = {
   isEndedGame: boolean
 }
 
-export const useStartFinishCollisionBlocks = ({
-  gameModel,
-  isEndedGame,
-}: Props) => {
+export const useStartFinishCollisionBlocks = ({ gameModel, isEndedGame }: Props) => {
   const collisions = useMemo(() => {
     const result: CollisionBlock[] = []
     if (gameModel) {
@@ -25,8 +22,7 @@ export const useStartFinishCollisionBlocks = ({
             result.push(
               new CollisionBlock({
                 model: gameModel,
-                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE },
-                frameRate: 4,
+                position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE }
               })
             )
           }

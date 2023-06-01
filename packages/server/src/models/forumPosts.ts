@@ -6,7 +6,7 @@ import {
   AllowNull,
   ForeignKey,
   BelongsTo,
-  HasMany
+  HasMany,
 } from 'sequelize-typescript'
 import { TopicsModel } from './forumTopics'
 import { UsersModel } from './users'
@@ -38,5 +38,5 @@ export class PostsModel extends Model {
     foreignKey: 'post_id',
     as: 'emojis',
   })
-  emojis: PostEmojisModel[];
+  emojis: PostEmojisModel[]
 }

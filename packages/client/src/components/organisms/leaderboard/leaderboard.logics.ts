@@ -34,10 +34,13 @@ const useLeaderboard = ({ data }: { data: LeaderboardElementProps[] }) => {
     })
   }, [positionSort])
 
-  const dataWithPositions = data.map((el, index) => ({ ...el, position: index + 1 }))
+  const dataWithPositions = data.map((el, index) => ({
+    ...el,
+    position: index + 1,
+  }))
 
-  const sortedData = sortData.map((el) => {
-    const position = dataWithPositions.find((e) => e.name === el.name)?.position
+  const sortedData = sortData.map(el => {
+    const position = dataWithPositions.find(e => e.name === el.name)?.position
     return { ...el, position }
   })
 

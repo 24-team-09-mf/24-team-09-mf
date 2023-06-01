@@ -246,23 +246,7 @@ export const ForumPostRate = styled.div`
   align-items: center;
 `
 
-export const ForumPostRateButton = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s;
-  &:hover {
-    opacity: 0.5;
-  }
-`
-
-export const ForumPostRateText = styled.div`
-  margin: 0 0.625rem;
-  font-size: 0.75rem;
-`
-
 export const ForumEmoji = styled.div`
-  margin-right: 1.25rem;
   display: flex;
   align-items: center;
 `

@@ -18,7 +18,8 @@ export const GlobalStyle = createGlobalStyle`
     --color-gray1: #FAFAFA;
     --color-green3: #FFF;
     --color-green4: #FFF;
-}
+    --color-gray2: #F3F3F3;
+  }
 
 html[data-theme='dark'] {
   --color-text: #FFFFFF;

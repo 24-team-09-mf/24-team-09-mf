@@ -7,8 +7,6 @@ import {
   ForumPostDate,
   ForumEmoji,
   ForumPostRate,
-  ForumPostRateButton,
-  ForumPostRateText,
   ForumPostReplyBtn,
   ForumPostText,
   ForumPostTop,
@@ -16,20 +14,18 @@ import {
   ForumEmojiAddBtn,
   ForumEmojiAddBlock,
   ForumEmojiAddElement,
-  ForumEmojiElement,
-  Count
+  // ForumEmojiElement,
 } from '@/components/templates/forum/forum.styles'
-import IconRateMinus from '@/assets/icons/rate_minus.svg'
-import IconRatePlus from '@/assets/icons/rate_plus.svg'
 import IconEmojiAdd from '@/assets/icons/emojiAdd.svg'
 import { useState } from 'react'
 import dateParse from '@/utils/dateParse'
 import avatarDefault from '@/assets/images/avatarDefault.png'
 import { EMOJI, ForumEditor } from '@/components'
 
+import changeAvatarDomain from '@/utils/changeAvatarDomain'
+
 const ForumPost = (el: ForumPostProps) => {
-  const [rate, setRate] = useState(el.rate)
-  const { userAvatar, userName, date, text, emoji } = el
+  const { user, createdAt, message } = el
 
   const [replyOpen, setReplyOpen] = useState(false)
   const [emojiAdd, setEmojiAdd] = useState('none')
@@ -37,20 +33,23 @@ const ForumPost = (el: ForumPostProps) => {
   const onReplyHandler = () => setReplyOpen(prev => !prev)
   const onsetEmojiHandler = () =>
     setEmojiAdd(prev => (prev === 'none' ? 'block' : 'none'))
-  const onSetRateMinusHandler = () => setRate(prev => prev - 1)
-  const onSetRatePlusHandler = () => setRate(prev => prev + 1)
 
   return (
     <ForumPostBlock>
       <ForumPostBlockAvatar>
-        <img src={userAvatar ? userAvatar : avatarDefault} alt={userName} />
+        <img
+          src={user.avatar ? changeAvatarDomain(user.avatar) : avatarDefault}
+          alt={user.login}
+        />
       </ForumPostBlockAvatar>
       <ForumPostContent>
         <ForumPostTop>
-          <ForumPostUserName>{userName}</ForumPostUserName>
-          <ForumPostDate>{dateParse(date)}</ForumPostDate>
+          <ForumPostUserName>{user.login}</ForumPostUserName>
+          <ForumPostDate>{dateParse(createdAt)}</ForumPostDate>
         </ForumPostTop>
-        <ForumPostText dangerouslySetInnerHTML={{ __html: text as string }} />
+        <ForumPostText
+          dangerouslySetInnerHTML={{ __html: message as string }}
+        />
         <ForumPostBottom>
           <div>
             <ForumPostReplyBtn onClick={onReplyHandler}>
@@ -59,13 +58,14 @@ const ForumPost = (el: ForumPostProps) => {
           </div>
           <ForumPostRate>
             <ForumEmoji>
-              {emoji &&
+              {/* TODO сделать emoji */}
+              {/* {emoji &&
                 emoji.map(el => (
                   <ForumEmojiElement key={el.name}>
                     <img src={EMOJI[el.name]} alt={el.name} />
                     <Count>{el.usersId.length}</Count>
                   </ForumEmojiElement>
-                ))}
+                ))} */}
               <ForumEmojiAddBtn onClick={onsetEmojiHandler}>
                 <ForumEmojiAddBlock display={emojiAdd}>
                   {Object.keys(EMOJI).map(el => (
@@ -77,13 +77,6 @@ const ForumPost = (el: ForumPostProps) => {
                 <img src={IconEmojiAdd} alt="Добавить эмоцию" />
               </ForumEmojiAddBtn>
             </ForumEmoji>
-            <ForumPostRateButton onClick={onSetRateMinusHandler}>
-              <img src={IconRateMinus} alt="Не нравится" />
-            </ForumPostRateButton>
-            <ForumPostRateText>{rate}</ForumPostRateText>
-            <ForumPostRateButton onClick={onSetRatePlusHandler}>
-              <img src={IconRatePlus} alt="Нравится" />
-            </ForumPostRateButton>
           </ForumPostRate>
         </ForumPostBottom>
         {replyOpen && (
@@ -91,9 +84,9 @@ const ForumPost = (el: ForumPostProps) => {
             title="Ответить на сообщение"
             replyMessage={
               <>
-                <strong>{userName}</strong>
+                <strong>{user.login}</strong>
                 <br />
-                <div dangerouslySetInnerHTML={{ __html: text as string }} />
+                <div dangerouslySetInnerHTML={{ __html: message as string }} />
               </>
             }
           />

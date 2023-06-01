@@ -2,6 +2,7 @@ import { Player } from '@/components/organisms/game/game-view/models/Player'
 import { CollisionBlock } from '@/components/organisms/game/game-view/models/CollisionBlock'
 import { Coin } from '@/components/organisms/game/game-view/models/Coin'
 import { Enemy } from '@/components/organisms/game/game-view/models/Enemy'
+import { Finish } from '@/components/organisms/game/game-view/models/Finish'
 
 import {
   HEIGHT_VIEW,
@@ -36,6 +37,7 @@ describe('Тестирую класс Player', () => {
     const collisionBlocks: CollisionBlock[] = []
     const coins: Coin[] = []
     const enemies: Enemy[] = []
+    const finish: Finish[] = []
     const imageSrc = '/assets/sprites/hero/idle.png'
     player = new Player({
       position,
@@ -47,6 +49,7 @@ describe('Тестирую класс Player', () => {
       incrementScore: fn,
       imageSrc,
       animations,
+      finish
     })
   })
 
@@ -57,6 +60,7 @@ describe('Тестирую класс Player', () => {
     expect(player.collisionBlocks).toEqual([])
     expect(player.coins).toEqual([])
     expect(player.enemies).toEqual([])
+    expect(player.finish).toEqual([])
     expect(player.imageSrc).toBe('/assets/sprites/hero/idle.png')
     expect(player.animations).toEqual(animations)
   })
