@@ -1,5 +1,6 @@
 import { IStoreServices } from '@/store/store'
 import { SignIn } from '@/store/user/types'
+import { IAddLeaderboard, IGetLeaderboard } from '@/store/leaderboard/types'
 
 export class ApiService {
   constructor(private _service: IStoreServices['user']) {}
@@ -12,10 +13,10 @@ export class ApiService {
   logout() {
     return this._service.logout()
   }
-  addLeaderboardItem(data: any) {
+  addLeaderboardItem(data: IAddLeaderboard) {
     return this._service.addLeaderboardItem(data)
   }
-  getLeaderboardList(data: any) {
+  getLeaderboardList(data: IGetLeaderboard) {
     return this._service.getLeaderboardList(data)
   }
 }
