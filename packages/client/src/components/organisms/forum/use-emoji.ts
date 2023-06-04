@@ -17,7 +17,7 @@ const useEmoji = (user: UserState, emojiId: string | undefined, postId: string |
         const response = await dispatch(getEmoji(emojiKey))
 
         if (response && response.payload && response.payload.id) {
-          await dispatch(
+          return await dispatch(
             addEmoji({
               postId: data.postId,
               emojiId: response.payload.id,
@@ -39,15 +39,13 @@ const useEmoji = (user: UserState, emojiId: string | undefined, postId: string |
         const response = await dispatch(getEmoji(emojiKey))
 
         if (response && response.payload && response.payload.id) {
-          await dispatch(
+          return await dispatch(
             deleteEmoji({
               postId: data.postId,
               emojiId: response.payload.id,
               user: user.user
             })
           )
-          console.log('Emoji deleted:', emojiKey)
-
         }
       } catch (e) {
         console.log(e)

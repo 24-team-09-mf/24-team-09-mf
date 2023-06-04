@@ -17,7 +17,7 @@ import {
   ForumEmojiElement,
 } from '@/components/templates/forum/forum.styles'
 import IconEmojiAdd from '@/assets/icons/emojiAdd.svg'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import dateParse from '@/utils/dateParse'
 import avatarDefault from '@/assets/images/avatarDefault.png'
 import { EMOJI, ForumEditor } from '@/components'
@@ -49,24 +49,40 @@ const ForumPost = (el: ForumPostProps) => {
       postId: id,
       emojiName: emojiKey,
       user: user
+    }).then(res => {
+      const check = emojiList.find(
+        el => el.user_id === res!.payload.user_id &&
+          el.file.emoji_name === emojiKey
+      )
+      if (!check)
+        setEmojiList(prevList => [
+          ...prevList,
+          {
+            id: res!.payload.id,
+            user_id: res!.payload.user_id,
+            file: { emoji_name: emojiKey }
+          }
+        ] as ForumEmojis[])
     })
-
-    setEmojiList(
-      prevList =>
-        [...prevList, { file: { emoji_name: emojiKey } }] as ForumEmojis[])
   }
 
   const onDeleteEmojiHandler = async (emojiKey: string) => {
     try {
+      const data: typeof emojiList = []
       await deleteEmojiHandler({
         postId: id,
         emojiName: emojiKey,
         user: user,
+      }).then(res => {
+        console.log(res)
+        for (let i = 0; i < emojiList.length; i++) {
+          if (emojiList[i].user_id === res!.payload.user_id &&
+            emojiList[i].file.emoji_name === emojiKey) {
+            console.log('fdgdfg');
+          } else data.push(emojiList[i])
+        }
+        setEmojiList(data)
       })
-
-      setEmojiList((prevList) =>
-        prevList.filter((emojiList) => emojiList.file.emoji_name !== emojiKey)
-      )
     } catch (e) {
       console.log(e)
     }
@@ -97,6 +113,7 @@ const ForumPost = (el: ForumPostProps) => {
                 emojiList.map(el => (
                   <ForumEmojiElement key={el.file.emoji_name} onClick={() => onDeleteEmojiHandler(el.file.emoji_name)}>
                     <img src={EMOJI[el.file.emoji_name]} alt={el.file.emoji_name} />
+                    <span>{el.user_id}</span>
                   </ForumEmojiElement>
                 ))}
               <ForumEmojiAddBtn onClick={onsetEmojiHandler}>

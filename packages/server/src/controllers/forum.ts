@@ -196,17 +196,26 @@ export function forumController() {
       const { postId, emojiId, user } = req.body
       const userDB = await checkUser(user)
       try {
-        const emoji = await PostEmojisModel.create({
-          post_id: postId,
-          emoji_id: emojiId,
-          user_id: userDB.id,
+        const check = await PostEmojisModel.findOne({
+          where: {
+            post_id: postId,
+            emoji_id: emojiId,
+            user_id: userDB.id
+          }
         })
-        return res.status(201).json({
-          ...emoji.dataValues,
-          user: {
-            user_id: userDB.user_id
-          },
-        })
+        if (!check) {
+          const emoji = await PostEmojisModel.create({
+            post_id: postId,
+            emoji_id: emojiId,
+            user_id: userDB.id,
+          })
+          return res.status(201).json({
+            ...emoji.dataValues,
+            user: {
+              user_id: userDB.user_id
+            },
+          })
+        } else return res.status(201)
       } catch (e) {
         return res.status(500).send(e)
       }
@@ -225,7 +234,7 @@ export function forumController() {
         })
         if (emoji) {
           await emoji.destroy();
-          return res.status(200).json({ success: true });
+          return res.status(200).json(emoji);
         } else {
           return res.status(404).send('Ресурс не найден');
         }
