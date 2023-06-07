@@ -17,7 +17,7 @@ import {
   ForumEmojiElement,
 } from '@/components/templates/forum/forum.styles'
 import IconEmojiAdd from '@/assets/icons/emojiAdd.svg'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import dateParse from '@/utils/dateParse'
 import avatarDefault from '@/assets/images/avatarDefault.png'
 import { EMOJI, ForumEditor } from '@/components'
@@ -34,6 +34,8 @@ const ForumPost = (el: ForumPostProps) => {
   const [emojiAdd, setEmojiAdd] = useState('none')
   const [emojiList, setEmojiList] = useState(emojis)
 
+  const [emojiCounts, setEmojiCounts] = useState<{ [key: string]: number }>({})
+
   const onReplyHandler = () => setReplyOpen(prev => !prev)
   const onsetEmojiHandler = () =>
     setEmojiAdd(prev => (prev === 'none' ? 'block' : 'none'))
@@ -43,6 +45,20 @@ const ForumPost = (el: ForumPostProps) => {
     emoji_name,
     postId
   )
+
+  useEffect(() => {
+    const updatedEmojiCounts: { [key: string]: number } = {}
+    emojis.forEach(emoji => {
+      const key = `${id}_${emoji.file.emoji_name}`
+      if (updatedEmojiCounts[key]) {
+        updatedEmojiCounts[key]++
+      }
+      else {
+        updatedEmojiCounts[key] = 1
+      }
+    })
+    setEmojiCounts(updatedEmojiCounts)
+  }, [emojis, id])
 
   const onAddEmojiHandler = async (emojiKey: string) => {
     addEmojiHandler({
@@ -54,7 +70,7 @@ const ForumPost = (el: ForumPostProps) => {
         el => el.user_id === res!.payload.user_id &&
           el.file.emoji_name === emojiKey
       )
-      if (!check)
+      if (!check) {
         setEmojiList(prevList => [
           ...prevList,
           {
@@ -63,8 +79,21 @@ const ForumPost = (el: ForumPostProps) => {
             file: { emoji_name: emojiKey }
           }
         ] as ForumEmojis[])
+
+        const updatedEmojiCounts = { ...emojiCounts }
+        const key = `${id}_${emojiKey}`
+        if (!updatedEmojiCounts[key]) {
+          updatedEmojiCounts[key] = 1
+        }
+        else {
+          updatedEmojiCounts[key]++
+        }
+
+        setEmojiCounts(updatedEmojiCounts)
+      }
     })
   }
+
 
   const onDeleteEmojiHandler = async (emojiKey: string) => {
     try {
@@ -74,11 +103,18 @@ const ForumPost = (el: ForumPostProps) => {
         emojiName: emojiKey,
         user: user,
       }).then(res => {
-        console.log(res)
         for (let i = 0; i < emojiList.length; i++) {
           if (emojiList[i].user_id === res!.payload.user_id &&
             emojiList[i].file.emoji_name === emojiKey) {
-            console.log('fdgdfg');
+            const updatedEmojiCounts = { ...emojiCounts }
+            const key = `${id}_${emojiKey}`
+            if (updatedEmojiCounts[key]) {
+              updatedEmojiCounts[key]--
+              if (updatedEmojiCounts[key] < 1) {
+                delete updatedEmojiCounts[key]
+              }
+            }
+            setEmojiCounts(updatedEmojiCounts)
           } else data.push(emojiList[i])
         }
         setEmojiList(data)
@@ -109,13 +145,12 @@ const ForumPost = (el: ForumPostProps) => {
           </div>
           <ForumPostRate>
             <ForumEmoji>
-              {emojiList &&
-                emojiList.map(el => (
-                  <ForumEmojiElement key={el.file.emoji_name} onClick={() => onDeleteEmojiHandler(el.file.emoji_name)}>
-                    <img src={EMOJI[el.file.emoji_name]} alt={el.file.emoji_name} />
-                    <span>{el.user_id}</span>
-                  </ForumEmojiElement>
-                ))}
+              {Object.entries(emojiCounts).map(([key, count]) => (
+                <ForumEmojiElement key={key} onClick={() => onDeleteEmojiHandler(key.split("_")[1])}>
+                  <img src={EMOJI[key.split("_")[1]]} alt={key.split("_")[1]} />
+                  <span>{count}</span>
+                </ForumEmojiElement>
+              ))}
               <ForumEmojiAddBtn onClick={onsetEmojiHandler}>
                 <ForumEmojiAddBlock display={emojiAdd}>
                   {Object.keys(EMOJI).map(el => (
@@ -147,6 +182,7 @@ const ForumPost = (el: ForumPostProps) => {
 }
 
 export const ForumPosts = ({ data }: { data: ForumPostProps[] }) => {
+
   return (
     <div>
       {data.map(el => (

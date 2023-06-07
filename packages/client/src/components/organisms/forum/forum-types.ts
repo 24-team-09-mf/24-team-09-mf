@@ -49,6 +49,7 @@ export type ForumEmojis = {
   file: {
     emoji_name: string
   }
+  count: number
 }
 
 export type ForumPostProps = {
