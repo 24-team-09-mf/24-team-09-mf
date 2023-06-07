@@ -33,7 +33,6 @@ const ForumPost = (el: ForumPostProps) => {
   const [replyOpen, setReplyOpen] = useState(false)
   const [emojiAdd, setEmojiAdd] = useState('none')
   const [emojiList, setEmojiList] = useState(emojis)
-
   const [emojiCounts, setEmojiCounts] = useState<{ [key: string]: number }>({})
 
   const onReplyHandler = () => setReplyOpen(prev => !prev)
@@ -70,7 +69,7 @@ const ForumPost = (el: ForumPostProps) => {
         el => el.user_id === res!.payload.user_id &&
           el.file.emoji_name === emojiKey
       )
-      if (!check) {
+      if (!check && res!.payload.success) {
         setEmojiList(prevList => [
           ...prevList,
           {
@@ -79,21 +78,14 @@ const ForumPost = (el: ForumPostProps) => {
             file: { emoji_name: emojiKey }
           }
         ] as ForumEmojis[])
-
-        const updatedEmojiCounts = { ...emojiCounts }
         const key = `${id}_${emojiKey}`
-        if (!updatedEmojiCounts[key]) {
-          updatedEmojiCounts[key] = 1
-        }
-        else {
-          updatedEmojiCounts[key]++
-        }
-
-        setEmojiCounts(updatedEmojiCounts)
+        setEmojiCounts(prevCounts => ({
+          ...prevCounts,
+          [key]: (prevCounts[key] || 0) + 1
+        }))
       }
     })
   }
-
 
   const onDeleteEmojiHandler = async (emojiKey: string) => {
     try {

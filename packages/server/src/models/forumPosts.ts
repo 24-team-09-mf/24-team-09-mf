@@ -38,5 +38,5 @@ export class PostsModel extends Model {
     foreignKey: 'post_id',
     as: 'emojis',
   })
-  emojis: PostEmojisModel[];
+  emojis: PostEmojisModel[]
 }

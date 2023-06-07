@@ -214,8 +214,9 @@ export function forumController() {
             user: {
               user_id: userDB.user_id
             },
+            success: true
           })
-        } else return res.status(201)
+        } else return res.status(201).json({ success: false })
       } catch (e) {
         return res.status(500).send(e)
       }
@@ -233,13 +234,13 @@ export function forumController() {
           }
         })
         if (emoji) {
-          await emoji.destroy();
-          return res.status(200).json(emoji);
+          await emoji.destroy()
+          return res.status(200).json(emoji)
         } else {
-          return res.status(404).send('Ресурс не найден');
+          return res.status(404).send('Ресурс не найден')
         }
       } catch (e) {
-        return res.status(500).send(e);
+        return res.status(500).send(e)
       }
     },
 
