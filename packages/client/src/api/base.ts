@@ -30,14 +30,14 @@ export const ApiEndpoints = {
     addTheme: '/user-theme',
   },
   Forum: {
-    getCategories: '/',
-    getTopics: '/topics/:id',
-    getPosts: '/posts/:id',
-    getEmoji: '/emojis/:emojiName',
-    addPost: '/post',
-    addTopic: '/topic',
-    addEmoji: '/emoji',
-    deleteEmoji: '/emoji/delete',
+    getCategories: '/api/forum/',
+    getTopics: '/api/forum/topics/:id',
+    getPosts: '/api/forum/posts/:id',
+    getEmoji: '/api/forum/emojis/:emojiName',
+    addPost: '/api/forum/post',
+    addTopic: '/api/forum/topic',
+    addEmoji: '/api/forum/emoji',
+    deleteEmoji: '/api/forum/emoji/delete',
 
   },
 }
