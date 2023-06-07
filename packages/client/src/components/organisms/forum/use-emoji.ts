@@ -61,4 +61,3 @@ const useEmoji = (user: UserState, emojiId: string | undefined, postId: string |
 }
 
 export default useEmoji
-
