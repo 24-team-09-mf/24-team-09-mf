@@ -49,7 +49,7 @@ describe('Тестирую класс Player', () => {
       incrementScore: fn,
       imageSrc,
       animations,
-      finish
+      finish,
     })
   })
 

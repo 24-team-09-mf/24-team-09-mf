@@ -2,11 +2,10 @@
 import { Link } from 'react-router-dom'
 
 // components
-import { Button } from '../../atoms'
 import { FormSignIn } from '../../organisms'
 
 // styles
-import { Section, Title } from './signin.styles'
+import { Section, Title, SignUpBtn } from './signin.styles'
 
 export const SignIn = () => {
   return (
@@ -14,9 +13,9 @@ export const SignIn = () => {
       <Title>Авторизация</Title>
       <FormSignIn />
       <Link to="/signup">
-        <Button color="#333333" variant="text">
+        <SignUpBtn color="#333333" variant="text">
           Еще не зарегистрированы?
-        </Button>
+        </SignUpBtn>
       </Link>
     </Section>
   )

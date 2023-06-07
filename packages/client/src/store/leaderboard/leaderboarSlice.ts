@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { LeaderboardElementProps } from '@/components/organisms/leaderboard/leaderboard-types'
-import { getLeaderboardList } from '../../api/leaderboard'
+import { getLeaderboardList } from '@/store/leaderboard/actions'
 
 export interface LeaderboardState {
   data: LeaderboardElementProps[]

@@ -3,7 +3,7 @@ import { Leaderboard } from '@/components'
 import Container from '@/components/layouts/container/container.component'
 import { H1 } from '@/global-styles'
 import { useEffect } from 'react'
-import { getLeaderboardList } from '@/api/leaderboard'
+import { getLeaderboardList } from '@/store/leaderboard/actions'
 import { useAppDispatch, useAppSelector } from '@/store'
 
 export const Statistics = () => {

@@ -32,7 +32,7 @@ const userSlice = createSlice({
         state.error = ''
         state.user = {
           ...action.payload,
-          avatar: action.payload.avatar
+          avatar: action.payload?.avatar
             ? `${AvatarUrl}${action.payload.avatar}`
             : initialState.user?.avatar,
         }

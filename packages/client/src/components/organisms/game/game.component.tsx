@@ -97,7 +97,12 @@ export const GameComponent = () => {
         {isShowInformation && (
           <InformationView onCloseInformation={handlerClickShowInformation} />
         )}
-        {isGameEnded && <EndView outcome={outcome} onClickStartGame={handlerClickRestartGame} />}
+        {isGameEnded && (
+          <EndView
+            outcome={outcome}
+            onClickStartGame={handlerClickRestartGame}
+          />
+        )}
       </MainView>
     </Wrapper>
   )

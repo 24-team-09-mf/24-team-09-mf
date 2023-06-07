@@ -54,10 +54,10 @@ export class Player extends Sprite {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  decrementLives() { }
+  decrementLives() {}
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  incrementScore(_value: number) { }
+  incrementScore(_value: number) {}
 
   update() {
     this.position.x += this.velocity.x
@@ -102,7 +102,7 @@ export class Player extends Sprite {
           this.position.x + this.dimensions.width >= enemy.position.x &&
           this.position.y + this.dimensions.height > enemy.position.y &&
           this.position.y + this.dimensions.height <
-          enemy.position.y + enemy.dimensions.height - ENEMY_FIX
+            enemy.position.y + enemy.dimensions.height - ENEMY_FIX
         ) {
           enemy.destroyEnemy()
           return
@@ -113,7 +113,7 @@ export class Player extends Sprite {
           this.position.x + this.dimensions.width >= enemy.position.x &&
           this.position.y + this.dimensions.height > enemy.position.y &&
           this.position.y + this.dimensions.height <=
-          enemy.position.y + enemy.dimensions.height
+            enemy.position.y + enemy.dimensions.height
         ) {
           this.decrementLives()
           break
@@ -185,11 +185,11 @@ export class Player extends Sprite {
   checkCollision(collisionBlock: CollisionBlock | Coin | Finish) {
     return (
       this.position.x <=
-      collisionBlock.position.x + collisionBlock.dimensions.width &&
+        collisionBlock.position.x + collisionBlock.dimensions.width &&
       this.position.x + this.dimensions.width >= collisionBlock.position.x &&
       this.position.y + this.dimensions.height >= collisionBlock.position.y &&
       this.position.y <=
-      collisionBlock.position.y + collisionBlock.dimensions.height
+        collisionBlock.position.y + collisionBlock.dimensions.height
     )
   }
 

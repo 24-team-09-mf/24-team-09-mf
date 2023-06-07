@@ -25,6 +25,8 @@ import { useParams } from 'react-router-dom'
 import { userStore } from '@/store'
 import useEmoji from './use-emoji'
 
+import changeAvatarDomain from '@/utils/changeAvatarDomain'
+
 const ForumPost = (el: ForumPostProps) => {
   const { id, user, createdAt, message, emojis } = el
   const { emoji_name, postId } = useParams()
@@ -119,7 +121,10 @@ const ForumPost = (el: ForumPostProps) => {
   return (
     <ForumPostBlock>
       <ForumPostBlockAvatar>
-        <img src={user.avatar ? user.avatar : avatarDefault} alt={user.login} />
+        <img
+          src={user.avatar ? changeAvatarDomain(user.avatar) : avatarDefault}
+          alt={user.login}
+        />
       </ForumPostBlockAvatar>
       <ForumPostContent>
         <ForumPostTop>

@@ -147,6 +147,7 @@ export function forumController() {
           user: {
             user_id: userDB.user_id,
             login: userDB.login,
+            avatar: userDB.avatar,
           },
         })
       } catch (e) {
