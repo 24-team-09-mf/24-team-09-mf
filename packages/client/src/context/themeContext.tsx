@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, createContext } from 'react'
 import { addUserTheme, getUserTheme } from '@/api/userTheme'
 import { userStore } from '@/store'
 
@@ -14,9 +14,7 @@ type ThemeContextType = {
   toggleTheme: () => void
 }
 
-const ThemeContext = React.createContext<ThemeContextType>(
-  {} as ThemeContextType
-)
+const ThemeContext = createContext<ThemeContextType>({} as ThemeContextType)
 
 export const ThemeContextProvider: React.FC<{
   children: React.ReactNode
