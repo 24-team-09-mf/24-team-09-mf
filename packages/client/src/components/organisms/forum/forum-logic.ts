@@ -26,17 +26,24 @@ const useSectionForm = (user: UserState, id: string, postPageId?: string) => {
     async (data: ForumFormsProps) => {
       try {
         if (postPageId) {
-          await dispatch(
-            forumAddPost({ ...data, user: user.user, id: postPageId })
-          )
+          const sanitizeData = {
+            message: sanitizeHtml(data.message),
+          }
+          if (sanitizeData.message) {
+            await dispatch(
+              forumAddPost({ ...sanitizeData, user: user.user, id: postPageId })
+            )
+          }
         } else {
           const sanitizeData = {
             title: sanitizeHtml(data.title),
             message: sanitizeHtml(data.message),
           }
-          await dispatch(
-            forumAddTopic({ ...sanitizeData, user: user.user, id: id })
-          )
+          if (sanitizeData.title && sanitizeData.message) {
+            await dispatch(
+              forumAddTopic({ ...sanitizeData, user: user.user, id: id })
+            )
+          }
         }
         reset()
         setValue('message', '')
