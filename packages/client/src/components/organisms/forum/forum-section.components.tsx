@@ -8,6 +8,7 @@ import {
 import { ForumSectionProps } from './forum-types'
 import dateParse from '@/utils/dateParse'
 import { H2 } from '@/global-styles'
+import sanitizeHtml from 'sanitize-html'
 
 export const ForumSectionTitle = ({ title }: { title: string }) => {
   return <H2>{title}</H2>
@@ -18,7 +19,7 @@ const ForumSectionTopicsElement = (el: ForumSectionProps) => {
   return (
     <CatalogBlock>
       <SectionRowContent to={`/forum/${parent_id}/${id}`}>
-        <SectionRowContentTitle>{title}</SectionRowContentTitle>
+        <SectionRowContentTitle>{sanitizeHtml(title)}</SectionRowContentTitle>
       </SectionRowContent>
       <SectionRowMessagesCount>{postsCount}</SectionRowMessagesCount>
       <SectionRowMessagesCount>{user.login}</SectionRowMessagesCount>
