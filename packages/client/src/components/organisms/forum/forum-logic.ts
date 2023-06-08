@@ -7,6 +7,7 @@ import { useAppDispatch } from '@/store'
 import { useForm } from 'react-hook-form'
 import { ForumFormsProps } from './forum-types'
 import { UserState } from '@/store/user/types'
+import sanitizeHtml from 'sanitize-html'
 
 const useSectionForm = (user: UserState, id: string, postPageId?: string) => {
   const dispatch = useAppDispatch()
@@ -29,7 +30,13 @@ const useSectionForm = (user: UserState, id: string, postPageId?: string) => {
             forumAddPost({ ...data, user: user.user, id: postPageId })
           )
         } else {
-          await dispatch(forumAddTopic({ ...data, user: user.user, id: id }))
+          const sanitizeData = {
+            title: sanitizeHtml(data.title),
+            message: sanitizeHtml(data.message),
+          }
+          await dispatch(
+            forumAddTopic({ ...sanitizeData, user: user.user, id: id })
+          )
         }
         reset()
         setValue('message', '')
