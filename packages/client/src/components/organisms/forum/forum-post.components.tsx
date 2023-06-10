@@ -24,6 +24,7 @@ import { EMOJI, ForumEditor } from '@/components'
 import { useParams } from 'react-router-dom'
 import { userStore } from '@/store'
 import useEmoji from './use-emoji'
+import sanitizeHtml from 'sanitize-html'
 
 import changeAvatarDomain from '@/utils/changeAvatarDomain'
 
@@ -132,7 +133,7 @@ const ForumPost = (el: ForumPostProps) => {
           <ForumPostDate>{dateParse(createdAt)}</ForumPostDate>
         </ForumPostTop>
         <ForumPostText
-          dangerouslySetInnerHTML={{ __html: message as string }}
+          dangerouslySetInnerHTML={{ __html: sanitizeHtml(message as string) }}
         />
         <ForumPostBottom>
           <div>
@@ -168,7 +169,11 @@ const ForumPost = (el: ForumPostProps) => {
               <>
                 <strong>{user.login}</strong>
                 <br />
-                <div dangerouslySetInnerHTML={{ __html: message as string }} />
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: sanitizeHtml(message as string),
+                  }}
+                />
               </>
             }
           />

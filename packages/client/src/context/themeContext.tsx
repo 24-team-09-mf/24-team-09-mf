@@ -14,9 +14,7 @@ type ThemeContextType = {
   toggleTheme: () => void
 }
 
-const ThemeContext = createContext<ThemeContextType>(
-  {} as ThemeContextType
-)
+const ThemeContext = createContext<ThemeContextType>({} as ThemeContextType)
 
 export const ThemeContextProvider: React.FC<{
   children: React.ReactNode

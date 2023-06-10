@@ -7,6 +7,7 @@ import { PostsModel } from '../models/forumPosts'
 import { UsersModel } from '../models/users'
 import { checkUser } from '../utils/checkUser'
 import { EmojiModel, PostEmojisModel } from '../models/forumEmoji'
+import sanitizeHtml from 'sanitize-html'
 
 export function forumController() {
   return {
@@ -138,7 +139,7 @@ export function forumController() {
       const userDB = await checkUser(user)
       try {
         const post = await PostsModel.create({
-          message: message,
+          message: sanitizeHtml(message),
           parent_id: id,
           user_id: userDB.id,
         })
@@ -165,12 +166,12 @@ export function forumController() {
         const { id, title, message, user } = req.body
         const userDB = await checkUser(user)
         const topic = await TopicsModel.create({
-          title: title,
+          title: sanitizeHtml(title),
           parent_id: id,
           user_id: userDB.id,
         })
         await PostsModel.create({
-          message: message,
+          message: sanitizeHtml(message),
           parent_id: topic.id,
           user_id: userDB.id,
         })

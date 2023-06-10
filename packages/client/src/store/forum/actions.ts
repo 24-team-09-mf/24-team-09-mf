@@ -48,11 +48,11 @@ export const forumGetPosts = createAsyncThunk(
 interface IAddTopic {
   id: string
   title: string
-  parent_id: number
-  user_id: number
-  updatedAt: number
-  createdAt: number
-  postCount: number
+  parent_id?: number
+  user_id?: number
+  updatedAt?: number
+  createdAt?: number
+  postCount?: number
   user: Partial<User> | null
 }
 
