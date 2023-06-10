@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { TEAM_NAME } from '@/constants/constants'
+import { TEAM_NAME } from '../constants/constants'
 
 export const AvatarUrl = 'https://ya-praktikum.tech/api/v2/resources'
 export const OAuthUrl = 'https://oauth.yandex.ru/authorize?response_type=code'
