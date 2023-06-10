@@ -9,7 +9,7 @@ import { dbConnect } from './db'
 import { apiRouter } from './src/routes'
 
 import { ApiRepository } from './repository/apiRepository'
-import * as process from 'process'
+import { LeaderboardRepository } from './repository/leaderboardRepository'
 import dev from './mode/dev'
 import prod from './mode/prod'
 import polyfills from './polyfills'
@@ -58,7 +58,10 @@ async function startServer() {
       try {
         const [appHtml, css, initialState] = await render({
           request: req,
-          repository: new ApiRepository(req.headers['cookie']),
+          repositories: {
+            user: new ApiRepository(req.headers['cookie']),
+            leaderboard: new LeaderboardRepository(req.headers['cookie']),
+          },
         })
 
         const initialStateSerialized = initialState && jsesc(initialState)

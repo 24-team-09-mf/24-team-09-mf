@@ -13,6 +13,8 @@ import { createStore } from './store'
 import { ThemeContextProvider } from '@/context/themeContext'
 import { ApiService } from '@/services/apiService'
 import { UserService } from './api/UserService'
+import { LeaderboardService } from '@/services/leaderboardService'
+import { LeaderboardApiService } from '@/api/LeaderboardService'
 
 const startServiceWorker = () => {
   // TODO изменить расположение файлов и добавить sw
@@ -56,6 +58,7 @@ async function hydrate() {
 
   const apiServices = {
     user: new ApiService(new UserService()),
+    leaderboard: new LeaderboardService(new LeaderboardApiService()),
   }
 
   ReactDOM.hydrateRoot(

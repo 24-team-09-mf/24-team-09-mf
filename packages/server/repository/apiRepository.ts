@@ -37,32 +37,4 @@ export class ApiRepository {
       throw new Error('logout failed')
     }
   }
-
-  async addLeaderboardItem(data: any): Promise<any> {
-    try {
-      const response = await axios.post(`${API_ROOT}/leaderboard`, data)
-      return {
-        ...response.data,
-      }
-    } catch (e) {
-      console.error(e)
-    }
-  }
-
-  async getLeaderboardList(data: any): Promise<any> {
-    try {
-      const response = await axios.post(
-        `${API_ROOT}/leaderboard/team09`,
-        data,
-        {
-          headers: {
-            cookie: this._cookiesHeader,
-          },
-        }
-      )
-      return response.data
-    } catch (e) {
-      console.error(e)
-    }
-  }
 }

@@ -17,12 +17,16 @@ import { ApiService } from './src/services/apiService'
 
 type Args = {
   request: express.Request
-  repository: any
+  repositories: {
+    user: any
+    leaderboard: any
+  }
 }
 
 import { getUser } from './src/store/user/auth/actions'
 import { getLeaderboardList } from './src/store/leaderboard/actions'
 import { matchRoutes } from 'react-router-dom'
+import { LeaderboardService } from './src/services/leaderboardService'
 
 // Loader данных для страницы
 const getDataForRoute = async (path: string, dispatch: AppDispatch) => {
@@ -40,12 +44,13 @@ const getCurrentPath = (pathname: string) => {
   return match?.route
 }
 
-export async function render({ request, repository }: Args) {
+export async function render({ request, repositories }: Args) {
   const { query, dataRoutes } = createStaticHandler(routes)
   const remixRequest = createFetchRequest(request)
 
   const apiServices = {
-    user: new ApiService(repository),
+    user: new ApiService(repositories.user),
+    leaderboard: new LeaderboardService(repositories.leaderboard),
   }
 
   const store = createStore(apiServices)

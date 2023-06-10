@@ -20,7 +20,7 @@ export default (app: Express) => {
       string,
       (args: {
         request: Request
-        repository: any
+        repositories: Record<string, any>
       }) => Promise<[string, string, object]>
     ]
   > {
