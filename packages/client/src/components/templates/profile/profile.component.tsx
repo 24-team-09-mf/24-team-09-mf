@@ -10,14 +10,14 @@ import { Button } from '../../atoms'
 import { FormProfile } from '../../organisms'
 
 // styles
-import { Section } from './profile.styles'
+import { Section, ChangePassword } from './profile.styles'
 
 export const Profile = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const onHandleClick = () => {
-    dispatch(signOut())
+  const onHandleClick = async () => {
+    await dispatch(signOut())
     navigate('/signin')
   }
 
@@ -25,9 +25,9 @@ export const Profile = () => {
     <Section>
       <FormProfile />
       <Link to="/change-password">
-        <Button color="#333333" variant="text">
+        <ChangePassword variant="text" color="#333">
           Изменить пароль
-        </Button>
+        </ChangePassword>
       </Link>
       <Button color="#C22020" variant="text" onClick={onHandleClick}>
         Выход

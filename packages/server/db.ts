@@ -1,28 +1,49 @@
-import { Client } from 'pg'
+import { Sequelize, SequelizeOptions } from 'sequelize-typescript'
+import { CategoriesModel } from './src/models/forumCategories'
+import { TopicsModel } from './src/models/forumTopics'
+import { PostsModel } from './src/models/forumPosts'
+import { UsersModel } from './src/models/users'
+import { EmojiModel, PostEmojisModel } from './src/models/forumEmoji'
+import { SiteThemeModel } from './src/models/themes'
+import { UserThemeModel } from './src/models/userTheme'
 
-const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
-  process.env
+const {
+  POSTGRES_USER,
+  POSTGRES_PASSWORD,
+  POSTGRES_DB,
+  POSTGRES_PORT,
+  POSTGRES_HOST,
+} = process.env
 
-export const createClientAndConnect = async (): Promise<Client | null> => {
+const sequelizeOptions: SequelizeOptions = {
+  host: POSTGRES_HOST || 'localhost',
+  port: Number(POSTGRES_PORT),
+  username: POSTGRES_USER,
+  password: POSTGRES_PASSWORD,
+  database: POSTGRES_DB,
+  dialect: 'postgres',
+  models: [
+    CategoriesModel,
+    TopicsModel,
+    PostsModel,
+    UsersModel,
+    EmojiModel,
+    PostEmojisModel,
+    SiteThemeModel,
+    UserThemeModel,
+  ],
+}
+
+export const sequelize = new Sequelize(sequelizeOptions)
+
+export async function dbConnect() {
   try {
-    const client = new Client({
-      user: POSTGRES_USER,
-      host: 'localhost',
-      database: POSTGRES_DB,
-      password: POSTGRES_PASSWORD,
-      port: Number(POSTGRES_PORT),
-    })
-
-    await client.connect()
-
-    const res = await client.query('SELECT NOW()')
-    console.log('  ➜ 🎸 Connected to the database at:', res?.rows?.[0].now)
-    client.end()
-
-    return client
-  } catch (e) {
-    console.error(e)
+    await sequelize.authenticate()
+    console.log(
+      '\x1b[36m%s\x1b[0m',
+      'Connection has been established successfully.'
+    )
+  } catch (error) {
+    console.error('\x1b[31m%s\x1b[0m', error)
   }
-
-  return null
 }

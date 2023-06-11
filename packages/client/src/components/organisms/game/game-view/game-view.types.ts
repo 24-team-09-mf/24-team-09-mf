@@ -1,17 +1,17 @@
 export type GameViewProps = {
   isStartedGame: boolean
   isEndedGame: boolean
-  onGameOver(): void
+  onGameOver: (outcome: string) => void
 }
 
 export type GameModel = CanvasRenderingContext2D | null
 
 export type SrpiteAnimation = {
   [key: string]: {
-    frameRate: number,
-    frameBuffer: number,
-    imageSrc: string,
-    image?: HTMLImageElement,
+    frameRate: number
+    frameBuffer: number
+    imageSrc: string
+    image?: HTMLImageElement
   }
 }
 

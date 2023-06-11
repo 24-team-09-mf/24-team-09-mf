@@ -1,3 +1,5 @@
+import dateParse from '@/utils/dateParse'
+
 import {
   CatalogBlock,
   CatalogRowContent,
@@ -8,30 +10,33 @@ import {
   CatalogRowMessageLink,
   CatalogRowMessageUser,
 } from '@/components/templates/forum/forum.styles'
-import { ForumStartProps } from './forum-types'
-import dateParse from '@/utils/dateParse'
+
+import { ForumLastTopicProps, ForumStartProps } from './forum-types'
+import sanitizeHtml from 'sanitize-html'
 
 const ForumStartElement = (el: ForumStartProps) => {
-  const { id, title, text, topicsCount, lastTopic } = el
+  const { id, title, description, topicsCount, topics } = el
+
+  const lastTopic = topics[0] as ForumLastTopicProps
 
   return (
     <CatalogBlock>
       <CatalogRowContent>
         <CatalogRowContentTitle to={`/forum/${id}`}>
-          {title}
+          {sanitizeHtml(title)}
         </CatalogRowContentTitle>
-        <p>{text}</p>
+        <p>{sanitizeHtml(description)}</p>
       </CatalogRowContent>
       <CatalogRowThreadsCount>{topicsCount}</CatalogRowThreadsCount>
       <CatalogRowMessage>
         <div>
           <CatalogRowMessageDate>
-            {dateParse(lastTopic.date)}
+            {dateParse(lastTopic.posts[0].createdAt)}
           </CatalogRowMessageDate>
           <CatalogRowMessageLink to={`/forum/${id}/${lastTopic.id}`}>
-            {lastTopic.title}
+            {sanitizeHtml(lastTopic.title)}
           </CatalogRowMessageLink>
-          <CatalogRowMessageUser>@{lastTopic.userName}</CatalogRowMessageUser>
+          <CatalogRowMessageUser>@{lastTopic.user.login}</CatalogRowMessageUser>
         </div>
       </CatalogRowMessage>
     </CatalogBlock>

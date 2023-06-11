@@ -1,13 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import http, { ApiEndpoints } from '@/api/base'
-import { SignIn, SignUp, User } from '../types'
+import { IStoreServices } from '@/store/store'
+
+import { SignIn, SignUp } from '../types'
 
 export const getUser = createAsyncThunk(
   'user/getuser',
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, extra }) => {
     try {
-      const response = await http.get<User>(ApiEndpoints.Auth.UserInfo)
-      return response.data
+      const service = extra as IStoreServices
+      const data = await service.user.getUser()
+      return data
     } catch (error) {
       return rejectWithValue('Ошибка при получении данных пользователя')
     }
@@ -16,11 +19,13 @@ export const getUser = createAsyncThunk(
 
 export const signIn = createAsyncThunk(
   'user/signin',
-  async (signinData: SignIn, { rejectWithValue }) => {
+  async (signinData: SignIn, { rejectWithValue, extra }) => {
     try {
-      await http.post(ApiEndpoints.Auth.SignIn, signinData)
-    } catch (e) {
-      return rejectWithValue('Ошибка авторизации')
+      const service = extra as IStoreServices
+      const data = await service.user.signIn(signinData)
+      return data
+    } catch (error) {
+      return rejectWithValue('Ошибка при получении данных пользователя')
     }
   }
 )
@@ -38,10 +43,11 @@ export const signUp = createAsyncThunk(
 
 export const signOut = createAsyncThunk(
   'user/signout',
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, extra }) => {
     try {
-      await http.post(ApiEndpoints.Auth.SignOut)
-      return null
+      const service = extra as IStoreServices
+      const data = await service.user.logout()
+      return data
     } catch (e) {
       return rejectWithValue('Ошибка выхода из приложения')
     }

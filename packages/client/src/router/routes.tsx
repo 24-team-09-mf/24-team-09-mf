@@ -1,95 +1,82 @@
-import { createBrowserRouter, Routes, Route } from 'react-router-dom'
-import { ErrorWrapper } from '@/components/layouts/error-wrapper'
-import loadable from '@loadable/component'
-import { WithAuth } from '@/hooks/withAuth'
+import Path from '@/router/path'
+import type { RouteObject } from 'react-router-dom'
 
 import { LayoutMain } from '@/components'
+import ProtectedRoute from '@/router/utils/ProtectedRoute'
 
-const ErrorPage = loadable(() => import('@/pages/ErrorPage'))
-const PageNotFound = loadable(() => import('@/pages/PageNotFound'))
-const SignInPage = loadable(() => import('@/pages/signin'))
-const SignUpPage = loadable(() => import('@/pages/signup'))
-const ProfilePage = loadable(() => import('@/pages/profile'))
-const ChangePasswordPage = loadable(() => import('@/pages/change-password'))
-const GamePage = loadable(() => import('@/pages/game'))
-const ForumPage = loadable(() => import('@/pages/forum/forum-start'))
-const ForumSectionPage = loadable(() => import('@/pages/forum/forum-section'))
-const ForumPostPage = loadable(() => import('@/pages/forum/forum-post'))
-const LandingPage = loadable(() => import('@/pages/landing'))
-const StatisticsPage = loadable(() => import('@/pages/statistics'))
-
-export const Router = () => (
-  <Routes>
-    <Route element={<LayoutMain />}>
-      <Route path="/landing" element={<LandingPage />} />
-    </Route>
-  </Routes>
-)
-
-export const router = createBrowserRouter([
+export const routes: RouteObject[] = [
   {
-    element: (
-      <ErrorWrapper>
-        <LayoutMain />
-      </ErrorWrapper>
-    ),
+    path: Path.DEFAULT,
+    element: <LayoutMain />,
     children: [
       {
-        path: '/',
-        element: <LandingPage />,
+        index: true,
+        lazy: () => import('@/pages/landing'),
       },
       {
-        path: '/500',
-        element: <ErrorPage />,
+        path: Path.NOT_FOUND,
+        lazy: () => import('@/pages/PageNotFound'),
       },
       {
-        path: '/*',
-        element: <PageNotFound />,
+        path: Path.ERROR_500,
+        lazy: () => import('@/pages/ErrorPage'),
       },
       {
-        path: '/signin',
-        element: <SignInPage />,
+        path: Path.SIGN_IN,
+        lazy: () => import('@/pages/signin'),
       },
       {
-        path: '/signup',
-        element: <SignUpPage />,
+        path: Path.SIGN_UP,
+        lazy: () => import('@/pages/signup'),
       },
       {
-        path: '/profile',
-        element: (
-          <WithAuth>
-            <ProfilePage />
-          </WithAuth>
-        ),
+        path: Path.PROFILE,
+        async lazy() {
+          const { element } = await import('@/pages/profile')
+
+          return { Component: () => <ProtectedRoute>{element}</ProtectedRoute> }
+        },
       },
       {
-        path: '/change-password',
-        element: (
-          <WithAuth>
-            <ChangePasswordPage />
-          </WithAuth>
-        ),
+        path: Path.CHANGE_PASSWORD,
+        async lazy() {
+          const { element } = await import('@/pages/change-password')
+
+          return { Component: () => <ProtectedRoute>{element}</ProtectedRoute> }
+        },
       },
       {
-        path: '/forum',
-        element: <ForumPage />,
+        path: Path.FORUM,
+        async lazy() {
+          const { element } = await import('@/pages/forum/forum-start')
+
+          return { Component: () => <ProtectedRoute>{element}</ProtectedRoute> }
+        },
       },
       {
-        path: `/forum/:id`,
-        element: <ForumSectionPage />,
+        path: Path.FORUM_ID,
+        async lazy() {
+          const { element } = await import('@/pages/forum/forum-section')
+
+          return { Component: () => <ProtectedRoute>{element}</ProtectedRoute> }
+        },
       },
       {
-        path: `/forum/:id/:postPageId`,
-        element: <ForumPostPage />,
+        path: Path.FORUM_POST_PAGE,
+        async lazy() {
+          const { element } = await import('@/pages/forum/forum-post')
+
+          return { Component: () => <ProtectedRoute>{element}</ProtectedRoute> }
+        },
       },
       {
-        path: '/statistics',
-        element: <StatisticsPage />,
+        path: Path.STATISTICS,
+        lazy: () => import('@/pages/statistics'),
       },
       {
-        path: '/game',
-        element: <GamePage />,
+        path: Path.GAME,
+        lazy: () => import('@/pages/game'),
       },
     ],
   },
-])
+]

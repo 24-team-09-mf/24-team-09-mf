@@ -5,10 +5,12 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{TODO: Set title :) }</title>
+    <!--ssr-styles-->
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/App.tsx"></script>
-    <script src="./sw.js"></script>
+    <div id="root"><!--ssr-body--></div>
+    <!--ssr-initialState-->
+    <script type="module" src="/src/index.tsx"></script>
+    <script src="/sw.js"></script>
   </body>
 </html>

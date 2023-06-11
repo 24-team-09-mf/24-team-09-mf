@@ -9,7 +9,6 @@ export class Coin extends Sprite {
   }
 
   switchSprite(name: string) {
-
     const animation = this.animations?.[name]
     if (this.image === animation?.image) return
 
@@ -21,23 +20,19 @@ export class Coin extends Sprite {
       this.frameBuffer = animation.frameBuffer || 2
     }
     setTimeout(() => {
-
       this.compeleAnimation = true
-
-    }, 260)
+    }, 100)
   }
 
-  getCoin() {
+  getCoin(callback: () => void) {
     const getCoin = 'getCoin'
     this.switchSprite(getCoin)
 
     if (this.compeleAnimation) {
+      callback()
       this.shouldDraw = false
-      console.log('get coin, you should update score on one')
     }
-
   }
-
 
   draw() {
     if (this.shouldDraw && !this.compeleAnimation) {

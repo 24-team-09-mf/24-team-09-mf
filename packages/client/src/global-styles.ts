@@ -7,18 +7,36 @@ export const GlobalStyle = createGlobalStyle`
 
   ${Fonts}
 
-  :root {
-    --font-title: 'Oswald', sans-serif;
-    --color-text: #333333;
-
+  html[data-theme='light'] {
+    --color-text: : #333333;
+    --bg-color: #fff;
+    --color-text-rgb: 0, 0, 0;
     --color-green1: #D1E3AC;
     --color-green1-rgb: 209, 227, 172;
     --color-green2: #579945;
     --color-green2-rgb: 87, 153, 69;
-
     --color-gray1: #FAFAFA;
+    --color-green3: #FFF;
+    --color-green4: #FFF;
+    --color-gray2: #F3F3F3;
   }
 
+html[data-theme='dark'] {
+  --color-text: #FFFFFF;
+  --bg-color: #333333;
+  --color-text-rgb: 255, 255, 255;
+  --color-green1: #D1E3AC;
+  --color-green1-rgb: 209, 227, 172;
+  --color-green2: #579945;
+  --color-green2-rgb: 87, 153, 69;
+  --color-gray1: #FAFAFA;
+  --color-green3: #525944;
+  --color-green4: #edf4de;
+}
+
+  :root {
+    --font-title: 'Oswald', sans-serif;
+  }
 
   html,
   body {
@@ -34,7 +52,8 @@ export const GlobalStyle = createGlobalStyle`
   font-weight: 500;
   font-style: normal;
   line-height: 19px;
-  color: #000;
+  background-color: var(--bg-color);
+  color: var(--color-text);
   text-size-adjust: 100%;
   text-rendering: optimizelegibility;
 
@@ -111,7 +130,9 @@ export const GlobalStyle = createGlobalStyle`
     cursor: pointer;
     display: inline-block;
     text-decoration: none;
+    color: var(--color-text)
   }
+
 
   input:-webkit-autofill,
   input:-webkit-autofill:hover,

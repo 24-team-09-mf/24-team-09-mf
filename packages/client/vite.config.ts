@@ -1,8 +1,10 @@
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
+import EnvironmentPlugin from 'vite-plugin-environment'
 
 import * as path from 'path'
 import dotenv from 'dotenv'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 dotenv.config()
 
@@ -35,9 +37,29 @@ export default defineConfig({
   },
   define: {
     __SERVER_PORT__: process.env.SERVER_PORT,
+    'process.env.OAUTH_REDIRECT_URL': process.env.OAUTH_REDIRECT_URL,
+    'process.env.NODE_API_URL': process.env.NODE_API_URL,
   },
-  plugins: [react()],
+
+  plugins: [
+    react(),
+    EnvironmentPlugin('all'),
+    viteStaticCopy({
+      targets: [
+        {
+          src: 'sw.js',
+          dest: '',
+        },
+      ],
+    }),
+  ],
+
   resolve: {
-    alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+      path: path.resolve(__dirname, 'path-browserify.txt'),
+      url: path.resolve(__dirname, 'path-browserify.txt'),
+      fs: path.resolve(__dirname, 'path-browserify.txt'),
+    },
   },
 })

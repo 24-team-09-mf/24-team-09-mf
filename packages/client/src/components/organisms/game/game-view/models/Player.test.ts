@@ -2,6 +2,7 @@ import { Player } from '@/components/organisms/game/game-view/models/Player'
 import { CollisionBlock } from '@/components/organisms/game/game-view/models/CollisionBlock'
 import { Coin } from '@/components/organisms/game/game-view/models/Coin'
 import { Enemy } from '@/components/organisms/game/game-view/models/Enemy'
+import { Finish } from '@/components/organisms/game/game-view/models/Finish'
 
 import {
   HEIGHT_VIEW,
@@ -29,13 +30,14 @@ describe('Тестирую класс Player', () => {
     canvas.width = WIDTH_VIEW
     canvas.height = HEIGHT_VIEW
     ctx = canvas.getContext('2d') as CanvasRenderingContext2D
+    const fn = jest.fn()
 
     const position = { x: 0, y: 0 }
     const model = ctx
     const collisionBlocks: CollisionBlock[] = []
     const coins: Coin[] = []
     const enemies: Enemy[] = []
-    const onGameOver = jest.fn()
+    const finish: Finish[] = []
     const imageSrc = '/assets/sprites/hero/idle.png'
     player = new Player({
       position,
@@ -43,9 +45,11 @@ describe('Тестирую класс Player', () => {
       collisionBlocks,
       coins,
       enemies,
-      onGameOver,
+      decrementLives: fn,
+      incrementScore: fn,
       imageSrc,
       animations,
+      finish,
     })
   })
 
@@ -56,6 +60,7 @@ describe('Тестирую класс Player', () => {
     expect(player.collisionBlocks).toEqual([])
     expect(player.coins).toEqual([])
     expect(player.enemies).toEqual([])
+    expect(player.finish).toEqual([])
     expect(player.imageSrc).toBe('/assets/sprites/hero/idle.png')
     expect(player.animations).toEqual(animations)
   })

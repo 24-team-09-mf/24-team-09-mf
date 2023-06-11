@@ -1,33 +1,43 @@
+import { useEffect } from 'react'
+import { Navigate, useParams } from 'react-router-dom'
+
 import {
   ForumEditor,
   ForumPosts,
   ForumSectionTitle,
 } from '@/components/organisms/forum'
-import { Navigate, useParams } from 'react-router-dom'
+
+import { forumStore } from '@/store/forumStore'
+import { forumGetPosts } from '@/store/forum/actions'
+import { useAppDispatch } from '@/store'
 
 import Container from '@/components/layouts/container/container.component'
+import { BaseLoader } from '@/components/molecules/loader'
+
 import { H1 } from '@/global-styles'
 import { Wrapper } from './forum.styles'
-import { forumPostsDemo } from '@/mocks'
 
 export const ForumPost = () => {
-  const { id, postPageId } = useParams()
+  const { postPageId } = useParams()
+  const dispatch = useAppDispatch()
+  const { posts } = forumStore()
 
-  // TODO: Поменять, демо
-  if (id !== '1' && id !== '2') {
+  useEffect(() => {
+    if (postPageId) {
+      dispatch(forumGetPosts(postPageId))
+    }
+  }, [])
+
+  if (posts.error === 'Ошибка при получении постов форума') {
     return <Navigate to="/404" replace />
   }
-  if (postPageId !== '55' && postPageId !== '56') {
-    return <Navigate to="/404" replace />
-  }
-  const data = forumPostsDemo
 
   return (
     <Container>
       <Wrapper>
         <H1>ФОРУМ</H1>
-        <ForumSectionTitle title={data.title} />
-        <ForumPosts data={data.posts} />
+        <ForumSectionTitle title={posts.title} />
+        {posts.isLoading ? <BaseLoader /> : <ForumPosts data={posts.items} />}
         <ForumEditor title="Написать сообщение" />
       </Wrapper>
     </Container>

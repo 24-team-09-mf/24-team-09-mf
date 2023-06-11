@@ -1,6 +1,8 @@
 // custom hooks
 import useProfile from './form-profile.logics'
 
+import changeAvatarDomain from '@/utils/changeAvatarDomain'
+
 // styles
 import {
   Form,
@@ -16,7 +18,10 @@ export const FormProfile = () => {
 
   return (
     <Form onSubmit={handleSubmit(onSubmitHandler)}>
-      <AvatarComponent {...register('avatar')} src={user?.avatar} />
+      <AvatarComponent
+        {...register('avatar')}
+        src={changeAvatarDomain(user?.avatar)}
+      />
       <AvatarLabel color="#579945" fontSize="26px">
         {user?.login}
       </AvatarLabel>
@@ -25,36 +30,42 @@ export const FormProfile = () => {
         errorMessage={errors.first_name?.message}
         {...register('first_name')}
         placeholder="Имя"
+        defaultValue={user?.first_name}
       />
       <InputComponent
         isError={!!errors.second_name}
         errorMessage={errors.second_name?.message}
         {...register('second_name')}
         placeholder="Фамилия"
+        defaultValue={user?.second_name}
       />
       <InputComponent
         isError={!!errors.display_name}
         errorMessage={errors.display_name?.message}
         {...register('display_name')}
         placeholder="Ник"
+        defaultValue={user?.display_name}
       />
       <InputComponent
         isError={!!errors.login}
         errorMessage={errors.login?.message}
         {...register('login')}
         placeholder="Логин"
+        defaultValue={user?.login}
       />
       <InputComponent
         isError={!!errors.email}
         errorMessage={errors.email?.message}
         {...register('email')}
         placeholder="Email"
+        defaultValue={user?.email}
       />
       <InputComponent
         isError={!!errors.phone}
         errorMessage={errors.phone?.message}
         {...register('phone')}
         placeholder="Телефон"
+        defaultValue={user?.phone}
       />
       <BtnSave
         as="button"

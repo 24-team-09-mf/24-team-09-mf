@@ -5,6 +5,7 @@ import { useKeysHandlers } from '@/components/organisms/game/game-view/logics/us
 import { CollisionBlock } from '@/components/organisms/game/game-view/models/CollisionBlock'
 import { Coin } from '@/components/organisms/game/game-view/models/Coin'
 import { Enemy } from '@/components/organisms/game/game-view/models/Enemy'
+import { Finish } from '@/components/organisms/game/game-view/models/Finish'
 import { BackgroundGame } from '@/components/organisms/game/game-view/models/BackgroundGame'
 import {
   BLOCK_SIZE,
@@ -21,11 +22,14 @@ type Props = {
   keys: ReturnType<typeof useKeysHandlers>
   collisionBlocks: CollisionBlock[]
   startFinishCollisionBlocks: CollisionBlock[]
+  startBlock: CollisionBlock[]
+  finish: Finish[]
   enemies: Enemy[]
   enemiesCollisionBlocks: CollisionBlock[]
   coins: Coin[]
   gameBackground: BackgroundGame
-  onGameOver(): void
+  changeLivesCount(value: number): void
+  changeScore(value: number): void
   isEndedGame: boolean
 }
 
@@ -51,13 +55,16 @@ export const usePlayer = ({
   gameModel,
   keys,
   collisionBlocks,
-  onGameOver,
+  changeLivesCount,
   startFinishCollisionBlocks,
+  startBlock,
   coins,
   enemies,
+  finish,
   enemiesCollisionBlocks,
   isEndedGame,
   gameBackground,
+  changeScore,
 }: Props) => {
   const [jumpTime, setJumpTime] = useState(0)
 
@@ -69,8 +76,10 @@ export const usePlayer = ({
         model: gameModel,
         collisionBlocks,
         enemies,
+        finish,
         coins,
-        onGameOver,
+        decrementLives: () => changeLivesCount(-1),
+        incrementScore: value => changeScore(value),
         imageSrc: '/assets/sprites/hero/idle.png',
         animations: {
           idleRight: {
@@ -143,6 +152,8 @@ export const usePlayer = ({
         if (keys.pressedD) {
           if (!checkNextPosition(player, collisionBlocks, -SPEED)) {
             collisionBlocks.forEach(block => (block.position.x -= SPEED))
+            startBlock.forEach(block => (block.position.x -= SPEED))
+            finish.forEach(block => (block.position.x -= SPEED))
             startFinishCollisionBlocks.forEach(
               block => (block.position.x -= SPEED)
             )
@@ -154,6 +165,8 @@ export const usePlayer = ({
         } else if (keys.pressedA) {
           if (!checkNextPosition(player, collisionBlocks, SPEED)) {
             collisionBlocks.forEach(block => (block.position.x += SPEED))
+            startBlock.forEach(block => (block.position.x += SPEED))
+            finish.forEach(block => (block.position.x += SPEED))
             startFinishCollisionBlocks.forEach(
               block => (block.position.x += SPEED)
             )

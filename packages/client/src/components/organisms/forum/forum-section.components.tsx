@@ -8,22 +8,24 @@ import {
 import { ForumSectionProps } from './forum-types'
 import dateParse from '@/utils/dateParse'
 import { H2 } from '@/global-styles'
+import sanitizeHtml from 'sanitize-html'
 
 export const ForumSectionTitle = ({ title }: { title: string }) => {
   return <H2>{title}</H2>
 }
 
 const ForumSectionTopicsElement = (el: ForumSectionProps) => {
-  const { parentId, id, title, postCount, lastTopic } = el
-
+  const { parent_id, id, title, postsCount, user, posts } = el
   return (
     <CatalogBlock>
-      <SectionRowContent to={`/forum/${parentId}/${id}`}>
-        <SectionRowContentTitle>{title}</SectionRowContentTitle>
+      <SectionRowContent to={`/forum/${parent_id}/${id}`}>
+        <SectionRowContentTitle>{sanitizeHtml(title)}</SectionRowContentTitle>
       </SectionRowContent>
-      <SectionRowMessagesCount>{postCount}</SectionRowMessagesCount>
-      <SectionRowMessagesCount>{lastTopic.userName}</SectionRowMessagesCount>
-      <SectionRowLastMessage>{dateParse(lastTopic.date)}</SectionRowLastMessage>
+      <SectionRowMessagesCount>{postsCount}</SectionRowMessagesCount>
+      <SectionRowMessagesCount>{user.login}</SectionRowMessagesCount>
+      <SectionRowLastMessage>
+        {dateParse(posts[0].createdAt)}
+      </SectionRowLastMessage>
     </CatalogBlock>
   )
 }

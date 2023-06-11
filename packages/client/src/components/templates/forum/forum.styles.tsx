@@ -28,8 +28,8 @@ export const CatalogRowThreadsCount = styled.div`
   width: 6.25rem;
   font-size: 0.75rem;
   text-align: center;
-  border-left: solid 0.063rem #ffffff;
-  border-right: solid 0.063rem #ffffff;
+  border-left: solid 0.063rem var(--bg-color);
+  border-right: solid 0.063rem var(--bg-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -86,7 +86,7 @@ export const CatalogRowMessageLink = styled(Link)`
   border-bottom: dashed 1px var(--color-text);
   margin-bottom: 0.438rem;
   cursor: pointer;
-  color: #333333;
+  color: var(--color-text);
   transition: all 0.3s;
   &:hover {
     border-color: transparent;
@@ -100,14 +100,15 @@ export const SectionRowContent = styled(Link)`
   padding: 1.25rem;
   padding-right: 1.25rem;
   width: calc(100% - 21.875rem);
+  color: var(--color-text);
 `
 
 export const SectionRowMessagesCount = styled.div`
   width: 6.25rem;
   font-size: 0.75rem;
   text-align: center;
-  border-left: solid 0.063rem #ffffff;
-  border-right: solid 0.063rem #ffffff;
+  border-left: solid 0.063rem var(--bg-color);
+  border-right: solid 0.063rem var(--bg-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -131,18 +132,24 @@ export const FormSeparator = styled.div`
 `
 
 export const FormInput = styled.input`
-  background: var(--color-gray1);
+  color: var(--color-text);
+  background-color: var(--bg-color);
+  border: 1px solid;
+  border-color: var(--color-text);
   height: 2.5rem;
   width: 100%;
   padding: 0 0.938rem;
   margin-bottom: 0.938rem;
-  border: none;
   outline: none;
 `
 
 export const FormTextareaWrapper = styled.div`
-  background: var(--color-gray1);
+  background-color: var(--bg-color);
   padding: 0.938rem 0 0 0;
+  border: 1px solid;
+  border-color: var(--color-text);
+  border-radius: 10px;
+  margin-block-end: 10px;
 `
 
 export const FormTextareaButtons = styled.div`
@@ -171,15 +178,15 @@ export const FormTextareaButton = styled.div`
 `
 
 export const FormTextarea = styled.div`
-  background: var(--color-gray1);
   height: 7.5rem;
   width: 100%;
   padding: 0.938rem;
   margin-bottom: 0.938rem;
-  border: none;
   outline: none;
   overflow-y: scroll;
   position: relative;
+  color: var(--color-text);
+  background-color: var(--bg-color);
 
   blockquote {
     border: solid 1px #000000;
@@ -239,23 +246,7 @@ export const ForumPostRate = styled.div`
   align-items: center;
 `
 
-export const ForumPostRateButton = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s;
-  &:hover {
-    opacity: 0.5;
-  }
-`
-
-export const ForumPostRateText = styled.div`
-  margin: 0 0.625rem;
-  font-size: 0.75rem;
-`
-
 export const ForumEmoji = styled.div`
-  margin-right: 1.25rem;
   display: flex;
   align-items: center;
 `
@@ -265,13 +256,14 @@ export const ForumEmojiAddBtn = styled.div`
   width: 1.625rem;
   height: 1.625rem;
   position: relative;
-  background-color: #ffffff;
+  background-color: var(--color-green4);
   border-radius: 0.313rem;
   display: flex;
   justify-content: center;
   align-items: center;
 
   img {
+    padding: 0.1rem 0 0 0.15rem;
     cursor: pointer;
   }
 `
@@ -283,6 +275,7 @@ export const ForumEmojiAddBlock = styled.div((props: { display?: string }) => {
     left: -0.125rem;
     background-color: #ffffff;
     border: solid 1px var(--color-text);
+    border-radius: 0.313rem;
     z-index: 2;
     width: 1.875rem;
     display: ${props.display}
@@ -309,7 +302,7 @@ export const ForumEmojiAddElement = styled.div`
 
 export const ForumEmojiElement = styled.div`
   height: 1.375rem;
-  background-color: #ffffff;
+  background-color: var(--color-green4);
   border: solid 1px var(--color-text);
   border-radius: 0.313rem;
   display: flex;
@@ -320,6 +313,10 @@ export const ForumEmojiElement = styled.div`
 
   img {
     margin-right: 0.313rem;
+  }
+
+  span {
+    color: #333333;
   }
 `
 
@@ -346,7 +343,7 @@ export const ForumPostBlock = styled.div`
     margin-top: 1.875rem;
   }
   &:nth-child(even) {
-    background: #ffffff;
+    background: var(--color-green3);
   }
 
   &:hover {
@@ -365,4 +362,8 @@ export const ForumPostText = styled.div`
     border-radius: 0.313rem;
     margin-bottom: 0.938rem;
   }
+`
+
+export const Count = styled.span`
+  color: #333;
 `

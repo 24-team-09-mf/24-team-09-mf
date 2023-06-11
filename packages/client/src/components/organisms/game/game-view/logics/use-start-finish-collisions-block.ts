@@ -26,7 +26,6 @@ export const useStartFinishCollisionBlocks = ({
               new CollisionBlock({
                 model: gameModel,
                 position: { x: x * BLOCK_SIZE, y: y * BLOCK_SIZE },
-                frameRate: 4,
               })
             )
           }

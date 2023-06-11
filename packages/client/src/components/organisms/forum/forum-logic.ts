@@ -1,7 +1,17 @@
+// react
+import { useCallback } from 'react'
+
+import { forumAddTopic, forumAddPost } from '@/store/forum/actions'
+import { useAppDispatch } from '@/store'
+
 import { useForm } from 'react-hook-form'
 import { ForumFormsProps } from './forum-types'
+import { UserState } from '@/store/user/types'
+import sanitizeHtml from 'sanitize-html'
 
-const useSectionForm = (id: string, postPageId?: string) => {
+const useSectionForm = (user: UserState, id: string, postPageId?: string) => {
+  const dispatch = useAppDispatch()
+
   const {
     register,
     handleSubmit,
@@ -12,17 +22,37 @@ const useSectionForm = (id: string, postPageId?: string) => {
     mode: 'onBlur',
   })
 
-  const onSubmitHandler = async (data: ForumFormsProps) => {
-    try {
-      data = { ...data, id: id }
-      if (postPageId) data = { ...data, postPageId: postPageId }
-      console.log(data)
-      reset()
-      setValue('message', '')
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  const onSubmitHandler = useCallback(
+    async (data: ForumFormsProps) => {
+      try {
+        if (postPageId) {
+          const sanitizeData = {
+            message: sanitizeHtml(data.message),
+          }
+          if (sanitizeData.message) {
+            await dispatch(
+              forumAddPost({ ...sanitizeData, user: user.user, id: postPageId })
+            )
+          }
+        } else {
+          const sanitizeData = {
+            title: sanitizeHtml(data.title),
+            message: sanitizeHtml(data.message),
+          }
+          if (sanitizeData.title && sanitizeData.message) {
+            await dispatch(
+              forumAddTopic({ ...sanitizeData, user: user.user, id: id })
+            )
+          }
+        }
+        reset()
+        setValue('message', '')
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    [reset, id, postPageId, setValue]
+  )
 
   return {
     register,

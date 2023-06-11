@@ -4,4 +4,4 @@ const LandingPage: React.FC = () => {
   return <Landing />
 }
 
-export default LandingPage
+export const element = <LandingPage />
