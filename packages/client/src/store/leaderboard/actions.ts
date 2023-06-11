@@ -9,7 +9,7 @@ export const addLeaderboardItem = createAsyncThunk(
   async (data: IAddLeaderboard, { extra, rejectWithValue }) => {
     try {
       const service = extra as IStoreServices
-      await service.user.addLeaderboardItem(data)
+      await service.leaderboard.addLeaderboardItem(data)
     } catch (e) {
       return rejectWithValue('Ошибка при добавлении данных в таблицу лидеров')
     }
@@ -22,7 +22,7 @@ export const getLeaderboardList = createAsyncThunk(
     try {
       const service = extra as IStoreServices
 
-      const response = await service.user.getLeaderboardList({
+      const response = await service.leaderboard.getLeaderboardList({
         ratingFieldName: 'score',
         cursor: 0,
         limit,

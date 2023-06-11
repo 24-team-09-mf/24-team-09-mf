@@ -1,41 +1,35 @@
 import dotenv from 'dotenv'
 import cors from 'cors'
 import path from 'path'
-import fs from 'fs'
-import { createServer as createViteServer } from 'vite'
-import type { ViteDevServer } from 'vite'
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import { createProxyMiddleware } from 'http-proxy-middleware'
 import jsesc from 'jsesc'
-import { installGlobals } from '@remix-run/node'
-import { Image } from 'canvas'
 import { dbConnect } from './db'
 import { apiRouter } from './src/routes'
 
 import { ApiRepository } from './repository/apiRepository'
-import * as process from 'process'
+import { LeaderboardRepository } from './repository/leaderboardRepository'
+import dev from './mode/dev'
+import prod from './mode/prod'
+import polyfills from './polyfills'
 
 const isDev = process.env.NODE_ENV === 'development'
 const app = express()
 const port = Number(process.env.SERVER_PORT) || 3001
 
 if (isDev) {
-  dotenv.config({ path: '../.env.dev' })
+  dotenv.config({
+    path: path.resolve(__dirname, '..', '..', 'configs', '.env.dev'),
+    override: true,
+  })
 } else {
   dotenv.config()
 }
 
-console.log(process.env)
-
 async function startServer() {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  //@ts-ignore
-  global.Image = Image
-  installGlobals()
-
+  await polyfills()
   app.use(cors())
-
   await dbConnect()
   // Использовать до express.json()
   app.use(
@@ -50,25 +44,9 @@ async function startServer() {
   app.use(express.json())
   app.use('/api', apiRouter)
 
-  let vite: ViteDevServer
-  const distPath = path.dirname(require.resolve('client/dist/index.html'))
-  const ssrClientPath = require.resolve('client/dist-ssr/client.cjs')
-  let srcPath = ''
-  if (isDev) {
-    srcPath = path.dirname(require.resolve('client/ssr.tsx'))
-  }
+  const configuration = isDev ? dev(app) : prod(app)
 
-  if (isDev) {
-    vite = await createViteServer({
-      server: { middlewareMode: true },
-      root: srcPath,
-      appType: 'custom',
-    })
-    app.use(vite.middlewares)
-  } else {
-    app.use('/assets', express.static(path.resolve(distPath, 'assets')))
-    app.use('/sw.js', express.static(path.resolve(distPath, 'sw.js')))
-  }
+  await configuration.preload()
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   //@ts-ignore
@@ -76,29 +54,14 @@ async function startServer() {
     const url = req.originalUrl
 
     try {
-      let template: string
-      let render: (args: {
-        request: express.Request
-        repository: any
-      }) => Promise<[string, string, object]>
-
-      if (isDev) {
-        template = fs.readFileSync(path.resolve(srcPath, 'index.html'), 'utf-8')
-        template = await vite.transformIndexHtml(url, template)
-        render = (await vite.ssrLoadModule(path.resolve(srcPath, 'ssr.tsx')))
-          .render
-      } else {
-        template = fs.readFileSync(
-          path.resolve(distPath, 'index.html'),
-          'utf-8'
-        )
-        render = (await import(ssrClientPath)).render
-      }
-
+      const [template, render] = await configuration.resolve(url)
       try {
         const [appHtml, css, initialState] = await render({
           request: req,
-          repository: new ApiRepository(req.headers['cookie']),
+          repositories: {
+            user: new ApiRepository(req.headers['cookie']),
+            leaderboard: new LeaderboardRepository(req.headers['cookie']),
+          },
         })
 
         const initialStateSerialized = initialState && jsesc(initialState)
@@ -120,9 +83,7 @@ async function startServer() {
       }
       next()
     } catch (error) {
-      if (isDev) {
-        vite.ssrFixStacktrace(error as Error)
-      }
+      configuration.catchError(error)
       next(error)
     }
   })

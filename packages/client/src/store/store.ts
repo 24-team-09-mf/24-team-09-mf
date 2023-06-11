@@ -20,7 +20,8 @@ export interface IStoreServices {
     getUser(): Promise<User>
     signIn(signInData: SignIn): Promise<User>
     logout(): Promise<null>
-    // Убрать any
+  }
+  leaderboard: {
     addLeaderboardItem(data: IAddLeaderboard): Promise<LeaderboardElementProps>
     getLeaderboardList(
       data: IGetLeaderboard
@@ -29,7 +30,7 @@ export interface IStoreServices {
 }
 
 export function createStore(
-  service: IStoreServices,
+  services: IStoreServices,
   initialState?: IInitialStore
 ) {
   const store = configureStore({
@@ -38,7 +39,7 @@ export function createStore(
     middleware: getDefaultMiddleWare => {
       return getDefaultMiddleWare({
         thunk: {
-          extraArgument: service,
+          extraArgument: services,
         },
       })
     },
