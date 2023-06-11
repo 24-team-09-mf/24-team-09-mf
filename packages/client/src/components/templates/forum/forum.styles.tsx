@@ -263,6 +263,7 @@ export const ForumEmojiAddBtn = styled.div`
   align-items: center;
 
   img {
+    padding: 0.1rem 0 0 0.15rem;
     cursor: pointer;
   }
 `
@@ -274,6 +275,7 @@ export const ForumEmojiAddBlock = styled.div((props: { display?: string }) => {
     left: -0.125rem;
     background-color: #ffffff;
     border: solid 1px var(--color-text);
+    border-radius: 0.313rem;
     z-index: 2;
     width: 1.875rem;
     display: ${props.display}
@@ -311,6 +313,10 @@ export const ForumEmojiElement = styled.div`
 
   img {
     margin-right: 0.313rem;
+  }
+
+  span {
+    color: #333333;
   }
 `
 

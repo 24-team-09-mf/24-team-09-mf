@@ -193,5 +193,77 @@ export function forumController() {
         return res.status(500).send(e)
       }
     },
+
+    async addEmoji(req: Request, res: Response) {
+      const { postId, emojiId, user } = req.body
+      const userDB = await checkUser(user)
+      try {
+        const check = await PostEmojisModel.findOne({
+          where: {
+            post_id: postId,
+            emoji_id: emojiId,
+            user_id: userDB.id
+          }
+        })
+        if (!check) {
+          const emoji = await PostEmojisModel.create({
+            post_id: postId,
+            emoji_id: emojiId,
+            user_id: userDB.id,
+          })
+          return res.status(201).json({
+            ...emoji.dataValues,
+            user: {
+              user_id: userDB.user_id
+            },
+            success: true
+          })
+        } else return res.status(201).json({ success: false })
+      } catch (e) {
+        return res.status(500).send(e)
+      }
+    },
+
+    async deleteEmoji(req: Request, res: Response) {
+      const { postId, emojiId, user } = req.body
+      const userDB = await checkUser(user)
+      try {
+        const emoji = await PostEmojisModel.findOne({
+          where: {
+            post_id: postId,
+            emoji_id: emojiId,
+            user_id: userDB.id,
+          }
+        })
+        if (emoji) {
+          await emoji.destroy()
+          return res.status(200).json(emoji)
+        } else {
+          return res.status(404).send('Ресурс не найден')
+        }
+      } catch (e) {
+        return res.status(500).send(e)
+      }
+    },
+
+    async getEmoji(req: Request, res: Response) {
+      try {
+        const { emojiName } = req.params
+
+        const emoji = await EmojiModel.findOne({
+          where: {
+            emoji_name: emojiName
+          }
+        })
+
+        if (emoji) {
+          return res.status(200).json(emoji)
+        } else {
+          return res.status(404).send('Ресурс не найден')
+        }
+      } catch (e) {
+        return res.status(500).send(e)
+      }
+    }
   }
 }
