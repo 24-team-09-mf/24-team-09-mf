@@ -12,6 +12,7 @@ import {
 } from '@/components/templates/forum/forum.styles'
 
 import { ForumLastTopicProps, ForumStartProps } from './forum-types'
+import sanitizeHtml from 'sanitize-html'
 
 const ForumStartElement = (el: ForumStartProps) => {
   const { id, title, description, topicsCount, topics } = el
@@ -22,9 +23,9 @@ const ForumStartElement = (el: ForumStartProps) => {
     <CatalogBlock>
       <CatalogRowContent>
         <CatalogRowContentTitle to={`/forum/${id}`}>
-          {title}
+          {sanitizeHtml(title)}
         </CatalogRowContentTitle>
-        <p>{description}</p>
+        <p>{sanitizeHtml(description)}</p>
       </CatalogRowContent>
       <CatalogRowThreadsCount>{topicsCount}</CatalogRowThreadsCount>
       <CatalogRowMessage>
@@ -33,7 +34,7 @@ const ForumStartElement = (el: ForumStartProps) => {
             {dateParse(lastTopic.posts[0].createdAt)}
           </CatalogRowMessageDate>
           <CatalogRowMessageLink to={`/forum/${id}/${lastTopic.id}`}>
-            {lastTopic.title}
+            {sanitizeHtml(lastTopic.title)}
           </CatalogRowMessageLink>
           <CatalogRowMessageUser>@{lastTopic.user.login}</CatalogRowMessageUser>
         </div>

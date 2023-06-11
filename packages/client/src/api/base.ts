@@ -33,8 +33,12 @@ export const ApiEndpoints = {
     getCategories: '/api/forum/',
     getTopics: '/api/forum/topics/:id',
     getPosts: '/api/forum/posts/:id',
+    getEmoji: '/api/forum/emojis/:emojiName',
     addPost: '/api/forum/post',
     addTopic: '/api/forum/topic',
+    addEmoji: '/api/forum/emoji',
+    deleteEmoji: '/api/forum/emoji/delete',
+
   },
 }
 
