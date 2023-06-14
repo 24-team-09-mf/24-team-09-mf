@@ -36,7 +36,7 @@ async function startServer() {
     '/api/v2',
     createProxyMiddleware({
       changeOrigin: true,
-      cookieDomainRewrite: 'localhost',
+      cookieDomainRewrite: 'http://158.160.73.172:8080',
       target: 'https://ya-praktikum.tech',
     })
   )
