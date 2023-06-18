@@ -5,6 +5,8 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import { createProxyMiddleware } from 'http-proxy-middleware'
 import jsesc from 'jsesc'
+import crypto from 'crypto'
+
 import { dbConnect } from './db'
 import { apiRouter } from './src/routes'
 
@@ -17,6 +19,7 @@ import polyfills from './polyfills'
 const isDev = process.env.NODE_ENV === 'development'
 const app = express()
 const port = Number(process.env.SERVER_PORT) || 3001
+const nonce = crypto.randomBytes(16).toString('base64')
 
 if (isDev) {
   dotenv.config({
@@ -31,7 +34,17 @@ async function startServer() {
   await polyfills()
   app.use(cors())
   await dbConnect()
-  // Использовать до express.json()
+
+  // CSP Policy
+  app.use(function (_req, res, next) {
+    res.setHeader(
+      'Content-Security-Policy',
+      `default-src 'self'; font-src 'self' data:; img-src 'self' * data:; script-src 'self' 'nonce-${nonce}'; style-src 'self' 'unsafe-inline'; frame-src 'self'`
+    )
+    next()
+  })
+
+  // Proxy Использовать до express.json()
   app.use(
     '/api/v2',
     createProxyMiddleware({
@@ -70,8 +83,9 @@ async function startServer() {
           .replace(`<!--ssr-styles-->`, css)
           .replace(
             '<!--ssr-initialState-->',
-            `<script>window.__INITIAL_STATE__ = ${initialStateSerialized}</script>`
+            `<script nonce="${nonce}">window.__INITIAL_STATE__ = ${initialStateSerialized}</script>`
           )
+          .replace('__SERVER_NONCE__', nonce)
 
         res.setHeader('Content-Type', 'text/html')
         res.status(200).end(html)

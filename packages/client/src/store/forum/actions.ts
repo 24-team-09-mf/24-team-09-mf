@@ -114,7 +114,9 @@ export const deleteEmoji = createAsyncThunk(
   'forum-delete-emoji',
   async (data: IDeleteEmoji, { rejectWithValue }) => {
     try {
-      const response = await http.delete(ApiEndpoints.Forum.deleteEmoji, { data })
+      const response = await http.delete(ApiEndpoints.Forum.deleteEmoji, {
+        data,
+      })
       return response.data
     } catch (error) {
       return rejectWithValue('Ошибка при добавлении реакции')
@@ -126,7 +128,9 @@ export const getEmoji = createAsyncThunk(
   'forum-get-emoji',
   async (emojiName: string, { rejectWithValue }) => {
     try {
-      const response = await http.get(generatePath(ApiEndpoints.Forum.getEmoji, { emojiName }))
+      const response = await http.get(
+        generatePath(ApiEndpoints.Forum.getEmoji, { emojiName })
+      )
       return response.data
     } catch (error) {
       return rejectWithValue('Ошибка при получении реакций')

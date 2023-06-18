@@ -39,7 +39,6 @@ export const ApiEndpoints = {
     addTopic: '/api/forum/topic',
     addEmoji: '/api/forum/emoji',
     deleteEmoji: '/api/forum/emoji/delete',
-
   },
 }
 
