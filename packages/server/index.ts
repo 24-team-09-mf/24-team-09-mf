@@ -85,6 +85,10 @@ async function startServer() {
             '<!--ssr-initialState-->',
             `<script nonce="${nonce}">window.__INITIAL_STATE__ = ${initialStateSerialized}</script>`
           )
+          .replace(
+            '<!-- ssr-service-worker -->',
+            `<script nonce="${nonce}" src="/sw.js"></script>`
+          )
           .replace('__SERVER_NONCE__', nonce)
 
         res.setHeader('Content-Type', 'text/html')
