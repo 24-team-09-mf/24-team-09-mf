@@ -84,7 +84,12 @@ export function forumController() {
           },
           order: [['createdAt', 'ASC']],
         })
-        if (data.length === 0) throw new Error('Ресурс не найден')
+        const checkCategory = await CategoriesModel.findOne({
+          where: {
+            id: req.params.id,
+          },
+        })
+        if (!checkCategory) throw new Error('Ресурс не найден')
         return res.status(200).send(data)
       } catch (e) {
         if (e instanceof Error) {
@@ -202,8 +207,8 @@ export function forumController() {
           where: {
             post_id: postId,
             emoji_id: emojiId,
-            user_id: userDB.id
-          }
+            user_id: userDB.id,
+          },
         })
         if (!check) {
           const emoji = await PostEmojisModel.create({
@@ -214,9 +219,9 @@ export function forumController() {
           return res.status(201).json({
             ...emoji.dataValues,
             user: {
-              user_id: userDB.user_id
+              user_id: userDB.user_id,
             },
-            success: true
+            success: true,
           })
         } else return res.status(201).json({ success: false })
       } catch (e) {
@@ -233,7 +238,7 @@ export function forumController() {
             post_id: postId,
             emoji_id: emojiId,
             user_id: userDB.id,
-          }
+          },
         })
         if (emoji) {
           await emoji.destroy()
@@ -252,8 +257,8 @@ export function forumController() {
 
         const emoji = await EmojiModel.findOne({
           where: {
-            emoji_name: emojiName
-          }
+            emoji_name: emojiName,
+          },
         })
 
         if (emoji) {
@@ -264,6 +269,6 @@ export function forumController() {
       } catch (e) {
         return res.status(500).send(e)
       }
-    }
+    },
   }
 }
