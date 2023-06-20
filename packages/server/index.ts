@@ -10,6 +10,8 @@ import crypto from 'crypto'
 import { dbConnect } from './db'
 import { apiRouter } from './src/routes'
 
+import { csp } from './src/utils/csp'
+
 import { ApiRepository } from './repository/apiRepository'
 import { LeaderboardRepository } from './repository/leaderboardRepository'
 import dev from './mode/dev'
@@ -36,13 +38,7 @@ async function startServer() {
   await dbConnect()
 
   // CSP Policy
-  app.use(function (_req, res, next) {
-    res.setHeader(
-      'Content-Security-Policy',
-      `default-src 'self'; font-src 'self' data:; img-src 'self' * data:; script-src 'self' 'nonce-${nonce}'; style-src 'self' 'unsafe-inline'; frame-src 'self'`
-    )
-    next()
-  })
+  app.use(csp(nonce))
 
   // Proxy Использовать до express.json()
   app.use(
