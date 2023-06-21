@@ -8,7 +8,11 @@ export const oAuthGetServiseId = createAsyncThunk(
   'oauth/oAuthGetServiseId',
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await http.get<ServiceId>(`${ApiEndpoints.Auth.ServiceId}?redirect_uri=${RedirectUrl}`)
+      const { data } = await http.get<ServiceId>(ApiEndpoints.Auth.ServiceId, {
+        params: {
+          redirect_uri: RedirectUrl
+        }
+      })
 
       const url = new URL(OAuthUrl)
 
