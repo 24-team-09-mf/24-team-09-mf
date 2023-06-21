@@ -13,4 +13,3 @@ forumRouter.post('/topic/', forumController().addForumTopic)
 
 forumRouter.post('/emoji/', forumController().addEmoji)
 forumRouter.delete('/emoji/:emojiName', forumController().deleteEmoji)
-

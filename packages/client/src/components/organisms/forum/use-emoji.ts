@@ -7,7 +7,11 @@ import { useAppDispatch } from '@/store'
 import { ForumPostEmoji } from './forum-types'
 import { UserState } from '@/store/user/types'
 
-const useEmoji = (user: UserState, emojiId: string | undefined, postId: string | undefined) => {
+const useEmoji = (
+  user: UserState,
+  emojiId: string | undefined,
+  postId: string | undefined
+) => {
   const dispatch = useAppDispatch()
 
   const addEmojiHandler = useCallback(
@@ -21,7 +25,7 @@ const useEmoji = (user: UserState, emojiId: string | undefined, postId: string |
             addEmoji({
               postId: data.postId,
               emojiId: response.payload.id,
-              user: user.user
+              user: user.user,
             })
           )
         }
@@ -43,7 +47,7 @@ const useEmoji = (user: UserState, emojiId: string | undefined, postId: string |
             deleteEmoji({
               postId: data.postId,
               emojiId: response.payload.id,
-              user: user.user
+              user: user.user,
             })
           )
         }
