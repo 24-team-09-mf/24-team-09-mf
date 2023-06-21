@@ -19,6 +19,22 @@ const ForumStartElement = (el: ForumStartProps) => {
 
   const lastTopic = topics[0] as ForumLastTopicProps
 
+  let last = <CatalogRowMessageUser>Сообщений нет</CatalogRowMessageUser>
+
+  if (lastTopic) {
+    last = (
+      <div>
+        <CatalogRowMessageDate>
+          {dateParse(lastTopic.posts[0].createdAt)}
+        </CatalogRowMessageDate>
+        <CatalogRowMessageLink to={`/forum/${id}/${lastTopic.id}`}>
+          {sanitizeHtml(lastTopic.title)}
+        </CatalogRowMessageLink>
+        <CatalogRowMessageUser>@{lastTopic.user.login}</CatalogRowMessageUser>
+      </div>
+    )
+  }
+
   return (
     <CatalogBlock>
       <CatalogRowContent>
@@ -28,17 +44,7 @@ const ForumStartElement = (el: ForumStartProps) => {
         <p>{sanitizeHtml(description)}</p>
       </CatalogRowContent>
       <CatalogRowThreadsCount>{topicsCount}</CatalogRowThreadsCount>
-      <CatalogRowMessage>
-        <div>
-          <CatalogRowMessageDate>
-            {dateParse(lastTopic.posts[0].createdAt)}
-          </CatalogRowMessageDate>
-          <CatalogRowMessageLink to={`/forum/${id}/${lastTopic.id}`}>
-            {sanitizeHtml(lastTopic.title)}
-          </CatalogRowMessageLink>
-          <CatalogRowMessageUser>@{lastTopic.user.login}</CatalogRowMessageUser>
-        </div>
-      </CatalogRowMessage>
+      <CatalogRowMessage>{last}</CatalogRowMessage>
     </CatalogBlock>
   )
 }
