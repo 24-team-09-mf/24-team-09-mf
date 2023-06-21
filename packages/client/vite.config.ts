@@ -43,6 +43,15 @@ export default defineConfig({
 
   plugins: [
     react(),
+    {
+      name: 'html-inject-nonce-into-script-tag',
+      enforce: 'post',
+      transformIndexHtml(html: string) {
+        const regex = /<script(.*?)/gi
+        const replacement = '<script nonce="__SERVER_NONCE__"$1'
+        return html.replace(regex, replacement)
+      },
+    },
     EnvironmentPlugin('all'),
     viteStaticCopy({
       targets: [

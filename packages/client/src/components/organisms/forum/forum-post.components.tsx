@@ -54,8 +54,7 @@ const ForumPost = (el: ForumPostProps) => {
       const key = `${id}_${emoji.file.emoji_name}`
       if (updatedEmojiCounts[key]) {
         updatedEmojiCounts[key]++
-      }
-      else {
+      } else {
         updatedEmojiCounts[key] = 1
       }
     })
@@ -66,25 +65,28 @@ const ForumPost = (el: ForumPostProps) => {
     addEmojiHandler({
       postId: id,
       emojiName: emojiKey,
-      user: user
+      user: user,
     }).then(res => {
       const check = emojiList.find(
-        el => el.user_id === res!.payload.user_id &&
-          el.file.emoji_name === emojiKey
+        el =>
+          el.user_id === res!.payload.user_id && el.file.emoji_name === emojiKey
       )
       if (!check && res!.payload.success) {
-        setEmojiList(prevList => [
-          ...prevList,
-          {
-            id: res!.payload.id,
-            user_id: res!.payload.user_id,
-            file: { emoji_name: emojiKey }
-          }
-        ] as ForumEmojis[])
+        setEmojiList(
+          prevList =>
+            [
+              ...prevList,
+              {
+                id: res!.payload.id,
+                user_id: res!.payload.user_id,
+                file: { emoji_name: emojiKey },
+              },
+            ] as ForumEmojis[]
+        )
         const key = `${id}_${emojiKey}`
         setEmojiCounts(prevCounts => ({
           ...prevCounts,
-          [key]: (prevCounts[key] || 0) + 1
+          [key]: (prevCounts[key] || 0) + 1,
         }))
       }
     })
@@ -99,8 +101,10 @@ const ForumPost = (el: ForumPostProps) => {
         user: user,
       }).then(res => {
         for (let i = 0; i < emojiList.length; i++) {
-          if (emojiList[i].user_id === res!.payload.user_id &&
-            emojiList[i].file.emoji_name === emojiKey) {
+          if (
+            emojiList[i].user_id === res!.payload.user_id &&
+            emojiList[i].file.emoji_name === emojiKey
+          ) {
             const updatedEmojiCounts = { ...emojiCounts }
             const key = `${id}_${emojiKey}`
             if (updatedEmojiCounts[key]) {
@@ -144,15 +148,19 @@ const ForumPost = (el: ForumPostProps) => {
           <ForumPostRate>
             <ForumEmoji>
               {Object.entries(emojiCounts).map(([key, count]) => (
-                <ForumEmojiElement key={key} onClick={() => onDeleteEmojiHandler(key.split("_")[1])}>
-                  <img src={EMOJI[key.split("_")[1]]} alt={key.split("_")[1]} />
+                <ForumEmojiElement
+                  key={key}
+                  onClick={() => onDeleteEmojiHandler(key.split('_')[1])}>
+                  <img src={EMOJI[key.split('_')[1]]} alt={key.split('_')[1]} />
                   <span>{count}</span>
                 </ForumEmojiElement>
               ))}
               <ForumEmojiAddBtn onClick={onsetEmojiHandler}>
                 <ForumEmojiAddBlock display={emojiAdd}>
                   {Object.keys(EMOJI).map(el => (
-                    <ForumEmojiAddElement key={el} onClick={() => onAddEmojiHandler(el)}>
+                    <ForumEmojiAddElement
+                      key={el}
+                      onClick={() => onAddEmojiHandler(el)}>
                       <img src={EMOJI[el]} alt={el} />
                     </ForumEmojiAddElement>
                   ))}
@@ -184,7 +192,6 @@ const ForumPost = (el: ForumPostProps) => {
 }
 
 export const ForumPosts = ({ data }: { data: ForumPostProps[] }) => {
-
   return (
     <div>
       {data.map(el => (
