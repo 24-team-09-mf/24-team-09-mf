@@ -1,7 +1,7 @@
 const changeAvatarDomain = (url: string | undefined) => {
-  if (!url) return undefined
+  if (!url) return ''
   const domain: URL = new URL(url)
-  return `https://danger-in-jungle.ya-praktikum.tech${domain.pathname}`
+  return `${domain.pathname}`
 }
 
 export default changeAvatarDomain
