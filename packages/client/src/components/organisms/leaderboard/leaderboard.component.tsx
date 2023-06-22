@@ -20,13 +20,11 @@ import { Input } from '@/components/molecules'
 import { LeaderboardElementProps } from './leaderboard-types'
 import useLeaderboard from './leaderboard.logics'
 
-import changeAvatarDomain from '@/utils/changeAvatarDomain'
-
 import avatarDefault from '@/assets/images/avatarDefault.png'
 
 const LeaderboardElement = memo((props: LeaderboardElementProps) => {
   const { position, score, name, avatar } = props
-  const avatarSrc = avatar ? changeAvatarDomain(avatar) : avatarDefault
+  const avatarSrc = avatar ? avatar : avatarDefault
 
   return (
     <Item>

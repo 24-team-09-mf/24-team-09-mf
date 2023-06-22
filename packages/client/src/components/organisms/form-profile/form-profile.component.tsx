@@ -1,8 +1,6 @@
 // custom hooks
 import useProfile from './form-profile.logics'
 
-import changeAvatarDomain from '@/utils/changeAvatarDomain'
-
 // styles
 import {
   Form,
@@ -18,10 +16,7 @@ export const FormProfile = () => {
 
   return (
     <Form onSubmit={handleSubmit(onSubmitHandler)}>
-      <AvatarComponent
-        {...register('avatar')}
-        src={changeAvatarDomain(user?.avatar)}
-      />
+      <AvatarComponent {...register('avatar')} src={user?.avatar} />
       <AvatarLabel color="#579945" fontSize="26px">
         {user?.login}
       </AvatarLabel>
