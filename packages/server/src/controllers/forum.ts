@@ -84,7 +84,12 @@ export function forumController() {
           },
           order: [['createdAt', 'ASC']],
         })
-        if (data.length === 0) throw new Error('Ресурс не найден')
+        const checkCategory = await CategoriesModel.findOne({
+          where: {
+            id: req.params.id,
+          },
+        })
+        if (!checkCategory) throw new Error('Ресурс не найден')
         return res.status(200).send(data)
       } catch (e) {
         if (e instanceof Error) {
