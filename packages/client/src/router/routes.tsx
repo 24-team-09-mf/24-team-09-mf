@@ -71,7 +71,11 @@ export const routes: RouteObject[] = [
       },
       {
         path: Path.STATISTICS,
-        lazy: () => import('@/pages/statistics'),
+        async lazy() {
+          const { element } = await import('@/pages/statistics')
+
+          return { Component: () => <ProtectedRoute>{element}</ProtectedRoute> }
+        },
       },
       {
         path: Path.GAME,
