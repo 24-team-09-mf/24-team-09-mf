@@ -21,6 +21,7 @@ export default (app: Express) => {
       (args: {
         request: Request
         repositories: Record<string, any>
+        nonce: string
       }) => Promise<[string, string, object]>
     ]
   > {

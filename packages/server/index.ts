@@ -45,7 +45,7 @@ async function startServer() {
     '/api/v2',
     createProxyMiddleware({
       changeOrigin: true,
-      cookieDomainRewrite: 'localhost',
+      cookieDomainRewrite: process.env.DOMAIN,
       target: 'https://ya-praktikum.tech',
     })
   )
@@ -71,6 +71,7 @@ async function startServer() {
             user: new ApiRepository(req.headers['cookie']),
             leaderboard: new LeaderboardRepository(req.headers['cookie']),
           },
+          nonce
         })
 
         const initialStateSerialized = initialState && jsesc(initialState)

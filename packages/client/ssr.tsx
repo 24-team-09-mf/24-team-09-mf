@@ -21,6 +21,7 @@ type Args = {
     user: any
     leaderboard: any
   }
+  nonce: string
 }
 
 import { getUser } from './src/store/user/auth/actions'
@@ -44,7 +45,7 @@ const getCurrentPath = (pathname: string) => {
   return match?.route
 }
 
-export async function render({ request, repositories }: Args) {
+export async function render({ request, repositories, nonce }: Args) {
   const { query, dataRoutes } = createStaticHandler(routes)
   const remixRequest = createFetchRequest(request)
 
@@ -74,7 +75,11 @@ export async function render({ request, repositories }: Args) {
       <StyleSheetManager sheet={sheet.instance}>
         <Provider store={store}>
           <GlobalStyle />
-          <StaticRouterProvider context={context} router={router} />
+          <StaticRouterProvider
+            context={context}
+            router={router}
+            nonce={nonce}
+          />
           <CheckAuthorizedPerson />
         </Provider>
       </StyleSheetManager>

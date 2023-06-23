@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - dev
 
 jobs:
   build-and-push:
@@ -30,7 +33,7 @@ jobs:
           context: .
           file: Dockerfile.ssr
           push: true
-          tags: ghcr.io/${{ env.OWNER_LC }}/${{ github.event.repository.name }}/ssr:${{ github.sha }}
+          tags: ghcr.io/${{ env.OWNER_LC }}/${{ github.event.repository.name }}/ssr2:${{ github.sha }}
 
       - name: Build and push nginx image
         uses: docker/build-push-action@v2

@@ -1,7 +1,7 @@
 const changeAvatarDomain = (url: string | undefined) => {
-  if (!url) return undefined
+  if (!url) return ''
   const domain: URL = new URL(url)
-  return `${process.env.NODE_API_URL}${domain.pathname}`
+  return `${domain.pathname}`
 }
 
 export default changeAvatarDomain
